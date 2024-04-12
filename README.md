@@ -7,9 +7,9 @@
 This is the collection of notebooks for the course *Time Series Analysis with Python*.
 For more information and for reading the content of this repository, please refer to the [book](https://filippomb.github.io/python-time-series-handbook) version.
 
-## Content
+## 📑 Content
 
-1. Introduction to time series analysis
+1. **Introduction to time series analysis**
    - Definition of time series data
    - Main applications of time series analysis
    - Statistical vs dynamical models perspective
@@ -17,9 +17,9 @@ For more information and for reading the content of this repository, please refe
    - Additive vs multiplicative models
    - Time series decomposition
   
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture1/Introduction_to_Time_Series.ipynb)
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb)
 
-2. Stationarity in time series
+2. **Stationarity in time series**
    - Stationarity in time series
    - Weak vs strong stationarity
    - Autocorrelation and autocovariance
@@ -27,69 +27,68 @@ For more information and for reading the content of this repository, please refe
    - How to identify stationarity
    - Transformations to achieve stationarity
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture2/Stationarity.ipynb) 
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/02/stationarity.ipynb) 
 
-3. Smoothing
+3. **Smoothing**
    - Smoothing in time series data
    - The mean squared error
    - Simple average, moving average, and weighted moving average
    - Single, double, and triple exponential smoothing
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture3/Smoothing.ipynb) 
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/03/smoothing.ipynb) 
 
-4. AR-MA
+4. **AR-MA**
    - The autocorrelation function
    - The partial autocorrelation function
    - The Auto-Regressive model
    - The Moving-Average model
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture4/AR-MA.ipynb)
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/04/ar-ma.ipynb)
 
-5. ARMA, ARIMA, SARIMA
+5. **ARMA, ARIMA, SARIMA**
    - Autoregressive Moving Average (ARMA) models
    - Autoregressive Integrated Moving Average (ARIMA) models
    - SARIMA models (ARIMA model for data with seasonality)
    - Automatic model selection with AutoARIMA
    - Model selection with exploratory data analysis
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture5/ARMA_ARIMA_SARIMA.ipynb)
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/05/arma_arima_sarima.ipynb)
 
-6. Unit root test and Hurst exponent
+6. **Unit root test and Hurst exponent**
    - Unit root test
    - Mean Reversion
    - Hurst Exponent
    - Geometric Brownian Motion
    - Applications in quantitative finance
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture6/unit-root_hurst.ipynb)
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/06/unit-root-hurst.ipynb)
 
-7. Kalman filter
+7. **Kalman filter**
    - Introduction to Kalman Filter
    - Model components and assumptions
    - The Kalman Filter algorithm
    - Application to static and dynamic one-dimensional data
    - Application to higher-dimensional data
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture7/Kalman_Filter.ipynb) 
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/07/kalman-filter.ipynb) 
 
-8. Signal transforms and filters
+8. **Signal transforms and filters**
    - Introduction to Fourier Transform and Discrete Fourier Transform, and FFT
    - Fourier Transform of common signals
    - Properties of the Fourier Transform
    - Signal filtering with low-pass, high-pass, band-pass, and bass-stop filters
    - Application of Fourier Transform for time series forecasting
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture8/Signal_Transforms_and_Filters.ipynb)
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb)
 
-
-9. Prophet
+9. **Prophet**
    - Introduction to Prophet for time series forecasting
    - Advanced modelling of trend, seasonality, and holidays
    - The Prophet library in Python
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture9/Prophet.ipynb), [solution](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture9/solution.ipynb)
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb)
 
-10. Neural networks and Reservoir Computing
+10.  Neural networks and Reservoir Computing
    - Windowed approaches and Neural Networks for time series forecasting
    - Forecasting with the Multi Layer Perceptron
    - Recurrent Neural Networks: advantages and challenges
@@ -97,9 +96,9 @@ For more information and for reading the content of this repository, please refe
    - Dimensionality reduction with Principal Component Analysis
    - Forecasting electricity consumption with Multi Layer Perceptron and Echo State Network
 
-> [notebook](https://github.com/FilippoMB/Time-Series-Course-STA2003-/blob/main/notebooks/Lecture10/nn_and_esn.ipynb)
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb)
 
-11. Non-linear time series analysis
+11.  **Non-linear time series analysis**
     - Dynamical systems and nonlinear dynamics
     - Bifurcation diagrams
     - Chaotic systems
@@ -110,7 +109,7 @@ For more information and for reading the content of this repository, please refe
 
 > [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb)
 
-1.  Time series classification and clustering
+12.  **Time series classification and clustering**
     - Multivariate time series
     - Time series similarity
     - Dynamic Time Warping
