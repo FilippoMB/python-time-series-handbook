@@ -46,21 +46,21 @@ To run the code and the notebooks the recommended steps are the following:
     - If you are on Windows, open the Miniconda shell.
 
 4. Install the environment with 
-   ````{bash}
+   ```
    > conda env create -f env.yml
-   ````
+   ```
 
 5. Activate your environment: 
-   ````{bash}
+   ```
    > conda activate pytsa
-   ````
+   ```
 
 6. Go to the folder with the notebooks
 
 7. Launch Jupyter Lab with the command 
-   ````{bash}
+   ```
    > jupyter lab
-   ````
+   ```
 
 ## ⚒ Roadmap
 
