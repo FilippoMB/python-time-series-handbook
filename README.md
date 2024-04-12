@@ -89,16 +89,16 @@ For more information and for reading the content of this repository, please refe
 > [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb)
 
 10. **Neural networks and Reservoir Computing**
-   - Windowed approaches and Neural Networks for time series forecasting
-   - Forecasting with the Multi Layer Perceptron
-   - Recurrent Neural Networks: advantages and challenges
-   - Reservoir Computing and the Echo State Network
-   - Dimensionality reduction with Principal Component Analysis
-   - Forecasting electricity consumption with Multi Layer Perceptron and Echo State Network
+    - Windowed approaches and Neural Networks for time series forecasting
+    - Forecasting with the Multi Layer Perceptron
+    - Recurrent Neural Networks: advantages and challenges
+    - Reservoir Computing and the Echo State Network
+    - Dimensionality reduction with Principal Component Analysis
+    - Forecasting electricity consumption with Multi Layer Perceptron and Echo State Network
 
 > [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb)
 
-11. **Non-linear time series analysis**
+1.  **Non-linear time series analysis**
     - Dynamical systems and nonlinear dynamics
     - Bifurcation diagrams
     - Chaotic systems
