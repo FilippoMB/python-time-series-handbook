@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -180,6 +180,16 @@
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02/stationarity.html">Stationarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/smoothing.html">Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/ar-ma.html">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/unit-root-hurst.html">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/kalman-filter.html">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/prophet.html">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
 </ul>
 
@@ -411,6 +421,16 @@ To reinforce learning and encourage active engagement, each chapter concludes wi
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02/stationarity.html">Stationarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/smoothing.html">Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/ar-ma.html">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/unit-root-hurst.html">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/kalman-filter.html">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/prophet.html">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
 </ul>
 </div>
@@ -427,7 +447,7 @@ To reinforce learning and encourage active engagement, each chapter concludes wi
 <p>To run the code and the notebooks the recommended steps are the following:</p>
 <ol class="arabic">
 <li><p>Download and install <a class="reference external" href="https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.htmlLinks">Miniconda</a>.</p></li>
-<li><p>Download the <a class="reference internal" href="#env.yml"><span class="xref myst">env.yml</span></a> file.</p></li>
+<li><p>Download the <a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/env.yml">env.yml</a> file.</p></li>
 <li><p>Open the shell and navigate to the location with the yml file you just downloaded.</p>
 <ul class="simple">
 <li><p>If you are on Windows, open the Miniconda shell.</p></li>
@@ -488,7 +508,7 @@ You can contribute both by adding new material, fixing typos, and suggesting edi
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks\00"
+            path: "./notebooks/00"
         },
         predefinedOutput: true
     }

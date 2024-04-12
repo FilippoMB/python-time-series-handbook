@@ -1,0 +1,1581 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Smoothing &#8212; Time series analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/03/smoothing';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="AR-MA" href="../04/ar-ma.html" />
+    <link rel="prev" title="Stationarity" href="../02/stationarity.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../00/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Time series analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Time series analysis with Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../00/intro.html">
+                    Time series analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/stationarity.html">Stationarity</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/ar-ma.html">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/unit-root-hurst.html">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/kalman-filter.html">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/prophet.html">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/03/smoothing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/03/smoothing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Smoothing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Smoothing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-smoothing-techniques">Simple smoothing techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-average">Simple average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">Mean squared error (MSE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average-ma">Moving Average (MA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-moving-average-wma">Weighted moving average (WMA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ma">Forecasting with MA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-wma">Forecasting with WMA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-smoothing">Exponential Smoothing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential-smoothing">Single exponential smoothing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-alpha">Setting Alpha</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential-smoothing">Double exponential smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential-smoothing">Triple exponential smoothing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-smoothing-in-python">Exponential smoothing in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Simple Average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential">Single Exponential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential">Double Exponential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential">Triple Exponential</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="smoothing">
+<h1>Smoothing<a class="headerlink" href="#smoothing" title="Link to this heading">#</a></h1>
+<br>
+<div style="text-align: center">
+    <img src="media/cover.png" style="width: 45%">
+</div><section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In the previous lectures, we learned that:</p>
+<ul class="simple">
+<li><p>A time series consists of measurements characterized by temporal dependencies.</p></li>
+<li><p>The measurements are (usually) collected at equally-spaced intervals.</p></li>
+<li><p>A time series can be decomposed into trend, seasonality, and residuals.</p></li>
+<li><p>Many time series models require the data to be stationary in order to make forecasts.</p></li>
+</ul>
+<ul class="simple">
+<li><p>In this lecture, we will build that knowledge and explore another important concept called <strong>smoothing</strong>.</p></li>
+<li><p>In particular, we will cover:</p>
+<ol class="arabic simple">
+<li><p>An introduction to smoothing and why it is necessary.</p></li>
+<li><p>Common smoothing techniques.</p></li>
+<li><p>How to smooth time series data with Python and generate forecasts.</p></li>
+</ol>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">statsmodels</span> <span class="k">as</span> <span class="nn">ss</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="c1"># reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2>Smoothing<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A data collection process is often affected by noise.</p></li>
+<li><p>If too strong, the noise can conceal useful patterns in the data.</p></li>
+<li><p>Smoothing is a well-known and often-used technique to recover those patterns by <em>filtering out noise</em>.</p></li>
+<li><p>It can also be used to <em>make forecasts</em> by projecting the recovered patterns into the future.</p></li>
+</ul>
+<ul class="simple">
+<li><p>We will explore two important techniques to do smoothing:</p>
+<ol class="arabic simple">
+<li><p>Simple smoothing.</p></li>
+<li><p>Exponential smoothing.</p></li>
+</ol>
+</li>
+</ul>
+<ul class="simple">
+<li><p>We start by generating some stationary data.</p></li>
+<li><p>We discussed the importance of visually inspecting the time series with a run-sequence plot.</p></li>
+<li><p>So, we will also define the <code class="docutils literal notranslate"><span class="pre">run_sequence_plot</span></code> function to visualize our data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate stationary data</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">stationary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_sequence_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Values&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mf">3.5</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">stationary</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Stationary time series&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c965f406b5b2470775102d82b68e1b04ab3bb6c5b79d8e8b9d24483ae639b3a0.png" src="../../_images/c965f406b5b2470775102d82b68e1b04ab3bb6c5b79d8e8b9d24483ae639b3a0.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="simple-smoothing-techniques">
+<h2>Simple smoothing techniques<a class="headerlink" href="#simple-smoothing-techniques" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>There are many techniques for smoothing data.</p></li>
+<li><p>The most simple ones are:</p>
+<ol class="arabic simple">
+<li><p>Simple average</p></li>
+<li><p>Moving average</p></li>
+<li><p>Weighted moving average</p></li>
+</ol>
+</li>
+</ul>
+<section id="simple-average">
+<h3>Simple average<a class="headerlink" href="#simple-average" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Simple average is the most basic technique.</p></li>
+<li><p>Consider the stationary data above.</p></li>
+<li><p>The most conservative way to represent it is through its <strong>mean</strong>.</p></li>
+<li><p>The mean can be used to predict the future values of the time series.</p></li>
+<li><p>This type of representation is called <em>simple average</em>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find mean of series</span>
+<span class="n">stationary_time_series_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stationary</span><span class="p">)</span>
+
+<span class="c1"># create array composed of mean value and equal to length of time array</span>
+<span class="n">sts_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">stationary_time_series_avg</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">stationary</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Stationary Data&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">sts_avg</span><span class="p">,</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d8fa76579d779b3bdf670280caaf021a1df753d0a53bc9fa6995b952ceef02ff.png" src="../../_images/d8fa76579d779b3bdf670280caaf021a1df753d0a53bc9fa6995b952ceef02ff.png" />
+</div>
+</div>
+</section>
+<section id="mean-squared-error-mse">
+<h3>Mean squared error (MSE)<a class="headerlink" href="#mean-squared-error-mse" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The approximation with the mean seems reasonable in this case.</p></li>
+<li><p>In general we want to measure how far off our estimate is from reality.</p></li>
+<li><p>A common way of doing it is by calculating <em>Mean Squared Error</em> (MSE) $<span class="math notranslate nohighlight">\(MSE = \frac{1}{T}\sum_{t=1}^{T} (X(t) - \hat{X}(t))^2\)</span><span class="math notranslate nohighlight">\(
+where \)</span>X(t)<span class="math notranslate nohighlight">\( and \)</span>\hat{X}(t)<span class="math notranslate nohighlight">\( are the true and estimated values at time \)</span>t$, respectively.</p></li>
+</ul>
+<p><strong>Example</strong></p>
+<ul class="simple">
+<li><p>Let’s consider the following example.</p></li>
+<li><p>Say we have a time series of observed values <span class="math notranslate nohighlight">\(X = [0, 1, 3, 2]\)</span>.</p></li>
+<li><p>The predictions given by our model are <span class="math notranslate nohighlight">\(\hat{X} =  [1, 1, 2, 4]\)</span>.</p></li>
+<li><p>We calculate MSE as: $<span class="math notranslate nohighlight">\((0-1)^{2} + (1-1)^{2} + (3-2)^{2} + (2-4)^{2} = 6\)</span>$</p></li>
+</ul>
+<ul class="simple">
+<li><p>Say we had another model that give us the estimate <span class="math notranslate nohighlight">\(\hat{X} =  [0, 0, 1, 0]\)</span>.</p></li>
+<li><p>The MSE in this case is: $<span class="math notranslate nohighlight">\(0^{2} + 1^{2} + 2^{2} + 2^{2} = 9\)</span>$</p></li>
+</ul>
+<ul class="simple">
+<li><p>The MSE allows to compare different estimates to see which is best.</p></li>
+<li><p>In this case, the first model gives us a better estimate than the second one.</p></li>
+<li><p>This idea of measuring how a model performs is important in machine learning and we will use it often in this course.</p></li>
+<li><p>Let’s create a function to calculate MSE that we will use in as we go forward.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mse</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">estimates</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    INPUT:</span>
+<span class="sd">        observations - numpy array of values indicating observed values</span>
+<span class="sd">        estimates - numpy array of values indicating an estimate of values</span>
+<span class="sd">    OUTPUT:</span>
+<span class="sd">        Mean Square Error value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># check arg types</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])),</span> <span class="s2">&quot;&#39;observations&#39; must be a numpy array&quot;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])),</span> <span class="s2">&quot;&#39;estimates&#39; must be a numpy array&quot;</span>
+    <span class="c1"># check length of arrays equal</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">estimates</span><span class="p">),</span> <span class="s2">&quot;Arrays must be of equal length&quot;</span>
+    
+    <span class="c1"># calculations</span>
+    <span class="n">difference</span> <span class="o">=</span> <span class="n">observations</span> <span class="o">-</span> <span class="n">estimates</span>
+    <span class="n">sq_diff</span> <span class="o">=</span> <span class="n">difference</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sq_diff</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">mse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s test the <code class="docutils literal notranslate"><span class="pre">mse</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">zeros</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">zeros</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ones</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ones</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Next, we add a <em>trend</em> to our stationary time series.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">stationary</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with trend&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/eba5a7ea07d8259ba088210ae2800dfa0d7033ee82ebb4485daf686168decde2.png" src="../../_images/eba5a7ea07d8259ba088210ae2800dfa0d7033ee82ebb4485daf686168decde2.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Suppose we use again the simple average to represent the time series.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find mean of series</span>
+<span class="n">trend_time_series_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">trend</span><span class="p">)</span>
+
+<span class="c1"># create array of mean value equal to length of time array</span>
+<span class="n">avg_trend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">trend_time_series_avg</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with trend&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">avg_trend</span><span class="p">,</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ef0637129c3adbb9b75005aa1564d2810bf6cb5ef9debe9d5330ccdd92056568.png" src="../../_images/ef0637129c3adbb9b75005aa1564d2810bf6cb5ef9debe9d5330ccdd92056568.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Clearly, the simple average does not work well in this case.</p></li>
+<li><p>We must find other ways to capture the underlying pattern in the data.</p></li>
+<li><p>We start with something called a <em>moving average</em>.</p></li>
+</ul>
+</section>
+<section id="moving-average-ma">
+<h3>Moving Average (MA)<a class="headerlink" href="#moving-average-ma" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Moving average has a greater sensitivity than the simple average to local changes in the data.</p></li>
+<li><p>The easiest way to understand moving average is by example.</p></li>
+<li><p>Say we have the following values:</p></li>
+</ul>
+<img alt="../../_images/values.png" class="align-center" src="../../_images/values.png" />
+<ul class="simple">
+<li><p>The first step is to select a window size.</p></li>
+<li><p>We’ll arbitrarily choose a size of 3.</p></li>
+<li><p>Then, we start computing the average for the first three values and store the result.</p></li>
+<li><p>We then slide the window by one and calculate the average of the next three values.</p></li>
+<li><p>We repeat this process until we reach the final observed value.</p></li>
+</ul>
+<img alt="../../_images/EqWMA.gif" class="align-center" src="../../_images/EqWMA.gif" />
+<ul class="simple">
+<li><p>Now, let’s define a function to perform smoothing with the MA (adapted from <a class="reference external" href="https://stackoverflow.com/questions/14313510/how-to-calculate-moving-average-using-numpy#14314054">here</a>).</p></li>
+<li><p>Then, we compare the MSE obtained from applying simple and moving average on the data with trend.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">moving_average</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">forecast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">cumulative_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">cumulative_sum</span><span class="p">[</span><span class="n">window</span><span class="p">:]</span> <span class="o">=</span> <span class="n">cumulative_sum</span><span class="p">[</span><span class="n">window</span><span class="p">:]</span> <span class="o">-</span> <span class="n">cumulative_sum</span><span class="p">[:</span><span class="o">-</span><span class="n">window</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">forecast</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">cumulative_sum</span><span class="p">[</span><span class="n">window</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="n">window</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">window</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cumulative_sum</span><span class="p">[</span><span class="n">window</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="n">window</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MA_trend</span> <span class="o">=</span> <span class="n">moving_average</span><span class="p">(</span><span class="n">trend</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE:</span><span class="se">\n</span><span class="s2">--------</span><span class="se">\n</span><span class="s2">simple average: </span><span class="si">{</span><span class="n">mse</span><span class="p">(</span><span class="n">trend</span><span class="p">,</span><span class="w"> </span><span class="n">avg_trend</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">moving_average: </span><span class="si">{</span><span class="n">mse</span><span class="p">(</span><span class="n">trend</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span><span class="w"> </span><span class="n">MA_trend</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE:
+--------
+simple average: 332400.58
+moving_average: 448.32
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Clearly, the MA manages to pick up much better the trend data.</p></li>
+<li><p>We can also plot the result against the actual time series.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with trend&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">MA_trend</span><span class="p">,</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MA&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dd2d7da2d0d4b78b48b9f992c7889059a4e0ced5e6af35f23ca50f43dab4f7b2.png" src="../../_images/dd2d7da2d0d4b78b48b9f992c7889059a4e0ced5e6af35f23ca50f43dab4f7b2.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Note that the output of the MA is shorter than the original data.</p></li>
+<li><p>The reason is because the moving window is not centered on the first and last elements of the time series.</p></li>
+<li><p>Given a window of size <span class="math notranslate nohighlight">\(P\)</span>, the MA will be <span class="math notranslate nohighlight">\(P-1\)</span> steps shorter than the original time series.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">moving_average</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">9</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Now, we try the MA on a period time series, which could represent a seasonality.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seasonality</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="n">MA_seasonality</span> <span class="o">=</span> <span class="n">moving_average</span><span class="p">(</span><span class="n">seasonality</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">seasonality</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Seasonality&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">MA_seasonality</span><span class="p">,</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MA&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d44d4763ceb55bab7ea46649141861b4ca9ce304615ac1fdb365063de57e9d63.png" src="../../_images/d44d4763ceb55bab7ea46649141861b4ca9ce304615ac1fdb365063de57e9d63.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>It’s not perfect but clearly picks up the periodic pattern.</p></li>
+<li><p>Lastly, let’s see how moving average handles trend, seasonality, and a bit of noise.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_seasonality</span> <span class="o">=</span> <span class="n">trend</span> <span class="o">+</span> <span class="n">seasonality</span> <span class="o">+</span> <span class="n">stationary</span>
+<span class="n">MA_trend_seasonality</span> <span class="o">=</span> <span class="n">moving_average</span><span class="p">(</span><span class="n">trend_seasonality</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">trend_seasonality</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Trend, seasonality, and noise&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">MA_trend_seasonality</span><span class="p">,</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MA&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/eef59c1daaa55e11176690dcc0b51387fae9704b26599dd065f2aa6654a5ac96.png" src="../../_images/eef59c1daaa55e11176690dcc0b51387fae9704b26599dd065f2aa6654a5ac96.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>This method is picking up key patterns in these toy datasets.</p></li>
+<li><p>However, it has several limitations.</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>MA assigns equal importance to all values in the window, regardless of their chronological order.</p>
+<ul class="simple">
+<li><p>For this reason it fails in capturing the often more relevant recent trends.</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>MA requires the selection of a specific window size, which can be arbitrary and may not suit all types of data.</p></li>
+</ol>
+<ul class="simple">
+<li><p>a small window may lead to noise</p></li>
+<li><p>a too large window could oversmooth the data, missing important short-term fluctuations.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>MA does not adjust for changes in trend or seasonality.</p>
+<ul class="simple">
+<li><p>This can lead to inaccurate predictions, especially when these components are nonlinear and time-dependent.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="weighted-moving-average-wma">
+<h3>Weighted moving average (WMA)<a class="headerlink" href="#weighted-moving-average-wma" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>WMA weights recent observations more than more distant ones.</p></li>
+<li><p>This makes intuitive sense.</p>
+<ul>
+<li><p>Think of the stock market: it has been observed that today’s price is a good predictor of tomorrow’s price.</p></li>
+</ul>
+</li>
+<li><p>By applying unequal weights to past observations, we can control how much each affects the future forecast.</p></li>
+</ul>
+<ul class="simple">
+<li><p>There are many ways to create the weights.</p></li>
+<li><p>A simple way is to define them as follows:
+$<span class="math notranslate nohighlight">\(\begin{align}&amp; w + w^2 + w^3 = 1\\ &amp; w_1 = w \approx 0.543 \\ &amp; w_2 = w^2 \approx 0.294 \\ &amp; w_3 = w^3 \approx 0.16 \end{align}\)</span>$</p></li>
+</ul>
+<img alt="../../_images/ExpWMA.gif" class="align-center" src="../../_images/ExpWMA.gif" />
+<p><strong>📝Note</strong></p>
+<ul class="simple">
+<li><p>There are numerous methods to find the optimal weighting scheme based on the data and the task at hand.</p></li>
+<li><p>A full discussion is beyond the scope of the lecture.</p></li>
+</ul>
+</section>
+<section id="forecasting-with-ma">
+<h3>Forecasting with MA<a class="headerlink" href="#forecasting-with-ma" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Instead of pulling out the inherent pattern within a series, the smoothing functions can be used to create <em>forecasts</em>.</p></li>
+<li><p>The forecast for the next time step is compute as follow $<span class="math notranslate nohighlight">\(\hat{X}(t+1) = \frac{X(t) + X(t-1) + \dots + X(t-P+1)}{P}\)</span><span class="math notranslate nohighlight">\( where \)</span>P$ is the window size of the MA.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Let’s consider the following time series <span class="math notranslate nohighlight">\(X= [1, 2, 4, 8, 16, 32, 64]\)</span>.</p></li>
+<li><p>In particular, we apply the smoothing process and use the resulting value as forecast for the next time step.</p></li>
+<li><p>With the MA technique and a window size <span class="math notranslate nohighlight">\(P=3\)</span> we get the following forecast.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">])</span>
+<span class="n">ma_x</span> <span class="o">=</span> <span class="n">moving_average</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">forecast</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Nonlinear data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ma_x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MA&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="n">ma_x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MA forecast&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ca3328ff7bda4cba970ff3229171c414087b4cbaedff4dffb9c0bb74ee28a6c9.png" src="../../_images/ca3328ff7bda4cba970ff3229171c414087b4cbaedff4dffb9c0bb74ee28a6c9.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>The result shows that MA is lagging behind the actual signal.</p></li>
+<li><p>In this case, it is not able to keep up with changes in the trend.</p></li>
+<li><p>The lag of MA is also reflected in the forecasts it produces.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Let’s focus on the <a class="reference internal" href="#Forecasting-with-MA"><span class="xref myst">forecasting formula</span></a> we just defined.</p></li>
+<li><p>While easy to understand, one of its properties may not be obvious.</p></li>
+<li><p>What’s the lag associated with this technique?</p></li>
+<li><p>In other words, after how many time steps do we see a local change in the underlying signal?</p></li>
+</ul>
+<p>The answer is <span class="math notranslate nohighlight">\(\frac{(P+1)}{2}\)</span>.</p>
+<ul class="simple">
+<li><p>For example, say you’re averaging the past 5 values to make the next prediction.</p></li>
+<li><p>Then the forecast value that most closely reflects the current value will appear after <span class="math notranslate nohighlight">\(\frac{5+1}{2} = 3\)</span> time steps.</p></li>
+<li><p>Clearly, the lag increases as you increase the window size for averaging.</p></li>
+</ul>
+<ul class="simple">
+<li><p>One might reduce the window size to obtain a more responsive model.</p></li>
+<li><p>However, a window size that’s too small will chase noise in the data as opposed to extracting the pattern.</p></li>
+<li><p>There is a tradeoff between <em>responsiveness</em> and <em>robustness to noise</em>.</p></li>
+<li><p>The best answer lies somewhere between and requires careful tuning to determine which setup is best for a given dataset and problem at hand.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Let’s make a practical example to show this tradeoff.</p></li>
+<li><p>We will generate some toy data and apply a MA with different window sizes.</p></li>
+<li><p>To make thigs more clear, we generate again data with trend and seasonality, but we add more noise.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noisy_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+<span class="n">noisy_trend</span> <span class="o">=</span> <span class="n">time</span> <span class="o">*</span> <span class="mf">2.75</span>
+<span class="n">noisy_seasonality</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="mf">0.25</span><span class="p">)</span> <span class="o">*</span> <span class="mi">20</span>
+<span class="n">noisy_data</span> <span class="o">=</span> <span class="n">noisy_trend</span> <span class="o">+</span> <span class="n">noisy_seasonality</span> <span class="o">+</span> <span class="n">noisy_noise</span>
+
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Noisy data&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dce1ac489af637a0dadb1e4212b20779012a6995c27b15137ab8a35aeafac2b0.png" src="../../_images/dce1ac489af637a0dadb1e4212b20779012a6995c27b15137ab8a35aeafac2b0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute MA with different window sizes</span>
+<span class="n">lag_2</span> <span class="o">=</span> <span class="n">moving_average</span><span class="p">(</span><span class="n">noisy_data</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">lag_3</span> <span class="o">=</span> <span class="n">moving_average</span><span class="p">(</span><span class="n">noisy_data</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">lag_5</span> <span class="o">=</span> <span class="n">moving_average</span><span class="p">(</span><span class="n">noisy_data</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">lag_10</span> <span class="o">=</span> <span class="n">moving_average</span><span class="p">(</span><span class="n">noisy_data</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;MA with lag 2&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">lag_2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;MA with lag 3&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">lag_3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;MA with lag 5&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">lag_5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;MA with lag 10&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="o">-</span><span class="mi">9</span><span class="p">],</span> <span class="n">lag_10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/950ab95b7c0442b10cd20e82bc5fe66fdb30401577cd6ab976f14f84c1c65a00.png" src="../../_images/950ab95b7c0442b10cd20e82bc5fe66fdb30401577cd6ab976f14f84c1c65a00.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Clearly, the larger the window size the smoother the data.</p></li>
+<li><p>This allows to get rid of the noise but, eventually, also the underlying signal is smoothed out.</p></li>
+</ul>
+</section>
+<section id="forecasting-with-wma">
+<h3>Forecasting with WMA<a class="headerlink" href="#forecasting-with-wma" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Next, we use the WMA to generate forecasts.</p></li>
+<li><p>The previous <a class="reference internal" href="#Forecasting-with-MA"><span class="xref myst">forecasting formula</span></a> is modified to weight differently the past observations in the window $<span class="math notranslate nohighlight">\(\hat{X}(t+1) = \frac{w_1 \cdot X(t) + w_2 \cdot X(t-1) + \dots + w_P \cdot X(t-P+1)}{P}\)</span>$</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">weighted_moving_average</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">forecast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Length of weights must match the window size&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Normalize weights</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+    
+    <span class="c1"># Initialize the result array</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">observations</span><span class="p">))</span>
+    
+    <span class="c1"># Calculate weighted moving average</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">observations</span><span class="p">)):</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    
+    <span class="c1"># Handle forecast option</span>
+    <span class="k">if</span> <span class="n">forecast</span><span class="p">:</span>
+        <span class="c1"># Pad the beginning of the result array with zeros to maintain the original length</span>
+        <span class="n">result</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Remove the start of the array that doesn&#39;t have a full window</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We repeat the experiment on the same time series <span class="math notranslate nohighlight">\(X= [1, 2, 4, 8, 16, 32, 64]\)</span>.</p></li>
+<li><p>We will use the set of weights that we defined before, <code class="docutils literal notranslate"><span class="pre">[0.160,</span> <span class="pre">0.294,</span> <span class="pre">0.543]</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.160</span><span class="p">,</span> <span class="mf">0.294</span><span class="p">,</span> <span class="mf">0.543</span><span class="p">])</span>
+<span class="n">wma_x</span> <span class="o">=</span> <span class="n">weighted_moving_average</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">forecast</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Nonlinear data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ma_x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MA&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="n">ma_x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MA forecast&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">wma_x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;WMA&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="n">wma_x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;WMA forecast&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/edfce1deface40f18c49167ebb5459eff29692a0ddc98a26b8be244a1149971d.png" src="../../_images/edfce1deface40f18c49167ebb5459eff29692a0ddc98a26b8be244a1149971d.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>WMA solves some issues of MA.</p>
+<ul>
+<li><p>It is more sensitive to local changes.</p></li>
+<li><p>Is more flexible, as it can adjust the importance of different time steps</p></li>
+<li><p>It does not require a fixed window size as it applies an exponentially decreasing weight to all past observations.</p></li>
+</ul>
+</li>
+<li><p>However it still struggle in keeping pace with nonlinear and fast-changing trends… There’s a significant lag.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="exponential-smoothing">
+<h2>Exponential Smoothing<a class="headerlink" href="#exponential-smoothing" title="Link to this heading">#</a></h2>
+<p>There are three key exponential smoothing techniques:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Capture trend</p></th>
+<th class="head text-center"><p>Capture seasonality</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Single Exponential Smoothing</p></td>
+<td class="text-center"><p>❌</p></td>
+<td class="text-center"><p>❌</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Double Exponential Smoothing</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>❌</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Triple Exponential Smoothing</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+</tr>
+</tbody>
+</table>
+<section id="single-exponential-smoothing">
+<h3>Single exponential smoothing<a class="headerlink" href="#single-exponential-smoothing" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>💡 Useful if your data lacks trend and seasonality and you want to approximately extract patterns.</p></li>
+<li><p>It is analogous to the WMA we saw previously.</p></li>
+<li><p>The basic formulation is $<span class="math notranslate nohighlight">\(S(t) = \alpha X(t) + (1-\alpha)S(t-1)\)</span>$ where</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(S(t)\)</span> is the smoothed value at time <em>t</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is a smoothing constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(X(t)\)</span> is the value of the series at time <em>t</em></p></li>
+</ul>
+</li>
+</ul>
+<p>Expanding the formula we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align} S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
+S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha X(1) + \alpha(1 - \alpha)X(0)]\\
+&amp; = \alpha X(2) + \alpha(1 - \alpha)X(1) + \alpha(1 - \alpha)^2 X(0) \end{align}\end{split}\]</div>
+<p>The explicit formula for a generic time step <span class="math notranslate nohighlight">\(\tau\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[ S(T) = \sum_{t=0}^{\tau} \alpha(1 - \alpha)^{\tau-t}X(t) \]</div>
+<section id="initialization">
+<h4>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>There are many initialization strategies.</p></li>
+<li><p>A simple one is to set <span class="math notranslate nohighlight">\(S(0) = X(0)\)</span>.</p></li>
+<li><p>Another strategy is to find the mean of the first couple of observations, e.g., <span class="math notranslate nohighlight">\(S(0) = \frac{X(0) + X(1) + X(2)}{3}\)</span>.</p></li>
+<li><p>Once you’ve initialized, you simply use the update rule above to calculate all values.</p></li>
+<li><p>In practice, we don’t this process by hand, but we use the functions in <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p></li>
+</ul>
+</section>
+<section id="setting-alpha">
+<h4>Setting Alpha<a class="headerlink" href="#setting-alpha" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Choosing the optimal value for <span class="math notranslate nohighlight">\(\alpha\)</span> is also done by <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p></li>
+<li><p>A solver uses a metric like MSE to find the optimal <span class="math notranslate nohighlight">\(\alpha\)</span>.</p></li>
+<li><p>Even if we do not choose the value manually, is goot to have a basic idea of what’s happening under the hood.</p></li>
+</ul>
+</section>
+</section>
+<section id="double-exponential-smoothing">
+<h3>Double exponential smoothing<a class="headerlink" href="#double-exponential-smoothing" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>💡 It has all the benefits of Single Exponential plus the ability to pickup on trend.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
+b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ \hat{X}(t+1) = S(t) + b(t) &amp; \hspace{2cm} \text{Forecasts} \end{align}\end{split}\]</div>
+<ul class="simple">
+<li><p>The parameter <span class="math notranslate nohighlight">\(\beta \in [0,1]\)</span> controls the decay of the influence of change in the trend.</p></li>
+</ul>
+<p><strong>Initialization</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S(0) = X(0)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b(0) = X(1) - X(0)\)</span></p></li>
+<li><p>Other initializations are also possible.</p></li>
+</ul>
+<p><strong>Forecasts beyond 1-step ahead</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{X}(t+\tau) = S(t) + \tau b(t)\)</span></p></li>
+</ul>
+</section>
+<section id="triple-exponential-smoothing">
+<h3>Triple exponential smoothing<a class="headerlink" href="#triple-exponential-smoothing" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>💡 It has all the benefits of Double Exponential with the ability to also model the seasonality.</p></li>
+<li><p>It does by adding a third component that smooths out seasonality of length <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>There are two variants in the model:</p>
+<ul>
+<li><p>additive seasonality</p></li>
+<li><p>multiplicative seasonality</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Additive seasonality model</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \big(X(t) - S(t-1) - b(t-1)\big) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = S(t) + \tau b(t) + c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\end{split}\]</div>
+<p><strong>Multiplicative seasonality model</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+b(t) = \beta \big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = \big( S(t) + \tau b(t) \big)c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\end{split}\]</div>
+<p><strong>Initialization</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(b(0) = \frac{1}{L} \left( \frac{X(L+1) - X(1)}{L} + \frac{X(L+2) - X(2)}{L} + \dots + \frac{X(L+L) - X(L)}{L} \right)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c(t) = \frac{1}{N} \sum_{j=1}^N \frac{X(L(j-1)+t)}{A_j}\)</span> for <span class="math notranslate nohighlight">\(t=1,2,\dots,L\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is the number of complete cycles in the data and <span class="math notranslate nohighlight">\(A_j = \frac{\sum_{t=1}^L  X(2(j-1)+t)}{L}\)</span></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="exponential-smoothing-in-python">
+<h2>Exponential smoothing in Python<a class="headerlink" href="#exponential-smoothing-in-python" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Let’s now see how to perform smoothing in Python.</p></li>
+<li><p>As we’ve done in the past, we’ll leverage <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> to do the heavy lifting for us.</p></li>
+</ul>
+<ul class="simple">
+<li><p>We’ll use the same time series with trend and seasionality to compare simple average, single, double, and triple exponential smoothing.</p></li>
+<li><p>We will holdout the last 5 samples from the dataset (i.e., they become the <em>test set</em>).</p></li>
+<li><p>We will compare the predictions made by the models with these values.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train/test split</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">trend_seasonality</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">trend_seasonality</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id2">
+<h3>Simple Average<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>This is a very crude model to say the least.</p></li>
+<li><p>It can at least be used as a baseline.</p></li>
+<li><p>Any model we try moving forward should do much better than this one.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find mean of series</span>
+<span class="n">trend_seasonal_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">trend_seasonality</span><span class="p">)</span>
+
+<span class="c1"># create array of mean value equal to length of time array</span>
+<span class="n">simple_avg_preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">trend_seasonal_avg</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+
+<span class="c1"># mse</span>
+<span class="n">simple_mse</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">simple_avg_preds</span><span class="p">)</span>
+
+<span class="c1"># results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predictions: &quot;</span><span class="p">,</span> <span class="n">simple_avg_preds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE: &quot;</span><span class="p">,</span> <span class="n">simple_mse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predictions:  [109.15753549 109.15753549 109.15753549 109.15753549 109.15753549]
+MSE:  47197.581557567326
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="n">train</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Simple average - MSE: </span><span class="si">{</span><span class="n">simple_mse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">simple_avg_preds</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;preds&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9851ab1c64c6e28449a6dbf63a5b6576fb7bc50125443e584437e928e02d0954.png" src="../../_images/9851ab1c64c6e28449a6dbf63a5b6576fb7bc50125443e584437e928e02d0954.png" />
+</div>
+</div>
+</section>
+<section id="single-exponential">
+<h3>Single Exponential<a class="headerlink" href="#single-exponential" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.api</span> <span class="kn">import</span> <span class="n">SimpleExpSmoothing</span>
+
+<span class="n">single</span> <span class="o">=</span> <span class="n">SimpleExpSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">single_preds</span> <span class="o">=</span> <span class="n">single</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+<span class="n">single_mse</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">single_preds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predictions: &quot;</span><span class="p">,</span> <span class="n">single_preds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE: &quot;</span><span class="p">,</span> <span class="n">single_mse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predictions:  [196.26021282 196.26021282 196.26021282 196.26021282 196.26021282]
+MSE:  639.8061129113645
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="n">train</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Simple exponential smoothing - MSE: </span><span class="si">{</span><span class="n">single_mse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">single_preds</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;preds&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bdc83d0e052d1e3f98cd36dd41f3f49c2b1f825a01fd4f1c1a65ed11a01e0345.png" src="../../_images/bdc83d0e052d1e3f98cd36dd41f3f49c2b1f825a01fd4f1c1a65ed11a01e0345.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>This is certainly better than the simple average method but it’s still pretty crude.</p></li>
+<li><p>Notice how the forecast is just a horizontal line.</p></li>
+<li><p>Single Exponential Smoothing cannot pick up neither trend nor seasonality.</p></li>
+</ul>
+</section>
+<section id="double-exponential">
+<h3>Double Exponential<a class="headerlink" href="#double-exponential" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.api</span> <span class="kn">import</span> <span class="n">Holt</span>
+
+<span class="n">double</span> <span class="o">=</span> <span class="n">Holt</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">double_preds</span> <span class="o">=</span> <span class="n">double</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+<span class="n">double_mse</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">double_preds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predictions: &quot;</span><span class="p">,</span> <span class="n">double_preds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE: &quot;</span><span class="p">,</span> <span class="n">double_mse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predictions:  [198.1831097  200.10600656 202.02890341 203.95180027 205.87469713]
+MSE:  388.2154737380629
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="n">train</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Double exponential smoothing - MSE: </span><span class="si">{</span><span class="n">double_mse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">double_preds</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;preds&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/909220d3ee93b5b45a7ba0805e576af530bc6a62579b307d8789a0bb67833ccc.png" src="../../_images/909220d3ee93b5b45a7ba0805e576af530bc6a62579b307d8789a0bb67833ccc.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Double Exponential Smoothing can pickup on trend, which is exactly what we see here.</p></li>
+<li><p>This is a significant leap but no quite yet the prediction we would like to get.</p></li>
+</ul>
+</section>
+<section id="triple-exponential">
+<h3>Triple Exponential<a class="headerlink" href="#triple-exponential" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.api</span> <span class="kn">import</span> <span class="n">ExponentialSmoothing</span>
+
+<span class="n">triple</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span>
+                              <span class="n">trend</span><span class="o">=</span><span class="s2">&quot;additive&quot;</span><span class="p">,</span>
+                              <span class="n">seasonal</span><span class="o">=</span><span class="s2">&quot;additive&quot;</span><span class="p">,</span>
+                              <span class="n">seasonal_periods</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">triple_preds</span> <span class="o">=</span> <span class="n">triple</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+<span class="n">triple_mse</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">triple_preds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predictions: &quot;</span><span class="p">,</span> <span class="n">triple_preds</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE: &quot;</span><span class="p">,</span> <span class="n">triple_mse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predictions:  [203.98125253 208.5287971  214.22604744 207.94866204 201.04061453]
+MSE:  97.58370692262461
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="n">train</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Triple exponential smoothing - MSE: </span><span class="si">{</span><span class="n">triple_mse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:],</span> <span class="n">triple_preds</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;preds&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2f65ebbe2116d725c2d64c5e071bd4d1007a850cd570832752876564853b2062.png" src="../../_images/2f65ebbe2116d725c2d64c5e071bd4d1007a850cd570832752876564853b2062.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Triple Exponential Smoothing pickups trend and seasonality.</p></li>
+<li><p>Clearly, this is the most suitable approach for this data.</p></li>
+<li><p>We can summarize the results in the following</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;MSE&#39;</span><span class="p">:[</span><span class="n">simple_mse</span><span class="p">,</span> <span class="n">single_mse</span><span class="p">,</span> <span class="n">double_mse</span><span class="p">,</span> <span class="n">triple_mse</span><span class="p">]}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_dict</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;simple&#39;</span><span class="p">,</span> <span class="s1">&#39;single&#39;</span><span class="p">,</span> <span class="s1">&#39;double&#39;</span><span class="p">,</span> <span class="s1">&#39;triple&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 MSE
+simple  47197.581558
+single    639.806113
+double    388.215474
+triple     97.583707
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this lecture we learned</p>
+<ol class="arabic simple">
+<li><p>What is smoothing and why it is necessary.</p></li>
+<li><p>The common smoothing techniques.</p></li>
+<li><p>A basic understanding of how to smooth time series data with Python and generate forecasts.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>Load the following two time series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the first time series</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://zenodo.org/records/10897398/files/smoothing_ts1.npy?download=1&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="n">smoothing_ts1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">smoothing_ts1</span><span class="p">))</span>
+
+<span class="c1"># Load the second time series</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://zenodo.org/records/10897398/files/smoothing_ts4_4.npy?download=1&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="n">smoothing_ts2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">smoothing_ts2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>144
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using on what you learned in this and in the previous lectures, do the following.</p>
+<ol class="arabic simple">
+<li><p>Create two time variables called <code class="docutils literal notranslate"><span class="pre">mytime1</span></code> and <code class="docutils literal notranslate"><span class="pre">mytime2</span></code> that starts at 0 and are as long as each dataset.</p></li>
+<li><p>Split each dataset into train and test sets (as the test, use the last 5 observations).</p></li>
+<li><p>Identify trend and seasonality, if present.</p></li>
+<li><p>Identify if trend and/or seasonality are additive or multiplicative, if present.</p></li>
+<li><p>Create smoothed model on the train set and use to forecast on the test set.</p></li>
+<li><p>Calculate MSE on test data.</p></li>
+<li><p>Plot training data, test data, and your model’s forecast for each dataset.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../02/stationarity.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Stationarity</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../04/ar-ma.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AR-MA</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Smoothing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-smoothing-techniques">Simple smoothing techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-average">Simple average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">Mean squared error (MSE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average-ma">Moving Average (MA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-moving-average-wma">Weighted moving average (WMA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ma">Forecasting with MA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-wma">Forecasting with WMA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-smoothing">Exponential Smoothing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential-smoothing">Single exponential smoothing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-alpha">Setting Alpha</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential-smoothing">Double exponential smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential-smoothing">Triple exponential smoothing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-smoothing-in-python">Exponential smoothing in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Simple Average</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential">Single Exponential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential">Double Exponential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential">Triple Exponential</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Filippo Maria Bianchi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

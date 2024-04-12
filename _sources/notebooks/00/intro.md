@@ -7,6 +7,7 @@ Welcome to a journey through the world of time series analysis using Python! Thi
 
 Time series analysis is a crucial discipline in data science, offering insights into patterns over time that are invaluable for forecasting, anomaly detection, and understanding temporal dynamics. The aim of this book is to introduce fundamental concepts of time series analysis from multiple perspectives: statistical, dynamical systems, machine learning, and signal processing. This interdisciplinary approach aims to give the reader a broad view on the world of time series.
 
+
 ```{image} media/topics.png
 :alt: topics
 :width: 500px
@@ -40,7 +41,7 @@ To run the code and the notebooks the recommended steps are the following:
 
 1. Download and install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.htmlLinks).
 
-2. Download the [env.yml](env.yml) file.
+2. Download the [env.yml](https://github.com/FilippoMB/python-time-series-handbook/blob/main/env.yml) file.
 
 3. Open the shell and navigate to the location with the yml file you just downloaded.
     - If you are on Windows, open the Miniconda shell.

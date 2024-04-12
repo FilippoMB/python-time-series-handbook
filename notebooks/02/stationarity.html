@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/02/stationarity';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Resources" href="../00/resources.html" />
+    <link rel="next" title="Smoothing" href="../03/smoothing.html" />
     <link rel="prev" title="Introduction to time series analysis" href="../01/introduction_to_time_series.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,6 +181,16 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Stationarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/smoothing.html">Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/ar-ma.html">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/unit-root-hurst.html">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/kalman-filter.html">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/prophet.html">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources</a></li>
 </ul>
 
@@ -890,7 +900,7 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.847704120519421e-16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.975736996017264e-16
 </pre></div>
 </div>
 </div>
@@ -951,8 +961,8 @@ $<span class="math notranslate nohighlight">\(\sin(A) \sin(B) = \frac{1}{2}[\cos
 <li><p>Applying this identity, we get:
 $$</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-19462d63-83b1-4e46-9c17-36bf4327c238">
-<span class="eqno">(1)<a class="headerlink" href="#equation-19462d63-83b1-4e46-9c17-36bf4327c238" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e3a98bd3-6cc9-403b-b863-a1de11399d01">
+<span class="eqno">()<a class="headerlink" href="#equation-e3a98bd3-6cc9-403b-b863-a1de11399d01" title="Permalink to this equation">#</a></span>\[\begin{align}
 \text{Cov}(x_t, x_{t+h}) &amp; = R^2 \mathbb{E}\left[\frac{1}{2}[\cos(\lambda t + \psi - \lambda (t + h) - \psi) - \cos(\lambda t + \psi + \lambda (t + h) + \psi)]\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h) - \cos(2\lambda t + 2\psi + \lambda h)\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h)\right] - \frac{R^2}{2} \mathbb{E}\left[\cos(2\lambda t + 2\psi + \lambda h)\right] \end{align}\]</div>
@@ -1234,7 +1244,7 @@ $<span class="math notranslate nohighlight">\(\text{Cov}(x_t, x_{t+h}) = \frac{R
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value: 2.3001721380706884e-25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value: 2.300172138070656e-25
 </pre></div>
 </div>
 </div>
@@ -1947,7 +1957,7 @@ p-value: 0.000
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks\02"
+            path: "./notebooks/02"
         },
         predefinedOutput: true
     }
@@ -1974,11 +1984,11 @@ p-value: 0.000
       </div>
     </a>
     <a class="right-next"
-       href="../00/resources.html"
+       href="../03/smoothing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Resources</p>
+        <p class="prev-next-title">Smoothing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

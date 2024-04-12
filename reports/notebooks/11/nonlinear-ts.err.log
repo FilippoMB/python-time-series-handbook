@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/home/filippo/miniconda3/envs/sta2003/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/filippo/miniconda3/envs/sta2003/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/filippo/miniconda3/envs/sta2003/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/filippo/miniconda3/envs/sta2003/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/filippo/miniconda3/envs/sta2003/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/filippo/miniconda3/envs/sta2003/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/filippo/miniconda3/envs/sta2003/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+from scipy.integrate import solve_ivp
+from sklearn.neighbors import NearestNeighbors 
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error
+from sklearn.decomposition import PCA
+from reservoir_computing.reservoir import Reservoir
+from reservoir_computing.modules import RC_forecaster
+from reservoir_computing.utils import forecasting_datasets
+np.random.seed(0)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[1], line 11[0m
+[1;32m      9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mreservoir_computing[39;00m[38;5;21;01m.[39;00m[38;5;21;01mreservoir[39;00m [38;5;28;01mimport[39;00m Reservoir
+[1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01mreservoir_computing[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodules[39;00m [38;5;28;01mimport[39;00m RC_forecaster
+[0;32m---> 11[0m [38;5;28;01mfrom[39;00m [38;5;21;01mreservoir_computing[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m [38;5;28;01mimport[39;00m forecasting_datasets
+[1;32m     12[0m np[38;5;241m.[39mrandom[38;5;241m.[39mseed([38;5;241m0[39m)
+
+[0;31mImportError[0m: cannot import name 'forecasting_datasets' from 'reservoir_computing.utils' (/home/filippo/code/Time-series-classification-and-clustering-with-Reservoir-Computing/reservoir_computing/utils.py)
+

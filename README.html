@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>🚀 Getting started with coding &#8212; Time series analysis with Python</title>
+    <title>📑 Content &#8212; Time series analysis with Python</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -179,6 +179,16 @@
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/02/stationarity.html">Stationarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/03/smoothing.html">Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/04/ar-ma.html">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/06/unit-root-hurst.html">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/07/kalman-filter.html">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/09/prophet.html">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/12/classification-clustering.html">Time series classification and clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/00/resources.html">Resources</a></li>
 </ul>
 
@@ -365,7 +375,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>🚀 Getting started with coding</h1>
+    <h1>📑 Content</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -375,7 +385,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">🚀 Getting started with coding</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">📑 Content</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-coding">🚀 Getting started with coding</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-format-and-slides">🎥 Notebook format and slides</a></li>
 </ul>
 
@@ -391,11 +402,186 @@ document.write(`
                   
   <br>
 <div align="center">
-📚 <a href="">Read the book</a> 📚
+📚 <a href="https://filippomb.github.io/python-time-series-handbook">Read the book</a> 📚
 </div>
 <br>
 <p>This is the collection of notebooks for the course <em>Time Series Analysis with Python</em>.
-For more information and for reading the content of this repository, please refer to the <a class="reference internal" href="#"><span class="xref myst">book</span></a> version.</p>
+For more information and for reading the content of this repository, please refer to the <a class="reference external" href="https://filippomb.github.io/python-time-series-handbook">book</a> version.</p>
+<section id="content">
+<h1>📑 Content<a class="headerlink" href="#content" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><strong>Introduction to time series analysis</strong></p>
+<ul class="simple">
+<li><p>Definition of time series data</p></li>
+<li><p>Main applications of time series analysis</p></li>
+<li><p>Statistical vs dynamical models perspective</p></li>
+<li><p>Components of a time series</p></li>
+<li><p>Additive vs multiplicative models</p></li>
+<li><p>Time series decomposition</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Stationarity in time series</strong></p>
+<ul class="simple">
+<li><p>Stationarity in time series</p></li>
+<li><p>Weak vs strong stationarity</p></li>
+<li><p>Autocorrelation and autocovariance</p></li>
+<li><p>Common stationary and nonstationary time series</p></li>
+<li><p>How to identify stationarity</p></li>
+<li><p>Transformations to achieve stationarity</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/02/stationarity.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Smoothing</strong></p>
+<ul class="simple">
+<li><p>Smoothing in time series data</p></li>
+<li><p>The mean squared error</p></li>
+<li><p>Simple average, moving average, and weighted moving average</p></li>
+<li><p>Single, double, and triple exponential smoothing</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/03/smoothing.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p><strong>AR-MA</strong></p>
+<ul class="simple">
+<li><p>The autocorrelation function</p></li>
+<li><p>The partial autocorrelation function</p></li>
+<li><p>The Auto-Regressive model</p></li>
+<li><p>The Moving-Average model</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/04/ar-ma.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p><strong>ARMA, ARIMA, SARIMA</strong></p>
+<ul class="simple">
+<li><p>Autoregressive Moving Average (ARMA) models</p></li>
+<li><p>Autoregressive Integrated Moving Average (ARIMA) models</p></li>
+<li><p>SARIMA models (ARIMA model for data with seasonality)</p></li>
+<li><p>Automatic model selection with AutoARIMA</p></li>
+<li><p>Model selection with exploratory data analysis</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/05/arma_arima_sarima.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p><strong>Unit root test and Hurst exponent</strong></p>
+<ul class="simple">
+<li><p>Unit root test</p></li>
+<li><p>Mean Reversion</p></li>
+<li><p>Hurst Exponent</p></li>
+<li><p>Geometric Brownian Motion</p></li>
+<li><p>Applications in quantitative finance</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/06/unit-root-hurst.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p><strong>Kalman filter</strong></p>
+<ul class="simple">
+<li><p>Introduction to Kalman Filter</p></li>
+<li><p>Model components and assumptions</p></li>
+<li><p>The Kalman Filter algorithm</p></li>
+<li><p>Application to static and dynamic one-dimensional data</p></li>
+<li><p>Application to higher-dimensional data</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/07/kalman-filter.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p><strong>Signal transforms and filters</strong></p>
+<ul class="simple">
+<li><p>Introduction to Fourier Transform and Discrete Fourier Transform, and FFT</p></li>
+<li><p>Fourier Transform of common signals</p></li>
+<li><p>Properties of the Fourier Transform</p></li>
+<li><p>Signal filtering with low-pass, high-pass, band-pass, and bass-stop filters</p></li>
+<li><p>Application of Fourier Transform for time series forecasting</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="9">
+<li><p><strong>Prophet</strong></p>
+<ul class="simple">
+<li><p>Introduction to Prophet for time series forecasting</p></li>
+<li><p>Advanced modelling of trend, seasonality, and holidays</p></li>
+<li><p>The Prophet library in Python</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="10">
+<li><p><strong>Neural networks and Reservoir Computing</strong></p>
+<ul class="simple">
+<li><p>Windowed approaches and Neural Networks for time series forecasting</p></li>
+<li><p>Forecasting with the Multi Layer Perceptron</p></li>
+<li><p>Recurrent Neural Networks: advantages and challenges</p></li>
+<li><p>Reservoir Computing and the Echo State Network</p></li>
+<li><p>Dimensionality reduction with Principal Component Analysis</p></li>
+<li><p>Forecasting electricity consumption with Multi Layer Perceptron and Echo State Network</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="11">
+<li><p><strong>Non-linear time series analysis</strong></p>
+<ul class="simple">
+<li><p>Dynamical systems and nonlinear dynamics</p></li>
+<li><p>Bifurcation diagrams</p></li>
+<li><p>Chaotic systems</p></li>
+<li><p>High-dimensional continuous-time systems</p></li>
+<li><p>Fractal dimensions</p></li>
+<li><p>Phase space reconstruction and Taken’s embedding theorem</p></li>
+<li><p>Forecasting nonlinear time series</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb">notebook</a></p>
+</div></blockquote>
+<ol class="arabic simple" start="12">
+<li><p><strong>Time series classification and clustering</strong></p>
+<ul class="simple">
+<li><p>Multivariate time series</p></li>
+<li><p>Time series similarity</p></li>
+<li><p>Dynamic Time Warping</p></li>
+<li><p>Time series kernels</p></li>
+<li><p>Time series embedding</p></li>
+<li><p>Classification of time series</p></li>
+<li><p>Clustering of time series</p></li>
+<li><p>Visualization with kernel PCA</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb">notebook</a></p>
+</div></blockquote>
+</section>
 <section id="getting-started-with-coding">
 <h1>🚀 Getting started with coding<a class="headerlink" href="#getting-started-with-coding" title="Link to this heading">#</a></h1>
 <p>To run the notebooks the recommended steps are the following:</p>
@@ -472,7 +658,8 @@ If you open a notebook you will see the following structure:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">🚀 Getting started with coding</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">📑 Content</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-coding">🚀 Getting started with coding</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-format-and-slides">🎥 Notebook format and slides</a></li>
 </ul>
 

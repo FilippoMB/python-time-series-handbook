@@ -1,0 +1,1479 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kalman filter &#8212; Time series analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/07/kalman-filter';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Signal transforms and filters" href="../08/signal-transforms-filters.html" />
+    <link rel="prev" title="Unit root test and Hurst exponent" href="../06/unit-root-hurst.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../00/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Time series analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Time series analysis with Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../00/intro.html">
+                    Time series analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/stationarity.html">Stationarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/smoothing.html">Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/ar-ma.html">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/unit-root-hurst.html">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/prophet.html">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/07/kalman-filter.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/07/kalman-filter.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Kalman filter</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-kalman-filter">What is a Kalman Filter?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundations">Theoretical Foundations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-ingredients">What are the ingredients?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-noise">The role of noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-strategy">Update strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-assumptions">Fundamental Assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-linear-model">Assumption 1: Linear Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-2-whiteness">Assumption 2: Whiteness</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-gaussian-noise">Assumption 3: Gaussian Noise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical details</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-two-sources">Combining two sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-kf-algorithm">The KF algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predict">Predict</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correct">Correct</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-estimation">Parameters estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-and-variants">Extensions and Variants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical Considerations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation">Python implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-algorithm">The algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-static-one-dimensional-data">Example 1: Static one-dimensional data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-dynamic-one-dimensional-data">Example 2: Dynamic one-dimensional data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-dynamic-two-dimensional-data">Example 3: Dynamic two-dimensional data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise #1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise #2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise #3</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="kalman-filter">
+<h1>Kalman filter<a class="headerlink" href="#kalman-filter" title="Link to this heading">#</a></h1>
+<br>
+<div style="text-align: center">
+    <img src="media/cover.png" style="width: 45%">
+</div><section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This lecture will cover the following topics:</p>
+<ul class="simple">
+<li><p>Introduction to Kalman Filter</p></li>
+<li><p>Model components and assumptions</p></li>
+<li><p>The Kalman Filter algorithm</p></li>
+<li><p>Application to static and dynamic one-dimensional data</p></li>
+<li><p>Application to higher-dimensional data</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">statsmodels</span> <span class="k">as</span> <span class="nn">ss</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># for reproducibility</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">cv2</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># for reproducibility</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;cv2&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="what-is-a-kalman-filter">
+<h2>What is a Kalman Filter?<a class="headerlink" href="#what-is-a-kalman-filter" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The Kalman Filter (KF) is an algorithm that uses a series of measurements observed over time, containing statistical noise and other inaccuracies.</p></li>
+<li><p>It produces estimates of unknown variables that tend to be more accurate than those based only on measurements.</p></li>
+<li><p>Developed by Rudolf E. Kálmán in the late 1950s.</p></li>
+<li><p>Applications:</p>
+<ul>
+<li><p>tracking objects (Apollo project, GPS, self driving cars).</p></li>
+<li><p>image processing.</p></li>
+<li><p>economic and financial modeling.</p></li>
+</ul>
+</li>
+</ul>
+<section id="theoretical-foundations">
+<h3>Theoretical Foundations<a class="headerlink" href="#theoretical-foundations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Dynamic systems are systems that change over time.</p></li>
+<li><p>They are described by a set of equations that predict the future state of the system based on its current state.</p></li>
+<li><p>The KF assumes the system is a <em>linear</em> dynamic system with <em>Gaussian</em> noise.</p></li>
+<li><p>Gaussian distributions are used because of their nice properties when dealing with averages and variances.</p></li>
+</ul>
+</section>
+<section id="what-are-the-ingredients">
+<h3>What are the ingredients?<a class="headerlink" href="#what-are-the-ingredients" title="Link to this heading">#</a></h3>
+<p><strong>State</strong></p>
+<ul class="simple">
+<li><p>The true value of the variables we want to estimate.</p></li>
+<li><p>The state vector represents all the information needed to describe the current state of the system.</p></li>
+</ul>
+<p><strong>Observation Model</strong></p>
+<ul class="simple">
+<li><p>Relates the current state to the measurements or observations.</p></li>
+</ul>
+<p><strong>Noisy measurements</strong></p>
+<ul class="simple">
+<li><p>The process noise and measurement noise (assumed to be Gaussian) represent the uncertainty in our models and measurements.</p></li>
+</ul>
+<p>Example:</p>
+<ul class="simple">
+<li><p>Car moving at a constant velocity.</p></li>
+<li><p>Model: Car position = velocity <span class="math notranslate nohighlight">\(\times\)</span> time <span class="math notranslate nohighlight">\(+\)</span> system noise.</p></li>
+<li><p>Measurements: position and velocity (which are also noisy).</p></li>
+</ul>
+</section>
+<section id="the-role-of-noise">
+<h3>The role of noise<a class="headerlink" href="#the-role-of-noise" title="Link to this heading">#</a></h3>
+<p>The tradeoff between the influence of the model and the measurements is determined by noise.</p>
+<ul class="simple">
+<li><p>If the model has relatively large errors, more importance is given to the latest measurements in computing the current estimate.</p></li>
+<li><p>If the measurement have larger errors, more importance is given to the model in making the current estimate.</p></li>
+<li><p>Therefore, you need to estimate not only your state but also the errors (the covariance) for both the model and the measurements.</p></li>
+<li><p>These must be updated at each time step, too.</p></li>
+</ul>
+</section>
+<section id="update-strategy">
+<h3>Update strategy<a class="headerlink" href="#update-strategy" title="Link to this heading">#</a></h3>
+<p>KF is a recursive algorithm</p>
+<ul class="simple">
+<li><p>Uses information from previous time step to update the estimates.</p></li>
+<li><p>Does not keep in memory all the data acquired so far.</p></li>
+<li><p>Has predictor-corrector structure:</p>
+<ul>
+<li><p>Make a prediction based on the model.</p></li>
+<li><p>Update the prediction with the measurements.</p></li>
+<li><p>Repeat.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="fundamental-assumptions">
+<h3>Fundamental Assumptions<a class="headerlink" href="#fundamental-assumptions" title="Link to this heading">#</a></h3>
+<p>The Kalman filter approach is based on three fundamental assumptions:</p>
+<ol class="arabic simple">
+<li><p>The system can be described or approximated by a linear model.</p></li>
+<li><p>All noise (from both the system and the measurements) is white.</p></li>
+<li><p>All noise is Gaussian.</p></li>
+</ol>
+<section id="assumption-1-linear-model">
+<h4>Assumption 1: Linear Model<a class="headerlink" href="#assumption-1-linear-model" title="Link to this heading">#</a></h4>
+<p>Each variable at the current time is a linear function of the variables at previous times.</p>
+<ul class="simple">
+<li><p>Many systems can be approximated this way.</p></li>
+<li><p>Linear systems are easy to analyze.</p></li>
+<li><p>Nonlinear systems can often be approximated by linear models around a current estimate (extended KF).</p></li>
+</ul>
+</section>
+<section id="assumption-2-whiteness">
+<h4>Assumption 2: Whiteness<a class="headerlink" href="#assumption-2-whiteness" title="Link to this heading">#</a></h4>
+<p>The noise value is not correlated in time.</p>
+<ul class="simple">
+<li><p>If you know the noise at time <span class="math notranslate nohighlight">\(t\)</span>, it doesn’t help you to predict the noise at future times <span class="math notranslate nohighlight">\(t+\tau\)</span>.</p></li>
+<li><p>White noise is a reasonable approximation of hte real noise.</p></li>
+<li><p>Makes mathematics tractable.</p></li>
+</ul>
+</section>
+<section id="assumption-3-gaussian-noise">
+<h4>Assumption 3: Gaussian Noise<a class="headerlink" href="#assumption-3-gaussian-noise" title="Link to this heading">#</a></h4>
+<p>At any point in time, the probability density of the noise is a Gaussian.</p>
+<ul class="simple">
+<li><p>System and measurement noise are often a combination of many small sources of noise.</p></li>
+<li><p>The combination effect is approximately Gaussian.</p></li>
+<li><p>If only mean and variance are known (typical case in engineering systems), Gaussian distribution is a good choice as these two quantities completely determine the Gaussian distribution.</p></li>
+<li><p>Gaussian distribution have nice properties and are easy to treat mathematically.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="technical-details">
+<h2>Technical details<a class="headerlink" href="#technical-details" title="Link to this heading">#</a></h2>
+<section id="combining-two-sources">
+<h3>Combining two sources<a class="headerlink" href="#combining-two-sources" title="Link to this heading">#</a></h3>
+<p>Assume a car has a certain initial position <span class="math notranslate nohighlight">\(x_0=0\)</span> and initial velocity <span class="math notranslate nohighlight">\(\dot{x}_0=60 km/h\)</span>.</p>
+<p>If the speed is constant, we have:</p>
+<div class="math notranslate nohighlight">
+\[x_{t} = 1\cdot x_{t-1} + \delta t \cdot \dot{x}_{t-1}\]</div>
+<div class="math notranslate nohighlight">
+\[\dot{x}_{t} = 0 \cdot x_{t-1} + 1 \cdot \dot{x}_{t-1}\]</div>
+<p>In matrix form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \boldsymbol{x}_{t} = 
+\begin{bmatrix}
+x_{t} \\
+\dot{x}_{t}
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; \delta t \\
+0 &amp; 1 
+\end{bmatrix}
+\begin{bmatrix}
+x_{t-1} \\
+\dot{x}_{t-1}
+\end{bmatrix} = \mathbf{A} \boldsymbol{x}_{t-1}
+\end{split}\]</div>
+<div style="text-align: center">
+    <img src="./media/system.png" style="width: 50%">
+</div>
+<ul class="simple">
+<li><p>The current position and speed will evolve according to this simple dynamical system $<span class="math notranslate nohighlight">\(\boldsymbol{x}_{t} = \mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w}_{t-1}\)</span><span class="math notranslate nohighlight">\( where \)</span>\boldsymbol{w}_t \sim \mathcal{N}(0,\mathbf{Q})$ represents perturbations in the underlying dynamical systems (e.g., holes on the road).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{x}_{t} \in \mathbb{R}^{N}\)</span> represents the state of the system.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{Q} \in \mathbb{R}^{N \times N}\)</span> is the <em>process noise covariance</em>, where <span class="math notranslate nohighlight">\(N\)</span> represents the number of state variables (2 in our case, position and speed).</p></li>
+</ul>
+<p>Where the car will be after 1 minute?</p>
+<p>If we rely only on our simple sistem <span class="math notranslate nohighlight">\(\boldsymbol{x}_{t+1} = \mathbf{A} \boldsymbol{x}_{t}\)</span> without even consider the noise, the car will keep moving at <span class="math notranslate nohighlight">\(60 km/h\)</span> and will be at <span class="math notranslate nohighlight">\(1 km\)</span> distance.</p>
+<div style="text-align: center">
+    <img src="./media/model_pred.png" style="width: 50%">
+</div><p>Let say our car has a GPS.</p>
+<ul class="simple">
+<li><p>As all instruments, our GPS will be affected by errors and gives us measurements with uncertainties in it.</p></li>
+<li><p>In addition, our GPS can only measure the position but not the speed.</p></li>
+<li><p>Based on our GPS, after 1 minute we are at <span class="math notranslate nohighlight">\(0.8 km\)</span> from where we started.</p></li>
+</ul>
+<div style="text-align: center">
+    <img src="./media/gps.png" style="width: 50%">
+</div><ul class="simple">
+<li><p>Let the measure of our GPS be $<span class="math notranslate nohighlight">\(\boldsymbol{z}_t = \mathbf{H} \boldsymbol{x}_t + \boldsymbol{v}_t\)</span><span class="math notranslate nohighlight">\( where \)</span>\boldsymbol{v}_t \sim \mathcal{N}(0,\mathbf{R})$ represents the uncertainty in the measures.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{z}_{t} \in \mathbb{R}^{M}\)</span> is the measurements vector.</p></li>
+<li><p>In our case, since the GPS measures only the position, we have <span class="math notranslate nohighlight">\(\mathbf{H} = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R} = \begin{bmatrix} r_{xx} \end{bmatrix}\)</span>.</p></li>
+<li><p>In general, <span class="math notranslate nohighlight">\(\mathbf{H} \in \mathbb{R}^{M,N}\)</span> is a matrx that maps the <span class="math notranslate nohighlight">\(N\)</span> state variables into the <span class="math notranslate nohighlight">\(M\)</span> measurements and <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{M,M}\)</span> is the measurement noise covariance.</p></li>
+</ul>
+<p>In summary, we have two different sources of information:</p>
+<ul class="simple">
+<li><p>a linear stochastic difference equation, representing our imprecise knowledge of a discrete-time controlled process;</p></li>
+<li><p>a source of measurements, that are noisy.</p></li>
+</ul>
+<div style="text-align: center">
+    <img src="./media/inputs.png" style="width: 20%">
+</div>
+<p>How do we combine them to get the best possible estimate of our system variables?</p>
+</section>
+<section id="the-kf-algorithm">
+<h3>The KF algorithm<a class="headerlink" href="#the-kf-algorithm" title="Link to this heading">#</a></h3>
+<p>The KF is an interative procedure that consists of two steps:</p>
+<ul class="simple">
+<li><p><strong>Predict</strong> (Time Update)</p></li>
+<li><p><strong>Correct</strong> (Measurement Update)</p></li>
+</ul>
+<p>These two steps are used to update two quantities:</p>
+<ul class="simple">
+<li><p>The <strong>state estimate</strong>.</p></li>
+<li><p>The uncertainty about our state estimate, called <strong>covariance estimate</strong>.</p></li>
+</ul>
+<p>Before looking at the iterative procedure let’s introduce this second quantity.</p>
+<p><strong>Covariance estimate</strong></p>
+<p>There are two sources of error in the estimate of the state of our system.</p>
+<ul class="simple">
+<li><p>The <em>a priori</em> estimate error <span class="math notranslate nohighlight">\(e^{-}_t = x_t - \hat{x}^{-}_t\)</span></p></li>
+<li><p>The <em>a posteriori</em> estimate error <span class="math notranslate nohighlight">\(e_t = x_t - \hat{x}_t\)</span></p></li>
+</ul>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{x}^{-}_t\)</span> is the estimate of the state based only on the knowledge of the system, e.g., the dynamics equations.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{x}_t\)</span> is the estimate based also on the measurement <span class="math notranslate nohighlight">\(z_t\)</span>, e.g., the GPS.</p></li>
+</ul>
+<p>Each type of error is associated with a covariance matrix, which reflects the amount of uncertainty in the state estimates.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbb{E}[e^{-}_t e^{-T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>a priori</em> covariance estimate).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t = \mathbb{E}[e_t e^{T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>a posteriori</em> covariance estimate).</p></li>
+<li><p>In our case, we have  <span class="math notranslate nohighlight">\(\mathbf{P}_t = \begin{bmatrix} p_{xx} &amp; p_{\dot x x} \\ p_{\dot x x} &amp; p_{\dot x \dot x} \end{bmatrix}\)</span> (for readability, the index <span class="math notranslate nohighlight">\(t\)</span> on the matrix elements is omitted):</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(p_{xx}\)</span> is the uncertainty about the position;</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{\dot x \dot x}\)</span> is the uncertainty about the velocity;</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{x \dot x}\)</span> and <span class="math notranslate nohighlight">\(p_{\dot x x}\)</span> represent the correlation between the noise in the measurements of the position and the speed.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t^{-}\)</span> has the same form.</p></li>
+</ul>
+<section id="predict">
+<h4>Predict<a class="headerlink" href="#predict" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The dynamics equations are responsible for projecting forward (in time) the current state and error covariance estimates to obtain the <em>a priori</em> estimate for the next time step.</p></li>
+<li><p>Such time update equations can also be thought of as <em>predictor equations</em>.</p></li>
+</ul>
+<p>State estimate update: $<span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t}^{-} = \mathbf{A} \hat{\boldsymbol{x}}_{t-1}\)</span>$</p>
+<div style="text-align: center">
+    <img src="./media/model_pred.png" style="width: 50%">
+</div><p>Covariance estimate update: $<span class="math notranslate nohighlight">\(\begin{align} \mathbf{P}_{t}^{-} &amp;= \mathbb{E}[e^{-}_t e^{-T}_t] \\
+  &amp;= \mathbb{E}[(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})^T] \\
+  &amp;= \mathbb{E}[(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})^T] \\
+  &amp;= \mathbb{E}[(\mathbf{A}e_{t-1})(e_{t-1}^T \mathbf{A}^T)] + \mathbb{E}[\boldsymbol{w}\boldsymbol{w}^T]\\
+  &amp;= \mathbf{A}\mathbb{E}[e_{t-1}e_{t-1}^T ]\mathbf{A}^T + \mathbf{Q} \\
+  &amp;= \mathbf{A}\mathbf{P}_{t-1}\mathbf{A}^T + \mathbf{Q}
+  \end{align}\)</span>$</p>
+<p>In summary, the Predict step consists of two equations to update:</p>
+<ul class="simple">
+<li><p>State estimate.</p></li>
+<li><p>Covariance estimate.</p></li>
+</ul>
+<div style="text-align: center">
+    <img src="./media/update.png" style="width: 20%">
+</div></section>
+<section id="correct">
+<h4>Correct<a class="headerlink" href="#correct" title="Link to this heading">#</a></h4>
+<p>The measurement update equations are responsible for the feedback, i.e. for incorporating a new measurement into the prior estimate to obtain an improved a posterior estimate.</p>
+<p>The posterior estimate <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t}\)</span> is a linear combination of:</p>
+<ul class="simple">
+<li><p>The prior estimate <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}^{-}_{t}\)</span>.</p></li>
+<li><p>A weighted difference between the actual measurement <span class="math notranslate nohighlight">\(\boldsymbol{z}_{t}\)</span> and a measurement prediction <span class="math notranslate nohighlight">\(\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t}\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{\boldsymbol{x}}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{K}_t(\boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t})\]</div>
+<ul class="simple">
+<li><p>The difference <span class="math notranslate nohighlight">\(\Delta_t = \boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t}\)</span> is called measurement <em>innovation</em> or <em>residual</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta_t\)</span> reflects the difference between our imprecise prediction (<span class="math notranslate nohighlight">\(\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t}\)</span>) and the actual noisy measurement (<span class="math notranslate nohighlight">\(\boldsymbol{z}_{t}\)</span>).</p></li>
+<li><p>A residual of zero means that the two are in complete agreement.</p></li>
+</ul>
+<div style="text-align: center">
+    <img src="./media/innovation.png" style="width: 50%">
+</div><p>The matrix <span class="math notranslate nohighlight">\(\mathbf{K} \in \mathbb{R}^{N \times M}\)</span> is chosen to be the <strong>gain</strong> that minimizes the posterior error covariance.</p>
+<p>Derivation (sketch)</p>
+<ol class="arabic simple">
+<li><p>Define the posterior error  <span class="math notranslate nohighlight">\(e_t = x_t - \hat{x}_t\)</span>.</p></li>
+<li><p>Define the posterior error covariance <span class="math notranslate nohighlight">\(P_t = \mathbb{E}[e_t e^{T}_t]\)</span>.</p></li>
+<li><p>Substitute <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{K}\Delta_t\)</span> in 1).</p></li>
+<li><p>Substitute the <span class="math notranslate nohighlight">\(e_t\)</span> obtained from 3) in 2) and take the expectation.</p></li>
+<li><p>Take the derivative of the trace of the result with respect to <span class="math notranslate nohighlight">\(\mathbf{K}\)</span>.</p></li>
+<li><p>Set the result equal to zero.</p></li>
+<li><p>Solve for <span class="math notranslate nohighlight">\(\mathbf{K}\)</span>.</p></li>
+</ol>
+<p>The previous derivation give us the following result:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{K}_t = \mathbf{P}^{-}_t \mathbf{H}^T (\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R})^{-1}= \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}}\]</div>
+<p>Back to our car example, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{K}_t = \frac{\begin{bmatrix} p^{-}_{xx} &amp; p^{-}_{\dot x x} \\ p^{-}_{\dot x x} &amp; p^{-}_{\dot x \dot x} \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix}}{\begin{bmatrix} 1 &amp; 0 \end{bmatrix} \begin{bmatrix} p^{-}_{xx} &amp; p^{-}_{\dot x x} \\ p^{-}_{\dot x x} &amp; p^{-}_{\dot x \dot x} \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} + \begin{bmatrix} r_{xx} \end{bmatrix}} = \frac{\begin{bmatrix} p^{-}_{xx} \\ p^{-}_{x \dot x} \end{bmatrix}}{p^{-}_{xx} + r_{xx}}\end{split}\]</div>
+<p>where, once again, the index <span class="math notranslate nohighlight">\(t\)</span> has been dropped from the elements of <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> for readability.</p>
+<p>The update equations for the position and speed become:</p>
+<ul class="simple">
+<li><p>Position: <span class="math notranslate nohighlight">\(\hat{x}_t = \hat{x}_t^{-} + \frac{p^{-}_{xx}}{p^{-}_{xx} + r_{xx}} \Delta_t\)</span></p></li>
+<li><p>Speed: <span class="math notranslate nohighlight">\(\hat{\dot x}_t = \hat{\dot x}_t^{-} + \frac{p^{-}_{x \dot x}}{p^{-}_{xx} + r_{xx}} \Delta_t\)</span></p></li>
+</ul>
+<p>One key observation is that the speed is updated even if we do not have a direct measure for it in our measurement <span class="math notranslate nohighlight">\(\boldsymbol{z}_t\)</span>.</p>
+<p>The update is possible thanks to the term <span class="math notranslate nohighlight">\(p^{-}_{x \dot x}\)</span> in <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> that relates the position (and its measurement) to the velocity.</p>
+<p>This showcases one of the main strengths of KF: it can handle <em>partial observations</em>.</p>
+<p>Let’s consider the two extreme cases for the values of <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span></p>
+<ol class="arabic simple">
+<li><p>The measurement error covariance <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> approaches zero, i.e., there is no noise in the measurements.</p>
+<ul class="simple">
+<li><p>The measurements are completely reliable.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{R} \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = \mathbf{H}^{-1}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> weights the residuals more heavily: <span class="math notranslate nohighlight">\(\begin{align} \hat{\boldsymbol{x}}_{t} &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\Delta_t = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}(\boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t})\\ &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} - \mathbf{H}^{-1}\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} -  \hat{\boldsymbol{x}}^{-}_{t}\\ &amp;= \mathbf{H}^{-1}\boldsymbol{z}_{t} \end{align}\)</span></p></li>
+</ul>
+</li>
+</ol>
+<div style="text-align: center">
+    <img src="./media/extreme1.png" style="width: 50%">
+</div><ol class="arabic simple" start="2">
+<li><p>The covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> approaches zero.</p>
+<ul class="simple">
+<li><p>The model is completely reliable and the measurements are not accounted for.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{P}^{-}_t \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> does not give importance to the residuals: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + 0\Delta_t = \hat{\boldsymbol{x}}^{-}_{t}\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+<div style="text-align: center">
+    <img src="./media/extreme2.png" style="width: 50%">
+</div><p>The last thing that remains to update is the posterior covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}_t\)</span> to be used in the next predict step.</p>
+<p>The formula is
+$<span class="math notranslate nohighlight">\(\mathbf{P}_t = (\mathbf{I} - \mathbf{K}_t \mathbf{H})\mathbf{P}^{-}_t\)</span>$</p>
+<p>Let’s look again at the two extreme cases:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t = \mathbf{H}^{-1} \rightarrow \mathbf{P}_t = 0\)</span></p>
+<ul>
+<li><p>This is the case where the measurements are completely reliable.</p></li>
+<li><p>The only source of uncertainty at the next Predict step will be the one of the model: <span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbf{A}\mathbf{P}_t\mathbf{A}^T + \mathbf{Q} = \mathbf{Q}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t = 0 \rightarrow \mathbf{P}_t = \mathbf{P}^{-}_t\)</span></p>
+<ul>
+<li><p>This is the case where the measurements are unreliable and not accounted for.</p></li>
+<li><p>The posterior covariance estimate is exactly the same as the prior covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> obtained in the Predict step using the model and not modified with the new measurements in the Correct step.</p></li>
+</ul>
+</li>
+</ul>
+<p>Summary of Correct</p>
+<div style="text-align: center">
+    <img src="./media/correct.png" style="width: 25%">
+</div><p>The whole process is summarized below</p>
+<div style="text-align: center">
+    <img src="./media/kalman.png" style="width: 50%">
+</div></section>
+</section>
+<section id="parameters-estimation">
+<h3>Parameters estimation<a class="headerlink" href="#parameters-estimation" title="Link to this heading">#</a></h3>
+<p>In general, both the measurement noise covariance <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> and the process noise covariance <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span> are <strong>unknown</strong>.</p>
+<ul class="simple">
+<li><p>Estimating <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> is usually done prior to operation of the filter.</p></li>
+<li><p>Measuring <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> is usually possible because we measure the process anyway (while operating the filter).</p></li>
+<li><p>We can take some offline sample measurements to determine the variance of the measurement noise.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Determine the process noise covariance <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span> is generally more difficult.</p></li>
+<li><p>We typically do not have the ability to directly observe the process we are estimating.</p></li>
+<li><p>Sometimes a relatively simple process model can produce acceptable results if one “injects” enough uncertainty into the process.</p></li>
+<li><p>This works well if the process measurements are reliable.</p></li>
+</ul>
+</section>
+<section id="extensions-and-variants">
+<h3>Extensions and Variants<a class="headerlink" href="#extensions-and-variants" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The Extended Kalman Filter (EKF) is used for nonlinear systems by linearizing about the current estimate.</p></li>
+<li><p>The Unscented Kalman Filter (UKF) uses a deterministic sampling technique to capture the mean and variance of the state distribution.</p></li>
+</ul>
+</section>
+<section id="practical-considerations">
+<h3>Practical Considerations<a class="headerlink" href="#practical-considerations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Designing an accurate model and having reliable measurements are crucial for effective filtering.</p></li>
+<li><p>Dealing with nonlinearities can be challenging and may require the EKF or UKF.</p></li>
+<li><p>Tuning process and measurement noise covariances <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> is essential for optimal performance.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="python-implementation">
+<h2>Python implementation<a class="headerlink" href="#python-implementation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Next, we will implement the Kalman Filter in Python and use it to estimate the value of a signal from noisy data.</p></li>
+<li><p>Initially, we will construct the algorithm by hand so we understand all the steps involved.</p></li>
+<li><p>Also, we will generate datasets from scratch so we know what our true result should be and therefore gain insight into how well the Kalman Filter works.</p></li>
+</ul>
+<section id="the-algorithm">
+<h3>The algorithm<a class="headerlink" href="#the-algorithm" title="Link to this heading">#</a></h3>
+<p>This is the workflow of the algorithm we are going to implement:</p>
+<ol class="arabic simple">
+<li><p>Make an initial estimate of your state vector and covariance matrix</p></li>
+<li><p>Predict the state and covariance for the next time step</p></li>
+<li><p>Computer the Kalman gain</p></li>
+<li><p>Make a measurement</p></li>
+<li><p>Update estimates of state and covariance</p></li>
+<li><p>Repeat from step 2</p></li>
+</ol>
+<p>For one-dimensional examples, there are a couple of simplifications:</p>
+<ul class="simple">
+<li><p>the state vector is a single number (a scalar)</p></li>
+<li><p>the covariance matrix reduces to the variance (also a scalar).</p></li>
+</ul>
+<p>Therefore, only normal multiplication (as opposed to matrix multiplication) is involved.</p>
+</section>
+<section id="example-1-static-one-dimensional-data">
+<h3>Example 1: Static one-dimensional data<a class="headerlink" href="#example-1-static-one-dimensional-data" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Let’s start by considering a simple example: determine the position of a stationary car.</p></li>
+<li><p>We’ll assume that all we are interested in is a one-dimensional value, such as the distance along a road from a landmark.</p></li>
+<li><p>We are going to try to predict the true position based on some noisy measurements of the distance.</p></li>
+<li><p>Since we are going to generate the noisy measurements by hand and we will know the true position and we can see how well our algorithm performs.</p></li>
+</ul>
+<ul class="simple">
+<li><p>We assume the measurements to follow this distribution $<span class="math notranslate nohighlight">\(z_t = \mu + v_t \;\; \text{with}\;\; v_t \sim \mathcal{N}(0, R)\)</span><span class="math notranslate nohighlight">\( where \)</span>\mu<span class="math notranslate nohighlight">\( is the actual position and \)</span>R$ is the actual measurement noise covariance.</p></li>
+<li><p>Note that both <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are unknown to the filter.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">124.5</span> <span class="c1"># Actual position</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">0.1</span>    <span class="c1"># Actual standard deviation of actual measurements (R)</span>
+
+<span class="c1"># Generate measurements</span>
+<span class="n">n_measurements</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># Change the number of points to see how the convergence changes</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n_measurements</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="s1">&#39;k+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;measurements $z_t$&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Noisy position measurements&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$z_t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fb4b5e80eda4fa2b24df214448030fcab92e8569c387c473d27d12a2f793413f.png" src="../../_images/fb4b5e80eda4fa2b24df214448030fcab92e8569c387c473d27d12a2f793413f.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>As discussed previously, since the actual measurement noise covariance is unknown, we have to provide an estimate</p></li>
+<li><p>This is usually feasible as we can estimate <span class="math notranslate nohighlight">\(R\)</span> from the available measurements.</p></li>
+<li><p>In addition, we need to estimate the process noise covariance <span class="math notranslate nohighlight">\(Q\)</span>, which is usually harder to guess.</p></li>
+<li><p>Remember that <span class="math notranslate nohighlight">\(Q\)</span> represents the noise of the model used to describe the actual position.</p></li>
+<li><p>In our case $<span class="math notranslate nohighlight">\(x_t = x_0 + w_t \;\; \text{with}\;\; w_t \sim \mathcal{N}(0,Q)\)</span>$</p></li>
+</ul>
+<ul class="simple">
+<li><p>In summary, we have two noise parameters: one for the model (<span class="math notranslate nohighlight">\(Q\)</span>) and one for the measurement (<span class="math notranslate nohighlight">\(R\)</span>).</p></li>
+<li><p>The values of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are inputs for the algorithm.</p></li>
+<li><p>Therefore, since we usually don’t <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, we have to make reasonable estimates.</p></li>
+</ul>
+<ul class="simple">
+<li><p>In this example, we know the actual variance for the measurements (since we are generating the measurements ourselves), so we can see the effect of making a good or a bad estimate for this parameter.</p></li>
+<li><p>Also, we are going to choose the actual position of our car, so we can see how quickly the KF converges to the true algorithm.</p></li>
+<li><p>Finally, we need to guess initial values for the initial position of the car and the variance in this initial estimate.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Estimated covariances</span>
+<span class="n">Q_est</span> <span class="o">=</span> <span class="mf">1e-4</span> 
+<span class="n">R_est</span> <span class="o">=</span> <span class="mf">2e-2</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Create a function that computes the estimated position and associated error using the Kalman filter.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kalman_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">measurement</span><span class="p">,</span> <span class="n">R_est</span><span class="p">,</span> <span class="n">Q_est</span><span class="p">):</span>
+    
+    <span class="c1"># Prediction</span>
+    <span class="n">x_pred</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">P_pred</span> <span class="o">=</span> <span class="n">P</span> <span class="o">+</span> <span class="n">Q_est</span>
+
+    <span class="c1"># Update</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">P_pred</span> <span class="o">/</span> <span class="p">(</span><span class="n">P_pred</span> <span class="o">+</span> <span class="n">R_est</span><span class="p">)</span>
+    <span class="n">x_est</span> <span class="o">=</span> <span class="n">x_pred</span> <span class="o">+</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">measurement</span> <span class="o">-</span> <span class="n">x_pred</span><span class="p">)</span>
+    <span class="n">P_est</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">K</span><span class="p">)</span> <span class="o">*</span> <span class="n">P_pred</span>
+
+    <span class="k">return</span> <span class="n">x_est</span><span class="p">,</span> <span class="n">P_est</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Apply the filter to the 1D static measurements</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial guesses </span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">123</span> <span class="c1"># Use an integer (imagine the initial guess is determined with a meter stick)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mf">0.04</span> <span class="c1"># error covariance P</span>
+
+<span class="n">KF_estimate</span><span class="o">=</span><span class="p">[]</span> <span class="c1"># To store the position estimate at each time point </span>
+<span class="n">KF_error</span><span class="o">=</span><span class="p">[]</span> <span class="c1"># To store estimated error at each time point</span>
+<span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">Z</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">kalman_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">R_est</span><span class="p">,</span> <span class="n">Q_est</span><span class="p">)</span>
+    <span class="n">KF_estimate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">KF_error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Now, plot an estimate for the value <span class="math notranslate nohighlight">\(x_t\)</span> on top of the measurements <span class="math notranslate nohighlight">\(z_t\)</span>.</p></li>
+<li><p>We also plot how the covariance estimate <span class="math notranslate nohighlight">\(P_t\)</span> changes during the process.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_1d_comparison</span><span class="p">(</span><span class="n">measurements_made</span><span class="p">,</span> <span class="n">estimate</span><span class="p">,</span> <span class="n">true_value</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurements_made</span><span class="p">,</span><span class="s1">&#39;k+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;measurements&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">estimate</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;KF estimate&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">true_value</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+        <span class="c1"># plot line for a constant value</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">true_value</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;true value&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># for a list, tuple or array, plot the points</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">true_value</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;true value&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Estimated position vs. time step&#39;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$x_t$&#39;</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">plot_1d_error</span><span class="p">(</span><span class="n">estimated_error</span><span class="p">,</span> <span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+    <span class="c1"># lower_limit and upper_limit are the lower and upper limits of the vertical axis </span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">estimated_error</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;KF estimate for $P$&#39;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Estimated error vs. time step&#39;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$P_t$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span><span class="s1">&#39;ylim&#39;</span><span class="p">,[</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plot_1d_comparison</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">KF_estimate</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_1d_error</span><span class="p">(</span><span class="n">KF_error</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5ab14bb8483e38f5ae441a9e74afc79cbedf51ee2fbeff296f440a09804c4eb9.png" src="../../_images/5ab14bb8483e38f5ae441a9e74afc79cbedf51ee2fbeff296f440a09804c4eb9.png" />
+</div>
+</div>
+<p>We see that for the parameters we’ve chosen, the filter converges to the true value quickly and the noise is filtered out.</p>
+<p><strong>Question:</strong> How much the KF estimate fluctuates around the true value?</p>
+<p><strong>Answer:</strong> The fluctuations around the true value are approximately the size of the standard deviation of the estimate, which is <span class="math notranslate nohighlight">\(\sqrt{P_t}\)</span>.</p>
+</section>
+<section id="example-2-dynamic-one-dimensional-data">
+<h3>Example 2: Dynamic one-dimensional data<a class="headerlink" href="#example-2-dynamic-one-dimensional-data" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Let’s now consider the system we saw earlier, a car that moves approximately at a constant velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p></li>
+<li><p>The position changes over time according to the following formula $<span class="math notranslate nohighlight">\(x_{t} = x_{t-1} + \delta t \cdot v_0 + w_t\)</span><span class="math notranslate nohighlight">\( where \)</span>w_t \sim \mathcal{N}(0, Q)$ represents the model noise.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Now, assume we have measurements only for the position, but not the velocity.</p></li>
+<li><p>Let the measurements be generated according to the following distribution $<span class="math notranslate nohighlight">\(z_t = z_{t-1} + \delta t \cdot v_t\)</span>$</p></li>
+<li><p>In this case, <span class="math notranslate nohighlight">\(v_t\)</span> represent a noisy measurement for the velocity, that is not observed directly.</p></li>
+<li><p>We let <span class="math notranslate nohighlight">\(v_t \sim \mathcal{N}(v_0, R)\)</span>, where <span class="math notranslate nohighlight">\(R\)</span> represents the variance of the measurements error.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Let’s now modify our static algorithm to take into account this motion.</p></li>
+<li><p>At each time point, we will generate a random value <span class="math notranslate nohighlight">\(v_t\)</span> for the velocity measurement.</p></li>
+<li><p>We will assume that the car moves at velocity <span class="math notranslate nohighlight">\(v_t\)</span> until the next time point, which allows us to calculate the distance traveled.</p></li>
+<li><p>By summing all of the distances traveled, we can calculate the measured position of the car <span class="math notranslate nohighlight">\(z_t\)</span>.</p></li>
+<li><p>Then we will apply the KF and compare the KF estimate for the position with both the actual position <span class="math notranslate nohighlight">\(x_t = x_0 + v_0 \cdot t\)</span> and the measured positions <span class="math notranslate nohighlight">\(z_t\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial parameters</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="mf">0.3</span> 
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.0</span>     
+<span class="n">R</span> <span class="o">=</span> <span class="mf">4.0</span>
+
+<span class="c1"># generate noisy measurements</span>
+<span class="n">n_measurements</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">Zv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span> <span class="c1"># velocity measurements</span>
+<span class="n">Zx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span> <span class="c1"># position measurements</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_measurements</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">Zv</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">R</span><span class="p">))</span> 
+    <span class="n">Zx</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Zx</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">Zv</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span> <span class="c1"># delta_t = 1</span>
+
+<span class="c1"># generate true positions</span>
+<span class="n">Xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span> 
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_measurements</span><span class="p">):</span>
+    <span class="n">Xt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Zx</span><span class="p">,</span><span class="s1">&#39;k+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;measurements $z_t$&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Noisy position measurements&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$z_t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/de9820cb599f061461c7af984d13037dbb7fd479bc7f087eeda995869d39535e.png" src="../../_images/de9820cb599f061461c7af984d13037dbb7fd479bc7f087eeda995869d39535e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial guesses and estimates</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">P</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">Q_est</span> <span class="o">=</span> <span class="mi">4</span> 
+<span class="n">R_est</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">KF_estimate</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># To store the position estimate at each time point </span>
+<span class="n">KF_error</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># To store estimated error at each time point</span>
+
+<span class="c1"># Kalman filter</span>
+<span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">Zx</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">kalman_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">R_est</span><span class="p">,</span> <span class="n">Q_est</span><span class="p">)</span>
+    <span class="n">KF_estimate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">KF_error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plot_1d_comparison</span><span class="p">(</span><span class="n">Zx</span><span class="p">,</span> <span class="n">KF_estimate</span><span class="p">,</span> <span class="n">Xt</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_1d_error</span><span class="p">(</span><span class="n">KF_error</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">KF_error</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">KF_error</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/65d3070c843e45a24821bcd897152df4d3e7b9113b70d313ad2ac4a2d5760c14.png" src="../../_images/65d3070c843e45a24821bcd897152df4d3e7b9113b70d313ad2ac4a2d5760c14.png" />
+</div>
+</div>
+<p><strong>Question:</strong> Neither the measurements nor the KF estimate are close to the true value. Why?</p>
+<p><strong>Answer:</strong> The measurements are not close to the true value because the variance of the measurements error <span class="math notranslate nohighlight">\(R\)</span> is large compared to the velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p>
+<p>The KF estimate is tracking the measurements, so it won’t be close to the true value.</p>
+<p>In addition, we do not have measurements for the instant velocity.</p>
+<ul class="simple">
+<li><p>With dynamic models, there are more parameters to tune, so it can be more challenging to reach convergence.</p></li>
+<li><p>If we had a way to measure velocity, we could use that information too.</p></li>
+<li><p>Nevertheless, the KF can work with incomplete observations, which is one of its main advantages.</p></li>
+</ul>
+</section>
+<section id="example-3-dynamic-two-dimensional-data">
+<h3>Example 3: Dynamic two-dimensional data<a class="headerlink" href="#example-3-dynamic-two-dimensional-data" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Now we consider an example that is closer to real-world applications: estimating the motion of a point in two dimensions, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p>This 2D algorithm is used in mouse tracking software and also to track objects in videos.</p></li>
+<li><p>As before, we will use instantaneous measurements for the position (<span class="math notranslate nohighlight">\(x, y\)</span>).</p></li>
+<li><p>We are going to use the Kalman filter built into OpenCV.</p></li>
+</ul>
+<p>Our system is defined by the following quantities:</p>
+<ul class="simple">
+<li><p>State vector <span class="math notranslate nohighlight">\(\boldsymbol{x} = \begin{bmatrix} x \\ y \\ \dot x \\ \dot y \end{bmatrix}\)</span>, representing the 2D position and 2D velocity.</p></li>
+<li><p>Measurement vector <span class="math notranslate nohighlight">\(\boldsymbol{z} = \begin{bmatrix} z_x \\ z_y  \end{bmatrix}\)</span>, representing measurements for the 2D position.</p></li>
+<li><p>Transition matrix <span class="math notranslate nohighlight">\(\mathbf{A} = \begin{bmatrix} 1 &amp; 0 &amp; \delta_t &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; \delta_t \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">transitionMatrix</span></code> in OpenCV).</p></li>
+<li><p>Measurement matrix <span class="math notranslate nohighlight">\(\mathbf{H} = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">measurementMatrix</span></code> in OpenCV).</p></li>
+</ul>
+<ul class="simple">
+<li><p>The covariance of the model noise <span class="math notranslate nohighlight">\(\mathbf{Q} = \begin{bmatrix}  q &amp; 0 &amp; 0 &amp; 0 \\  0 &amp; q &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; q &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; q  \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">processNoiseCov</span></code> in OpenCV)</p></li>
+<li><p>The covariance of the measurements noise <span class="math notranslate nohighlight">\(\mathbf{R} = \begin{bmatrix}  r &amp; 0 \\ 0 &amp; r  \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">measurementNoiseCov</span></code> in OpenCV)</p></li>
+</ul>
+<p>For simplicity, we use diagonal covariances in this example.</p>
+<p>The constructor has has the following sintax</p>
+<p><code class="docutils literal notranslate"><span class="pre">KalmanFilter(state_size,</span> <span class="pre">measurements_size,</span> <span class="pre">control_size)</span></code></p>
+<p>where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">state_size</span></code> is the dimension of the state vector <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, which is 4 in our case.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">measurements_size</span></code> is the dimension of the state vector <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, which is 2 in our case.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">control_size</span></code>, which is 0 since we do not have the optional control <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span> (not discussed in this lecture).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kalman</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">KalmanFilter</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 4 states, 2 measurements, 0 control vector</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># the variance in the model</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># the variance in the measurement</span>
+<span class="n">dtime</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># size of time step</span>
+
+<span class="n">kalman</span><span class="o">.</span><span class="n">measurementMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="c1">#  H</span>
+<span class="n">kalman</span><span class="o">.</span><span class="n">transitionMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">dtime</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">dtime</span><span class="p">],</span>
+                                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="c1"># A</span>
+<span class="n">kalman</span><span class="o">.</span><span class="n">processNoiseCov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span> <span class="c1"># Q</span>
+<span class="n">kalman</span><span class="o">.</span><span class="n">measurementNoiseCov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                       <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="n">r</span> <span class="c1"># R</span>
+
+<span class="n">KF_estimate_xy</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># To store the position estimate at each time point</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Generate the <span class="math notranslate nohighlight">\((z_x, z_y)\)</span> measurements by clicking with a mouse on the screen.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://guoguibing.github.io/librec/datagen.html&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="900"
+            height="800"
+            src="https://guoguibing.github.io/librec/datagen.html"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we just load some precomputed data for simplicity/reproducibility</span>
+<span class="n">xy_motion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://zenodo.org/records/10951538/files/kf_ts1.csv?download=1&#39;</span><span class="p">,</span>
+                        <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>As always, take a look at the data before analyzing it.</p></li>
+<li><p>Also, it is good practice to make sure the data loaded properly.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xy_motion</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xy_motion</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># Print first 10 items for clarity, but can look at all 205 or plot them</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>205
+[[2.35 1.45]
+ [3.55 1.8 ]
+ [3.   2.9 ]
+ [2.65 4.2 ]
+ [2.95 5.15]
+ [3.7  5.4 ]
+ [4.8  5.55]
+ [5.3  5.25]
+ [5.7  5.25]
+ [5.8  5.85]]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We are now ready to apply the Kalman Filter.</p></li>
+<li><p>In the OpenCV implementation of the KF there is no initialization options.</p></li>
+<li><p>Both the state vector <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> and the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> are always initialized to zero.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xy_motion</span><span class="p">:</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">kalman</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>  <span class="c1"># predicts new state using the model</span>
+    <span class="n">kalman</span><span class="o">.</span><span class="n">correct</span><span class="p">((</span><span class="n">i</span><span class="p">))</span>      <span class="c1"># updates estimated state with the measurement</span>
+    <span class="n">KF_estimate_xy</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">pred</span><span class="p">[</span><span class="mi">0</span><span class="p">]),(</span><span class="n">pred</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span> <span class="c1"># store the estimated position</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Quick check: estimate has same length as measurement data</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">KF_estimate_xy</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>205
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now plot the data and the KF estimate</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_est</span><span class="p">,</span> <span class="n">y_est</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">KF_estimate_xy</span><span class="p">)</span>
+<span class="n">x_true</span><span class="p">,</span> <span class="n">y_true</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">xy_motion</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_est</span><span class="p">,</span> <span class="n">y_est</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;KF estimate&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_true</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;true value&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2D position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x coordinate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y coordinate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ad820766c7c44ec93732b4da14ee881223de3c6339ba515b8de2ccba7540c30a.png" src="../../_images/ad820766c7c44ec93732b4da14ee881223de3c6339ba515b8de2ccba7540c30a.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Pretty good agreement.</p></li>
+<li><p>Once again, you are encouraged to change the parameters and explore what happens.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>What we covered in this lecture:</p>
+<ol class="arabic simple">
+<li><p>What is the Kalman Filter</p></li>
+<li><p>The recursive formulation used to update the predictions.</p></li>
+<li><p>The importance of tuning the parameters of the Kalman Filter</p></li>
+<li><p>How to apply the Kalman Filter in various situations.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-1">
+<h3>Exercise #1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
+<p>This exercise refers to <a class="reference internal" href="#Example-1:-Static-one-dimensional-data"><span class="xref myst">Example 1</span></a>.</p>
+<ol class="arabic simple">
+<li><p>Choose a value for the estimated model variance <code class="docutils literal notranslate"><span class="pre">Q_est</span></code> that is larger than estimated measurement variance <code class="docutils literal notranslate"><span class="pre">R_est</span></code>.</p></li>
+<li><p>Repeat the analysis of Example 1 for this new value.</p></li>
+<li><p>Does the KF estimate converge?</p></li>
+<li><p>Why the estimates changed? Do they look more noisy than before? Why?</p></li>
+</ol>
+</section>
+<section id="exercise-2">
+<h3>Exercise #2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<p>This exercise refers to <a class="reference internal" href="#Example-2:-Dynamic-one-dimensional-data"><span class="xref myst">Example 2</span></a>.</p>
+<p>In the case we examined above, the KF estimate was close to the measurements and both were different from the true value.
+Change the parameters of the algorithm until you find some combinations that achieve the following:</p>
+<ol class="arabic simple">
+<li><p>Measurements, KF estimate and true value are all close.</p></li>
+<li><p>Measurements, KF estimate and true value are all noticeably different.</p></li>
+<li><p>The measurements are close to the true value, but the KF estimate is different.</p></li>
+</ol>
+<p>Discuss your findings.</p>
+</section>
+<section id="exercise-3">
+<h3>Exercise #3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
+<p>This exercise refers to <a class="reference internal" href="#Example-3:-Dynamic-two-dimensional-data"><span class="xref myst">Example 3</span></a>.</p>
+<p>In the original example, we used both Position and Velocity (PV model) in the state vector, i.e., <span class="math notranslate nohighlight">\(\boldsymbol{x} = \begin{bmatrix} x &amp; y &amp; \dot x &amp; \dot y \end{bmatrix}^T\)</span>.</p>
+<p>What happens if we use only the Position (P model) to describe the state? After all, our measurements only provide position. Do we really need to include the velocity?</p>
+<ol class="arabic simple">
+<li><p>Rewrite the algorithm above for the P model.</p></li>
+</ol>
+<p><strong>💡 Hint:</strong> what is the size of the state vector in this case? What are the dimensions of the matrices that characterize the system?</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/07"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../06/unit-root-hurst.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Unit root test and Hurst exponent</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../08/signal-transforms-filters.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Signal transforms and filters</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-kalman-filter">What is a Kalman Filter?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundations">Theoretical Foundations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-ingredients">What are the ingredients?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-noise">The role of noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-strategy">Update strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-assumptions">Fundamental Assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-linear-model">Assumption 1: Linear Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-2-whiteness">Assumption 2: Whiteness</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-gaussian-noise">Assumption 3: Gaussian Noise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-details">Technical details</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-two-sources">Combining two sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-kf-algorithm">The KF algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predict">Predict</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correct">Correct</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-estimation">Parameters estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-and-variants">Extensions and Variants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical Considerations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation">Python implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-algorithm">The algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-static-one-dimensional-data">Example 1: Static one-dimensional data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-dynamic-one-dimensional-data">Example 2: Dynamic one-dimensional data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-dynamic-two-dimensional-data">Example 3: Dynamic two-dimensional data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise #1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise #2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise #3</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Filippo Maria Bianchi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

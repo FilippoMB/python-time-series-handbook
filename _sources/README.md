@@ -1,12 +1,127 @@
+# Time Series Analysis with Python
+
 <br>
 <div align="center">
-📚 <a href="">Read the book</a> 📚
+📚 <a href="https://filippomb.github.io/python-time-series-handbook">Read the book</a> 📚
 </div>
 <br>
 
 This is the collection of notebooks for the course *Time Series Analysis with Python*.
-For more information and for reading the content of this repository, please refer to the [book]() version.
+For more information and for reading the content of this repository, please refer to the [book](https://filippomb.github.io/python-time-series-handbook) version.
 
+## 📑 Content
+
+1. **Introduction to time series analysis**
+   - Definition of time series data
+   - Main applications of time series analysis
+   - Statistical vs dynamical models perspective
+   - Components of a time series
+   - Additive vs multiplicative models
+   - Time series decomposition
+  
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb)
+
+2. **Stationarity in time series**
+   - Stationarity in time series
+   - Weak vs strong stationarity
+   - Autocorrelation and autocovariance
+   - Common stationary and nonstationary time series
+   - How to identify stationarity
+   - Transformations to achieve stationarity
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/02/stationarity.ipynb) 
+
+3. **Smoothing**
+   - Smoothing in time series data
+   - The mean squared error
+   - Simple average, moving average, and weighted moving average
+   - Single, double, and triple exponential smoothing
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/03/smoothing.ipynb) 
+
+4. **AR-MA**
+   - The autocorrelation function
+   - The partial autocorrelation function
+   - The Auto-Regressive model
+   - The Moving-Average model
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/04/ar-ma.ipynb)
+
+5. **ARMA, ARIMA, SARIMA**
+   - Autoregressive Moving Average (ARMA) models
+   - Autoregressive Integrated Moving Average (ARIMA) models
+   - SARIMA models (ARIMA model for data with seasonality)
+   - Automatic model selection with AutoARIMA
+   - Model selection with exploratory data analysis
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/05/arma_arima_sarima.ipynb)
+
+6. **Unit root test and Hurst exponent**
+   - Unit root test
+   - Mean Reversion
+   - Hurst Exponent
+   - Geometric Brownian Motion
+   - Applications in quantitative finance
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/06/unit-root-hurst.ipynb)
+
+7. **Kalman filter**
+   - Introduction to Kalman Filter
+   - Model components and assumptions
+   - The Kalman Filter algorithm
+   - Application to static and dynamic one-dimensional data
+   - Application to higher-dimensional data
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/07/kalman-filter.ipynb) 
+
+8. **Signal transforms and filters**
+   - Introduction to Fourier Transform and Discrete Fourier Transform, and FFT
+   - Fourier Transform of common signals
+   - Properties of the Fourier Transform
+   - Signal filtering with low-pass, high-pass, band-pass, and bass-stop filters
+   - Application of Fourier Transform for time series forecasting
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb)
+
+9. **Prophet**
+   - Introduction to Prophet for time series forecasting
+   - Advanced modelling of trend, seasonality, and holidays
+   - The Prophet library in Python
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb)
+
+10. **Neural networks and Reservoir Computing**
+    - Windowed approaches and Neural Networks for time series forecasting
+    - Forecasting with the Multi Layer Perceptron
+    - Recurrent Neural Networks: advantages and challenges
+    - Reservoir Computing and the Echo State Network
+    - Dimensionality reduction with Principal Component Analysis
+    - Forecasting electricity consumption with Multi Layer Perceptron and Echo State Network
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb)
+
+11. **Non-linear time series analysis**
+    - Dynamical systems and nonlinear dynamics
+    - Bifurcation diagrams
+    - Chaotic systems
+    - High-dimensional continuous-time systems
+    - Fractal dimensions
+    - Phase space reconstruction and Taken's embedding theorem
+    - Forecasting nonlinear time series
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb)
+
+12. **Time series classification and clustering**
+    - Multivariate time series
+    - Time series similarity
+    - Dynamic Time Warping
+    - Time series kernels
+    - Time series embedding
+    - Classification of time series
+    - Clustering of time series
+    - Visualization with kernel PCA
+
+> [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb)
 
 ## 🚀 Getting started with coding
 

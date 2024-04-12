@@ -1,0 +1,1472 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Unit root test and Hurst exponent &#8212; Time series analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/06/unit-root-hurst';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Kalman filter" href="../07/kalman-filter.html" />
+    <link rel="prev" title="ARMA, ARIMA, SARIMA" href="../05/arma_arima_sarima.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../00/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Time series analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Time series analysis with Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../00/intro.html">
+                    Time series analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/stationarity.html">Stationarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/smoothing.html">Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/ar-ma.html">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/kalman-filter.html">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/prophet.html">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/06/unit-root-hurst.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/06/unit-root-hurst.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Unit root test and Hurst exponent</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-recap">Small recap</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposition">Decomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additive-vs-multiplicative">Additive vs Multiplicative</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity">Stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detect-non-stationarity">Detect non-stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#achieve-stationarity">Achieve stationarity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-root-test">Unit root test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-the-adf-test">More on the ADF test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-testing">Mean Reversion Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-finance">Applications in finance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-for-mean-reversion">Testing for mean reversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-vs-stationarity">Mean reversion VS stationarity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion-recap">Brownian Motion (recap)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hurst-exponent">Hurst Exponent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hurst-exponent-in-finance">Interpretation of the Hurst Exponent in Finance:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical Considerations:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-brownian-motion">Geometric Brownian Motion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-gbm">Variance of GBM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-applications">Real world applications</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="unit-root-test-and-hurst-exponent">
+<h1>Unit root test and Hurst exponent<a class="headerlink" href="#unit-root-test-and-hurst-exponent" title="Link to this heading">#</a></h1>
+<br>
+<div style="text-align: center">
+    <img src="media/cover.png" style="width: 45%"\>
+</div><section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In this lecture, we will first recap and provide more details about some concepts from previous lectures.</p></li>
+<li><p>Then, we will look into new analytics tools and some of their application in financial time series.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The content of the lecture is organized as follows:</p>
+<ol class="arabic simple">
+<li><p>Small recap</p></li>
+<li><p>Unit root test</p></li>
+<li><p>Mean Reversion</p></li>
+<li><p>Hurst Exponent</p></li>
+<li><p>Geometric Brownian Motion</p></li>
+</ol>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="p">(</span><span class="ne">FutureWarning</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">))</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># For reproducible results</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="small-recap">
+<h2>Small recap<a class="headerlink" href="#small-recap" title="Link to this heading">#</a></h2>
+<p>We’ve covered lots of material in the previous four lessons.</p>
+<p>Now is a good time to step back and rehash what we’ve covered.</p>
+<section id="decomposition">
+<h3>Decomposition<a class="headerlink" href="#decomposition" title="Link to this heading">#</a></h3>
+<p>Time series data can often be decomposed into trend, seasonal, and random fluctuation components.</p>
+<p><strong>Trends</strong></p>
+<ul class="simple">
+<li><p>Up.</p></li>
+<li><p>Down.</p></li>
+<li><p>Flat.</p></li>
+<li><p>Larger trends can be made up of smaller trends.</p></li>
+<li><p>There is no defined timeframe for what constitutes a trend as it depends on your data and task at hand.</p></li>
+</ul>
+<p><strong>Seasonal Effects</strong></p>
+<ul class="simple">
+<li><p>Weekend retail sales spikes.</p></li>
+<li><p>Holiday shopping.</p></li>
+<li><p>Energy requirement changes with annual weather patterns.</p></li>
+</ul>
+<p><strong>Random Fluctuations</strong></p>
+<ul class="simple">
+<li><p>The human element.</p></li>
+<li><p>Aggregations of small influencers.</p></li>
+<li><p>Observation errors.</p></li>
+<li><p>The smaller this is in relation to Trend and Seasonal, the better we can predict the future.</p></li>
+</ul>
+</section>
+<section id="additive-vs-multiplicative">
+<h3>Additive vs Multiplicative<a class="headerlink" href="#additive-vs-multiplicative" title="Link to this heading">#</a></h3>
+<p>Time series models can fall into categories:</p>
+<p><strong>Additive</strong></p>
+<ul class="simple">
+<li><p>Data = Trend + Seasonal + Random</p></li>
+<li><p>What we will be using for our modeling</p></li>
+</ul>
+<p>If our seasonality and fluctuations are stable, we likely have an additive model.</p>
+<p><strong>Multiplicative</strong></p>
+<ul class="simple">
+<li><p>Data = Trend x Seasonal x Random</p></li>
+<li><p>As easy to fit as Additive if we take the log:
+<code class="docutils literal notranslate"><span class="pre">log(Data)</span> <span class="pre">=</span> <span class="pre">log(Trend</span> <span class="pre">+</span> <span class="pre">Seasonal</span> <span class="pre">+</span> <span class="pre">Random)</span></code></p></li>
+</ul>
+<p>Use multiplicative models if the amplitude in seasonal and random fluctuations grows as the trend rises.</p>
+<p>Also, use multiplicative models when the percentage change of our data is more important than the absolute value change (e.g. stocks, commodities).</p>
+</section>
+<section id="stationarity">
+<h3>Stationarity<a class="headerlink" href="#stationarity" title="Link to this heading">#</a></h3>
+<p>A time series is stationary if</p>
+<ul class="simple">
+<li><p>The mean of the series is constant.</p></li>
+<li><p>The variance does not change over time (homoscedasticity).</p></li>
+<li><p>The covariance is not a function of time.</p></li>
+</ul>
+<div style="text-align: center">
+    <img src="./media/non-stationarity.png" width=40% \>
+</div>
+<div style="text-align: center; font-size: 15px;">Image: <a href="https://www.investopedia.com/articles/trading/07/stationary.asp">Investopedia</a></div></section>
+<section id="detect-non-stationarity">
+<h3>Detect non-stationarity<a class="headerlink" href="#detect-non-stationarity" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Make a run-sequence plot.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Compute (and plot) rolling statistics</p>
+<ul>
+<li><p>Compute and plot the moving average/variance on chunks of data and check if it changes with time.</p></li>
+<li><p>This technique can be done on different windows (small windows are noisy, large windows too conservative).</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Histogram of time series</p>
+<ul>
+<li><p>Normal? <span class="math notranslate nohighlight">\(\rightarrow\)</span> stationary.</p></li>
+<li><p>Non-normal (e.g., uniform)? <span class="math notranslate nohighlight">\(\rightarrow\)</span> non-stationary.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Augmented Dickey-Fuller (ADF) test</p>
+<ul>
+<li><p>Statistical tests for checking stationarity.</p></li>
+<li><p>The null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> is that the TS is non-stationary.</p></li>
+<li><p>If the test statistic is small enough and the <span class="math notranslate nohighlight">\(p\)</span>-value below the target <span class="math notranslate nohighlight">\(\alpha\)</span>, we <em>can</em> reject <span class="math notranslate nohighlight">\(H_0\)</span> and say that the series is stationary.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="achieve-stationarity">
+<h3>Achieve stationarity<a class="headerlink" href="#achieve-stationarity" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Take the log of the data.</p></li>
+<li><p>Difference (multiple times if needed) to remove trends and seasonality.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="unit-root-test">
+<h2>Unit root test<a class="headerlink" href="#unit-root-test" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The ADF is one of the most popular unit root tests.</p></li>
+<li><p>The presence of a unit root suggests that the time series is generated by a stochastic process with some level of persistence.</p></li>
+<li><p>This means that shocks to the system will have permanent effects.</p></li>
+<li><p>This is opposed to stationary processes where shocks have only temporary effects.</p></li>
+</ul>
+<blockquote>
+<div><p>Where does the term <em>unit root</em> comes from?</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Consider a simple autoregressive process of order 1, denoted as AR(1).</p></li>
+<li><p>This can be represented as: $<span class="math notranslate nohighlight">\(Y_t = \phi Y_{t-1} + \epsilon_t,\)</span>$
+where</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(Y_t\)</span> is the value of the series at time <span class="math notranslate nohighlight">\(t\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi\)</span> is a coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon_t\)</span> is a white noise error term.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>To analyze the properties of this process, we can rewrite the equation in terms of <strong>lag operator</strong> <span class="math notranslate nohighlight">\(L\)</span> where <span class="math notranslate nohighlight">\(LY_t = Y_{t-1}\)</span>.</p></li>
+<li><p>The equation becomes: $<span class="math notranslate nohighlight">\((1 - \phi L)Y_t = \epsilon_t.\)</span>$</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\((1 - \phi L)\)</span> is known as the <strong>characteristic equation</strong> of the AR(1) process.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The roots of this equation are found by setting <span class="math notranslate nohighlight">\(1 - \phi L = 0\)</span> and solving for <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>The solution gives <span class="math notranslate nohighlight">\(L = 1/\phi\)</span>, which is the <strong>root of the characteristic equation</strong>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\phi = 1\)</span>, then <span class="math notranslate nohighlight">\(L = 1/\phi = 1\)</span>, meaning the root of the characteristic equation is equal to 1, or a “unit” value.</p></li>
+<li><p>This is what is known as a “unit root”.</p></li>
+<li><p>When an AR(1) process has a unit root (i.e., <span class="math notranslate nohighlight">\(\phi = 1\)</span>), it implies that the series is non-stationary as it becomes a random walk: <span class="math notranslate nohighlight">\(Y_t = Y_{t-1} + \epsilon_t\)</span></p></li>
+<li><p>The value of the series will be highly dependent on its previous values (the shocks to the series have a permanent effect).</p></li>
+</ul>
+<blockquote>
+<div><p>In conclusion, the term “unit root” describes a specific condition in the autoregressive representation of a time series, indicating that the series is <strong>non-stationary</strong>.</p>
+</div></blockquote>
+<section id="more-on-the-adf-test">
+<h3>More on the ADF test<a class="headerlink" href="#more-on-the-adf-test" title="Link to this heading">#</a></h3>
+<p><strong>Formulation of the Test</strong></p>
+<ul class="simple">
+<li><p>The basic idea of the ADF test is to assess whether lagged values of the time series are useful in predicting current values.</p></li>
+<li><p>The test starts with a model that includes the time series lagged by one period (lag-1).</p></li>
+<li><p>Then, other lagged terms are added to control for higher-order correlation (this is the “augmented” part of the ADF test).</p></li>
+</ul>
+<p><strong>ADF Test Equation</strong></p>
+<p>The ADF test model the time series with the following equation:</p>
+<div class="math notranslate nohighlight">
+\[\Delta Y_t = \alpha + \beta t + \gamma Y_{t-1} + \sum_{i=1}^{p} \delta_i \Delta Y_{t-i} + \epsilon_t\]</div>
+<p>Where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Delta Y_t\)</span> is the difference of the series at time <span class="math notranslate nohighlight">\(t\)</span>, i.e., <span class="math notranslate nohighlight">\(\Delta Y_t = Y_t - Y_{t-1}\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_{t-1}\)</span> is the lagged value of the series,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is a constant,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> represents the trend,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma\)</span> is the coefficient on the lagged value of the series,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta_i\)</span> terms are coefficients for the lagged differences (account for higher-order correlations),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon_t\)</span> error term.</p></li>
+</ul>
+<p><strong>Connection to unit root</strong></p>
+<ul class="simple">
+<li><p>Assume <span class="math notranslate nohighlight">\(\alpha=\beta=0\)</span> (i.e., zero-mean and no trend) and do not consider the higher-order terms (<span class="math notranslate nohighlight">\(\delta_i=0\)</span>).</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\gamma = (\phi -1)\)</span>.</p>
+<ul>
+<li><p>We get <span class="math notranslate nohighlight">\(\Delta Y_t = (\phi -1) Y_t + \epsilon_t\)</span>.</p></li>
+</ul>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(\gamma = 0\)</span>, then <span class="math notranslate nohighlight">\(\phi = 1\)</span> (unit root).</p>
+<ul>
+<li><p>Then <span class="math notranslate nohighlight">\(\Delta Y_t = \epsilon_t \rightarrow Y_t = Y_{t-1} + \epsilon_t\)</span>, which is the non-stationary random walk.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Null and Alternative Hypotheses (again)</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(\gamma = 0\)</span> the time series has unit root, i.e., it is not stationary.</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span>: <span class="math notranslate nohighlight">\(\gamma &lt; 0\)</span> the series does not have a unit root.</p></li>
+</ul>
+<p><strong>Test Statistics</strong>:</p>
+<ul class="simple">
+<li><p>The ADF test statistic is calculated based on the estimated coefficient <span class="math notranslate nohighlight">\(\hat{\gamma}\)</span>.</p></li>
+<li><p>This statistic is then compared to critical values for the ADF distribution.</p></li>
+<li><p>If the test statistic is more negative than the critical value, <span class="math notranslate nohighlight">\(H_0\)</span> is rejected.</p></li>
+<li><p>If the test statistic is less negative than the critical value, <span class="math notranslate nohighlight">\(H_0\)</span> cannot be rejected.</p></li>
+</ul>
+<p><strong>Choosing Lag Length</strong>:</p>
+<ul class="simple">
+<li><p>The number of lags (<span class="math notranslate nohighlight">\(p\)</span>) included in the test equation is important.</p></li>
+<li><p>Too few lags might leave out necessary corrections for autocorrelation.</p></li>
+<li><p>Too many lags can reduce the power of the test.</p></li>
+<li><p>The appropriate lag length is often chosen based on information criteria such as the Akaike Information Criterion (AIC) or the Schwarz Information Criterion (BIC).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
+
+<span class="c1"># Generating a synthetic time series (replace this with your dataset)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">100</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+
+<span class="c1"># Perform Augmented Dickey-Fuller test</span>
+<span class="c1"># the lag can be set manually with &#39;maxlag&#39; or inferred automatically with autolag</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">autolag</span><span class="o">=</span><span class="s1">&#39;AIC&#39;</span><span class="p">)</span>  <span class="c1"># You can change to &#39;BIC&#39; for Schwarz Information Criterion</span>
+
+<span class="n">adf_statistic</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">usedlag</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="n">critical_values</span><span class="p">,</span> <span class="n">icbest</span> <span class="o">=</span> <span class="n">result</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ADF Statistic: </span><span class="si">{</span><span class="n">adf_statistic</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Used Lag: </span><span class="si">{</span><span class="n">usedlag</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of Observations: </span><span class="si">{</span><span class="n">nobs</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Critical Values: </span><span class="si">{</span><span class="n">critical_values</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ADF Statistic: -1.1320384625097903
+p-value: 0.7021277385898381
+Used Lag: 0
+Number of Observations: 99
+Critical Values: {&#39;1%&#39;: -3.498198082189098, &#39;5%&#39;: -2.891208211860468, &#39;10%&#39;: -2.5825959973472097}
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Types of ADF Tests</strong></p>
+<ul class="simple">
+<li><p>There are three versions of the ADF test depending on whether the equation includes none, both, or one of the terms <span class="math notranslate nohighlight">\(\alpha\)</span> (constant) and <span class="math notranslate nohighlight">\(\beta t\)</span> (trend):</p>
+<ul>
+<li><p>No constant or trend.</p></li>
+<li><p>Constant, but no trend.</p></li>
+<li><p>Both constant and trend.</p></li>
+</ul>
+</li>
+<li><p>The choice among these depends on the nature of the underlying time series.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to perform ADF test</span>
+<span class="k">def</span> <span class="nf">perform_adf_test</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">regression_type</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="n">regression_type</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Results for </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ADF Statistic: </span><span class="si">{</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p-value: </span><span class="si">{</span><span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Critical Values: </span><span class="si">{</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">zip</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span><span class="w"> </span><span class="n">out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 1. No Constant or Trend</span>
+<span class="n">series_no_const_no_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+<span class="c1"># 2. Constant, but No Trend</span>
+<span class="n">series_const_no_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+<span class="c1"># 3. Both Constant and Trend</span>
+<span class="n">series_const_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">series_no_const_no_trend</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;No Constant, No Trend&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">series_const_no_trend</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Constant, but No Trend&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">series_const_trend</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Both Constant and Trend&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/85f25efd455c25888e16083bdcd6ac14b1f0cb7fff396c34248e0e10b7a65e83.png" src="../../_images/85f25efd455c25888e16083bdcd6ac14b1f0cb7fff396c34248e0e10b7a65e83.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. No Constant or Trend</span>
+<span class="n">perform_adf_test</span><span class="p">(</span><span class="n">series_no_const_no_trend</span><span class="p">,</span> <span class="s2">&quot;No Constant, No Trend&quot;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Constant, but No Trend</span>
+<span class="n">perform_adf_test</span><span class="p">(</span><span class="n">series_const_no_trend</span><span class="p">,</span> <span class="s2">&quot;Constant, No Trend&quot;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. Both Constant and Trend</span>
+<span class="n">perform_adf_test</span><span class="p">(</span><span class="n">series_const_trend</span><span class="p">,</span> <span class="s2">&quot;Constant and Trend&quot;</span><span class="p">,</span> <span class="s1">&#39;ct&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Results for No Constant, No Trend:
+ADF Statistic: -9.96
+p-value: 0.000
+Critical Values: [&#39;1%: -2.59&#39;, &#39;5%: -1.94&#39;, &#39;10%: -1.61&#39;]
+
+Results for Constant, No Trend:
+ADF Statistic: -1.55
+p-value: 0.511
+Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;]
+
+Results for Constant and Trend:
+ADF Statistic: -5.70
+p-value: 0.000
+Critical Values: [&#39;1%: -4.06&#39;, &#39;5%: -3.46&#39;, &#39;10%: -3.16&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>In the last two cases, without accounting for the non-zero mean and the trend we would not reject <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>Try using <code class="docutils literal notranslate"><span class="pre">'n'</span></code> in the last two examples and see for yourself.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="mean-reversion-testing">
+<h2>Mean Reversion Testing<a class="headerlink" href="#mean-reversion-testing" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Mean reversion refers to the property of a time series to revert to its historical mean.</p></li>
+<li><p>This concept is particularly popular in financial economics, where it is often assumed that asset prices and revert to their historical average over the long term.</p></li>
+</ul>
+<section id="applications-in-finance">
+<h3>Applications in finance<a class="headerlink" href="#applications-in-finance" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Portfolio Management</strong></p>
+<ul class="simple">
+<li><p>Investors use mean reversion as a strategy to buy assets that have underperformed and sell assets that have overperformed, expecting that they will revert to their historical mean.</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p><strong>Risk Management</strong></p>
+<ul class="simple">
+<li><p>Understanding mean reversion helps in assessing the long-term risk of assets.</p></li>
+<li><p>If an asset is highly mean-reverting, it might be considered less risky over the long term, as it tends to move back to its average.</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p><strong>Pricing Models</strong></p>
+<ul class="simple">
+<li><p>In option pricing, certain models assume mean reversion in the underlying asset’s volatility.</p></li>
+<li><p>This affects the pricing and strategy for options trading.</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p><strong>Economic Forecasting</strong></p>
+<ul class="simple">
+<li><p>Economic variables (like GDP growth rates, interest rates) often exhibit mean-reverting behavior.</p></li>
+<li><p>This assumption is used in macroeconomic models and forecasts.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="testing-for-mean-reversion">
+<h3>Testing for mean reversion<a class="headerlink" href="#testing-for-mean-reversion" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Determines whether, after a deviation from its mean, a time series will eventually revert back to that mean.</p></li>
+<li><p>This can be done using unit root tests such as ADF.</p></li>
+<li><p>If a time series has a unit root, it implies that it does not revert to a mean.</p></li>
+<li><p>The absence of a unit root can be indicative of mean reversion.</p></li>
+</ul>
+<p><strong>Example: Google stocks</strong></p>
+<p>We will download the Google Open-High-Low-Close-Volume (GOOG OHLCV) data from the 1st September 2004 to 31st August 2020 from <a class="reference external" href="https://finance.yahoo.com/">Yahoo finance</a> using the <code class="docutils literal notranslate"><span class="pre">yfinance</span></code> Python package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">tickerSymbol</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+
+    <span class="c1"># Get data on the ticker</span>
+    <span class="n">tickerData</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="n">tickerSymbol</span><span class="p">)</span>
+
+    <span class="c1"># Get the historical prices for this ticker</span>
+    <span class="n">tickerDf</span> <span class="o">=</span> <span class="n">tickerData</span><span class="o">.</span><span class="n">history</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">tickerDf</span>
+    
+<span class="n">data</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;GOOG&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s1">&#39;1d&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;2004-09-01&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2020-08-31&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting the Closing Prices</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GOOG Closing Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Google Stock Closing Prices (2004-2020)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Price (USD)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f3b5b6dbff496ca89303fc1757244fa1c50a4f3eae2d220962041a307557f32c.png" src="../../_images/f3b5b6dbff496ca89303fc1757244fa1c50a4f3eae2d220962041a307557f32c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform the ADF test</span>
+<span class="n">perform_adf_test</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span><span class="s2">&quot;Google Stock Closing Prices&quot;</span><span class="p">,</span> <span class="s1">&#39;ct&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Results for Google Stock Closing Prices:
+ADF Statistic: -0.78
+p-value: 0.968
+Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We cannot reject <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>It does not look like a mean reverting time series.</p></li>
+</ul>
+</section>
+<section id="mean-reversion-vs-stationarity">
+<h3>Mean reversion VS stationarity<a class="headerlink" href="#mean-reversion-vs-stationarity" title="Link to this heading">#</a></h3>
+<p>Testing for mean reversion and testing for stationarity are related but distinct concepts in time series analysis.</p>
+<p><strong>Key Differences</strong>:</p>
+<ul class="simple">
+<li><p>Mean reversion testing is focused on whether a time series will return to a specific level (the mean).</p></li>
+<li><p>Stationarity testing checks if the overall statistical properties of the series remain consistent over time.</p></li>
+<li><p>A stationary time series may or may not be mean reverting.</p>
+<ul>
+<li><p>A stationary series with a constant mean and variance over time might still not revert to its mean after a shock.</p></li>
+</ul>
+</li>
+<li><p>Conversely, a mean-reverting series must have some stationarity, particularly in its mean, but it might still have changing variance or other properties over time.</p></li>
+</ul>
+</section>
+</section>
+<section id="brownian-motion-recap">
+<h2>Brownian Motion (recap)<a class="headerlink" href="#brownian-motion-recap" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Recall the random walk $<span class="math notranslate nohighlight">\(X_t = X_{t-1} + \epsilon_t\)</span><span class="math notranslate nohighlight">\( where \)</span>\epsilon_t \sim \mathcal{N}(0,\sigma^2)$.</p></li>
+<li><p>This is also be expressed as $<span class="math notranslate nohighlight">\(X_t = X_0 + W_t\)</span><span class="math notranslate nohighlight">\( where \)</span>W_t$ is the <em>Wiener Process</em></p></li>
+<li><p>or as $<span class="math notranslate nohighlight">\(X_t = X_0 + B(t)\)</span><span class="math notranslate nohighlight">\( where \)</span>B(t)$ is the <em>Brownian Motion</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(W_t\)</span> and <span class="math notranslate nohighlight">\(B(t)\)</span> represents the cumulative sum of normally distributed increments <span class="math notranslate nohighlight">\(\epsilon_1 + \epsilon_2 + \dots \epsilon_t\)</span>.</p></li>
+</ul>
+<p><strong>Variance of Brownian Motion at Time Lag <span class="math notranslate nohighlight">\(\tau\)</span></strong></p>
+<ul class="simple">
+<li><p>For a time series <span class="math notranslate nohighlight">\(X(t)\)</span>, the variance at a time lag <span class="math notranslate nohighlight">\(\tau\)</span> can be defined as: $<span class="math notranslate nohighlight">\(\text{Var}(X(t + \tau) - X(t))\)</span>$</p></li>
+</ul>
+<ul class="simple">
+<li><p>Given <span class="math notranslate nohighlight">\(B(t)\)</span> as Brownian motion, the increment <span class="math notranslate nohighlight">\(B(t + \tau) - B(t)\)</span> is normally distributed with mean 0 and variance <span class="math notranslate nohighlight">\(\tau\)</span>, because the variance of the increments of Brownian motion over a period <span class="math notranslate nohighlight">\(\tau\)</span> is <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(B(t + \tau) - B(t)) = \tau\]</div>
+</section>
+<hr class="docutils" />
+<section id="hurst-exponent">
+<h2>Hurst Exponent<a class="headerlink" href="#hurst-exponent" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The Hurst exponent (<span class="math notranslate nohighlight">\(H\)</span>) is a measure used to characterize the long-term memory of time series.</p></li>
+<li><p>It helps to determine the presence of autocorrelation or persistence in the data.</p></li>
+<li><p>The goal of the Hurst Exponent is to provide us with a scalar value that will help us to identify whether a series is</p>
+<ul>
+<li><p>random walking,</p></li>
+<li><p>trending,</p></li>
+<li><p>mean reverting.</p></li>
+</ul>
+</li>
+</ul>
+<p>The key insight is that, if any <em>autocorrelation</em> exists, then</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}(X(t + \tau) - X(t)) \propto \tau^{2H},\]</div>
+<p>where <span class="math notranslate nohighlight">\(H\)</span> is the Hurst exponent.</p>
+<p>A time series can then be characterised in the following manner:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(H = 0.5\)</span>, the time series is similar to a random walk (Brownian motion). In this case, the variance increases linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(H &lt; 0.5\)</span>, the time series exhibits anti-persistence, i.e. mean reverting. The variance increases more slowly than linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(H &gt; 0.5\)</span>, the time series exhibits persistent long-range dependence, i.e. is trending. The variance increases more rapidly than linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hurst</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+        
+    <span class="c1"># Create the range of lag values</span>
+    <span class="n">lags</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the array of the variances of the lagged differences</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="n">lag</span><span class="p">:],</span> <span class="n">ts</span><span class="p">[:</span><span class="o">-</span><span class="n">lag</span><span class="p">])))</span> <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="n">lags</span><span class="p">]</span>
+
+    <span class="c1"># Use a linear fit to estimate the Hurst Exponent</span>
+    <span class="n">poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">lags</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">tau</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Return the Hurst exponent from the polyfit output</span>
+    <span class="k">return</span> <span class="n">poly</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">2.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>How do persistent and anti-persistent time series look like?</strong></p>
+<ul class="simple">
+<li><p>Let’s create a Python script (adapted from <a class="reference external" href="https://github.com/Mottl/hurst/tree/master">here</a>) to generate random walk with persistence</p></li>
+<li><p>We must incorporate a form of “memory” by considering past values within a specified lookback window to decide the direction of the next step.</p></li>
+</ul>
+<p>Let’s define</p>
+<p>where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">proba</span></code> is the probability that the next increment will follow the trend.</p>
+<ul>
+<li><p>proba &gt; 0.5 persistent random walk</p></li>
+<li><p>proba &lt; 0.5 antipersistent one</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_lookback</span></code> and <code class="docutils literal notranslate"><span class="pre">max_lookback</span></code> are the minimum and maximum window sizes to calculate trend direction</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_walk_memory</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">proba</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">min_lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_lookback</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span> <span class="o">*</span> <span class="n">length</span>  
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        
+        <span class="c1"># If the series has not yet reached the min_lookback threshold</span>
+        <span class="c1"># the direction of the step is random (-1 or 1) </span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">min_lookback</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">())</span>
+            
+        <span class="c1"># consider the historical values to determine the direction</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># randomly choose between min_lookback and the minimum of </span>
+            <span class="c1"># i-1 (to ensure not exceeding the current length) and max_lookback.</span>
+            <span class="n">lookback</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">min_lookback</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_lookback</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            
+            <span class="c1"># Decides whether to follow the recent trend or move against it, </span>
+            <span class="c1"># based on a comparison between proba and a random number between 0 and 1.</span>
+            <span class="n">recent_trend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">series</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">series</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">lookback</span><span class="p">])</span>
+            <span class="n">change</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">proba</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">())</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="n">recent_trend</span> <span class="o">*</span> <span class="n">change</span>
+        
+        <span class="n">series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">())</span> <span class="o">*</span> <span class="n">direction</span>
+    <span class="k">return</span> <span class="n">series</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bm</span> <span class="o">=</span> <span class="n">random_walk_memory</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">proba</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">persistent</span> <span class="o">=</span> <span class="n">random_walk_memory</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">proba</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">antipersistent</span> <span class="o">=</span> <span class="n">random_walk_memory</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">proba</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bm</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Brownian Motion, H: </span><span class="si">{</span><span class="n">hurst</span><span class="p">(</span><span class="n">bm</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">persistent</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Persistent, H: </span><span class="si">{</span><span class="n">hurst</span><span class="p">(</span><span class="n">persistent</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">antipersistent</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Anti-Persistent, H: </span><span class="si">{</span><span class="n">hurst</span><span class="p">(</span><span class="n">antipersistent</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7f077e08257d771449e63126a5f1e3f52861fda3bcf20fb54bd590a5f5ae42e8.png" src="../../_images/7f077e08257d771449e63126a5f1e3f52861fda3bcf20fb54bd590a5f5ae42e8.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>What is the Hurst exponent of the Google stocks closing price?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GOOG closing price, H: </span><span class="si">{</span><span class="n">hurst</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GOOG closing price, H: 0.41
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Google has stocks time series approaches <span class="math notranslate nohighlight">\(H=0.5\)</span>, indicating that it is close to a geometric random walk (at least for the sample period we’re looking at).</p></li>
+<li><p>What does this mean in practice?</p></li>
+</ul>
+<section id="interpretation-of-the-hurst-exponent-in-finance">
+<h3>Interpretation of the Hurst Exponent in Finance:<a class="headerlink" href="#interpretation-of-the-hurst-exponent-in-finance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The Hurst exponent, <span class="math notranslate nohighlight">\(H\)</span>, is a critical metric in the analysis of financial time series.</p></li>
+<li><p>Offers insights into the behavior of assets such as stocks.</p></li>
+<li><p>Here’s how to interpret <span class="math notranslate nohighlight">\(H\)</span> in the context of <em>closing stock prices</em> and its influence on <em>investment decisions</em>.</p></li>
+</ul>
+<p><strong>Case 1: <span class="math notranslate nohighlight">\(H = 0.5\)</span></strong></p>
+<ul class="simple">
+<li><p>This value suggests that the stock price follows a geometric Brownian motion, i.e., a completely random walk.</p></li>
+<li><p>It implies that future price movements are independent of past movements.</p></li>
+<li><p>For investors, this means that there are no autocorrelations in price movements to exploit; past data cannot predict future prices.</p></li>
+<li><p>Trading strategies based on historical price patterns or trends are, theoretically, no more likely to be successful than random guessing.</p></li>
+<li><p>Investors should rely on broader market analysis or diversified portfolio strategies rather than trying to predict future prices based on past trends.</p></li>
+</ul>
+<p><strong>Case 2: <span class="math notranslate nohighlight">\(H &lt; 0.5\)</span></strong></p>
+<ul class="simple">
+<li><p>Indicates a mean-reverting series, i.e., the stock price tends to revert to its historical average.</p></li>
+<li><p>This suggests that the asset is less risky over the long term.</p></li>
+<li><p>Investors might interpret a low <span class="math notranslate nohighlight">\(H\)</span> as an opportunity to buy stocks after a significant drop, expecting a reversion to the mean, or to sell after a substantial rise.</p></li>
+</ul>
+<p><strong>Case 3: <span class="math notranslate nohighlight">\(H &gt; 0.5\)</span></strong></p>
+<ul class="simple">
+<li><p>Suggests a trending series, where increases or decreases in stock prices are likely to be followed by further increases or decreases, respectively.</p></li>
+<li><p>This persistence indicates potential momentum in stock prices, which can be exploited by momentum strategies—buying stocks that have been going up in the hope that they will continue to do so, and selling those in a downtrend.</p></li>
+</ul>
+<section id="practical-considerations">
+<h4>Practical Considerations:<a class="headerlink" href="#practical-considerations" title="Link to this heading">#</a></h4>
+<p>Before applying these interpretations, investors should consider:</p>
+<ul class="simple">
+<li><p><strong>Time Frame</strong>: The observed value of <span class="math notranslate nohighlight">\(H\)</span> can vary over different time frames: analyze <span class="math notranslate nohighlight">\(H\)</span> over the period relevant to the investment horizon.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Market Conditions</strong>: External factors such as market conditions, economic indicators, and geopolitical events can influence stock prices and should be considered alongside <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Risk Management</strong>: Regardless of the value of <span class="math notranslate nohighlight">\(H\)</span>, implementing proper risk management strategies is essential to protect against unexpected market movements.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Significance</strong>: is the <span class="math notranslate nohighlight">\(H\)</span> computed on a specific time series statistically significant?</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="geometric-brownian-motion">
+<h2>Geometric Brownian Motion<a class="headerlink" href="#geometric-brownian-motion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The <em>Geometric Brownian Motion</em> (GBM) is a stochastic process often used to model stock prices and other financial variables that do not revert to a mean but rather exhibit trends with a drift <span class="math notranslate nohighlight">\(\mu\)</span> and volatility <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+</ul>
+<p>The GBM is defined as: $<span class="math notranslate nohighlight">\(S(t) = S_0 \exp\left((\mu - \frac{1}{2} \sigma^2)t + \sigma W_t\right)\)</span>$ where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S(t)\)</span> is the stock price at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(S_0\)</span> is the initial stock price at time <span class="math notranslate nohighlight">\(t = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the expected annual return (drift coefficient).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the volatility (standard deviation of returns).</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_t\)</span> is a Wiener process (standard Brownian motion).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S0</span> <span class="o">=</span> <span class="mi">100</span>                 <span class="c1"># Initial stock price</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.09</span>                <span class="c1"># Expected annual return (9%)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.25</span>             <span class="c1"># Annual volatility (25%)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">2</span>                    <span class="c1"># Time horizon in years</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">252</span>               <span class="c1"># Time step in years, assuming 252 trading days per year</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>            <span class="c1"># Number of time steps</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># Time vector</span>
+
+<span class="c1"># Brownian Motion</span>
+<span class="n">dW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">),</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dW</span><span class="p">)</span>
+
+<span class="c1"># Geometric Brownian Motion</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">mu</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">W</span><span class="p">)</span>
+
+<span class="c1"># Plotting the Geometric Brownian Motion</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Geometric Brownian Motion&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5b0803555062294c08d0f1e6de158125ed68aa60e6ad31412fb8a7a2e2442961.png" src="../../_images/5b0803555062294c08d0f1e6de158125ed68aa60e6ad31412fb8a7a2e2442961.png" />
+</div>
+</div>
+<section id="variance-of-gbm">
+<h3>Variance of GBM<a class="headerlink" href="#variance-of-gbm" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>First, note that <span class="math notranslate nohighlight">\(S(t)\)</span> is <em>log-normally distributed</em> because it’s an exponential function of a normally distributed process <span class="math notranslate nohighlight">\(B(t)\)</span>.</p></li>
+<li><p>The variance of <span class="math notranslate nohighlight">\(S(t)\)</span> can be found from the properties of the log-normal distribution:
+$<span class="math notranslate nohighlight">\(\text{Var}(S(t)) = \left(e^{\sigma^2 t} - 1\right) e^{2\mu t + \sigma^2 t} S_0^2.\)</span>$</p></li>
+<li><p>This shows that the variance of GBM is not linear in <span class="math notranslate nohighlight">\(t\)</span> like the BM.</p></li>
+<li><p>Instead, it grows <em>exponentially</em> with time due to the exponential term <span class="math notranslate nohighlight">\(e^{\sigma^2 t}\)</span>.</p></li>
+<li><p>This, and the possibility of modelling drift (expected annual return) are the main additions of GBM over BM.</p></li>
+</ul>
+</section>
+<section id="real-world-applications">
+<h3>Real world applications<a class="headerlink" href="#real-world-applications" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>GBM can be used to model real stock prices and simulate their future behavior.</p></li>
+<li><p>First, we estimate <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> from historical stock price data.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> could be the historical average of the stock’s logarithmic returns</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> could be the standard deviation of those returns.</p></li>
+</ul>
+</li>
+<li><p>Then, we use these estimates in the GBM formula to simulate future price paths.</p></li>
+</ul>
+<ul class="simple">
+<li><p>This method is widely used for option pricing, risk management, and investment strategy simulations.</p></li>
+<li><p>However, GBM has limitations, such as assuming a <em>constant drift and volatility</em>.</p></li>
+<li><p>This, may not hold true in real markets.</p></li>
+<li><p>Therefore, it’s often used as a component of a broader analysis or modeling strategy.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Get the &quot;training&quot; data (e.g., 2020-2022)</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;GOOG&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s1">&#39;1d&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;2019-12-31&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2022-12-31&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get &quot;test&quot; data, for comparison (e.g., 2023)</span>
+<span class="n">data3</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;GOOG&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s1">&#39;1d&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;2022-12-31&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2023-12-31&#39;</span><span class="p">)</span>
+<span class="n">test_days</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 2: Calculate Daily Returns</span>
+<span class="n">returns</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="c1"># We are interested in the returns, so we get the changes in %</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 3: Estimate Parameters for GBM</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">252</span>  <span class="c1"># Annualize the mean</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span>  <span class="c1"># Annualize the std deviation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 4: Set GBM parameters</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Time horizon in years</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">test_days</span>  <span class="c1"># Time step in years, assuming 252 trading days per year</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>  <span class="c1"># Number of time steps</span>
+<span class="n">time_step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">S0</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Starting stock price (latest close price) </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  Step 5: Compute Simulation</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">W</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>  <span class="c1"># Cumulative sum for the Wiener process</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">time_step</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">W</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># GBM formula</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GOOGL Historical Closing Prices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data3</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated GBM Prices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real Prices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Google Stock Prices and Simulated GBM&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f990b55ef3fd47bb5ce58970471c2fb044c3ec3d92e76681a30bdaec085e2220.png" src="../../_images/f990b55ef3fd47bb5ce58970471c2fb044c3ec3d92e76681a30bdaec085e2220.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>There is a stochastic component in each GBM realization..</p></li>
+<li><p>Usually, more paths are simulated to get a more informative simulation.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate multiple paths</span>
+<span class="n">n_paths</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_paths</span><span class="p">):</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">time_step</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">W</span>
+    <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+    
+<span class="n">path_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">path_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GOOGL Historical Closing Prices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data3</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">path_mean</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated GBM Prices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">data3</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">path_mean</span><span class="o">-</span><span class="mf">1.96</span><span class="o">*</span><span class="n">path_std</span><span class="p">,</span> <span class="n">path_mean</span><span class="o">+</span><span class="mf">1.96</span><span class="o">*</span><span class="n">path_std</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;95% CI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real Prices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Google Stock Prices and Simulated GBM&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/11e18d4657c0ed3b435df6baf73d05df7a22681b2f2231ec19218e54c1a13d3c.png" src="../../_images/11e18d4657c0ed3b435df6baf73d05df7a22681b2f2231ec19218e54c1a13d3c.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this lecture we covered:</p>
+<ol class="arabic simple">
+<li><p>Unit root test and a deeper insight on ADF test.</p></li>
+<li><p>Mean Reversion and how to test it with ADF.</p></li>
+<li><p>Hurst Exponent: how to compute it and its application in finance.</p></li>
+<li><p>Geometric Brownian Motion: definition and application to simulate stocks.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Download and plot the historical closing prices of Tesla (<code class="docutils literal notranslate"><span class="pre">TSLA</span></code>) and Equinor (<code class="docutils literal notranslate"><span class="pre">EQNR</span></code>) for the years <code class="docutils literal notranslate"><span class="pre">2019-12-31</span></code>- <code class="docutils literal notranslate"><span class="pre">2022-12-31</span></code>.</p></li>
+<li><p>For each time series:</p>
+<ul>
+<li><p>Test if the time series look stationary</p></li>
+<li><p>Compute the Hurst coefficient for both time series.</p></li>
+<li><p>Which stock would you like to invest into? Motivate your answer based on the tests and the value of <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+<li><p>Simulate the stock prices using GBM.</p></li>
+</ul>
+</li>
+<li><p>Which simulation seems to be more reliable? The one for Tesla or Equinor?</p></li>
+<li><p>To motivate your answer:</p>
+<ol class="arabic simple">
+<li><p>compute the simulation at least 100 times.</p></li>
+<li><p>Compute the MSE between the true stock prices and the simulated ones.</p></li>
+<li><p>Compare the expected value of the MAPE for the two stocks.</p></li>
+</ol>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/06"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../05/arma_arima_sarima.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ARMA, ARIMA, SARIMA</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../07/kalman-filter.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Kalman filter</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-recap">Small recap</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposition">Decomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additive-vs-multiplicative">Additive vs Multiplicative</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity">Stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detect-non-stationarity">Detect non-stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#achieve-stationarity">Achieve stationarity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-root-test">Unit root test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-the-adf-test">More on the ADF test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-testing">Mean Reversion Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-finance">Applications in finance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-for-mean-reversion">Testing for mean reversion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-vs-stationarity">Mean reversion VS stationarity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion-recap">Brownian Motion (recap)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hurst-exponent">Hurst Exponent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hurst-exponent-in-finance">Interpretation of the Hurst Exponent in Finance:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical Considerations:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-brownian-motion">Geometric Brownian Motion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-gbm">Variance of GBM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-applications">Real world applications</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Filippo Maria Bianchi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

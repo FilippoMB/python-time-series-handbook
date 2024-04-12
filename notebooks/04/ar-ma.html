@@ -1,0 +1,1573 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>AR-MA &#8212; Time series analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04/ar-ma';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ARMA, ARIMA, SARIMA" href="../05/arma_arima_sarima.html" />
+    <link rel="prev" title="Smoothing" href="../03/smoothing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../00/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Time series analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Time series analysis with Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../00/intro.html">
+                    Time series analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/stationarity.html">Stationarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/smoothing.html">Smoothing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/unit-root-hurst.html">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/kalman-filter.html">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/prophet.html">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04/ar-ma.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/04/ar-ma.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>AR-MA</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlations-in-time-series">Correlations in time series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-function-acf">Autocorrelation Function (ACF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation-function-ccf">Cross-Correlation Function (CCF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications-of-correlation-functions">Practical Applications of Correlation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-considerations">Limitations and Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-partial-autocorrelation-function-pacf">The Partial Autocorrelation Function (PACF)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoregressive-ar-models">Autoregressive (AR) models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-model-identification">AR model identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ar-models">Forecasting with AR models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-model-example">AR model example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average-ma-models">Moving Average (MA) models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ma-model-identification">MA model identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ma-model-example">MA model example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-vs-ma-models">AR vs MA Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ar-ma">
+<h1>AR-MA<a class="headerlink" href="#ar-ma" title="Link to this heading">#</a></h1>
+<br>
+<div style="text-align: center">
+    <img src="media/cover.png" style="width: 45%">
+</div><section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>In this lecture we will cover:</p>
+<ul class="simple">
+<li><p>The autocorrelation function (ACF).</p></li>
+<li><p>The partial autocorrelation function (PACF).</p></li>
+<li><p>Explanation of how autoregressive and moving average models work.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">ccf</span><span class="p">,</span> <span class="n">adfuller</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_acf</span><span class="p">,</span> <span class="n">plot_pacf</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima_process</span> <span class="kn">import</span> <span class="n">arma_generate_sample</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.holtwinters</span> <span class="kn">import</span> <span class="n">ExponentialSmoothing</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># For reproducibility</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same function from the previous lecture</span>
+<span class="k">def</span> <span class="nf">run_sequence_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Values&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="correlations-in-time-series">
+<h2>Correlations in time series<a class="headerlink" href="#correlations-in-time-series" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The correlation function measures the degree of association between two random variables.</p></li>
+<li><p>In time series data it measures the association btween two different points in time.</p></li>
+<li><p>Correlation is essential for understanding the linear relationship and dependency in time series data.</p></li>
+<li><p>There are two types of correlation functions:</p>
+<ul>
+<li><p>Autocorrelation.</p></li>
+<li><p>Cross-Correlation.</p></li>
+</ul>
+</li>
+</ul>
+<section id="autocorrelation-function-acf">
+<h3>Autocorrelation Function (ACF)<a class="headerlink" href="#autocorrelation-function-acf" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The ACF measures the correlation of a time series with its own lagged values$<span class="math notranslate nohighlight">\( ACF(k) = \frac{\mathbb{E}[(X(t) - \mu)(X(t-k) - \mu)]}{\sigma^2} \)</span>$ where:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(k\)</span> is the lag number.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X(t)\)</span> is the value at time  <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the mean of the series.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of the series.</p></li>
+</ul>
+</li>
+<li><p>Values close to 1 or -1 indicate strong correlation, while values near 0 indicate weak correlation.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">time_series_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_series_1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original Time Series&#39;</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">time_series_1</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1"># We plot the first 20 lags. We could plot more by changing the `lags` argument.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/68d02040b177c6aeebd34613198ee7906f1efeda165d7bbe661dd544a2078eef.png" src="../../_images/68d02040b177c6aeebd34613198ee7906f1efeda165d7bbe661dd544a2078eef.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>The stems represent lagged correlation values.</p></li>
+<li><p>The time series correlates well with itself shifted by 1 (lag 1).</p></li>
+<li><p>A lag of 2 correlates nearly but not quite as well. And so on.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The blue region represents a confidence interval.</p></li>
+<li><p>Correlations outside of the confidence interval are statistically significant whereas the others are not.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> in this case was 0.05 (95% confidence interval), but it can be set to other levels.</p></li>
+<li><p>See the the <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.graphics.tsaplots.plot_acf.html">documentation</a> for more details.</p></li>
+</ul>
+</section>
+<section id="cross-correlation-function-ccf">
+<h3>Cross-Correlation Function (CCF)<a class="headerlink" href="#cross-correlation-function-ccf" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CCF measures the correlation between two time series at different lags $<span class="math notranslate nohighlight">\(CCF(k) = \frac{E[(X(t) - \mu_x)(Y(t-k) - \mu_y)]}{\sigma_x \sigma_y}\)</span>$ where:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are two different time series.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_x, \mu_y\)</span> are their means, and <span class="math notranslate nohighlight">\(\sigma_x, \sigma_y\)</span> are their standard deviations.</p></li>
+</ul>
+</li>
+<li><p>The CCF is used to find lead-lag relationships between two time series.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_series_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+
+<span class="c1"># Calculate CCF between the two time series</span>
+<span class="n">ccf_vals</span> <span class="o">=</span> <span class="n">ccf</span><span class="p">(</span><span class="n">time_series_1</span><span class="p">,</span> <span class="n">time_series_2</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">50</span><span class="p">]</span>
+
+<span class="c1"># Plot CCF</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ccf_vals</span><span class="p">)),</span> <span class="n">ccf_vals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cross-Correlation Function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Lag&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Correlation&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cbf216564b97c655c24a558c7048fd1b1550fc83f300510c9bc5048fbaaf98b5.png" src="../../_images/cbf216564b97c655c24a558c7048fd1b1550fc83f300510c9bc5048fbaaf98b5.png" />
+</div>
+</div>
+</section>
+<section id="practical-applications-of-correlation-functions">
+<h3>Practical Applications of Correlation Functions<a class="headerlink" href="#practical-applications-of-correlation-functions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Identifying the nature of the data (e.g., whether it is random, has a trend or a seasonality).</p></li>
+<li><p>Helping to determine the order of ARIMA models (more on this later on).</p></li>
+<li><p>Identifying outliers in time series data.</p></li>
+</ul>
+</section>
+<section id="limitations-and-considerations">
+<h3>Limitations and Considerations<a class="headerlink" href="#limitations-and-considerations" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Correlation functions only measure <em>linear</em> relationships.</p></li>
+<li><p>For meaningful results, time series should be <em>stationary</em>.</p></li>
+<li><p>High correlation does not imply <em>causation</em> and can sometimes be misleading.</p></li>
+</ol>
+<img src="media/timoelliot.png" style="width: 25%" align="center">
+<div style="text-align: center; font-size: 15px;">Image: <a href="https://timoelliott.com/">timoelliot</a></div>
+<ol class="arabic simple" start="4">
+<li><p>ACF measures both direct and <em>indirect correlations</em> between lags.</p></li>
+</ol>
+<ul class="simple">
+<li><p>A strong correlation at higher lags could actually be a result of the accumulation of correlations at shorter lags.</p></li>
+</ul>
+</section>
+<section id="the-partial-autocorrelation-function-pacf">
+<h3>The Partial Autocorrelation Function (PACF)<a class="headerlink" href="#the-partial-autocorrelation-function-pacf" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>PACF addresses the 4th limitation of ACF by isolating the direct correlation between a time series and its lagged version.</p></li>
+<li><p>It does that by removing the influence of correlations at shorter lags.</p></li>
+<li><p>High PACF at lag <span class="math notranslate nohighlight">\(k\)</span> indicates a strong partial correlation with the <span class="math notranslate nohighlight">\(k\)</span>-th lag, not accounted for by correlations at lower lags.</p></li>
+</ul>
+<ul class="simple">
+<li><p>PACF of lag <span class="math notranslate nohighlight">\(k\)</span> is sometimes denoted as <span class="math notranslate nohighlight">\(\phi_{kk}\)</span>: $<span class="math notranslate nohighlight">\(\phi_{kk} = \text{Corr}\big(X(t) - \hat{X}(t), X(t-k) - \hat{X}(t-k)\big)\)</span>$ where:</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{X}(t)\)</span> is the predicted value of <span class="math notranslate nohighlight">\(X(t)\)</span> based on all the values up to <span class="math notranslate nohighlight">\(t-1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{X}(t-k)\)</span> is the predicted value of <span class="math notranslate nohighlight">\(X(t-k)\)</span> based on all the values up to <span class="math notranslate nohighlight">\(t-k-1\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Using ACF and PACF together provides a more comprehensive understanding of the time series data.</p></li>
+<li><p>ACF helps in identifying the overall correlation structure and potential seasonality.</p></li>
+<li><p>PACF pinpoints the specific lags that have a significant direct impact on the current value.</p></li>
+</ul>
+<p><strong>Example</strong></p>
+<ul class="simple">
+<li><p>Consider a time series where ACF shows significant correlation at lags 1, 2, and 3.</p></li>
+<li><p>Without PACF, it is unclear whether the correlation at lag 3 is direct or merely a reflection of the strong correlations at lags 1 and 2.</p></li>
+<li><p>PACF can clarify this by showing whether there is a significant direct correlation at lag 3.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">time_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">alpha1</span><span class="p">,</span> <span class="n">alpha2</span><span class="p">,</span> <span class="n">alpha3</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.7</span>  <span class="c1"># Coefficients to induce autocorrelation at lags 1, 2, and 3</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Generate correlated data</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">time_series</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha1</span> <span class="o">*</span> <span class="n">time_series</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha2</span> <span class="o">*</span> <span class="n">time_series</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha3</span> <span class="o">*</span> <span class="n">time_series</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">noise</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Plot ACF</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Autocorrelation Function (ACF)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot PACF</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Partial Autocorrelation Function (PACF)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4cac0df823d29409068251d0019cdcbdcc4a84b5f8590db7ad7681cbc942d9f0.png" src="../../_images/4cac0df823d29409068251d0019cdcbdcc4a84b5f8590db7ad7681cbc942d9f0.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="autoregressive-ar-models">
+<h2>Autoregressive (AR) models<a class="headerlink" href="#autoregressive-ar-models" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>An Autoregressive (AR) model is a type of time series model that uses observations from previous time steps as input to a regression equation to predict the value at the next time step.</p></li>
+<li><p>The AR model is dependent solely on its own past values.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The general form of an AR model of order <span class="math notranslate nohighlight">\(p\)</span> is: $<span class="math notranslate nohighlight">\(X(t) = c + \phi_1 X(t-1) + \phi_2 X(t-2) + \dots + \phi_p X(t-p) + \epsilon_t\)</span>$ where</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(X(t)\)</span>: Time series value at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(c\)</span>: Constant term (also known as the intercept).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi_1, \phi_2, \dots, \phi_p\)</span>: Coefficients of the model.</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span>: Order of the AR model (number of lag terms).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon_t\)</span>: Error term (white noise) at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>AR(1) Model</strong></p>
+<ul class="simple">
+<li><p>The first-frder autoregressive model, AR(1), is $<span class="math notranslate nohighlight">\(X(t) = c + \phi_1 X(t-1) + \epsilon_t\)</span>$</p></li>
+<li><p>In an AR(1) model, the current value is based on the immediately preceding value.</p></li>
+</ul>
+<blockquote>
+<div><p>Example: A simple stock price model where today’s price is partially dependent on yesterday’s price.</p>
+</div></blockquote>
+<p><strong>Higher Order AR Models</strong></p>
+<ul class="simple">
+<li><p>Higher order AR models (AR(2), AR(3), etc.) depend on more than one past value.</p></li>
+<li><p>For example, the AR(2) model is: $<span class="math notranslate nohighlight">\(X(t) = c + \phi_1 X(t-1) + \phi_2 X(t-2) + \epsilon_t\)</span>$</p></li>
+<li><p>These models are useful in scenarios where the effect of more than one previous time step is significant.</p></li>
+</ul>
+<p><strong>Estimating AR Model Coefficients</strong></p>
+<ul class="simple">
+<li><p>Coefficients of AR models can be estimated using various methods like the Maximum Likelihood Estimation, or Least Squares Estimation.</p></li>
+<li><p>The estimated coefficients provide insights into the influence of past values on the current value in the time series.</p></li>
+<li><p>In other words, AR models are <em>interpretable</em>.</p></li>
+</ul>
+<p><strong>Limitations of AR Models</strong></p>
+<ul class="simple">
+<li><p>AR models require the time series to be <em>stationary</em>.</p></li>
+<li><p>Higher order AR models can <em>overfit</em> the training data and perform bad in prediction.</p></li>
+<li><p>AR models do not account for <em>exogenous factors</em>.</p></li>
+<li><p>They cannot model non-linear relationships in the data.</p></li>
+</ul>
+<section id="ar-model-identification">
+<h3>AR model identification<a class="headerlink" href="#ar-model-identification" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>How do we determine the correct order <span class="math notranslate nohighlight">\(p\)</span> of the AR model?</p></li>
+<li><p>We do that by looking at the first lags of the PACF.</p></li>
+<li><p>Let’s see it through an example.</p></li>
+</ul>
+<ul class="simple">
+<li><p>We generate some data from an AR(2) process with coefficients <code class="docutils literal notranslate"><span class="pre">[1.0,</span> <span class="pre">-0.5,</span> <span class="pre">0.7]</span></code>.</p></li>
+<li><p>Note that the <code class="docutils literal notranslate"><span class="pre">1.0</span></code> at the beginning refers to the zero-lag and is always <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ar_data</span> <span class="o">=</span> <span class="n">arma_generate_sample</span><span class="p">(</span><span class="n">ar</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]),</span> <span class="n">ma</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">nsample</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">burnin</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Next, we compute the PACF on the <code class="docutils literal notranslate"><span class="pre">ar_data</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">ar_data</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF of the AR process&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/af210c05095bbca1bb8d07d24e7609641110521984cf650bfc50f932c3fef3d8.png" src="../../_images/af210c05095bbca1bb8d07d24e7609641110521984cf650bfc50f932c3fef3d8.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Besides the spike at lag 0, which is always there, we see two significant lags:</p>
+<ul>
+<li><p>The <em>positive</em> spike at lag 1, introduced by the <em>negative</em> coefficient <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></li>
+<li><p>The <em>negative</em> spike at lag 2, introduced by the <em>positive</em> coefficient <code class="docutils literal notranslate"><span class="pre">0.7</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>This means that the process has a <em>memory</em> of length 2.</p></li>
+<li><p>In other words, all the correlations are explained by the previous 2 time steps.</p></li>
+<li><p>If we want to fit an AR model to our data we would choose <span class="math notranslate nohighlight">\(p=2\)</span>, which is a AR(2) model.</p></li>
+</ul>
+<p><strong>⚙ Try it yourself</strong></p>
+<ul class="simple">
+<li><p>Try modifying/adding/removing values in the <code class="docutils literal notranslate"><span class="pre">ar</span></code> coefficients in <code class="docutils literal notranslate"><span class="pre">arma_generate_sample</span></code>.</p></li>
+<li><p>Then, see how the PACF plot changes.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Characteristic of an AR process are the correlations that decay slowly in time.</p></li>
+<li><p>This can be seen by looking at the ACF plot, where we see significant spikes for many lags.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">ar_data</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ACF of the AR process&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c57afc33c4e19f5cfd256d482c8d5b2b89babbdfcac02294a291f16d3b351dbf.png" src="../../_images/c57afc33c4e19f5cfd256d482c8d5b2b89babbdfcac02294a291f16d3b351dbf.png" />
+</div>
+</div>
+</section>
+<section id="forecasting-with-ar-models">
+<h3>Forecasting with AR models<a class="headerlink" href="#forecasting-with-ar-models" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>How do we compute forecasts using an AR model?</p></li>
+<li><p>In general, our time series has a trend and a seasonality.</p></li>
+<li><p>However, an AR model can only be used on <em>stationary</em> data.</p></li>
+<li><p>Therefore, we need to do the following steps.</p></li>
+</ul>
+<p><strong>Step 1: Detrending and Deseasonalizing</strong></p>
+<ul class="simple">
+<li><p>Before applying an AR model is necessary to make the time series stationary.</p>
+<ol class="arabic simple">
+<li><p>Identify the trend <span class="math notranslate nohighlight">\(T\)</span> and seasonality <span class="math notranslate nohighlight">\(S\)</span> present in the time series (e.g., by using seasonal decomposition or smoothing techniques).</p></li>
+<li><p>Subtract the trend and seasonality $<span class="math notranslate nohighlight">\(R(t) = X(t) - T(t) - S(t)\)</span>$</p></li>
+</ol>
+</li>
+</ul>
+<p><strong>Step 2: Applying the AR Model</strong></p>
+<ul class="simple">
+<li><p>Fit an AR model to the detrended and deseasonalized time series <span class="math notranslate nohighlight">\(R(t)\)</span>.</p></li>
+<li><p>Use the model to forecast the next value <span class="math notranslate nohighlight">\(\hat R(t+\tau)\)</span>.</p></li>
+</ul>
+<p><strong>Step 3: Reconstructing the Forecast</strong></p>
+<ul class="simple">
+<li><p>Estimate the trend <span class="math notranslate nohighlight">\(\hat{T}(t+\tau)\)</span> and seasonality <span class="math notranslate nohighlight">\(\hat{S}(t+\tau)\)</span> (e.g., with smoothers).</p></li>
+<li><p>Add back the estimated trend and seasonality to the forecasted value: $<span class="math notranslate nohighlight">\(\hat X(t+\tau) = \hat R(t+\tau) + \hat{T}(t+\tau) + \hat{S}(t+\tau)\)</span>$</p></li>
+</ul>
+</section>
+<section id="ar-model-example">
+<h3>AR model example<a class="headerlink" href="#ar-model-example" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Let’s generate some data with trend and seasonality.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">trend</span> <span class="o">=</span> <span class="n">time</span> <span class="o">*</span> <span class="mf">0.2</span>
+<span class="n">seasonality</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># Seasonality 12</span>
+<span class="n">time_series_ar</span> <span class="o">=</span> <span class="n">trend</span> <span class="o">+</span> <span class="n">seasonality</span> <span class="o">+</span> <span class="n">ar_data</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_series_ar</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b5c574ee91726721658884939c3fd6036c36680f59914d6246d07edd270faea8.png" src="../../_images/b5c574ee91726721658884939c3fd6036c36680f59914d6246d07edd270faea8.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Since we are going to compute forecasts, let’s divide the data in a train and test set.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data_ar</span> <span class="o">=</span> <span class="n">time_series_ar</span><span class="p">[:</span><span class="mi">164</span><span class="p">]</span>
+<span class="n">test_data_ar</span> <span class="o">=</span> <span class="n">time_series_ar</span><span class="p">[</span><span class="mi">164</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>To determine the order <span class="math notranslate nohighlight">\(p\)</span> of the AR model we need to look at the PACF.</p></li>
+<li><p>The order <span class="math notranslate nohighlight">\(p\)</span> corresponds to the least nonzero lag in the PACF plot.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8e68bdb19fa05f451d8d64c889bdc3ac0a0ed63473e6a3356138fc6aee9d22da.png" src="../../_images/8e68bdb19fa05f451d8d64c889bdc3ac0a0ed63473e6a3356138fc6aee9d22da.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>The PACF would suggest an order <span class="math notranslate nohighlight">\(p=1\)</span>.</p></li>
+<li><p>However, this PACF <em>makes little sense</em>.</p></li>
+<li><p>As we discussed before, both the ACF and PACF should be computed on stationary data.</p></li>
+<li><p>If data are stationary, correlations drop quickly.</p></li>
+<li><p>If they don’t, that’s a sign that your data is not stationary.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Since we generated the time series by hands we know that it has trend and seasonality and, therefore, it is not stationary.</p></li>
+<li><p>However, to be rigorous we’ll test the time series with the Augmented Dickey-Fuller (ADF) test.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value: </span><span class="si">{</span><span class="n">pvalue</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value: 0.833
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>A p-value that high means we fail to reject the null hypothesis
+$<span class="math notranslate nohighlight">\(H_0: \text{the data is nonstationary}\)</span>$</p></li>
+<li><p>No surprises here.</p></li>
+</ul>
+<ul class="simple">
+<li><p>To achieve stationarity we can transform the data by applying differentiation.</p></li>
+<li><p>We apply first-order differencing which removes the trend.</p></li>
+<li><p>Then, we check the stationarity of the differenced data with the ADF test.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff_ar</span> <span class="o">=</span> <span class="n">train_data_ar</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">train_data_ar</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">diff_ar</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value: </span><span class="si">{</span><span class="n">pvalue</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value: 0.000
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The ADF test suggests that now the time series is stationary.</p></li>
+<li><p>We might want to apply also <em>seasonal differentiation</em> to get rid of the seasonal component.</p></li>
+<li><p>However, taking too much differencing might compromise the structure of the data.</p></li>
+<li><p>This problem is called <em>overdifferencing</em>.</p></li>
+<li><p>See <a class="reference external" href="https://people.duke.edu/~rnau/411arim2.htm">this excellent explanation</a> for how to determine the optimal order of differentiation.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Let’s see how data looks like after differencing.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">train_data_ar</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Nonstationary data&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">diff_ar</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Differenced data&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/511943c3078128e0386e2b87884f63981dbcb092d33e3bf667aaf57c5d3fc0c7.png" src="../../_images/511943c3078128e0386e2b87884f63981dbcb092d33e3bf667aaf57c5d3fc0c7.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Let’s recompute the PACF on the differenced data.</p></li>
+<li><p>We also compare it to the PACF on the original <code class="docutils literal notranslate"><span class="pre">ar_data</span></code> and the nonstationary data <code class="docutils literal notranslate"><span class="pre">train_data_ar</span></code> to see the differences.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">diff_ar</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF Differenced time series&quot;</span><span class="p">)</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">ar_data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF Original AR process&quot;</span><span class="p">)</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF Nonstationary time series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/056086cc0b61b83cf6266ad6ae2d5d38f5f54b8ccf36315c3f19160c41d9ae22.png" src="../../_images/056086cc0b61b83cf6266ad6ae2d5d38f5f54b8ccf36315c3f19160c41d9ae22.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>The prominent negative spike at lag 2 appears both in the PACF of the original AR data and in the differenced time series.</p></li>
+<li><p>These two look way more similar than the PACF we got for the nonstationary data.</p></li>
+<li><p>The prominent spike at lag 2 indicates that <span class="math notranslate nohighlight">\(p=2\)</span>, i.e., we should use an AR(2) model.</p></li>
+</ul>
+<p><strong>📝 Note</strong></p>
+<ul class="simple">
+<li><p>In the differenced time series there are also other significant spikes at higher lags, which are not present in the original AR data.</p></li>
+<li><p>This is because there is still some seasonal component left in the data.</p></li>
+<li><p>Let’s see if we can remove it by applying seasonal differencing and recompute the PACF plot.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seasonal differencing</span>
+<span class="n">diff_ar</span> <span class="o">=</span> <span class="n">diff_ar</span><span class="p">[</span><span class="mi">12</span><span class="p">:]</span> <span class="o">-</span> <span class="n">diff_ar</span><span class="p">[:</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">diff_ar</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF after seasonal differencing&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7b737d575859ec2fdb3fa94ad4f7b9f326b597c08ffb62a7513b75f8eeff2ef4.png" src="../../_images/7b737d575859ec2fdb3fa94ad4f7b9f326b597c08ffb62a7513b75f8eeff2ef4.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Even after seasonal differencing we are not able to recover the PACF of the original data.</p></li>
+<li><p>In practice, it is rare to get a “clean” PACF with only one prominent lag at the correct order when using differencing.</p></li>
+<li><p>Interpreting the PACF (and ACF) plots to select the order of the model requires skills and experience.</p></li>
+<li><p>See <a class="reference external" href="https://people.duke.edu/~rnau/411arim3.htm">this excellent explanation</a> for how to select the order of the AR and MA models.</p></li>
+</ul>
+<p><strong>💡 Hint</strong></p>
+<ul class="simple">
+<li><p>We could estimate the trend and seasonality with Triple exponential smoothing.</p></li>
+<li><p>Then, we compute the residuals subtracting the estimated trend and seasonality.</p></li>
+<li><p>In this case, the residuals are much closer to our original AR process.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">triple</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> 
+                              <span class="n">seasonal</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">trend_and_seasonality</span> <span class="o">=</span> <span class="n">triple</span><span class="o">.</span><span class="n">fittedvalues</span> <span class="c1"># Estimated trend and seasonality</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">train_data_ar</span> <span class="o">-</span> <span class="n">trend_and_seasonality</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">ar_data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF Original AR process&quot;</span><span class="p">)</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF of the residuals&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/87014634ea0cdcf60dbaca0f0ae7f60f705c03434057d98c17b61fb44136d809.png" src="../../_images/87014634ea0cdcf60dbaca0f0ae7f60f705c03434057d98c17b61fb44136d809.png" />
+</div>
+</div>
+<p><strong>💡 Hint</strong></p>
+<ul class="simple">
+<li><p>In this case, we knew the main period to be <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p>In general, we need to estimate it.</p></li>
+<li><p>We can use the <code class="docutils literal notranslate"><span class="pre">fft_analysis</span></code> function from Lecture 1.</p></li>
+</ul>
+<p><strong>⚠ Attention</strong></p>
+<ul class="simple">
+<li><p>Smoothers work so well here because we have toy data with additive components, linear trend, constant variance, etc…</p></li>
+<li><p>Many real-world data do not look so nice.</p></li>
+<li><p>In many cases, we have to rely on differentiation and the “dirty” ACF/PACF plot we got from it.</p></li>
+</ul>
+<ul class="simple">
+<li><p>In a way or another we got our stationary data.</p></li>
+<li><p>We are now ready to fit the AR(2) model.</p></li>
+<li><p>We will use the <code class="docutils literal notranslate"><span class="pre">diff_ar</span></code> data obtained from differencing twice at lag 1 and 12.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">diff_ar</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Next, we use the fitted model to predict the test data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_preds</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data_ar</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">13</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">diff_ar</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">test_preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predictions&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/30747bc30715aca90b28661fbd4a04bb035c3e4ef4c6e3addc6613792372a0d0.png" src="../../_images/30747bc30715aca90b28661fbd4a04bb035c3e4ef4c6e3addc6613792372a0d0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Finally, we must add back the trend and the seasonality to the predictions.</p></li>
+<li><p>Since we generated the data ourselves, we know the trend and the seasonality for the forecast period.</p></li>
+<li><p>In general, we need to estimate them (e.g., by making predictions with a smoother).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reintroduce Trend and Seasonality to Predictions</span>
+<span class="n">test_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ar_data</span><span class="p">))</span>
+<span class="n">final_preds</span> <span class="o">=</span> <span class="n">test_preds</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">test_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">test_idx</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_series_ar</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">test_data_ar</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test Data&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">final_preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predictions&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/da91d716cb0c8fc2d438a761527a7d683c4508e496c3f718a9911a45bd62c07f.png" src="../../_images/da91d716cb0c8fc2d438a761527a7d683c4508e496c3f718a9911a45bd62c07f.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="moving-average-ma-models">
+<h2>Moving Average (MA) models<a class="headerlink" href="#moving-average-ma-models" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Another approach to modeling univariate time series is the moving average (MA) model.</p></li>
+<li><p>The MA model is a linear regression of the current value of the series against the white noise of one or more of the previous values of the series.</p></li>
+<li><p>The noise at each point is assumed to come from a normal distribution with mean 0 and constant variance.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The MA model is defined as $<span class="math notranslate nohighlight">\(X(t) = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \dots + \theta_q \epsilon_{t-q}\)</span>$ where:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(X(t)\)</span>: Time series value at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Mean of the series.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_1, \theta_2, \dots, \theta_q\)</span>: Coefficients of the model.</p></li>
+<li><p><span class="math notranslate nohighlight">\(q\)</span>: Order of the MA model (number of lagged error terms).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon_t\)</span>: Error term (white noise) at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>MA models capture the dependency between an observation and a residual error through a moving average applied to lagged observations.</p></li>
+<li><p>Fitting MA estimates is more complicated than AR models because the error terms are not observable.</p></li>
+<li><p>Therefore, iterative nonlinear fitting procedures need to be used.</p></li>
+<li><p>MA models are less interpretable than AR models.</p></li>
+<li><p>As AR models, also MA models require data to be stationary.</p></li>
+</ul>
+<p><strong>⚠ Attention</strong></p>
+<ul class="simple">
+<li><p>We talked about smoothing with a moving averages in Lesson 3.</p></li>
+<li><p>MA models are not the same as those smoothing techniques.</p></li>
+<li><p>Each serves a different, important function.</p></li>
+<li><p>We should not confuse the two.</p></li>
+</ul>
+<section id="ma-model-identification">
+<h3>MA model identification<a class="headerlink" href="#ma-model-identification" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For the <a class="reference internal" href="#AR-model-identification"><span class="xref myst">AR model identification</span></a> we selected <span class="math notranslate nohighlight">\(p\)</span> as the lag after which the spikes in the PACF become nonsignificant.</p></li>
+<li><p>To identify the order <span class="math notranslate nohighlight">\(q\)</span> of the MA model we do the same but we use the ACF plot insted.</p></li>
+<li><p>Let’s see it through an example.</p></li>
+</ul>
+<ul class="simple">
+<li><p>We generate some data from an MA(2) process with coefficients <code class="docutils literal notranslate"><span class="pre">[1.0,</span> <span class="pre">0.7,</span> <span class="pre">0.8]</span></code>.</p></li>
+<li><p>Again, the <code class="docutils literal notranslate"><span class="pre">1.0</span></code> at the beginning refers to the zero-lag.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>  <span class="c1"># MA parameters</span>
+<span class="n">ma_data</span> <span class="o">=</span> <span class="n">arma_generate_sample</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">ma</span><span class="p">,</span> <span class="n">nsample</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">burnin</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># MA process</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">ma_data</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ACF of the MA process&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cadd59928ff5defcd4cfbc585f9ddf8871de00b0d792f498f9c36d55762465cc.png" src="../../_images/cadd59928ff5defcd4cfbc585f9ddf8871de00b0d792f498f9c36d55762465cc.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>As expected, there is a cutoff after the second lag.</p></li>
+<li><p>This indicates that the order of the MA model is <span class="math notranslate nohighlight">\(q=2\)</span></p></li>
+</ul>
+<p><strong>⚙ Try it yourself</strong></p>
+<ul class="simple">
+<li><p>Try modifying/adding/removing values in the <code class="docutils literal notranslate"><span class="pre">ma</span></code> coefficients in <code class="docutils literal notranslate"><span class="pre">arma_generate_sample</span></code>.</p></li>
+<li><p>Then, see how the ACF plot changes.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Characteristic of an MA process are the slowly decaying, alternative spikes in the PACF plot.</p></li>
+<li><p>Note how this is complementary to what we saw for the <a class="reference internal" href="#AR-model-identification"><span class="xref myst">AR process</span></a>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">ma_data</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF of the MA process&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b4519539eafdb6ecd03a8e5c6cc05a6d37f4652593d44acce62bcffb463bdb55.png" src="../../_images/b4519539eafdb6ecd03a8e5c6cc05a6d37f4652593d44acce62bcffb463bdb55.png" />
+</div>
+</div>
+</section>
+<section id="ma-model-example">
+<h3>MA model example<a class="headerlink" href="#ma-model-example" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We repeat the same procedure as in the <a class="reference internal" href="#AR-model-example"><span class="xref myst">AR example</span></a> with a MA model.</p></li>
+<li><p>The only difference is that now we construct a time series using a MA process rather than an AR one.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_series_ma</span> <span class="o">=</span> <span class="n">trend</span> <span class="o">+</span> <span class="n">seasonality</span> <span class="o">+</span> <span class="n">ma_data</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_series_ma</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0a0834d93d6f0d37a9eed469acca44aff15080d123b1ca3a5b13c81b15a64718.png" src="../../_images/0a0834d93d6f0d37a9eed469acca44aff15080d123b1ca3a5b13c81b15a64718.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train/test split</span>
+<span class="n">train_data_ma</span> <span class="o">=</span> <span class="n">time_series_ma</span><span class="p">[:</span><span class="mi">164</span><span class="p">]</span>
+<span class="n">test_data_ma</span> <span class="o">=</span> <span class="n">time_series_ma</span><span class="p">[</span><span class="mi">164</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>To identify the order <span class="math notranslate nohighlight">\(q\)</span> of the MA model we must look at the ACF plot.</p></li>
+<li><p>Let’s start by computing the ACF of <code class="docutils literal notranslate"><span class="pre">train_data_ma</span></code>, which looks very different from the ACF plot we obtained <a class="reference internal" href="#MA-model-identification"><span class="xref myst">before</span></a> for the MA process.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">train_data_ma</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0f427045d9e27f5022d39a11cb47e5b1ddd0213da702fb6cdffc88237455ed39.png" src="../../_images/0f427045d9e27f5022d39a11cb47e5b1ddd0213da702fb6cdffc88237455ed39.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Also in this case, we need to make the time series stationary to obtain a meaningful ACF plot.</p></li>
+<li><p>Like in the AR model case, stationarity is also needed to fit the MA model.</p></li>
+<li><p>To obtain stationary data, we apply differentiation like we did in the AR example.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diff_ma</span> <span class="o">=</span> <span class="n">train_data_ma</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">train_data_ma</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>To verify that our data are stationary, we compute the ADF test before and after differentiation.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">pvalue_ts</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">train_data_ma</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">pvalue_diff</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">diff_ma</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value (original ts): </span><span class="si">{</span><span class="n">pvalue_ts</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value (differenced ts): </span><span class="si">{</span><span class="n">pvalue_diff</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value (original ts): 0.925
+p-value (differenced ts): 0.000
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We also plot the differenced data and compute the ACF.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ma</span><span class="p">)],</span> <span class="n">diff_ma</span><span class="p">,</span> <span class="s2">&quot;Differenced MA time series&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">diff_ma</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1909beeb4351c52934fb9ff1cab4b67ccac51130142a297bfd33333d03ec6c2a.png" src="../../_images/1909beeb4351c52934fb9ff1cab4b67ccac51130142a297bfd33333d03ec6c2a.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>As for the AR case, we have some significant correlations at higher lags due to the seasonality component.</p></li>
+<li><p>For the sake of comparison, we compute the ACF of</p>
+<ul>
+<li><p>the original AR process,</p></li>
+<li><p>the time series after 1st order differencing,</p></li>
+<li><p>the time series with both 1st order + seasonal differening.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seas_diff_ma</span> <span class="o">=</span> <span class="n">diff_ma</span><span class="p">[</span><span class="mi">12</span><span class="p">:]</span> <span class="o">-</span> <span class="n">diff_ma</span><span class="p">[:</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">ma_data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ma</span><span class="p">)],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Original MA process&quot;</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">diff_ma</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;1st order diff&quot;</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">seas_diff_ma</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;1st order + seasonal diff&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b082555a6a4e6f3502a01a8712a8f05e0181eb205af626ce5f4c436f8b173c96.png" src="../../_images/b082555a6a4e6f3502a01a8712a8f05e0181eb205af626ce5f4c436f8b173c96.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>When taking also the seasonal differencing the ACF plot looks very different.</p></li>
+<li><p>The positive correlations at lags 1 and 2 are gone and a the first non-zero correlation appears at lag 3.</p></li>
+<li><p>Usually, this does not make much sense and hints at an overdifferentiation.</p></li>
+</ul>
+<ul class="simple">
+<li><p>In conclusion, is not obvious which order to use.</p></li>
+<li><p>The ACF after 1st order differencing suggests using <span class="math notranslate nohighlight">\(p=1\)</span> or <span class="math notranslate nohighlight">\(p=2\)</span>.</p></li>
+<li><p>The ACF obtained after seasonal differencing suggests <span class="math notranslate nohighlight">\(p=3\)</span>, but we suspect overdifferencing.</p></li>
+<li><p>The best way to figure out the correct model is to try them all and compare their prediction performance.</p></li>
+</ul>
+<ul class="simple">
+<li><p>We will fit the 3 MA models in the following.</p></li>
+<li><p>Then, we will compute forecasts and compute the MSE with the actual data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">diff_ma</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">diff_ma</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model3</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">seas_diff_ma</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filippo/miniconda3/envs/sta2003/lib/python3.10/site-packages/statsmodels/base/model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  warnings.warn(&quot;Maximum Likelihood optimization failed to &quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preds1</span> <span class="o">=</span> <span class="n">model1</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data_ma</span><span class="p">))</span>
+<span class="n">preds2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data_ma</span><span class="p">))</span>
+<span class="n">preds3</span> <span class="o">=</span> <span class="n">model3</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data_ma</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reintroduce Trend and Seasonality to Predictions</span>
+<span class="n">test_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ar_data</span><span class="p">))</span>
+<span class="n">final_preds1</span> <span class="o">=</span> <span class="n">preds1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">test_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">test_idx</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">final_preds2</span> <span class="o">=</span> <span class="n">preds2</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">test_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">test_idx</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">final_preds3</span> <span class="o">=</span> <span class="n">preds3</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">test_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">test_idx</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE model 1: </span><span class="si">{</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">final_preds1</span><span class="p">,</span><span class="w"> </span><span class="n">test_data_ma</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE model 2: </span><span class="si">{</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">final_preds2</span><span class="p">,</span><span class="w"> </span><span class="n">test_data_ma</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE model 3: </span><span class="si">{</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">final_preds3</span><span class="p">,</span><span class="w"> </span><span class="n">test_data_ma</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE model 1: 1.62
+MSE model 2: 1.64
+MSE model 3: 1.84
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>As expected <span class="math notranslate nohighlight">\(p=1\)</span> and <span class="math notranslate nohighlight">\(p=2\)</span> give better and almost identical results.</p></li>
+<li><p>Fitting an MA(3) model on <code class="docutils literal notranslate"><span class="pre">seas_diff_ma</span></code> does not work well.</p></li>
+<li><p>This confirms that we overdifferenced the data.</p></li>
+<li><p>We conclude by plotting the prediction of the best model.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_series_ar</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">test_data_ar</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test Data&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">final_preds1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predictions&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/644e2009cb4b20db2b766b13ab13ce63c7a00af8d470d8a8219a297e83ed902b.png" src="../../_images/644e2009cb4b20db2b766b13ab13ce63c7a00af8d470d8a8219a297e83ed902b.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>In this lecture you should have learned the basics of:</p>
+<ol class="arabic simple">
+<li><p>The Autocorrelation Function (ACF).</p></li>
+<li><p>The Partial Autocorrelation Function (PACF).</p></li>
+<li><p>Autoregressive (AR) models.</p></li>
+<li><p>Choosing order <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
+<li><p>Moving Average (MA) models.</p></li>
+<li><p>Choosing order <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+</ol>
+<section id="ar-vs-ma-models">
+<h3>AR vs MA Models<a class="headerlink" href="#ar-vs-ma-models" title="Link to this heading">#</a></h3>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><strong>AR Models</strong></p></th>
+<th class="head text-left"><p><strong>MA Models</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Depend on past values of the series.</p></td>
+<td class="text-left"><p>Depend on past forecast errors.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Suitable when past values have a direct influence on future values and for slowly changing time series</p></td>
+<td class="text-left"><p>Useful when the series is better explained by shocks or random disturbances, i.e., time series with sudden changes</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>If the <strong>PACF</strong> drops sharply at a given lag <span class="math notranslate nohighlight">\(p\)</span> or the first lag autocorrelation is <strong>positive</strong>, then use an <strong>AR</strong> model with order <span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td class="text-left"><p>If the <strong>ACF</strong> drops sharply at a given lag <span class="math notranslate nohighlight">\(q\)</span> or the first lag autocorrelation is <strong>negative</strong>, then use an <strong>MA</strong> model with order <span class="math notranslate nohighlight">\(q\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Load the two time series <code class="docutils literal notranslate"><span class="pre">arma_ts1</span></code> and <code class="docutils literal notranslate"><span class="pre">arma_ts2</span></code> by running the code below.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the first time series</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://zenodo.org/records/10951538/files/arma_ts3.npz?download=1&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="n">arma_ts1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))[</span><span class="s1">&#39;signal&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arma_ts1</span><span class="p">))</span>
+
+<span class="c1"># Load the second time series</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://zenodo.org/records/10951538/files/arma_ts4.npz?download=1&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="n">arma_ts2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))[</span><span class="s1">&#39;signal&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arma_ts2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>479
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000
+</pre></div>
+</div>
+</div>
+</div>
+<p>For each time series</p>
+<ol class="arabic simple">
+<li><p>Split the time series in train and test.</p>
+<ul class="simple">
+<li><p>Use the last 30 values as test for the first time series</p></li>
+<li><p>Use the last 100 as test for the second time series.</p></li>
+</ul>
+</li>
+<li><p>Make the time series stationary.</p></li>
+<li><p>Determine the order <span class="math notranslate nohighlight">\(p\)</span> of an AR model.</p></li>
+<li><p>Compute the prediction of the test data with the AR(<span class="math notranslate nohighlight">\(p\)</span>) model.</p></li>
+<li><p>Determine the order <span class="math notranslate nohighlight">\(q\)</span> of a MA model.</p></li>
+<li><p>Compute the prediction of the test data with the MA(<span class="math notranslate nohighlight">\(q\)</span>) model.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../03/smoothing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Smoothing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../05/arma_arima_sarima.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ARMA, ARIMA, SARIMA</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlations-in-time-series">Correlations in time series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-function-acf">Autocorrelation Function (ACF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation-function-ccf">Cross-Correlation Function (CCF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications-of-correlation-functions">Practical Applications of Correlation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-considerations">Limitations and Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-partial-autocorrelation-function-pacf">The Partial Autocorrelation Function (PACF)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoregressive-ar-models">Autoregressive (AR) models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-model-identification">AR model identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ar-models">Forecasting with AR models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-model-example">AR model example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average-ma-models">Moving Average (MA) models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ma-model-identification">MA model identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ma-model-example">MA model example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-vs-ma-models">AR vs MA Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Filippo Maria Bianchi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
