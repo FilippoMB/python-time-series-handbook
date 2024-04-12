@@ -6,4 +6,14 @@ root: notebooks/00/intro
 chapters:
 - file: notebooks/01/introduction_to_time_series
 - file: notebooks/02/stationarity
+- file: notebooks/03/smoothing
+- file: notebooks/04/ar-ma
+- file: notebooks/05/arma_arima_sarima
+- file: notebooks/06/unit-root-hurst
+- file: notebooks/07/kalman-filter
+- file: notebooks/08/signal-transforms-filters
+- file: notebooks/09/prophet
+- file: notebooks/10/nn-reservoir-computing
+- file: notebooks/11/nonlinear-ts
+- file: notebooks/12/classification-clustering
 - file: notebooks/00/resources
