@@ -98,7 +98,7 @@ For more information and for reading the content of this repository, please refe
 
 > [notebook](https://github.com/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb)
 
-1.  **Non-linear time series analysis**
+11. **Non-linear time series analysis**
     - Dynamical systems and nonlinear dynamics
     - Bifurcation diagrams
     - Chaotic systems
