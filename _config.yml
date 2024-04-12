@@ -5,7 +5,7 @@ logo: logo.png
 
 # Force re-execution of notebooks on each build.
 execute:
-  execute_notebooks: auto # off, force, auto
+  execute_notebooks: 'cache' # off, force, auto
 
 # # Define the name of the latex output file for PDF builds
 # latex:
@@ -38,3 +38,6 @@ parse:
     - html_image
     - amsmath
     - dollarmath
+
+execute:
+  timeout: -1 # Disable timeouts for executing notebooks

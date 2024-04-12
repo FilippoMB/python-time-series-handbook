@@ -1,3 +1,5 @@
+# Time Series Analysis with Python
+
 <br>
 <div align="center">
 📚 <a href="https://filippomb.github.io/python-time-series-handbook">Read the book</a> 📚
