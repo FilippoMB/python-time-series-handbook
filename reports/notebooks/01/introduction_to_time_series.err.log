@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "C:\Users\fmbia\miniconda3\envs\sta2003_nb\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\fmbia\miniconda3\envs\sta2003_nb\lib\site-packages\nbclient\client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\fmbia\miniconda3\envs\sta2003_nb\lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "C:\Users\fmbia\miniconda3\envs\sta2003_nb\lib\asyncio\base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "C:\Users\fmbia\miniconda3\envs\sta2003_nb\lib\site-packages\nbclient\client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\fmbia\miniconda3\envs\sta2003_nb\lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\fmbia\miniconda3\envs\sta2003_nb\lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+ts_A = ss.api.datasets.get_rdataset("AirPassengers", "datasets").data["value"].values
+print(len(ts_A))
+ts_B = ss.api.datasets.get_rdataset("co2", "datasets").data["value"].values
+print(len(ts_B))
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mAttributeError[0m                            Traceback (most recent call last)
+Cell [1;32mIn[26], line 1[0m
+[1;32m----> 1[0m ts_A [38;5;241m=[39m [43mss[49m[38;5;241;43m.[39;49m[43mapi[49m[38;5;241m.[39mdatasets[38;5;241m.[39mget_rdataset([38;5;124m"[39m[38;5;124mAirPassengers[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mdatasets[39m[38;5;124m"[39m)[38;5;241m.[39mdata[[38;5;124m"[39m[38;5;124mvalue[39m[38;5;124m"[39m][38;5;241m.[39mvalues
+[0;32m      2[0m [38;5;28mprint[39m([38;5;28mlen[39m(ts_A))
+[0;32m      3[0m ts_B [38;5;241m=[39m ss[38;5;241m.[39mapi[38;5;241m.[39mdatasets[38;5;241m.[39mget_rdataset([38;5;124m"[39m[38;5;124mco2[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mdatasets[39m[38;5;124m"[39m)[38;5;241m.[39mdata[[38;5;124m"[39m[38;5;124mvalue[39m[38;5;124m"[39m][38;5;241m.[39mvalues
+
+[1;31mAttributeError[0m: module 'statsmodels' has no attribute 'api'
+
