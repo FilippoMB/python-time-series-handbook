@@ -1,14 +1,11 @@
 # Book settings
-# Learn more at https://jupyterbook.org/customize/config.html
-
-title: My sample book
-author: The Jupyter Book Community
+title: Time series analysis with Python
+author: Filippo Maria Bianchi
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
-# See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
+  execute_notebooks: auto # off, force, auto
 
 # # Define the name of the latex output file for PDF builds
 # latex:
@@ -21,8 +18,8 @@ execute:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
+  url: https://github.com/FilippoMB/python-time-series-handbook  # Online location of the book
+  # path_to_book: docs  # Optional path to the book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
@@ -31,15 +28,13 @@ html:
   use_issues_button: true
   use_repository_button: true
 
-
 # sphinx:
 #   config:
 #     html_static_path: ['media']
 
 parse:
   myst_enable_extensions:
-    # don't forget to list any other extensions you want enabled,
-    # including those that are enabled by default! See here: https://jupyterbook.org/en/stable/customize/config.html
+    # Defaults here: https://jupyterbook.org/en/stable/customize/config.html
     - html_image
     - amsmath
     - dollarmath
