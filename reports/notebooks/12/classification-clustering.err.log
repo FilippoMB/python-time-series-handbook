@@ -15,37 +15,23 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-tck = TCK(G=30, C=15)
-Ktr = tck.fit(Xtr).predict(mode='tr-tr')
-Kte = tck.predict(Xte=Xte, mode='tr-te').T
-print(f"Ktr shape: {Ktr.shape}\nKte shape: {Kte.shape}")
+plot_uwave()
 ------------------
 
 ----- stdout -----
-The dataset contains missing data
-
-Training the TCK using the following parameters:
-	C = 15, G = 30
-	Number of MTS for each GMM: 216 - 270 (80 - 100 percent)
-	Number of attributes sampled from [2, 11]
-	Length of time segments sampled from [6, 23]
+Failed to download UWAVE dataset.
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mAttributeError[0m                            Traceback (most recent call last)
-Cell [0;32mIn[51], line 2[0m
-[1;32m      1[0m tck [38;5;241m=[39m TCK(G[38;5;241m=[39m[38;5;241m30[39m, C[38;5;241m=[39m[38;5;241m15[39m)
-[0;32m----> 2[0m Ktr [38;5;241m=[39m [43mtck[49m[38;5;241;43m.[39;49m[43mfit[49m[43m([49m[43mXtr[49m[43m)[49m[38;5;241m.[39mpredict(mode[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtr-tr[39m[38;5;124m'[39m)
-[1;32m      3[0m Kte [38;5;241m=[39m tck[38;5;241m.[39mpredict(Xte[38;5;241m=[39mXte, mode[38;5;241m=[39m[38;5;124m'[39m[38;5;124mtr-te[39m[38;5;124m'[39m)[38;5;241m.[39mT
-[1;32m      4[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mKtr shape: [39m[38;5;132;01m{[39;00mKtr[38;5;241m.[39mshape[38;5;132;01m}[39;00m[38;5;130;01m\n[39;00m[38;5;124mKte shape: [39m[38;5;132;01m{[39;00mKte[38;5;241m.[39mshape[38;5;132;01m}[39;00m[38;5;124m"[39m)
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[25], line 1[0m
+[0;32m----> 1[0m [43mplot_uwave[49m[43m([49m[43m)[49m
 
-File [0;32m~/code/Time-Series-Cluster-Kernel/tck/TCK.py:87[0m, in [0;36mTCK.fit[0;34m(self, X, minN, minV, maxV, minT, maxT, I)[0m
-[1;32m     84[0m [38;5;28;01mwith[39;00m ProcessPoolExecutor() [38;5;28;01mas[39;00m executor:
-[1;32m     85[0m     [38;5;66;03m# Pass additional arguments required by process_gmm[39;00m
-[1;32m     86[0m     futures [38;5;241m=[39m [executor[38;5;241m.[39msubmit([38;5;28mself[39m[38;5;241m.[39mprocess_gmm, X, [38;5;28mself[39m[38;5;241m.[39mG, minN, minT, maxT, minV, maxV, I, missing, i) [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m([38;5;28mself[39m[38;5;241m.[39mG [38;5;241m*[39m ([38;5;28mself[39m[38;5;241m.[39mC [38;5;241m-[39m [38;5;241m1[39m))]
-[0;32m---> 87[0m     [38;5;28;01mfor[39;00m future [38;5;129;01min[39;00m [43mtqdm[49m[38;5;241;43m.[39;49m[43mtqdm[49m(futures, desc[38;5;241m=[39m[38;5;124m'[39m[38;5;124mFitting GMMs[39m[38;5;124m'[39m):
-[1;32m     88[0m         [38;5;28mself[39m[38;5;241m.[39mGMM[38;5;241m.[39mappend(future[38;5;241m.[39mresult())
-[1;32m     90[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m
+Cell [0;32mIn[24], line 2[0m, in [0;36mplot_uwave[0;34m()[0m
+[1;32m      1[0m [38;5;28;01mdef[39;00m [38;5;21mplot_uwave[39m():
+[0;32m----> 2[0m     X, Y, _, _ [38;5;241m=[39m DataLoader()[38;5;241m.[39mget_data([38;5;124m'[39m[38;5;124mUWAVE[39m[38;5;124m'[39m)
+[1;32m      3[0m     fig, axes [38;5;241m=[39m plt[38;5;241m.[39msubplots([38;5;241m3[39m, [38;5;241m8[39m, figsize[38;5;241m=[39m([38;5;241m15[39m, [38;5;241m5[39m), subplot_kw[38;5;241m=[39m{[38;5;124m'[39m[38;5;124mprojection[39m[38;5;124m'[39m: [38;5;124m'[39m[38;5;124m3d[39m[38;5;124m'[39m})
+[1;32m      4[0m     [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m([38;5;28mlen[39m(np[38;5;241m.[39munique(Y))):
 
-[0;31mAttributeError[0m: type object 'tqdm_notebook' has no attribute 'tqdm'
+[0;31mTypeError[0m: cannot unpack non-iterable NoneType object
 

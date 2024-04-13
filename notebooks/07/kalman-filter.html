@@ -440,7 +440,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="kalman-filter">
 <h1>Kalman filter<a class="headerlink" href="#kalman-filter" title="Link to this heading">#</a></h1>
-<img alt="../../_images/cover6.png" class="align-center" src="../../_images/cover6.png" />
+<img alt="../../_images/cover6.png" src="../../_images/cover6.png" />
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture will cover the following topics:</p>
@@ -605,15 +605,20 @@ x_{t-1} \\
 \dot{x}_{t-1}
 \end{bmatrix} = \mathbf{A} \boldsymbol{x}_{t-1}
 \end{split}\]</div>
-<img alt="../../_images/system.png" class="align-center" src="../../_images/system.png" />
+<img alt="../../_images/system.png" src="../../_images/system.png" />
 <ul class="simple">
-<li><p>The current position and speed will evolve according to this simple dynamical system $<span class="math notranslate nohighlight">\(\boldsymbol{x}_{t} = \mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w}_{t-1}\)</span><span class="math notranslate nohighlight">\( where \)</span>\boldsymbol{w}_t \sim \mathcal{N}(0,\mathbf{Q})$ represents perturbations in the underlying dynamical systems (e.g., holes on the road).</p></li>
+<li><p>The current position and speed will evolve according to this simple dynamical system</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{x}_{t} = \mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w}_{t-1}\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\boldsymbol{w}_t \sim \mathcal{N}(0,\mathbf{Q})\)</span> represents perturbations in the underlying dynamical systems (e.g., holes on the road).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{x}_{t} \in \mathbb{R}^{N}\)</span> represents the state of the system.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{Q} \in \mathbb{R}^{N \times N}\)</span> is the <em>process noise covariance</em>, where <span class="math notranslate nohighlight">\(N\)</span> represents the number of state variables (2 in our case, position and speed).</p></li>
 </ul>
 <p>Where the car will be after 1 minute?</p>
 <p>If we rely only on our simple sistem <span class="math notranslate nohighlight">\(\boldsymbol{x}_{t+1} = \mathbf{A} \boldsymbol{x}_{t}\)</span> without even consider the noise, the car will keep moving at <span class="math notranslate nohighlight">\(60 km/h\)</span> and will be at <span class="math notranslate nohighlight">\(1 km\)</span> distance.</p>
-<img alt="../../_images/model_pred.png" class="align-center" src="../../_images/model_pred.png" />
+<img alt="../../_images/model_pred.png" src="../../_images/model_pred.png" />
 <p>Let say our car has a GPS.</p>
 <ul class="simple">
 <li><p>As all instruments, our GPS will be affected by errors and gives us measurements with uncertainties in it.</p></li>
@@ -622,7 +627,12 @@ x_{t-1} \\
 </ul>
 <img alt="../../_images/gps.png" class="align-center" src="../../_images/gps.png" />
 <ul class="simple">
-<li><p>Let the measure of our GPS be $<span class="math notranslate nohighlight">\(\boldsymbol{z}_t = \mathbf{H} \boldsymbol{x}_t + \boldsymbol{v}_t\)</span><span class="math notranslate nohighlight">\( where \)</span>\boldsymbol{v}_t \sim \mathcal{N}(0,\mathbf{R})$ represents the uncertainty in the measures.</p></li>
+<li><p>Let the measure of our GPS be</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{z}_t = \mathbf{H} \boldsymbol{x}_t + \boldsymbol{v}_t\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\boldsymbol{v}_t \sim \mathcal{N}(0,\mathbf{R})\)</span> represents the uncertainty in the measures.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{z}_{t} \in \mathbb{R}^{M}\)</span> is the measurements vector.</p></li>
 <li><p>In our case, since the GPS measures only the position, we have <span class="math notranslate nohighlight">\(\mathbf{H} = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R} = \begin{bmatrix} r_{xx} \end{bmatrix}\)</span>.</p></li>
 <li><p>In general, <span class="math notranslate nohighlight">\(\mathbf{H} \in \mathbb{R}^{M,N}\)</span> is a matrx that maps the <span class="math notranslate nohighlight">\(N\)</span> state variables into the <span class="math notranslate nohighlight">\(M\)</span> measurements and <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{M,M}\)</span> is the measurement noise covariance.</p></li>
@@ -632,7 +642,7 @@ x_{t-1} \\
 <li><p>a linear stochastic difference equation, representing our imprecise knowledge of a discrete-time controlled process;</p></li>
 <li><p>a source of measurements, that are noisy.</p></li>
 </ul>
-<img alt="../../_images/inputs.png" class="align-center" src="../../_images/inputs.png" />
+<img alt="../../_images/inputs.png" src="../../_images/inputs.png" />
 <p>How do we combine them to get the best possible estimate of our system variables?</p>
 </section>
 <section id="the-kf-algorithm">
@@ -678,21 +688,25 @@ x_{t-1} \\
 <li><p>The dynamics equations are responsible for projecting forward (in time) the current state and error covariance estimates to obtain the <em>a priori</em> estimate for the next time step.</p></li>
 <li><p>Such time update equations can also be thought of as <em>predictor equations</em>.</p></li>
 </ul>
-<p>State estimate update: $<span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t}^{-} = \mathbf{A} \hat{\boldsymbol{x}}_{t-1}\)</span>$</p>
-<img alt="../../_images/model_pred.png" class="align-center" src="../../_images/model_pred.png" />
-<p>Covariance estimate update: $<span class="math notranslate nohighlight">\(\begin{align} \mathbf{P}_{t}^{-} &amp;= \mathbb{E}[e^{-}_t e^{-T}_t] \\
+<p>State estimate update:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\boldsymbol{x}}_{t}^{-} = \mathbf{A} \hat{\boldsymbol{x}}_{t-1}\]</div>
+<img alt="../../_images/model_pred.png" src="../../_images/model_pred.png" />
+<p>Covariance estimate update:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} \mathbf{P}_{t}^{-} &amp;= \mathbb{E}[e^{-}_t e^{-T}_t] \\
   &amp;= \mathbb{E}[(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})^T] \\
   &amp;= \mathbb{E}[(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})^T] \\
   &amp;= \mathbb{E}[(\mathbf{A}e_{t-1})(e_{t-1}^T \mathbf{A}^T)] + \mathbb{E}[\boldsymbol{w}\boldsymbol{w}^T]\\
   &amp;= \mathbf{A}\mathbb{E}[e_{t-1}e_{t-1}^T ]\mathbf{A}^T + \mathbf{Q} \\
   &amp;= \mathbf{A}\mathbf{P}_{t-1}\mathbf{A}^T + \mathbf{Q}
-  \end{align}\)</span>$</p>
+  \end{align}\end{split}\]</div>
 <p>In summary, the Predict step consists of two equations to update:</p>
 <ul class="simple">
 <li><p>State estimate.</p></li>
 <li><p>Covariance estimate.</p></li>
 </ul>
-<img alt="../../_images/update.png" class="align-center" src="../../_images/update.png" />
+<img alt="../../_images/update.png" src="../../_images/update.png" />
 </section>
 <section id="correct">
 <h4>Correct<a class="headerlink" href="#correct" title="Link to this heading">#</a></h4>
@@ -709,7 +723,7 @@ x_{t-1} \\
 <li><p><span class="math notranslate nohighlight">\(\Delta_t\)</span> reflects the difference between our imprecise prediction (<span class="math notranslate nohighlight">\(\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t}\)</span>) and the actual noisy measurement (<span class="math notranslate nohighlight">\(\boldsymbol{z}_{t}\)</span>).</p></li>
 <li><p>A residual of zero means that the two are in complete agreement.</p></li>
 </ul>
-<img alt="../../_images/innovation.png" class="align-center" src="../../_images/innovation.png" />
+<img alt="../../_images/innovation.png" src="../../_images/innovation.png" />
 <p>The matrix <span class="math notranslate nohighlight">\(\mathbf{K} \in \mathbb{R}^{N \times M}\)</span> is chosen to be the <strong>gain</strong> that minimizes the posterior error covariance.</p>
 <p>Derivation (sketch)</p>
 <ol class="arabic simple">
@@ -737,16 +751,18 @@ x_{t-1} \\
 <p>The update is possible thanks to the term <span class="math notranslate nohighlight">\(p^{-}_{x \dot x}\)</span> in <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> that relates the position (and its measurement) to the velocity.</p>
 <p>This showcases one of the main strengths of KF: it can handle <em>partial observations</em>.</p>
 <p>Let’s consider the two extreme cases for the values of <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span></p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>The measurement error covariance <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> approaches zero, i.e., there is no noise in the measurements.</p>
 <ul class="simple">
 <li><p>The measurements are completely reliable.</p></li>
 <li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{R} \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = \mathbf{H}^{-1}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> weights the residuals more heavily: <span class="math notranslate nohighlight">\(\begin{align} \hat{\boldsymbol{x}}_{t} &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\Delta_t = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}(\boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t})\\ &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} - \mathbf{H}^{-1}\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} -  \hat{\boldsymbol{x}}^{-}_{t}\\ &amp;= \mathbf{H}^{-1}\boldsymbol{z}_{t} \end{align}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> weights the residuals more heavily:</p></li>
 </ul>
+<div class="amsmath math notranslate nohighlight" id="equation-841963cf-58fe-4bf9-a8d3-7d2b31b60e32">
+<span class="eqno">()<a class="headerlink" href="#equation-841963cf-58fe-4bf9-a8d3-7d2b31b60e32" title="Permalink to this equation">#</a></span>\[\begin{align} \hat{\boldsymbol{x}}_{t} &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\Delta_t = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}(\boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t})\\ &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} - \mathbf{H}^{-1}\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} -  \hat{\boldsymbol{x}}^{-}_{t}\\ &amp;= \mathbf{H}^{-1}\boldsymbol{z}_{t} \end{align}\]</div>
 </li>
 </ol>
-<img alt="../../_images/extreme1.png" class="align-center" src="../../_images/extreme1.png" />
+<img alt="../../_images/extreme1.png" src="../../_images/extreme1.png" />
 <ol class="arabic simple" start="2">
 <li><p>The covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> approaches zero.</p>
 <ul class="simple">
@@ -756,10 +772,11 @@ x_{t-1} \\
 </ul>
 </li>
 </ol>
-<img alt="../../_images/extreme2.png" class="align-center" src="../../_images/extreme2.png" />
+<img alt="../../_images/extreme2.png" src="../../_images/extreme2.png" />
 <p>The last thing that remains to update is the posterior covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}_t\)</span> to be used in the next predict step.</p>
-<p>The formula is
-$<span class="math notranslate nohighlight">\(\mathbf{P}_t = (\mathbf{I} - \mathbf{K}_t \mathbf{H})\mathbf{P}^{-}_t\)</span>$</p>
+<p>The formula is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{P}_t = (\mathbf{I} - \mathbf{K}_t \mathbf{H})\mathbf{P}^{-}_t\]</div>
 <p>Let’s look again at the two extreme cases:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t = \mathbf{H}^{-1} \rightarrow \mathbf{P}_t = 0\)</span></p>
@@ -777,10 +794,10 @@ $<span class="math notranslate nohighlight">\(\mathbf{P}_t = (\mathbf{I} - \math
 </ul>
 </li>
 </ul>
-<p>Summary of Correct</p>
-<img alt="../../_images/correct.png" class="align-center" src="../../_images/correct.png" />
-<p>The whole process is summarized below</p>
-<img alt="../../_images/kalman.png" class="align-center" src="../../_images/kalman.png" />
+<p>Summary of Correct:</p>
+<img alt="../../_images/correct.png" src="../../_images/correct.png" />
+<p>The whole process is summarized below.</p>
+<img alt="../../_images/kalman.png" src="../../_images/kalman.png" />
 </section>
 </section>
 <section id="parameters-estimation">
@@ -849,7 +866,12 @@ $<span class="math notranslate nohighlight">\(\mathbf{P}_t = (\mathbf{I} - \math
 <li><p>Since we are going to generate the noisy measurements by hand and we will know the true position and we can see how well our algorithm performs.</p></li>
 </ul>
 <ul class="simple">
-<li><p>We assume the measurements to follow this distribution $<span class="math notranslate nohighlight">\(z_t = \mu + v_t \;\; \text{with}\;\; v_t \sim \mathcal{N}(0, R)\)</span><span class="math notranslate nohighlight">\( where \)</span>\mu<span class="math notranslate nohighlight">\( is the actual position and \)</span>R$ is the actual measurement noise covariance.</p></li>
+<li><p>We assume the measurements to follow this distribution</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[z_t = \mu + v_t \;\; \text{with}\;\; v_t \sim \mathcal{N}(0, R)\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the actual position and <span class="math notranslate nohighlight">\(R\)</span> is the actual measurement noise covariance.</p></li>
 <li><p>Note that both <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are unknown to the filter.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -878,8 +900,10 @@ $<span class="math notranslate nohighlight">\(\mathbf{P}_t = (\mathbf{I} - \math
 <li><p>This is usually feasible as we can estimate <span class="math notranslate nohighlight">\(R\)</span> from the available measurements.</p></li>
 <li><p>In addition, we need to estimate the process noise covariance <span class="math notranslate nohighlight">\(Q\)</span>, which is usually harder to guess.</p></li>
 <li><p>Remember that <span class="math notranslate nohighlight">\(Q\)</span> represents the noise of the model used to describe the actual position.</p></li>
-<li><p>In our case $<span class="math notranslate nohighlight">\(x_t = x_0 + w_t \;\; \text{with}\;\; w_t \sim \mathcal{N}(0,Q)\)</span>$</p></li>
+<li><p>In our case</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[x_t = x_0 + w_t \;\; \text{with}\;\; w_t \sim \mathcal{N}(0,Q)\]</div>
 <ul class="simple">
 <li><p>In summary, we have two noise parameters: one for the model (<span class="math notranslate nohighlight">\(Q\)</span>) and one for the measurement (<span class="math notranslate nohighlight">\(R\)</span>).</p></li>
 <li><p>The values of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are inputs for the algorithm.</p></li>
@@ -992,11 +1016,20 @@ $<span class="math notranslate nohighlight">\(\mathbf{P}_t = (\mathbf{I} - \math
 <h3>Example 2: Dynamic one-dimensional data<a class="headerlink" href="#example-2-dynamic-one-dimensional-data" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Let’s now consider the system we saw earlier, a car that moves approximately at a constant velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p></li>
-<li><p>The position changes over time according to the following formula $<span class="math notranslate nohighlight">\(x_{t} = x_{t-1} + \delta t \cdot v_0 + w_t\)</span><span class="math notranslate nohighlight">\( where \)</span>w_t \sim \mathcal{N}(0, Q)$ represents the model noise.</p></li>
+<li><p>The position changes over time according to the following formula</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[x_{t} = x_{t-1} + \delta t \cdot v_0 + w_t\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(w_t \sim \mathcal{N}(0, Q)\)</span> represents the model noise.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Now, assume we have measurements only for the position, but not the velocity.</p></li>
-<li><p>Let the measurements be generated according to the following distribution $<span class="math notranslate nohighlight">\(z_t = z_{t-1} + \delta t \cdot v_t\)</span>$</p></li>
+<li><p>Let the measurements be generated according to the following distribution</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[z_t = z_{t-1} + \delta t \cdot v_t\]</div>
+<ul class="simple">
 <li><p>In this case, <span class="math notranslate nohighlight">\(v_t\)</span> represent a noisy measurement for the velocity, that is not observed directly.</p></li>
 <li><p>We let <span class="math notranslate nohighlight">\(v_t \sim \mathcal{N}(v_0, R)\)</span>, where <span class="math notranslate nohighlight">\(R\)</span> represents the variance of the measurements error.</p></li>
 </ul>

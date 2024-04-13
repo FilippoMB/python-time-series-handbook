@@ -461,7 +461,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="signal-transforms-and-filters">
 <h1>Signal transforms and filters<a class="headerlink" href="#signal-transforms-and-filters" title="Link to this heading">#</a></h1>
-<img alt="../../_images/cover7.png" class="align-center" src="../../_images/cover7.png" />
+<img alt="../../_images/cover7.png" src="../../_images/cover7.png" />
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -549,7 +549,12 @@ document.write(`
 </div>
 <ul class="simple">
 <li><p>A sine wave is mathematical curve that describes smooth periodic oscillations.</p></li>
-<li><p>It is continuous and is described by: $<span class="math notranslate nohighlight">\(y(t) = A \sin (2 \pi f t + \psi) = A \sin (\omega t + \psi)\)</span><span class="math notranslate nohighlight">\( where \)</span>A<span class="math notranslate nohighlight">\( is the amplitude, \)</span>f<span class="math notranslate nohighlight">\( is the frequency, and \)</span>\psi$ is the phase in radians.</p></li>
+<li><p>It is continuous and is described by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[y(t) = A \sin (2 \pi f t + \psi) = A \sin (\omega t + \psi)\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(A\)</span> is the amplitude, <span class="math notranslate nohighlight">\(f\)</span> is the frequency, and <span class="math notranslate nohighlight">\(\psi\)</span> is the phase in radians.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -572,12 +577,13 @@ document.write(`
 <li><p>The sines represent the constituent frequencies of the original signal.</p></li>
 <li><p>As such, FT gives the frequency domain representation of the original signal.</p></li>
 </ul>
-<img alt="../../_images/ft.png" class="align-center" src="../../_images/ft.png" />
+<img alt="../../_images/ft.png" src="../../_images/ft.png" />
 <p>The Fourier Transform mathematical formulation is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d6ec6102-a7de-40f0-92af-1eddf16912e1">
-<span class="eqno">()<a class="headerlink" href="#equation-d6ec6102-a7de-40f0-92af-1eddf16912e1" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
-<p>where:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6ec0a20f-6b4b-412d-80cc-736178da18cd">
+<span class="eqno">()<a class="headerlink" href="#equation-6ec0a20f-6b4b-412d-80cc-736178da18cd" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
 <ul class="simple">
+<li><p>where:</p>
+<ul>
 <li><p><span class="math notranslate nohighlight">\(t\)</span> is time,</p></li>
 <li><p><span class="math notranslate nohighlight">\(f(t)\)</span> is a continuous time signal,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{F}(\omega)\)</span> is the Fourier Transform of <span class="math notranslate nohighlight">\(f(t)\)</span>,</p></li>
@@ -585,6 +591,8 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span> is the angular frequency,</p></li>
 <li><p><span class="math notranslate nohighlight">\(e\)</span> is the base of the natural logarithm,</p></li>
 <li><p><span class="math notranslate nohighlight">\(i\)</span> is the imaginary unit, satisfying <span class="math notranslate nohighlight">\(i^2 = -1\)</span>.</p></li>
+</ul>
+</li>
 </ul>
 <p><strong>Explanation</strong></p>
 <ul class="simple">
@@ -607,7 +615,7 @@ document.write(`
 <li><p>The intuitive interpretation of Eq.1 is that the effect of multiplying <span class="math notranslate nohighlight">\(f(t)\)</span> by  <span class="math notranslate nohighlight">\(e^{-i\omega t}\)</span> is to subtract <span class="math notranslate nohighlight">\(\omega\)</span> from every frequency component of <span class="math notranslate nohighlight">\(f(t)\)</span>.</p></li>
 <li><p>Only the component that was at frequency <span class="math notranslate nohighlight">\(\omega\)</span> can produce a non-zero value of the infinite integral, because all the other shifted components are oscillatory and integrate to zero.</p></li>
 </ul>
-<img alt="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" /><div style="text-align: center; font-size: 80%">Image: <a href="https://commons.wikimedia.org/wiki/File:Fourier_series_square_wave_circles_animation.svg#filelinks">Wikimedia</a></div><section id="inverse-fourier-transform">
+<img alt="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" /><div style="text-align: center; font-size: 80%">Image: <a href="https://commons.wikimedia.org/wiki/File:Fourier_series_square_wave_circles_animation.svg#filelinks">Wikimedia</a></div><section id="inverse-fourier-transform">
 <h3>Inverse Fourier Transform<a class="headerlink" href="#inverse-fourier-transform" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ f(t) = \int_{-\infty}^{\infty} \mathcal{F}(\omega) e^{i \omega t} d \omega \]</div>
@@ -650,11 +658,12 @@ document.write(`
 <section id="basic-idea">
 <h3>Basic Idea<a class="headerlink" href="#basic-idea" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The DFT for a sequence <span class="math notranslate nohighlight">\(x[n]\)</span> of length <span class="math notranslate nohighlight">\(N\)</span> is defined as follows:
-$<span class="math notranslate nohighlight">\(
-X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-\frac{i 2 \pi}{N} k n}
-\)</span><span class="math notranslate nohighlight">\(
-for \)</span>k = 0, 1, \ldots, N-1<span class="math notranslate nohighlight">\(, where \)</span>X[k]$ are the frequency domain samples.</p></li>
+<li><p>The DFT for a sequence <span class="math notranslate nohighlight">\(x[n]\)</span> of length <span class="math notranslate nohighlight">\(N\)</span> is defined as follows:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-\frac{i 2 \pi}{N} k n}\]</div>
+<ul class="simple">
+<li><p>for <span class="math notranslate nohighlight">\(k = 0, 1, \ldots, N-1\)</span>, where <span class="math notranslate nohighlight">\(X[k]\)</span> are the frequency domain samples.</p></li>
 <li><p>The FFT exploits the symmetry and periodicity properties of the complex exponential function.</p></li>
 <li><p>It applies a divide-and-conquer strategy to decompose the DFT of a sequence into smaller DFTs, thereby reducing the overall computational effort.</p></li>
 </ul>
@@ -663,7 +672,16 @@ for \)</span>k = 0, 1, \ldots, N-1<span class="math notranslate nohighlight">\(,
 <h3>Cooley-Tukey Algorithm<a class="headerlink" href="#cooley-tukey-algorithm" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The most well-known FFT algorithm is the Cooley-Tukey algorithm.</p></li>
-<li><p>It recursively divides the DFT of a sequence into two, by separating the sequence into even and odd elements: $<span class="math notranslate nohighlight">\(X[k] = X_{\text{even}}[k] + e^{-\frac{i 2 \pi}{N} k} X_{\text{odd}}[k] \)</span><span class="math notranslate nohighlight">\( and \)</span><span class="math notranslate nohighlight">\(X[k + \frac{N}{2}] = X_{\text{even}}[k] - e^{-\frac{i 2 \pi}{N} k} X_{\text{odd}}[k]\)</span>$</p></li>
+<li><p>It recursively divides the DFT of a sequence into two, by separating the sequence into even and odd elements:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X[k] = X_{\text{even}}[k] + e^{-\frac{i 2 \pi}{N} k} X_{\text{odd}}[k] \]</div>
+<ul class="simple">
+<li><p>and</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X[k + \frac{N}{2}] = X_{\text{even}}[k] - e^{-\frac{i 2 \pi}{N} k} X_{\text{odd}}[k]\]</div>
+<ul class="simple">
 <li><p>This process is repeated on the subsequences until the problem is reduced to the DFT of sequences of length 1, which are trivial.</p></li>
 <li><p>The algorithm recombines these results to produce the final DFT.</p></li>
 </ul>
@@ -1005,7 +1023,7 @@ for \)</span>k = 0, 1, \ldots, N-1<span class="math notranslate nohighlight">\(,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3517adb1f8a162e1bb25c284e26c1fa8c4d70e4fc519ec47d10bc3b23d99346e.png" src="../../_images/3517adb1f8a162e1bb25c284e26c1fa8c4d70e4fc519ec47d10bc3b23d99346e.png" />
+<img alt="../../_images/f7114907e301aa69eac27b5f4b3d65f081aaddfe65e01a57c3f39fd51b8bcb17.png" src="../../_images/f7114907e301aa69eac27b5f4b3d65f081aaddfe65e01a57c3f39fd51b8bcb17.png" />
 </div>
 </div>
 <p>We can observe that in the Frequency Domain:</p>
@@ -1080,7 +1098,11 @@ for \)</span>k = 0, 1, \ldots, N-1<span class="math notranslate nohighlight">\(,
 <h3>Linearity<a class="headerlink" href="#linearity" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The FT is linear, meaning that the transform of a sum of signals is the sum of their transforms.</p></li>
-<li><p>Mathematically, for any two signals <span class="math notranslate nohighlight">\(f(t)\)</span> and <span class="math notranslate nohighlight">\(g(t)\)</span>, and any constants <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, this property is expressed as: $<span class="math notranslate nohighlight">\(\mathcal{F}\{a f(t) + b g(t)\} = a \mathcal{F}\{f(t)\} + b \mathcal{F}\{g(t)\}\)</span>$</p></li>
+<li><p>Mathematically, for any two signals <span class="math notranslate nohighlight">\(f(t)\)</span> and <span class="math notranslate nohighlight">\(g(t)\)</span>, and any constants <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, this property is expressed as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\{a f(t) + b g(t)\} = a \mathcal{F}\{f(t)\} + b \mathcal{F}\{g(t)\}\]</div>
+<ul class="simple">
 <li><p>This property allows for the analysis of complex signals by breaking them down into simpler components.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1158,8 +1180,11 @@ for \)</span>k = 0, 1, \ldots, N-1<span class="math notranslate nohighlight">\(,
 <h3>Time Shift<a class="headerlink" href="#time-shift" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Shifting a signal in time results in a phase shift in its Fourier Transform.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(f(t - t_0)\)</span> is a time-shifted version of <span class="math notranslate nohighlight">\(f(t)\)</span>, its Fourier Transform is:
-$<span class="math notranslate nohighlight">\(\mathcal{F}\{f(t - t_0)\} = e^{-i \omega t_0} \mathcal{F}\{f(t)\}\)</span>$</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f(t - t_0)\)</span> is a time-shifted version of <span class="math notranslate nohighlight">\(f(t)\)</span>, its Fourier Transform is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\{f(t - t_0)\} = e^{-i \omega t_0} \mathcal{F}\{f(t)\}\]</div>
+<ul class="simple">
 <li><p>This property shows that time delays correspond to phase shifts in the frequency domain, without affecting the amplitude of the frequency components.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1237,8 +1262,11 @@ $<span class="math notranslate nohighlight">\(\mathcal{F}\{f(t - t_0)\} = e^{-i 
 <h3>Frequency Shift<a class="headerlink" href="#frequency-shift" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Modulating a signal by a sinusoid results in a shift in the frequency domain.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(g(t) = e^{i 2 \pi f_0 t} f(t)\)</span>, then the Fourier Transform of <span class="math notranslate nohighlight">\(g(t)\)</span> is:
-$<span class="math notranslate nohighlight">\( \mathcal{F}\{g(t)\} = \mathcal{F}(\omega - 2\pi f_0)\)</span>$</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(g(t) = e^{i 2 \pi f_0 t} f(t)\)</span>, then the Fourier Transform of <span class="math notranslate nohighlight">\(g(t)\)</span> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \mathcal{F}\{g(t)\} = \mathcal{F}(\omega - 2\pi f_0)\]</div>
+<ul class="simple">
 <li><p>This property is used in modulation schemes in communications.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1306,8 +1334,11 @@ $<span class="math notranslate nohighlight">\( \mathcal{F}\{g(t)\} = \mathcal{F}
 <h3>Scaling<a class="headerlink" href="#scaling" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Let <span class="math notranslate nohighlight">\(f(at)\)</span> be a scaled version of <span class="math notranslate nohighlight">\(f(t)\)</span>, where <span class="math notranslate nohighlight">\(a\)</span> is a real non-zero scaling factor.</p></li>
-<li><p>Its Fourier Transform is scaled in the frequency domain by <span class="math notranslate nohighlight">\(1/|a|\)</span> and is given by:
-$<span class="math notranslate nohighlight">\(\mathcal{F}\{f(at)\} = \frac{1}{|a|}F\left(\frac{\omega}{a}\right)\)</span>$</p></li>
+<li><p>Its Fourier Transform is scaled in the frequency domain by <span class="math notranslate nohighlight">\(1/|a|\)</span> and is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\{f(at)\} = \frac{1}{|a|}F\left(\frac{\omega}{a}\right)\]</div>
+<ul class="simple">
 <li><p>This property indicates that compressing a signal in time domain expands its spectrum in the frequency domain, and vice versa.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1375,10 +1406,12 @@ $<span class="math notranslate nohighlight">\(\mathcal{F}\{f(at)\} = \frac{1}{|a
 <h3>Convolution<a class="headerlink" href="#convolution" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The Fourier Transform converts convolution in time domain into multiplication in frequency domain.</p></li>
-<li><p>The convolution is defined as $<span class="math notranslate nohighlight">\(f(t) * g(t) = \int \limits_{-\infty}^{\infty} f(\tau)g(t -\tau) d\tau\)</span>$</p></li>
+<li><p>The convolution is defined as</p></li>
 </ul>
-<img alt="https://upload.wikimedia.org/wikipedia/commons/archive/6/6e/20100707184430%21Convolution_of_box_signal_with_itself.gif" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/archive/6/6e/20100707184430%21Convolution_of_box_signal_with_itself.gif" />
-<img alt="https://upload.wikimedia.org/wikipedia/commons/archive/6/67/20100707184106%21Convolution_of_spiky_function_with_box.gif" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/archive/6/67/20100707184106%21Convolution_of_spiky_function_with_box.gif" />
+<div class="math notranslate nohighlight">
+\[f(t) * g(t) = \int \limits_{-\infty}^{\infty} f(\tau)g(t -\tau) d\tau\]</div>
+<img alt="https://upload.wikimedia.org/wikipedia/commons/archive/6/6e/20100707184430%21Convolution_of_box_signal_with_itself.gif" src="https://upload.wikimedia.org/wikipedia/commons/archive/6/6e/20100707184430%21Convolution_of_box_signal_with_itself.gif" />
+<img alt="https://upload.wikimedia.org/wikipedia/commons/archive/6/67/20100707184106%21Convolution_of_spiky_function_with_box.gif" src="https://upload.wikimedia.org/wikipedia/commons/archive/6/67/20100707184106%21Convolution_of_spiky_function_with_box.gif" />
 <div style="text-align: center; font-size: 80%;">Image: <a href="https://en.wikipedia.org/wiki/Convolution">Wikipedia</a></div><ul class="simple">
 <li><p>If two functions <span class="math notranslate nohighlight">\(f(t)\)</span> and <span class="math notranslate nohighlight">\(g(t)\)</span> are convolved, their Fourier Transforms are multiplied:</p></li>
 </ul>
@@ -1447,11 +1480,15 @@ $<span class="math notranslate nohighlight">\(\mathcal{F}\{f(at)\} = \frac{1}{|a
 <section id="differentiation">
 <h3>Differentiation<a class="headerlink" href="#differentiation" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The FT of the derivative of a function is proportional to the frequency times the FT of the function itself:
-$<span class="math notranslate nohighlight">\( \mathcal{F}\{f'(t)\} = i\omega \mathcal{F}\{f(t)\}\)</span>$</p></li>
-<li><p>Conversely, the inverse FT of <span class="math notranslate nohighlight">\(\frac{d^n F(\omega)}{d\omega^n}\)</span> is given by the multiplication of <span class="math notranslate nohighlight">\(f(t)\)</span> by <span class="math notranslate nohighlight">\((it)^n\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the order of differentiation:
-$<span class="math notranslate nohighlight">\(\mathcal{F}^{-1}\left\{\frac{d^n F(\omega)}{d\omega^n}\right\} = (it)^n f(t)\)</span>$</p></li>
+<li><p>The FT of the derivative of a function is proportional to the frequency times the FT of the function itself:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[ \mathcal{F}\{f'(t)\} = i\omega \mathcal{F}\{f(t)\}\]</div>
+<ul class="simple">
+<li><p>Conversely, the inverse FT of <span class="math notranslate nohighlight">\(\frac{d^n F(\omega)}{d\omega^n}\)</span> is given by the multiplication of <span class="math notranslate nohighlight">\(f(t)\)</span> by <span class="math notranslate nohighlight">\((it)^n\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the order of differentiation:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}^{-1}\left\{\frac{d^n F(\omega)}{d\omega^n}\right\} = (it)^n f(t)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Fs</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Sampling frequency in Hz</span>
@@ -1500,9 +1537,12 @@ $<span class="math notranslate nohighlight">\(\mathcal{F}^{-1}\left\{\frac{d^n F
 <h3>Integration<a class="headerlink" href="#integration" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The integration of a signal in the time domain corresponds to a specific transformation in the frequency domain.</p></li>
-<li><p>Specifically, the Fourier Transform of the integral of <span class="math notranslate nohighlight">\(f(t)\)</span> is given by:
-$<span class="math notranslate nohighlight">\(\mathcal{F}\left\{\int_{-\infty}^t f(\tau)d\tau\right\} = \frac{F(\omega)}{i\omega} + \pi F(0)\delta(\omega)\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\delta(\omega)$ is the Dirac delta function.</p></li>
+<li><p>Specifically, the Fourier Transform of the integral of <span class="math notranslate nohighlight">\(f(t)\)</span> is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\left\{\int_{-\infty}^t f(\tau)d\tau\right\} = \frac{F(\omega)}{i\omega} + \pi F(0)\delta(\omega)\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\delta(\omega)\)</span> is the Dirac delta function.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1579,11 +1619,17 @@ where \)</span>\delta(\omega)$ is the Dirac delta function.</p></li>
 <h3>Parseval’s Theorem<a class="headerlink" href="#parseval-s-theorem" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>This theorem relates the total energy of a signal in the time domain to the total energy in the frequency domain, indicating that energy is preserved in the Fourier Transform.</p></li>
-<li><p>Mathematically:
-$<span class="math notranslate nohighlight">\( \int_{-\infty}^{\infty} |f(t)|^2 dt = \int_{-\infty}^{\infty} |F(\omega)|^2 d\omega \)</span>$</p></li>
-<li><p>For discrete signals and their Discrete Fourier Transforms (DFTs), this can be approximated as:
-$<span class="math notranslate nohighlight">\(\sum_{n=0}^{N-1} |x[n]|^2 = \frac{1}{N} \sum_{k=0}^{N-1} |X[k]|^2\)</span><span class="math notranslate nohighlight">\(
-where \)</span>x[n]<span class="math notranslate nohighlight">\( is the discrete time-domain signal, \)</span>X[k]<span class="math notranslate nohighlight">\( is its DFT, and \)</span>N$ is the number of points in the signal and its DFT.</p></li>
+<li><p>Mathematically:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \int_{-\infty}^{\infty} |f(t)|^2 dt = \int_{-\infty}^{\infty} |F(\omega)|^2 d\omega \]</div>
+<ul class="simple">
+<li><p>For discrete signals and their Discrete Fourier Transforms (DFTs), this can be approximated as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\sum_{n=0}^{N-1} |x[n]|^2 = \frac{1}{N} \sum_{k=0}^{N-1} |X[k]|^2\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(x[n]\)</span> is the discrete time-domain signal, <span class="math notranslate nohighlight">\(X[k]\)</span> is its DFT, and <span class="math notranslate nohighlight">\(N\)</span> is the number of points in the signal and its DFT.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1643,12 +1689,23 @@ Energy in the frequency domain: 312.5
 <h3>Transfer Function<a class="headerlink" href="#transfer-function" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The transfer function describes how the filter modifies the amplitude and phase of components of the input signal at different frequencies.</p></li>
-<li><p>For analog filters (continuous time) is defined as the ratio of the output signal and the input signal of the filter in the Laplace domain: $<span class="math notranslate nohighlight">\(H(s) = \frac{Y(s)}{X(s)}\)</span>$</p></li>
-<li><p>For digital filters (discrete time) the ratio is defined in the Z-domain: $<span class="math notranslate nohighlight">\(H(z) = \frac{Y(z)}{X(z)}\)</span>$</p></li>
+<li><p>For analog filters (continuous time) is defined as the ratio of the output signal and the input signal of the filter in the Laplace domain:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[H(s) = \frac{Y(s)}{X(s)}\]</div>
+<ul class="simple">
+<li><p>For digital filters (discrete time) the ratio is defined in the Z-domain:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H(z) = \frac{Y(z)}{X(z)}\]</div>
 <p><strong>Laplace Transform</strong></p>
 <ul class="simple">
-<li><p>The Laplace transform of a function <span class="math notranslate nohighlight">\(f(t)\)</span>, defined for <span class="math notranslate nohighlight">\(t \geq 0\)</span>, is given by $<span class="math notranslate nohighlight">\(F(s) = \int_{0}^{\infty} e^{-st}f(t) \,dt\)</span><span class="math notranslate nohighlight">\( where \)</span>s = \sigma + i\omega$ is a complex number.</p></li>
+<li><p>The Laplace transform of a function <span class="math notranslate nohighlight">\(f(t)\)</span>, defined for <span class="math notranslate nohighlight">\(t \geq 0\)</span>, is given by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[F(s) = \int_{0}^{\infty} e^{-st}f(t) \,dt\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(s = \sigma + i\omega\)</span> is a complex number.</p></li>
 <li><p>The Fourier transform <span class="math notranslate nohighlight">\(F(\omega) = \int_{-\infty}^{\infty} e^{-i\omega t}f(t) \,dt\)</span> is a special case of the Laplace transform evaluated on the imaginary axis (<span class="math notranslate nohighlight">\(s = j\omega\)</span>), where <span class="math notranslate nohighlight">\(\sigma = 0\)</span>.</p></li>
 <li><p>The convergence of the Fourier transform is a stricter requirement, meaning that not all functions that have a Laplace transform will have a Fourier transform.</p></li>
 <li><p>While the Fourier transform is useful to analyze only the frequency content, Laplace transform is useful to analyze the overall system behavior, including stability and transient response.</p></li>
@@ -1656,7 +1713,12 @@ Energy in the frequency domain: 312.5
 <p><strong>Z-transform</strong></p>
 <ul class="simple">
 <li><p>The relationship between the z-transform and the Discrete Fourier Transform (DFT) is similar to the relationship between the Laplace and Fourier transforms in the continuous domain,</p></li>
-<li><p>The z-transform of a discrete-time signal <span class="math notranslate nohighlight">\(x[n]\)</span> is defined as $<span class="math notranslate nohighlight">\(X(z) = \sum_{n=-\infty}^{\infty} x[n]z^{-n}\)</span><span class="math notranslate nohighlight">\( where \)</span>z<span class="math notranslate nohighlight">\( is a complex variable (\)</span>z = re^{i\theta}$).</p></li>
+<li><p>The z-transform of a discrete-time signal <span class="math notranslate nohighlight">\(x[n]\)</span> is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X(z) = \sum_{n=-\infty}^{\infty} x[n]z^{-n}\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(z\)</span> is a complex variable (<span class="math notranslate nohighlight">\(z = re^{i\theta}\)</span>).</p></li>
 <li><p>The Discrete Fourier Transform (DFT) <span class="math notranslate nohighlight">\(X[k] = \sum_{n=0}^{N-1} x[n]e^{-i\frac{2\pi}{N}kn}\)</span> is a special case of z-transform evaluated on the unit circle in the complex plane, i.e., when <span class="math notranslate nohighlight">\(z = e^{i\omega}\)</span>.</p></li>
 <li><p>The z-transform encompasses a broader range of analysis, allowing for the examination of signals and systems inside and outside the unit circle, which is useful for stability analysis and filter design in the z-domain.</p></li>
 </ul>
@@ -1678,7 +1740,12 @@ Energy in the frequency domain: 312.5
 </ul>
 <ul class="simple">
 <li><p>Let’s create a Bode plot for a simple low-pass filter as an example.</p></li>
-<li><p>The transfer function for a first-order low-pass filter can be expressed as: $<span class="math notranslate nohighlight">\(H(s) = \frac{\omega_c}{s + \omega_c}\)</span><span class="math notranslate nohighlight">\( where \)</span>\omega_c$ is the cutoff frequency of the filter.</p></li>
+<li><p>The transfer function for a first-order low-pass filter can be expressed as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H(s) = \frac{\omega_c}{s + \omega_c}\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\omega_c\)</span> is the cutoff frequency of the filter.</p></li>
 <li><p>The cutoff frequency is the frequency at which the output signal’s power is reduced to half its input power.</p></li>
 <li><p>In this example, let’s assume a cutoff frequency <span class="math notranslate nohighlight">\(\omega_c = 1000\)</span> rad/s.</p></li>
 </ul>
@@ -1763,9 +1830,10 @@ Energy in the frequency domain: 312.5
 <ul class="simple">
 <li><p>The Hann window, is named after Julius von Hann, and is sometimes referred to as “Hanning” or as “raised cosine”.</p></li>
 <li><p>The shape of the filter in time domain is one lobe of an elevated cosine function.</p></li>
-<li><p>On the interval <span class="math notranslate nohighlight">\(n\in [0,N-1]\)</span> the Hann window function is:
-$<span class="math notranslate nohighlight">\(w(n)=0.5\;\left[1-\cos \left({\frac {2\pi n}{N-1}}\right)\right]=\sin ^{2}\left({\frac {\pi n}{N-1}}\right)\)</span>$</p></li>
+<li><p>On the interval <span class="math notranslate nohighlight">\(n\in [0,N-1]\)</span> the Hann window function is:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[w(n)=0.5\;\left[1-\cos \left({\frac {2\pi n}{N-1}}\right)\right]=\sin ^{2}\left({\frac {\pi n}{N-1}}\right)\]</div>
 <ul class="simple">
 <li><p>Let’s generate a Hann window of size <span class="math notranslate nohighlight">\(51\)</span>.</p></li>
 <li><p>Then, we plot the window and compute its frequency response with the function we have defined before.</p></li>
@@ -1834,9 +1902,10 @@ $<span class="math notranslate nohighlight">\(w(n)=0.5\;\left[1-\cos \left({\fra
 <h4>Tukey Filter<a class="headerlink" href="#tukey-filter" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>The Tukey window, also known as the “tapered cosine window”, can be regarded as a cosine lobe of width <span class="math notranslate nohighlight">\(\alpha N/2\)</span> that is convolved with a rectangular window of width <span class="math notranslate nohighlight">\((1 − α/2)N\)</span>.</p></li>
-<li><p>The expression of the filter in time domain is given by:
-$<span class="math notranslate nohighlight">\( w(n)={\begin{cases}{\frac{1}{2}}\left[1+\cos \left(\pi \left({\frac {2n}{\alpha (N-1)}}-1\right)\right)\right]&amp;0\leqslant n&lt;{\frac {\alpha (N-1)}{2}}\\1&amp;{\frac {\alpha (N-1)}{2}}\leqslant n\leqslant (N-1)(1-{\frac {\alpha }{2}})\\{\frac {1}{2}}\left[1+\cos \left(\pi \left({\frac {2n}{\alpha (N-1)}}-{\frac {2}{\alpha }}+1\right)\right)\right]&amp;(N-1)(1-{\frac {\alpha }{2}})&lt;n\leqslant (N-1)\end{cases}}\)</span>$</p></li>
+<li><p>The expression of the filter in time domain is given by:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\begin{split} w(n)={\begin{cases}{\frac{1}{2}}\left[1+\cos \left(\pi \left({\frac {2n}{\alpha (N-1)}}-1\right)\right)\right]&amp;0\leqslant n&lt;{\frac {\alpha (N-1)}{2}}\\1&amp;{\frac {\alpha (N-1)}{2}}\leqslant n\leqslant (N-1)(1-{\frac {\alpha }{2}})\\{\frac {1}{2}}\left[1+\cos \left(\pi \left({\frac {2n}{\alpha (N-1)}}-{\frac {2}{\alpha }}+1\right)\right)\right]&amp;(N-1)(1-{\frac {\alpha }{2}})&lt;n\leqslant (N-1)\end{cases}}\end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_tukey</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
@@ -1963,7 +2032,7 @@ $<span class="math notranslate nohighlight">\( w(n)={\begin{cases}{\frac{1}{2}}\
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Window length: 32
 </pre></div>
 </div>
-<img alt="../../_images/aed516c8a9ae495b493feee4247a6d8569ce194b7920138dbc951e230a2dec8d.png" src="../../_images/aed516c8a9ae495b493feee4247a6d8569ce194b7920138dbc951e230a2dec8d.png" />
+<img alt="../../_images/818c43034035f13b5cb1bff0bf0d710c6cb0caa98a57c444c030c6d77bfa3a6f.png" src="../../_images/818c43034035f13b5cb1bff0bf0d710c6cb0caa98a57c444c030c6d77bfa3a6f.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1976,20 +2045,24 @@ $<span class="math notranslate nohighlight">\( w(n)={\begin{cases}{\frac{1}{2}}\
 <li><p>The Butterworth filter is designed to have a frequency response as flat as possible in the passband.</p></li>
 <li><p>It avoids ripples both in the passband and in the stopband, providing a smooth transition between these regions.</p></li>
 </ul>
-<img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Butterworth_response.svg/640px-Butterworth_response.svg.png" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Butterworth_response.svg/640px-Butterworth_response.svg.png" />
+<img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Butterworth_response.svg/640px-Butterworth_response.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Butterworth_response.svg/640px-Butterworth_response.svg.png" />
 <div style="text-align: center; font-size: 80%;">Image: <a href="https://commons.wikimedia.org/wiki/File:Butterworth_response.svg">Wikimedia</a></div><ul class="simple">
 <li><p>Contrarily to the two window-based filters that we have just seen, the Butterworth filter is defined directly in the frequency domain.</p></li>
 <li><p>As such, it does not have a proper “shape” that we can visualize in the time domain.</p></li>
 <li><p>Therefore, we will use the Bode plot, which is the tool for visualizing a frequency response.</p></li>
 </ul>
-<p>The magnitude response of an <span class="math notranslate nohighlight">\(N\)</span>-th order Butterworth low-pass filter can be described by the following equation:
-$<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \left(\frac{\omega}{\omega_c}\right)^{2N}}}\)</span>$</p>
-<p>where:</p>
+<p>The magnitude response of an <span class="math notranslate nohighlight">\(N\)</span>-th order Butterworth low-pass filter can be described by the following equation:</p>
+<div class="math notranslate nohighlight">
+\[|H(\omega)| = \frac{1}{\sqrt{1 + \left(\frac{\omega}{\omega_c}\right)^{2N}}}\]</div>
 <ul class="simple">
+<li><p>where:</p>
+<ul>
 <li><p><span class="math notranslate nohighlight">\(|H(\omega)|\)</span> is the magnitude of the frequency response of the filter.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\omega\)</span> is the frequency of the input signal.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\omega_c\)</span> is the cutoff frequency (i.e., where the magnitude response is <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\)</span> (or -3 dB) of the passband value).</p></li>
 <li><p><span class="math notranslate nohighlight">\(N\)</span> is the order of the filter, which determines the steepness of the filter’s roll-off beyond the cutoff frequency. The higher the order, the steeper the roll-off.</p></li>
+</ul>
+</li>
 </ul>
 <p>In summary:</p>
 <ul class="simple">
@@ -2023,8 +2096,8 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 </div>
 </div>
 <ul class="simple">
-<li><p>We want to design a low-pass filter to remove <span class="math notranslate nohighlight">\(y_2\)</span>, the <span class="math notranslate nohighlight">\(15\)</span>Hz component, from the signal.</p></li>
-<li><p>We can use a LPF with cut frequency <span class="math notranslate nohighlight">\(f_c = 12\)</span>Hz.</p></li>
+<li><p>We want to design a low-pass filter to remove <span class="math notranslate nohighlight">\(y_2\)</span>, the <span class="math notranslate nohighlight">\(15\)</span> Hz component, from the signal.</p></li>
+<li><p>We can use a LPF with cut frequency <span class="math notranslate nohighlight">\(f_c = 12\)</span> Hz.</p></li>
 <li><p>Before, we applied the filter by multiplying the FFT of the filter and the signal and then computed the inverse.</p></li>
 <li><p>This time, we use the <code class="docutils literal notranslate"><span class="pre">filtfilt</span></code> function, which directly applies a digital filter to a signal.</p></li>
 </ul>
@@ -2049,7 +2122,7 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 </div>
 </div>
 <ul class="simple">
-<li><p>We see that the the <span class="math notranslate nohighlight">\(10\)</span>Hz component, <span class="math notranslate nohighlight">\(y_1\)</span>, is recovered in the filtered signal.</p></li>
+<li><p>We see that the the <span class="math notranslate nohighlight">\(10\)</span> Hz component, <span class="math notranslate nohighlight">\(y_1\)</span>, is recovered in the filtered signal.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Next, we want to remove the noise from the noisy signal we deine before (sinusoid + trend + noise).</p></li>
@@ -2104,7 +2177,7 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e150def5dc50831ccbcfe185f02d7121fe7684d1bf2022e5b45c96c04c5e843d.png" src="../../_images/e150def5dc50831ccbcfe185f02d7121fe7684d1bf2022e5b45c96c04c5e843d.png" />
+<img alt="../../_images/26a1d864f7c7fffa8360bea3d43aaeb119a8ffd0fd7024c06de5ddc6e8049d25.png" src="../../_images/26a1d864f7c7fffa8360bea3d43aaeb119a8ffd0fd7024c06de5ddc6e8049d25.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2135,7 +2208,7 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 <section id="high-pass-filters-hpfs">
 <h3>High Pass Filters (HPFs)<a class="headerlink" href="#high-pass-filters-hpfs" title="Link to this heading">#</a></h3>
 <p>Allows signals with frequencies higher than a certain cutoff frequency to pass through, while attenuating (reducing) signals with frequencies below the cutoff.</p>
-<img alt="https://upload.wikimedia.org/wikipedia/commons/4/4d/75_Hz_HPF_on_Smaart.jpg" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/75_Hz_HPF_on_Smaart.jpg" />
+<img alt="https://upload.wikimedia.org/wikipedia/commons/4/4d/75_Hz_HPF_on_Smaart.jpg" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/75_Hz_HPF_on_Smaart.jpg" />
 <div style="text-align: center; font-size: 80%;">Image: <a href="https://upload.wikimedia.org/wikipedia/commons/4/4d/75_Hz_HPF_on_Smaart.jpg">Wikimedia</a></div><ul class="simple">
 <li><p>LPFs are used to smooth out signals, remove noise, and preserve the basic shape of the signal without the details provided by high-frequency components.</p></li>
 <li><p>Conversely, HPFs are often used to enhance or isolate quick changes in signals (e.g., edges in images or high-frequency sounds in audio).</p></li>
@@ -2179,7 +2252,7 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f8d983f00942d43e4f58f44f31e8bd1e56018e062d3e5b3e0ce5e4961468a229.png" src="../../_images/f8d983f00942d43e4f58f44f31e8bd1e56018e062d3e5b3e0ce5e4961468a229.png" />
+<img alt="../../_images/ee74c836b1f51208fbcdc61f4f443c42713c0b53ad4682884fe8c299dd588953.png" src="../../_images/ee74c836b1f51208fbcdc61f4f443c42713c0b53ad4682884fe8c299dd588953.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2191,13 +2264,11 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 <ul class="simple">
 <li><p>A Band Pass Filter (BPF) passes frequencies within a certain range and rejects frequencies outside that range.</p></li>
 </ul>
-<img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Band-pass_filter.svg/640px-Band-pass_filter.svg.png" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Band-pass_filter.svg/640px-Band-pass_filter.svg.png" />
+<img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Band-pass_filter.svg/640px-Band-pass_filter.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Band-pass_filter.svg/640px-Band-pass_filter.svg.png" />
 <div style="text-align: center; font-size: 80%;">Image: <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Band-pass_filter.svg/640px-Band-pass_filter.svg.png">Wikimedia</a></div><ul class="simple">
 <li><p>A BPF can be seen as a combination of a high pass and low pass filters that remove both the high and low frequency components of a signal.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/filter.png" style="width: 85%">
-</div>
+<img alt="../../_images/filter.png" src="../../_images/filter.png" />
 <ul class="simple">
 <li><p>In particular, we can implement a BPF using a LPF and HPF Butterworth filters.</p></li>
 </ul>
@@ -2234,7 +2305,7 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/99013675d542c82d3d2642dc4c4385bf141fec0967b3ce047a5b46fb525dd799.png" src="../../_images/99013675d542c82d3d2642dc4c4385bf141fec0967b3ce047a5b46fb525dd799.png" />
+<img alt="../../_images/86738d7a2825e0411d6fcc8bcbdc60084b09e44e4d2d77ab7bd3458f7f31e501.png" src="../../_images/86738d7a2825e0411d6fcc8bcbdc60084b09e44e4d2d77ab7bd3458f7f31e501.png" />
 </div>
 </div>
 <p>We observe that the original signal has been de-trended, and the noise has been removed.</p>
@@ -2244,7 +2315,7 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 <ul class="simple">
 <li><p>A Band-Stop Filter (BSF) passes most filters unaltered, but attenuates those in a specific range to very low levels.</p></li>
 </ul>
-<img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ideal_Band_Stop_Filter_Transfer_Function.svg/640px-Ideal_Band_Stop_Filter_Transfer_Function.svg.png" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ideal_Band_Stop_Filter_Transfer_Function.svg/640px-Ideal_Band_Stop_Filter_Transfer_Function.svg.png" />
+<img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ideal_Band_Stop_Filter_Transfer_Function.svg/640px-Ideal_Band_Stop_Filter_Transfer_Function.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ideal_Band_Stop_Filter_Transfer_Function.svg/640px-Ideal_Band_Stop_Filter_Transfer_Function.svg.png" />
 <div style="text-align: center; font-size: 80%;">Image: <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ideal_Band_Stop_Filter_Transfer_Function.svg/640px-Ideal_Band_Stop_Filter_Transfer_Function.svg.png">Wikimedia</a></div><ul class="simple">
 <li><p>For the next example, we generate a new signal that is the sum of 3 sinusoids.</p></li>
 <li><p>Then, we design a filter to remove the 3rd sinusoid.</p></li>
@@ -2453,7 +2524,7 @@ $<span class="math notranslate nohighlight">\(|H(\omega)| = \frac{1}{\sqrt{1 + \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3f0bd3966ae73960435d78af02d8cde28e99ecf6c11f2d07e35d9d5fc658394d.png" src="../../_images/3f0bd3966ae73960435d78af02d8cde28e99ecf6c11f2d07e35d9d5fc658394d.png" />
+<img alt="../../_images/dcbdffc86ff57e593e4d9d230edbe898c0a5bc2e633063bb7d381c88d2be14f8.png" src="../../_images/dcbdffc86ff57e593e4d9d230edbe898c0a5bc2e633063bb7d381c88d2be14f8.png" />
 </div>
 </div>
 </section>

@@ -430,7 +430,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="smoothing">
 <h1>Smoothing<a class="headerlink" href="#smoothing" title="Link to this heading">#</a></h1>
-<img alt="../../_images/cover2.png" class="align-center" src="../../_images/cover2.png" />
+<img alt="../../_images/cover2.png" src="../../_images/cover2.png" />
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>In the previous lectures, we learned that:</p>
@@ -576,20 +576,28 @@ document.write(`
 <ul class="simple">
 <li><p>The approximation with the mean seems reasonable in this case.</p></li>
 <li><p>In general we want to measure how far off our estimate is from reality.</p></li>
-<li><p>A common way of doing it is by calculating <em>Mean Squared Error</em> (MSE) $<span class="math notranslate nohighlight">\(MSE = \frac{1}{T}\sum_{t=1}^{T} (X(t) - \hat{X}(t))^2\)</span><span class="math notranslate nohighlight">\(
-where \)</span>X(t)<span class="math notranslate nohighlight">\( and \)</span>\hat{X}(t)<span class="math notranslate nohighlight">\( are the true and estimated values at time \)</span>t$, respectively.</p></li>
+<li><p>A common way of doing it is by calculating <em>Mean Squared Error</em> (MSE)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[MSE = \frac{1}{T}\sum_{t=1}^{T} (X(t) - \hat{X}(t))^2\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(X(t)\)</span> and <span class="math notranslate nohighlight">\(\hat{X}(t)\)</span> are the true and estimated values at time <span class="math notranslate nohighlight">\(t\)</span>, respectively.</p></li>
 </ul>
 <p><strong>Example</strong></p>
 <ul class="simple">
 <li><p>Let’s consider the following example.</p></li>
 <li><p>Say we have a time series of observed values <span class="math notranslate nohighlight">\(X = [0, 1, 3, 2]\)</span>.</p></li>
 <li><p>The predictions given by our model are <span class="math notranslate nohighlight">\(\hat{X} =  [1, 1, 2, 4]\)</span>.</p></li>
-<li><p>We calculate MSE as: $<span class="math notranslate nohighlight">\((0-1)^{2} + (1-1)^{2} + (3-2)^{2} + (2-4)^{2} = 6\)</span>$</p></li>
+<li><p>We calculate MSE as:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[(0-1)^{2} + (1-1)^{2} + (3-2)^{2} + (2-4)^{2} = 6\]</div>
 <ul class="simple">
 <li><p>Say we had another model that give us the estimate <span class="math notranslate nohighlight">\(\hat{X} =  [0, 0, 1, 0]\)</span>.</p></li>
-<li><p>The MSE in this case is: $<span class="math notranslate nohighlight">\(0^{2} + 1^{2} + 2^{2} + 2^{2} = 9\)</span>$</p></li>
+<li><p>The MSE in this case is:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[0^{2} + 1^{2} + 2^{2} + 2^{2} = 9\]</div>
 <ul class="simple">
 <li><p>The MSE allows to compare different estimates to see which is best.</p></li>
 <li><p>In this case, the first model gives us a better estimate than the second one.</p></li>
@@ -697,7 +705,7 @@ where \)</span>X(t)<span class="math notranslate nohighlight">\( and \)</span>\h
 <li><p>The easiest way to understand moving average is by example.</p></li>
 <li><p>Say we have the following values:</p></li>
 </ul>
-<img alt="../../_images/values.png" class="align-center" src="../../_images/values.png" />
+<img alt="../../_images/values.png" src="../../_images/values.png" />
 <ul class="simple">
 <li><p>The first step is to select a window size.</p></li>
 <li><p>We’ll arbitrarily choose a size of 3.</p></li>
@@ -705,7 +713,7 @@ where \)</span>X(t)<span class="math notranslate nohighlight">\( and \)</span>\h
 <li><p>We then slide the window by one and calculate the average of the next three values.</p></li>
 <li><p>We repeat this process until we reach the final observed value.</p></li>
 </ul>
-<img alt="../../_images/EqWMA.gif" class="align-center" src="../../_images/EqWMA.gif" />
+<img alt="../../_images/EqWMA.gif" src="../../_images/EqWMA.gif" />
 <ul class="simple">
 <li><p>Now, let’s define a function to perform smoothing with the MA (adapted from <a class="reference external" href="https://stackoverflow.com/questions/14313510/how-to-calculate-moving-average-using-numpy#14314054">here</a>).</p></li>
 <li><p>Then, we compare the MSE obtained from applying simple and moving average on the data with trend.</p></li>
@@ -875,7 +883,12 @@ moving_average: 448.32
 <h3>Forecasting with MA<a class="headerlink" href="#forecasting-with-ma" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Instead of pulling out the inherent pattern within a series, the smoothing functions can be used to create <em>forecasts</em>.</p></li>
-<li><p>The forecast for the next time step is compute as follow $<span class="math notranslate nohighlight">\(\hat{X}(t+1) = \frac{X(t) + X(t-1) + \dots + X(t-P+1)}{P}\)</span><span class="math notranslate nohighlight">\( where \)</span>P$ is the window size of the MA.</p></li>
+<li><p>The forecast for the next time step is compute as follow</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{X}(t+1) = \frac{X(t) + X(t-1) + \dots + X(t-P+1)}{P}\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(P\)</span> is the window size of the MA.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Let’s consider the following time series <span class="math notranslate nohighlight">\(X= [1, 2, 4, 8, 16, 32, 64]\)</span>.</p></li>
@@ -915,8 +928,8 @@ moving_average: 448.32
 <li><p>What’s the lag associated with this technique?</p></li>
 <li><p>In other words, after how many time steps do we see a local change in the underlying signal?</p></li>
 </ul>
-<p>The answer is <span class="math notranslate nohighlight">\(\frac{(P+1)}{2}\)</span>.</p>
 <ul class="simple">
+<li><p>The answer is: <span class="math notranslate nohighlight">\(\frac{(P+1)}{2}\)</span>.</p></li>
 <li><p>For example, say you’re averaging the past 5 values to make the next prediction.</p></li>
 <li><p>Then the forecast value that most closely reflects the current value will appear after <span class="math notranslate nohighlight">\(\frac{5+1}{2} = 3\)</span> time steps.</p></li>
 <li><p>Clearly, the lag increases as you increase the window size for averaging.</p></li>
@@ -986,8 +999,10 @@ moving_average: 448.32
 <h3>Forecasting with WMA<a class="headerlink" href="#forecasting-with-wma" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Next, we use the WMA to generate forecasts.</p></li>
-<li><p>The previous <a class="reference internal" href="#Forecasting-with-MA"><span class="xref myst">forecasting formula</span></a> is modified to weight differently the past observations in the window $<span class="math notranslate nohighlight">\(\hat{X}(t+1) = \frac{w_1 \cdot X(t) + w_2 \cdot X(t-1) + \dots + w_P \cdot X(t-P+1)}{P}\)</span>$</p></li>
+<li><p>The previous <a class="reference internal" href="#Forecasting-with-MA"><span class="xref myst">forecasting formula</span></a> is modified to weight differently the past observations in the window</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\hat{X}(t+1) = \frac{w_1 \cdot X(t) + w_2 \cdot X(t-1) + \dots + w_P \cdot X(t-P+1)}{P}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">weighted_moving_average</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">forecast</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1090,7 +1105,12 @@ moving_average: 448.32
 <ul class="simple">
 <li><p>💡 Useful if your data lacks trend and seasonality and you want to approximately extract patterns.</p></li>
 <li><p>It is analogous to the WMA we saw previously.</p></li>
-<li><p>The basic formulation is $<span class="math notranslate nohighlight">\(S(t) = \alpha X(t) + (1-\alpha)S(t-1)\)</span>$ where</p>
+<li><p>The basic formulation is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S(t) = \alpha X(t) + (1-\alpha)S(t-1)\]</div>
+<ul class="simple">
+<li><p>where</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(S(t)\)</span> is the smoothed value at time <em>t</em></p></li>
 <li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is a smoothing constant</p></li>
@@ -1099,10 +1119,10 @@ moving_average: 448.32
 </li>
 </ul>
 <p>Expanding the formula we get</p>
-<div class="math notranslate nohighlight">
-\[\begin{split} \begin{align} S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
+<div class="amsmath math notranslate nohighlight" id="equation-3b286cf7-90b9-40cd-bb07-19e88d2b991d">
+<span class="eqno">()<a class="headerlink" href="#equation-3b286cf7-90b9-40cd-bb07-19e88d2b991d" title="Permalink to this equation">#</a></span>\[\begin{align} S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
 S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha X(1) + \alpha(1 - \alpha)X(0)]\\
-&amp; = \alpha X(2) + \alpha(1 - \alpha)X(1) + \alpha(1 - \alpha)^2 X(0) \end{align}\end{split}\]</div>
+&amp; = \alpha X(2) + \alpha(1 - \alpha)X(1) + \alpha(1 - \alpha)^2 X(0) \end{align}\]</div>
 <p>The explicit formula for a generic time step <span class="math notranslate nohighlight">\(\tau\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[ S(T) = \sum_{t=0}^{\tau} \alpha(1 - \alpha)^{\tau-t}X(t) \]</div>
@@ -1130,9 +1150,9 @@ S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha 
 <ul class="simple">
 <li><p>💡 It has all the benefits of Single Exponential plus the ability to pickup on trend.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align} S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
-b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ \hat{X}(t+1) = S(t) + b(t) &amp; \hspace{2cm} \text{Forecasts} \end{align}\end{split}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-294dcba7-74c3-40c9-ad8b-7663e1d9702e">
+<span class="eqno">()<a class="headerlink" href="#equation-294dcba7-74c3-40c9-ad8b-7663e1d9702e" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
+b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ \hat{X}(t+1) = S(t) + b(t) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <ul class="simple">
 <li><p>The parameter <span class="math notranslate nohighlight">\(\beta \in [0,1]\)</span> controls the decay of the influence of change in the trend.</p></li>
 </ul>
@@ -1160,13 +1180,13 @@ b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text
 </li>
 </ul>
 <p><strong>Additive seasonality model</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align} S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
-b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \big(X(t) - S(t-1) - b(t-1)\big) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = S(t) + \tau b(t) + c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\end{split}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-805913dc-b6a7-4b84-ada8-2319da2a2c49">
+<span class="eqno">()<a class="headerlink" href="#equation-805913dc-b6a7-4b84-ada8-2319da2a2c49" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \big(X(t) - S(t-1) - b(t-1)\big) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = S(t) + \tau b(t) + c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <p><strong>Multiplicative seasonality model</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align} S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
-b(t) = \beta \big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = \big( S(t) + \tau b(t) \big)c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\end{split}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-2a9b08aa-6f40-4d22-b3bc-8d51adc4b0ef">
+<span class="eqno">()<a class="headerlink" href="#equation-2a9b08aa-6f40-4d22-b3bc-8d51adc4b0ef" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+b(t) = \beta \big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = \big( S(t) + \tau b(t) \big)c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <p><strong>Initialization</strong></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(b(0) = \frac{1}{L} \left( \frac{X(L+1) - X(1)}{L} + \frac{X(L+2) - X(2)}{L} + \dots + \frac{X(L+L) - X(L)}{L} \right)\)</span></p></li>

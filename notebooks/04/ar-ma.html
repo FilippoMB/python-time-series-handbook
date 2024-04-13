@@ -425,7 +425,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ar-ma">
 <h1>AR-MA<a class="headerlink" href="#ar-ma" title="Link to this heading">#</a></h1>
-<img alt="../../_images/cover3.png" class="align-center" src="../../_images/cover3.png" />
+<img alt="../../_images/cover3.png" src="../../_images/cover3.png" />
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>In this lecture we will cover:</p>
@@ -437,6 +437,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.sm_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceWarning</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">ConvergenceWarning</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -485,7 +488,12 @@ document.write(`
 <section id="autocorrelation-function-acf">
 <h3>Autocorrelation Function (ACF)<a class="headerlink" href="#autocorrelation-function-acf" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The ACF measures the correlation of a time series with its own lagged values$<span class="math notranslate nohighlight">\( ACF(k) = \frac{\mathbb{E}[(X(t) - \mu)(X(t-k) - \mu)]}{\sigma^2} \)</span>$ where:</p>
+<li><p>The ACF measures the correlation of a time series with its own lagged values</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ ACF(k) = \frac{\mathbb{E}[(X(t) - \mu)(X(t-k) - \mu)]}{\sigma^2} \]</div>
+<ul class="simple">
+<li><p>where:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(k\)</span> is the lag number.</p></li>
 <li><p><span class="math notranslate nohighlight">\(X(t)\)</span> is the value at time  <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
@@ -525,7 +533,12 @@ document.write(`
 <section id="cross-correlation-function-ccf">
 <h3>Cross-Correlation Function (CCF)<a class="headerlink" href="#cross-correlation-function-ccf" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>CCF measures the correlation between two time series at different lags $<span class="math notranslate nohighlight">\(CCF(k) = \frac{E[(X(t) - \mu_x)(Y(t-k) - \mu_y)]}{\sigma_x \sigma_y}\)</span>$ where:</p>
+<li><p>CCF measures the correlation between two time series at different lags</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[CCF(k) = \frac{E[(X(t) - \mu_x)(Y(t-k) - \mu_y)]}{\sigma_x \sigma_y}\]</div>
+<ul class="simple">
+<li><p>where:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are two different time series.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mu_x, \mu_y\)</span> are their means, and <span class="math notranslate nohighlight">\(\sigma_x, \sigma_y\)</span> are their standard deviations.</p></li>
@@ -586,9 +599,17 @@ document.write(`
 <li><p>High PACF at lag <span class="math notranslate nohighlight">\(k\)</span> indicates a strong partial correlation with the <span class="math notranslate nohighlight">\(k\)</span>-th lag, not accounted for by correlations at lower lags.</p></li>
 </ul>
 <ul class="simple">
-<li><p>PACF of lag <span class="math notranslate nohighlight">\(k\)</span> is sometimes denoted as <span class="math notranslate nohighlight">\(\phi_{kk}\)</span>: $<span class="math notranslate nohighlight">\(\phi_{kk} = \text{Corr}\big(X(t) - \hat{X}(t), X(t-k) - \hat{X}(t-k)\big)\)</span>$ where:</p></li>
+<li><p>PACF of lag <span class="math notranslate nohighlight">\(k\)</span> is sometimes denoted as <span class="math notranslate nohighlight">\(\phi_{kk}\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\phi_{kk} = \text{Corr}\big(X(t) - \hat{X}(t), X(t-k) - \hat{X}(t-k)\big)\]</div>
+<ul class="simple">
+<li><p>where:</p>
+<ul>
 <li><p><span class="math notranslate nohighlight">\(\hat{X}(t)\)</span> is the predicted value of <span class="math notranslate nohighlight">\(X(t)\)</span> based on all the values up to <span class="math notranslate nohighlight">\(t-1\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\hat{X}(t-k)\)</span> is the predicted value of <span class="math notranslate nohighlight">\(X(t-k)\)</span> based on all the values up to <span class="math notranslate nohighlight">\(t-k-1\)</span>.</p></li>
+</ul>
+</li>
 </ul>
 <ul class="simple">
 <li><p>Using ACF and PACF together provides a more comprehensive understanding of the time series data.</p></li>
@@ -644,7 +665,12 @@ document.write(`
 <li><p>The AR model is dependent solely on its own past values.</p></li>
 </ul>
 <ul class="simple">
-<li><p>The general form of an AR model of order <span class="math notranslate nohighlight">\(p\)</span> is: $<span class="math notranslate nohighlight">\(X(t) = c + \phi_1 X(t-1) + \phi_2 X(t-2) + \dots + \phi_p X(t-p) + \epsilon_t\)</span>$ where</p>
+<li><p>The general form of an AR model of order <span class="math notranslate nohighlight">\(p\)</span> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X(t) = c + \phi_1 X(t-1) + \phi_2 X(t-2) + \dots + \phi_p X(t-p) + \epsilon_t\]</div>
+<ul class="simple">
+<li><p>where</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(X(t)\)</span>: Time series value at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(c\)</span>: Constant term (also known as the intercept).</p></li>
@@ -656,7 +682,11 @@ document.write(`
 </ul>
 <p><strong>AR(1) Model</strong></p>
 <ul class="simple">
-<li><p>The first-frder autoregressive model, AR(1), is $<span class="math notranslate nohighlight">\(X(t) = c + \phi_1 X(t-1) + \epsilon_t\)</span>$</p></li>
+<li><p>The first-frder autoregressive model, AR(1), is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X(t) = c + \phi_1 X(t-1) + \epsilon_t\]</div>
+<ul class="simple">
 <li><p>In an AR(1) model, the current value is based on the immediately preceding value.</p></li>
 </ul>
 <blockquote>
@@ -665,7 +695,11 @@ document.write(`
 <p><strong>Higher Order AR Models</strong></p>
 <ul class="simple">
 <li><p>Higher order AR models (AR(2), AR(3), etc.) depend on more than one past value.</p></li>
-<li><p>For example, the AR(2) model is: $<span class="math notranslate nohighlight">\(X(t) = c + \phi_1 X(t-1) + \phi_2 X(t-2) + \epsilon_t\)</span>$</p></li>
+<li><p>For example, the AR(2) model is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X(t) = c + \phi_1 X(t-1) + \phi_2 X(t-2) + \epsilon_t\]</div>
+<ul class="simple">
 <li><p>These models are useful in scenarios where the effect of more than one previous time step is significant.</p></li>
 </ul>
 <p><strong>Estimating AR Model Coefficients</strong></p>
@@ -758,12 +792,14 @@ document.write(`
 <li><p>Therefore, we need to do the following steps.</p></li>
 </ul>
 <p><strong>Step 1: Detrending and Deseasonalizing</strong></p>
-<ul class="simple">
+<ul>
 <li><p>Before applying an AR model is necessary to make the time series stationary.</p>
 <ol class="arabic simple">
 <li><p>Identify the trend <span class="math notranslate nohighlight">\(T\)</span> and seasonality <span class="math notranslate nohighlight">\(S\)</span> present in the time series (e.g., by using seasonal decomposition or smoothing techniques).</p></li>
-<li><p>Subtract the trend and seasonality $<span class="math notranslate nohighlight">\(R(t) = X(t) - T(t) - S(t)\)</span>$</p></li>
+<li><p>Subtract the trend and seasonality</p></li>
 </ol>
+<div class="math notranslate nohighlight">
+\[R(t) = X(t) - T(t) - S(t)\]</div>
 </li>
 </ul>
 <p><strong>Step 2: Applying the AR Model</strong></p>
@@ -774,8 +810,10 @@ document.write(`
 <p><strong>Step 3: Reconstructing the Forecast</strong></p>
 <ul class="simple">
 <li><p>Estimate the trend <span class="math notranslate nohighlight">\(\hat{T}(t+\tau)\)</span> and seasonality <span class="math notranslate nohighlight">\(\hat{S}(t+\tau)\)</span> (e.g., with smoothers).</p></li>
-<li><p>Add back the estimated trend and seasonality to the forecasted value: $<span class="math notranslate nohighlight">\(\hat X(t+\tau) = \hat R(t+\tau) + \hat{T}(t+\tau) + \hat{S}(t+\tau)\)</span>$</p></li>
+<li><p>Add back the estimated trend and seasonality to the forecasted value:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\hat X(t+\tau) = \hat R(t+\tau) + \hat{T}(t+\tau) + \hat{S}(t+\tau)\]</div>
 </section>
 <section id="ar-model-example">
 <h3>AR model example<a class="headerlink" href="#ar-model-example" title="Link to this heading">#</a></h3>
@@ -850,8 +888,11 @@ document.write(`
 </div>
 </div>
 <ul class="simple">
-<li><p>A p-value that high means we fail to reject the null hypothesis
-$<span class="math notranslate nohighlight">\(H_0: \text{the data is nonstationary}\)</span>$</p></li>
+<li><p>A p-value that high means we fail to reject the null hypothesis</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H_0: \text{the data is nonstationary}\]</div>
+<ul class="simple">
 <li><p>No surprises here.</p></li>
 </ul>
 <ul class="simple">
@@ -1057,7 +1098,12 @@ $<span class="math notranslate nohighlight">\(H_0: \text{the data is nonstationa
 <li><p>The noise at each point is assumed to come from a normal distribution with mean 0 and constant variance.</p></li>
 </ul>
 <ul class="simple">
-<li><p>The MA model is defined as $<span class="math notranslate nohighlight">\(X(t) = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \dots + \theta_q \epsilon_{t-q}\)</span>$ where:</p>
+<li><p>The MA model is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X(t) = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \dots + \theta_q \epsilon_{t-q}\]</div>
+<ul class="simple">
+<li><p>where:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(X(t)\)</span>: Time series value at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mu\)</span>: Mean of the series.</p></li>
@@ -1275,12 +1321,6 @@ p-value (differenced ts): 0.000
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">diff_ma</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">model2</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">diff_ma</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">model3</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">seas_diff_ma</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filippo/miniconda3/envs/sta2003/lib/python3.10/site-packages/statsmodels/base/model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
-  warnings.warn(&quot;Maximum Likelihood optimization failed to &quot;
 </pre></div>
 </div>
 </div>
