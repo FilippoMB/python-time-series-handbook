@@ -453,16 +453,24 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">statsmodels</span> <span class="k">as</span> <span class="nn">ss</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<span class="c1"># reproducibility</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># reproducibility</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_351815/3433846032.py:4: DeprecationWarning: 
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was not found to be installed on your system.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+        
+  import pandas as pd
 </pre></div>
 </div>
 </div>
@@ -715,7 +723,7 @@ document.write(`
 </ul>
 <img alt="../../_images/EqWMA.gif" src="../../_images/EqWMA.gif" />
 <ul class="simple">
-<li><p>Now, let’s define a function to perform smoothing with the MA (adapted from <a class="reference external" href="https://stackoverflow.com/questions/14313510/how-to-calculate-moving-average-using-numpy#14314054">here</a>).</p></li>
+<li><p>Now, let’s define a function to perform smoothing with the MA.</p></li>
 <li><p>Then, we compare the MSE obtained from applying simple and moving average on the data with trend.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -923,7 +931,7 @@ moving_average: 448.32
 <li><p>The lag of MA is also reflected in the forecasts it produces.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Let’s focus on the <a class="reference internal" href="#Forecasting-with-MA"><span class="xref myst">forecasting formula</span></a> we just defined.</p></li>
+<li><p>Let’s focus on the <a class="reference internal" href="#forecasting-with-ma"><span class="xref myst">forecasting formula</span></a> we just defined.</p></li>
 <li><p>While easy to understand, one of its properties may not be obvious.</p></li>
 <li><p>What’s the lag associated with this technique?</p></li>
 <li><p>In other words, after how many time steps do we see a local change in the underlying signal?</p></li>
@@ -999,7 +1007,7 @@ moving_average: 448.32
 <h3>Forecasting with WMA<a class="headerlink" href="#forecasting-with-wma" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Next, we use the WMA to generate forecasts.</p></li>
-<li><p>The previous <a class="reference internal" href="#Forecasting-with-MA"><span class="xref myst">forecasting formula</span></a> is modified to weight differently the past observations in the window</p></li>
+<li><p>The previous <a class="reference internal" href="#forecasting-with-ma"><span class="xref myst">forecasting formula</span></a> is modified to weight differently the past observations in the window</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\hat{X}(t+1) = \frac{w_1 \cdot X(t) + w_2 \cdot X(t-1) + \dots + w_P \cdot X(t-P+1)}{P}\]</div>
@@ -1119,8 +1127,8 @@ moving_average: 448.32
 </li>
 </ul>
 <p>Expanding the formula we get</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3b286cf7-90b9-40cd-bb07-19e88d2b991d">
-<span class="eqno">()<a class="headerlink" href="#equation-3b286cf7-90b9-40cd-bb07-19e88d2b991d" title="Permalink to this equation">#</a></span>\[\begin{align} S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
+<div class="amsmath math notranslate nohighlight" id="equation-fb6b1e87-c22b-4756-a5a2-28369938f738">
+<span class="eqno">()<a class="headerlink" href="#equation-fb6b1e87-c22b-4756-a5a2-28369938f738" title="Permalink to this equation">#</a></span>\[\begin{align} S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
 S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha X(1) + \alpha(1 - \alpha)X(0)]\\
 &amp; = \alpha X(2) + \alpha(1 - \alpha)X(1) + \alpha(1 - \alpha)^2 X(0) \end{align}\]</div>
 <p>The explicit formula for a generic time step <span class="math notranslate nohighlight">\(\tau\)</span> is</p>
@@ -1150,8 +1158,8 @@ S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha 
 <ul class="simple">
 <li><p>💡 It has all the benefits of Single Exponential plus the ability to pickup on trend.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-294dcba7-74c3-40c9-ad8b-7663e1d9702e">
-<span class="eqno">()<a class="headerlink" href="#equation-294dcba7-74c3-40c9-ad8b-7663e1d9702e" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
+<div class="amsmath math notranslate nohighlight" id="equation-1f69567d-ff3f-4710-94d7-3600b7c51174">
+<span class="eqno">()<a class="headerlink" href="#equation-1f69567d-ff3f-4710-94d7-3600b7c51174" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
 b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ \hat{X}(t+1) = S(t) + b(t) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <ul class="simple">
 <li><p>The parameter <span class="math notranslate nohighlight">\(\beta \in [0,1]\)</span> controls the decay of the influence of change in the trend.</p></li>
@@ -1180,12 +1188,12 @@ b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text
 </li>
 </ul>
 <p><strong>Additive seasonality model</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-805913dc-b6a7-4b84-ada8-2319da2a2c49">
-<span class="eqno">()<a class="headerlink" href="#equation-805913dc-b6a7-4b84-ada8-2319da2a2c49" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+<div class="amsmath math notranslate nohighlight" id="equation-8e7bd6e5-bc3b-4905-93f1-866316517e64">
+<span class="eqno">()<a class="headerlink" href="#equation-8e7bd6e5-bc3b-4905-93f1-866316517e64" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
 b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \big(X(t) - S(t-1) - b(t-1)\big) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = S(t) + \tau b(t) + c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <p><strong>Multiplicative seasonality model</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-2a9b08aa-6f40-4d22-b3bc-8d51adc4b0ef">
-<span class="eqno">()<a class="headerlink" href="#equation-2a9b08aa-6f40-4d22-b3bc-8d51adc4b0ef" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+<div class="amsmath math notranslate nohighlight" id="equation-c4260880-eb1f-4891-8bbe-8730fb343d06">
+<span class="eqno">()<a class="headerlink" href="#equation-c4260880-eb1f-4891-8bbe-8730fb343d06" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
 b(t) = \beta \big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = \big( S(t) + \tau b(t) \big)c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <p><strong>Initialization</strong></p>
 <ul class="simple">

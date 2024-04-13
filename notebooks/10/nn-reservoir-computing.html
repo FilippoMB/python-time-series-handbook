@@ -468,9 +468,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">scipy.io</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -613,7 +610,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ee0dcc0288d90f3c853c07122534b0a3c0e64e59e5d91725dc28ac3a3d785229.png" src="../../_images/ee0dcc0288d90f3c853c07122534b0a3c0e64e59e5d91725dc28ac3a3d785229.png" />
+<img alt="../../_images/48679352a5f972a6579eaea01eaa6b65f6ddf0d2b3221e61fa9af13ab494512e.png" src="../../_images/48679352a5f972a6579eaea01eaa6b65f6ddf0d2b3221e61fa9af13ab494512e.png" />
 </div>
 </div>
 <section id="multi-layer-perceptron">
@@ -1272,7 +1269,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 35.06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 38.05
 </pre></div>
 </div>
 </div>
@@ -1299,10 +1296,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 25.64
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 26.74
 </pre></div>
 </div>
-<img alt="../../_images/4cbc3d6cdd25a83d0a218003cfd5e28a4f0ae05371b826fff648380ba7c0c314.png" src="../../_images/4cbc3d6cdd25a83d0a218003cfd5e28a4f0ae05371b826fff648380ba7c0c314.png" />
+<img alt="../../_images/2e2d3b338903d19fa5b333f446a5993eb2bc843ed20d9e6f9152f84bf7fa9079.png" src="../../_images/2e2d3b338903d19fa5b333f446a5993eb2bc843ed20d9e6f9152f84bf7fa9079.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1565,7 +1562,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ab97742b33d2539e934ed6ac49d860868607b610f349fabaad82e3ffbd7ca75b.png" src="../../_images/ab97742b33d2539e934ed6ac49d860868607b610f349fabaad82e3ffbd7ca75b.png" />
+<img alt="../../_images/3d0eb7a7be9b668fc7c791d0ad753603d8b10b725728b6231f933938ec88a45e.png" src="../../_images/3d0eb7a7be9b668fc7c791d0ad753603d8b10b725728b6231f933938ec88a45e.png" />
 </div>
 </div>
 </section>
@@ -1603,6 +1600,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <hr class="docutils" />
 <section id="python-example-electricity-load-forecasting-with-esn">
 <h2>Python example: electricity load forecasting with ESN<a class="headerlink" href="#python-example-electricity-load-forecasting-with-esn" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In the following, we will use the <a class="reference external" href="https://github.com/FilippoMB/Time-series-classification-and-clustering-with-Reservoir-Computing">Python library</a> <code class="docutils literal notranslate"><span class="pre">reservoir-computing</span></code>.</p></li>
+<li><p>The library allows us to perform time series classification, clustering, and forecasting.</p></li>
+<li><p>In this lecture, we will focus on <em>forecasting</em>.</p></li>
+</ul>
 <section id="load-the-data">
 <h3>Load the data<a class="headerlink" href="#load-the-data" title="Link to this heading">#</a></h3>
 <p>We reload the same time series of energy load that we used before.</p>
@@ -1772,7 +1774,7 @@ states_te shape: (1, 266, 900)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0212s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0206s
 Test time: 0.0003s
 </pre></div>
 </div>
@@ -1792,7 +1794,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f24930ebd527d145fa4d5ca0254f60ab4bfa80c419a062f4e4d50b6fa402f973.png" src="../../_images/f24930ebd527d145fa4d5ca0254f60ab4bfa80c419a062f4e4d50b6fa402f973.png" />
+<img alt="../../_images/65ac6f62dbeea437bc07cddaeb43cc0cf5896b324139d03e5bf85bd4f1a5f772.png" src="../../_images/65ac6f62dbeea437bc07cddaeb43cc0cf5896b324139d03e5bf85bd4f1a5f772.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1803,7 +1805,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 19.26
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 18.84
 </pre></div>
 </div>
 </div>
@@ -2073,7 +2075,7 @@ states_te shape: (266, 75)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0017s
 Test time: 0.0001s
-Mean Squared Error: 21.24
+Mean Squared Error: 20.25
 </pre></div>
 </div>
 </div>
@@ -2126,7 +2128,7 @@ Mean Squared Error: 21.24
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 2.59s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 2.65s
 </pre></div>
 </div>
 </div>
@@ -2146,7 +2148,7 @@ Mean Squared Error: 21.24
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3280bd3173d19da489fc70cea259f5cf60ed7074ff1ccba3e453bdb79c0d17e1.png" src="../../_images/3280bd3173d19da489fc70cea259f5cf60ed7074ff1ccba3e453bdb79c0d17e1.png" />
+<img alt="../../_images/7a79faa3f83f14ed3f738ed497f3dd679170f16e0e30126c570318a2e07e0fe0.png" src="../../_images/7a79faa3f83f14ed3f738ed497f3dd679170f16e0e30126c570318a2e07e0fe0.png" />
 </div>
 </div>
 <p>Finally, we repeat the training on the states reduced with PCA.</p>
@@ -2178,7 +2180,7 @@ Mean Squared Error: 21.24
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.87s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.89s
 </pre></div>
 </div>
 </div>

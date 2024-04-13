@@ -1130,7 +1130,7 @@ document.write(`
 <section id="ma-model-identification">
 <h3>MA model identification<a class="headerlink" href="#ma-model-identification" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>For the <a class="reference internal" href="#AR-model-identification"><span class="xref myst">AR model identification</span></a> we selected <span class="math notranslate nohighlight">\(p\)</span> as the lag after which the spikes in the PACF become nonsignificant.</p></li>
+<li><p>Before, for the <a class="reference internal" href="#ar-model-identification"><span class="xref myst">AR model identification</span></a>, we selected <span class="math notranslate nohighlight">\(p\)</span> as the lag after which the spikes in the PACF become nonsignificant.</p></li>
 <li><p>To identify the order <span class="math notranslate nohighlight">\(q\)</span> of the MA model we do the same but we use the ACF plot insted.</p></li>
 <li><p>Let’s see it through an example.</p></li>
 </ul>
@@ -1169,7 +1169,7 @@ document.write(`
 </ul>
 <ul class="simple">
 <li><p>Characteristic of an MA process are the slowly decaying, alternative spikes in the PACF plot.</p></li>
-<li><p>Note how this is complementary to what we saw for the <a class="reference internal" href="#AR-model-identification"><span class="xref myst">AR process</span></a>.</p></li>
+<li><p>Note how this is complementary to what we saw for the <a class="reference internal" href="#ar-model-identification"><span class="xref myst">AR process</span></a>.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1187,7 +1187,7 @@ document.write(`
 <section id="ma-model-example">
 <h3>MA model example<a class="headerlink" href="#ma-model-example" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>We repeat the same procedure as in the <a class="reference internal" href="#AR-model-example"><span class="xref myst">AR example</span></a> with a MA model.</p></li>
+<li><p>We repeat the same procedure as in the <a class="reference internal" href="#ar-model-example"><span class="xref myst">AR example</span></a> with a MA model.</p></li>
 <li><p>The only difference is that now we construct a time series using a MA process rather than an AR one.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1214,7 +1214,7 @@ document.write(`
 </div>
 <ul class="simple">
 <li><p>To identify the order <span class="math notranslate nohighlight">\(q\)</span> of the MA model we must look at the ACF plot.</p></li>
-<li><p>Let’s start by computing the ACF of <code class="docutils literal notranslate"><span class="pre">train_data_ma</span></code>, which looks very different from the ACF plot we obtained <a class="reference internal" href="#MA-model-identification"><span class="xref myst">before</span></a> for the MA process.</p></li>
+<li><p>Let’s start by computing the ACF of <code class="docutils literal notranslate"><span class="pre">train_data_ma</span></code>, which looks very different from the ACF plot we obtained <a class="reference internal" href="#ma-model-identification"><span class="xref myst">before</span></a> for the MA process.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
