@@ -466,7 +466,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="time-series-classification-and-clustering">
 <h1>Time series classification and clustering<a class="headerlink" href="#time-series-classification-and-clustering" title="Link to this heading">#</a></h1>
-<img alt="../../_images/cover11.png" class="align-center" src="../../_images/cover11.png" />
+<img alt="../../_images/cover11.png" src="../../_images/cover11.png" />
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>In this lecture we will cover the following topics:</p>
@@ -507,6 +507,12 @@ document.write(`
 <span class="kn">from</span> <span class="nn">reservoir_computing.tensorPCA</span> <span class="kn">import</span> <span class="n">tensorPCA</span>
 <span class="kn">from</span> <span class="nn">reservoir_computing.modules</span> <span class="kn">import</span> <span class="n">RC_model</span>
 <span class="kn">from</span> <span class="nn">reservoir_computing.utils</span> <span class="kn">import</span> <span class="n">compute_test_scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filippo/code/Time-Series-Cluster-Kernel/tck/TCK.py:3: TqdmExperimentalWarning: Using `tqdm.autonotebook.tqdm` in notebook mode. Use `tqdm.tqdm` instead to force console mode (e.g. in jupyter console)
+  from tqdm.autonotebook import tqdm
 </pre></div>
 </div>
 </div>
@@ -684,7 +690,7 @@ $<span class="math notranslate nohighlight">\(F1 = 2 \times \frac{\text{Precisio
 where 
 \)</span><span class="math notranslate nohighlight">\(\text{Precision} = \frac{TP}{TP + FP}\)</span><span class="math notranslate nohighlight">\( and \)</span><span class="math notranslate nohighlight">\(\text{Recall} = \frac{TP}{TP + FN}\)</span>$</p></li>
 </ul>
-<img alt="../../_images/precision-recall.png" class="align-center" src="../../_images/precision-recall.png" />
+<img alt="../../_images/precision-recall.png" src="../../_images/precision-recall.png" />
 <div style="text-align: center; font-size: 80%">Image: <a href="https://en.wikipedia.org/wiki/Precision_and_recall">Wikipedia</a></div><p>Let’s create an imbalanced dataset</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1106,14 +1112,14 @@ Partition 1: 4 clusters
 <li><p>The whole datatset can be represented by a 3-dimensional array <code class="docutils literal notranslate"><span class="pre">X</span></code> of size <code class="docutils literal notranslate"><span class="pre">[N,</span> <span class="pre">T,</span> <span class="pre">V]</span></code>.</p></li>
 <li><p>In a classification setting, the <span class="math notranslate nohighlight">\(i\)</span>th MTS <code class="docutils literal notranslate"><span class="pre">X[i,:,:]</span></code> is associated with with a class label <code class="docutils literal notranslate"><span class="pre">y[i]</span></code>.</p></li>
 </ul>
-<img alt="../../_images/mts_data.png" class="align-center" src="../../_images/mts_data.png" />
+<img alt="../../_images/mts_data.png" src="../../_images/mts_data.png" />
 <p><strong>Example:</strong></p>
 <ul class="simple">
 <li><p>Consider the <a class="reference external" href="https://ieeexplore.ieee.org/document/4912759">uWave</a> MTS dataset.</p></li>
 <li><p>Each MTS represents the <span class="math notranslate nohighlight">\((x,y,z)\)</span> measurements of an accelerometer wore when doing one of the following gestures.</p></li>
 <li><p>The dot is the starting point, the arrow the end point.</p></li>
 </ul>
-<img alt="../../_images/UWaveGestureLibrary.jpg" class="align-center" src="../../_images/UWaveGestureLibrary.jpg" />
+<img alt="../../_images/UWaveGestureLibrary.jpg" src="../../_images/UWaveGestureLibrary.jpg" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_uwave</span><span class="p">():</span>
@@ -1169,12 +1175,12 @@ Data shapes:
 <li><p>We compute a distance between all the time steps of two time series <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> of length <span class="math notranslate nohighlight">\(T_x\)</span> and <span class="math notranslate nohighlight">\(T_y\)</span>, respectively: $<span class="math notranslate nohighlight">\(d(\boldsymbol{x}, \boldsymbol{y}) = \sum \limits_{t=1}^{\min(T_x, T_y)} \|x(t) - y(t)\|_2\)</span>$</p></li>
 <li><p>If the two time series are very similar but slightly disaligned, it will produce a large distance.</p></li>
 </ul>
-<img alt="../../_images/DTW_idea_1.gif" class="align-center" src="../../_images/DTW_idea_1.gif" />
+<img alt="../../_images/DTW_idea_1.gif" src="../../_images/DTW_idea_1.gif" />
 <ul class="simple">
 <li><p>DTW disregards the exact timestamps at which the observations occur.</p></li>
 <li><p>DTW seeks for the <em>temporal alignment</em> (a matching between time indexes of the two time series) that minimizes Euclidean distance between aligned series.</p></li>
 </ul>
-<img alt="../../_images/DTW_idea_2.gif" class="align-center" src="../../_images/DTW_idea_2.gif" />
+<img alt="../../_images/DTW_idea_2.gif" src="../../_images/DTW_idea_2.gif" />
 <section id="dtw-algorithm">
 <h3>DTW algorithm<a class="headerlink" href="#dtw-algorithm" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1191,7 +1197,7 @@ Data shapes:
 </ul>
 </li>
 </ol>
-<img alt="../../_images/start_end.png" class="align-center" src="../../_images/start_end.png" />
+<img alt="../../_images/start_end.png" src="../../_images/start_end.png" />
 <ol class="arabic simple" start="2">
 <li><p>The sequence is monotonically increasing in both <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> and all time series indexes should appear at least once:</p>
 <ul class="simple">
@@ -1200,7 +1206,7 @@ Data shapes:
 </ul>
 </li>
 </ol>
-<img alt="../../_images/conditions.png" class="align-center" src="../../_images/conditions.png" />
+<img alt="../../_images/conditions.png" src="../../_images/conditions.png" />
 <ul class="simple">
 <li><p>The DTW path can be represented by a binary matrix <span class="math notranslate nohighlight">\(\mathbf{P}_\pi\)</span> whose non-zero entries are those corresponding to a matching between time series elements: $<span class="math notranslate nohighlight">\((\mathbf{P}_\pi)_{i,j} = \begin{cases}1 &amp;= \text{if}\; (i,j)\in \pi \\ 0 &amp;= \text{otherwise}\end{cases}\)</span>$</p></li>
 <li><p>Using the matrix notation, DTW can be rewritten as $<span class="math notranslate nohighlight">\(\text{DTW}(\boldsymbol{x}, \boldsymbol{y}) = \min \limits_{\pi \in \mathcal{P}(\boldsymbol{x}, \boldsymbol{y})} \langle \mathbf{P}_\pi, \mathbf{D}_{\boldsymbol{x}, \boldsymbol{y}} \rangle\)</span><span class="math notranslate nohighlight">\(
@@ -1316,7 +1322,7 @@ where the \)</span>(i,j)^{th}<span class="math notranslate nohighlight">\( eleme
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d8f4698a1643a56a4451387d84611c238f64501f4dfa6587797fb4e643bd5f8d.png" src="../../_images/d8f4698a1643a56a4451387d84611c238f64501f4dfa6587797fb4e643bd5f8d.png" />
+<img alt="../../_images/d89ffe429be30818048bce16d753fa79b2fd645fa1a3a6a6baf5e14fcdcbbbd9.png" src="../../_images/d89ffe429be30818048bce16d753fa79b2fd645fa1a3a6a6baf5e14fcdcbbbd9.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1336,7 +1342,7 @@ where the \)</span>(i,j)^{th}<span class="math notranslate nohighlight">\( eleme
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a83f668a2fb1013433e6377b7ec0c371036fd666c3c9033443e7cf7520aabd61.png" src="../../_images/a83f668a2fb1013433e6377b7ec0c371036fd666c3c9033443e7cf7520aabd61.png" />
+<img alt="../../_images/aa63972bdcdceea4412f28fb7cc078311055dfb4fd5c48424cd4ca471a3ae59c.png" src="../../_images/aa63972bdcdceea4412f28fb7cc078311055dfb4fd5c48424cd4ca471a3ae59c.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1355,7 +1361,7 @@ where the \)</span>(i,j)^{th}<span class="math notranslate nohighlight">\( eleme
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/83bc4e0c812a7e6cd6cd33019d2b931d9fc464bf211e2bb83a7db77a2e907b8c.png" src="../../_images/83bc4e0c812a7e6cd6cd33019d2b931d9fc464bf211e2bb83a7db77a2e907b8c.png" />
+<img alt="../../_images/2227b701390d95558071c3ae936ee3d84826f5a13a2ce8c867dfcd3a9e9f6e0d.png" src="../../_images/2227b701390d95558071c3ae936ee3d84826f5a13a2ce8c867dfcd3a9e9f6e0d.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1378,7 +1384,7 @@ where the \)</span>(i,j)^{th}<span class="math notranslate nohighlight">\( eleme
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/95f107c9f0ed366b0ac5bc46e57c455a7d9ac35e6b2090892976be23c7452edb.png" src="../../_images/95f107c9f0ed366b0ac5bc46e57c455a7d9ac35e6b2090892976be23c7452edb.png" />
+<img alt="../../_images/77387981cee607294f656977c9f66b3a5b87e1efc5a04b6b50a78b05c1f02853.png" src="../../_images/77387981cee607294f656977c9f66b3a5b87e1efc5a04b6b50a78b05c1f02853.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1400,7 +1406,7 @@ where the \)</span>(i,j)^{th}<span class="math notranslate nohighlight">\( eleme
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d2a1d60925122d76233b1f59cead3308c42d53acd276186e71bcfae8cd53abb9.png" src="../../_images/d2a1d60925122d76233b1f59cead3308c42d53acd276186e71bcfae8cd53abb9.png" />
+<img alt="../../_images/287c178501f68eef5ee0d5c9d19c3e8ae0a21f975c33a0682545f35c0ac91a74.png" src="../../_images/287c178501f68eef5ee0d5c9d19c3e8ae0a21f975c33a0682545f35c0ac91a74.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1937,707 +1943,23 @@ Training the TCK using the following parameters:
 	Length of time segments sampled from [6, 23]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:   0%|                                                                                                                                                        | 0/420 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:   1%|█▋                                                                                                                                              | 5/420 [00:00&lt;00:09, 44.57it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:   9%|████████████▌                                                                                                                                 | 37/420 [00:00&lt;00:01, 192.14it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  19%|██████████████████████████▎                                                                                                                   | 78/420 [00:00&lt;00:01, 282.15it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  25%|███████████████████████████████████▉                                                                                                         | 107/420 [00:00&lt;00:01, 256.93it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  32%|████████████████████████████████████████████▉                                                                                                | 134/420 [00:00&lt;00:01, 231.03it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  38%|█████████████████████████████████████████████████████                                                                                        | 158/420 [00:00&lt;00:01, 218.08it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  43%|████████████████████████████████████████████████████████████▊                                                                                | 181/420 [00:00&lt;00:01, 172.00it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  48%|███████████████████████████████████████████████████████████████████▏                                                                         | 200/420 [00:01&lt;00:01, 160.06it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  52%|████████████████████████████████████████████████████████████████████████▊                                                                    | 217/420 [00:01&lt;00:01, 138.23it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  58%|█████████████████████████████████████████████████████████████████████████████████▏                                                           | 242/420 [00:01&lt;00:01, 154.02it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  62%|██████████████████████████████████████████████████████████████████████████████████████▉                                                      | 259/420 [00:01&lt;00:01, 111.08it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  66%|████████████████████████████████████████████████████████████████████████████████████████████▋                                                | 276/420 [00:01&lt;00:01, 102.49it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  69%|█████████████████████████████████████████████████████████████████████████████████████████████████▎                                            | 288/420 [00:02&lt;00:01, 88.03it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  71%|████████████████████████████████████████████████████████████████████████████████████████████████████▊                                         | 298/420 [00:02&lt;00:01, 75.50it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  78%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                               | 326/420 [00:02&lt;00:00, 108.24it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  81%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                           | 339/420 [00:02&lt;00:00, 93.52it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  84%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                       | 351/420 [00:02&lt;00:00, 97.18it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                   | 363/420 [00:03&lt;00:00, 70.23it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  89%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                | 372/420 [00:03&lt;00:00, 67.01it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  91%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍            | 383/420 [00:03&lt;00:00, 71.19it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  94%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊         | 393/420 [00:03&lt;00:00, 61.19it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs:  96%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎     | 403/420 [00:03&lt;00:00, 64.46it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting GMMs: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 420/420 [00:03&lt;00:00, 112.84it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):   0%|                                                                                                                                               | 0/420 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):   2%|██▎                                                                                                                                    | 7/420 [00:00&lt;00:06, 63.48it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):   3%|████▍                                                                                                                                 | 14/420 [00:00&lt;00:06, 66.71it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):   5%|███████                                                                                                                               | 22/420 [00:00&lt;00:05, 69.59it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):   7%|█████████▎                                                                                                                            | 29/420 [00:00&lt;00:07, 55.02it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):   9%|████████████▍                                                                                                                         | 39/420 [00:00&lt;00:05, 67.30it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  12%|███████████████▋                                                                                                                      | 49/420 [00:00&lt;00:04, 76.43it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  14%|██████████████████▌                                                                                                                   | 58/420 [00:00&lt;00:04, 79.69it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  16%|█████████████████████▍                                                                                                                | 67/420 [00:01&lt;00:05, 61.81it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  18%|███████████████████████▌                                                                                                              | 74/420 [00:01&lt;00:07, 49.38it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  19%|█████████████████████████▌                                                                                                            | 80/420 [00:01&lt;00:07, 43.11it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  20%|███████████████████████████                                                                                                           | 85/420 [00:01&lt;00:08, 40.30it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  21%|████████████████████████████▋                                                                                                         | 90/420 [00:01&lt;00:09, 34.59it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  22%|█████████████████████████████▉                                                                                                        | 94/420 [00:01&lt;00:09, 35.23it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  23%|███████████████████████████████▎                                                                                                      | 98/420 [00:02&lt;00:09, 34.44it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  24%|████████████████████████████████▎                                                                                                    | 102/420 [00:02&lt;00:09, 35.11it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  25%|█████████████████████████████████▌                                                                                                   | 106/420 [00:02&lt;00:09, 32.75it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  26%|██████████████████████████████████▊                                                                                                  | 110/420 [00:02&lt;00:09, 31.76it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  27%|████████████████████████████████████                                                                                                 | 114/420 [00:02&lt;00:09, 31.94it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  28%|█████████████████████████████████████▎                                                                                               | 118/420 [00:02&lt;00:10, 29.97it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  29%|██████████████████████████████████████▋                                                                                              | 122/420 [00:02&lt;00:10, 29.21it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  30%|███████████████████████████████████████▉                                                                                             | 126/420 [00:02&lt;00:09, 31.26it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  31%|█████████████████████████████████████████▏                                                                                           | 130/420 [00:03&lt;00:09, 31.83it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  32%|██████████████████████████████████████████▍                                                                                          | 134/420 [00:03&lt;00:09, 29.49it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  33%|███████████████████████████████████████████▋                                                                                         | 138/420 [00:03&lt;00:08, 31.47it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  34%|████████████████████████████████████████████▉                                                                                        | 142/420 [00:03&lt;00:09, 28.64it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  35%|██████████████████████████████████████████████▏                                                                                      | 146/420 [00:03&lt;00:09, 29.29it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  36%|███████████████████████████████████████████████▌                                                                                     | 150/420 [00:03&lt;00:08, 30.91it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  37%|████████████████████████████████████████████████▊                                                                                    | 154/420 [00:03&lt;00:08, 31.93it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  38%|██████████████████████████████████████████████████                                                                                   | 158/420 [00:03&lt;00:08, 31.78it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  39%|███████████████████████████████████████████████████▎                                                                                 | 162/420 [00:04&lt;00:08, 30.09it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  40%|████████████████████████████████████████████████████▌                                                                                | 166/420 [00:04&lt;00:08, 31.32it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  40%|█████████████████████████████████████████████████████▊                                                                               | 170/420 [00:04&lt;00:08, 29.61it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  41%|███████████████████████████████████████████████████████                                                                              | 174/420 [00:04&lt;00:09, 26.71it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  43%|████████████████████████████████████████████████████████▋                                                                            | 179/420 [00:04&lt;00:08, 29.80it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  44%|█████████████████████████████████████████████████████████▉                                                                           | 183/420 [00:04&lt;00:07, 30.03it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  45%|███████████████████████████████████████████████████████████▏                                                                         | 187/420 [00:04&lt;00:07, 29.62it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  45%|████████████████████████████████████████████████████████████▍                                                                        | 191/420 [00:05&lt;00:07, 30.00it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  46%|█████████████████████████████████████████████████████████████▊                                                                       | 195/420 [00:05&lt;00:07, 29.16it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  47%|███████████████████████████████████████████████████████████████                                                                      | 199/420 [00:05&lt;00:07, 29.59it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  48%|████████████████████████████████████████████████████████████████▎                                                                    | 203/420 [00:05&lt;00:07, 30.99it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  49%|█████████████████████████████████████████████████████████████████▌                                                                   | 207/420 [00:05&lt;00:07, 28.99it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  50%|██████████████████████████████████████████████████████████████████▌                                                                  | 210/420 [00:05&lt;00:07, 28.71it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  51%|███████████████████████████████████████████████████████████████████▍                                                                 | 213/420 [00:05&lt;00:07, 28.84it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  52%|████████████████████████████████████████████████████████████████████▋                                                                | 217/420 [00:06&lt;00:07, 28.82it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  53%|█████████████████████████████████████████████████████████████████████▉                                                               | 221/420 [00:06&lt;00:06, 29.54it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  53%|██████████████████████████████████████████████████████████████████████▉                                                              | 224/420 [00:06&lt;00:07, 26.99it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  54%|████████████████████████████████████████████████████████████████████████▏                                                            | 228/420 [00:06&lt;00:06, 28.84it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  55%|█████████████████████████████████████████████████████████████████████████▊                                                           | 233/420 [00:06&lt;00:05, 32.48it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  56%|███████████████████████████████████████████████████████████████████████████                                                          | 237/420 [00:06&lt;00:05, 32.68it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  57%|████████████████████████████████████████████████████████████████████████████▎                                                        | 241/420 [00:06&lt;00:05, 31.49it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  58%|█████████████████████████████████████████████████████████████████████████████▌                                                       | 245/420 [00:06&lt;00:06, 28.25it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  60%|███████████████████████████████████████████████████████████████████████████████▏                                                     | 250/420 [00:07&lt;00:05, 32.12it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  60%|████████████████████████████████████████████████████████████████████████████████▍                                                    | 254/420 [00:07&lt;00:05, 32.82it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  61%|█████████████████████████████████████████████████████████████████████████████████▋                                                   | 258/420 [00:07&lt;00:05, 30.67it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  62%|██████████████████████████████████████████████████████████████████████████████████▉                                                  | 262/420 [00:07&lt;00:05, 30.16it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  63%|████████████████████████████████████████████████████████████████████████████████████▏                                                | 266/420 [00:07&lt;00:05, 29.63it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  64%|█████████████████████████████████████████████████████████████████████████████████████▌                                               | 270/420 [00:07&lt;00:05, 27.42it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  65%|███████████████████████████████████████████████████████████████████████████████████████                                              | 275/420 [00:07&lt;00:04, 31.87it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  66%|████████████████████████████████████████████████████████████████████████████████████████▎                                            | 279/420 [00:08&lt;00:04, 30.94it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  67%|█████████████████████████████████████████████████████████████████████████████████████████▌                                           | 283/420 [00:08&lt;00:04, 31.36it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  68%|██████████████████████████████████████████████████████████████████████████████████████████▉                                          | 287/420 [00:08&lt;00:04, 30.38it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  69%|████████████████████████████████████████████████████████████████████████████████████████████▏                                        | 291/420 [00:08&lt;00:04, 31.84it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  70%|█████████████████████████████████████████████████████████████████████████████████████████████▍                                       | 295/420 [00:08&lt;00:03, 32.24it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  71%|██████████████████████████████████████████████████████████████████████████████████████████████▋                                      | 299/420 [00:08&lt;00:04, 29.82it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  72%|████████████████████████████████████████████████████████████████████████████████████████████████▎                                    | 304/420 [00:08&lt;00:03, 33.05it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  73%|█████████████████████████████████████████████████████████████████████████████████████████████████▌                                   | 308/420 [00:08&lt;00:03, 28.91it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  74%|██████████████████████████████████████████████████████████████████████████████████████████████████▊                                  | 312/420 [00:09&lt;00:03, 29.13it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  75%|████████████████████████████████████████████████████████████████████████████████████████████████████                                 | 316/420 [00:09&lt;00:03, 26.96it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  76%|█████████████████████████████████████████████████████████████████████████████████████████████████████▎                               | 320/420 [00:09&lt;00:03, 29.75it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  77%|██████████████████████████████████████████████████████████████████████████████████████████████████████▌                              | 324/420 [00:09&lt;00:03, 31.84it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  78%|███████████████████████████████████████████████████████████████████████████████████████████████████████▊                             | 328/420 [00:09&lt;00:02, 31.49it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  79%|█████████████████████████████████████████████████████████████████████████████████████████████████████████▏                           | 332/420 [00:09&lt;00:03, 28.18it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  80%|██████████████████████████████████████████████████████████████████████████████████████████████████████████▍                          | 336/420 [00:09&lt;00:02, 29.00it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  81%|███████████████████████████████████████████████████████████████████████████████████████████████████████████▉                         | 341/420 [00:10&lt;00:02, 31.30it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  82%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████▎                       | 345/420 [00:10&lt;00:02, 32.08it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  83%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                      | 349/420 [00:10&lt;00:02, 32.60it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  84%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                     | 353/420 [00:10&lt;00:02, 30.19it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  85%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████                    | 357/420 [00:10&lt;00:02, 31.21it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎                  | 361/420 [00:10&lt;00:01, 30.75it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  87%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                 | 365/420 [00:10&lt;00:02, 27.02it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  88%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                | 368/420 [00:11&lt;00:01, 27.39it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  89%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████               | 373/420 [00:11&lt;00:01, 27.76it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  90%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍             | 377/420 [00:11&lt;00:01, 30.22it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  91%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋            | 381/420 [00:11&lt;00:01, 31.97it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  92%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉           | 385/420 [00:11&lt;00:01, 27.26it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  93%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌         | 390/420 [00:11&lt;00:00, 32.34it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  94%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊        | 394/420 [00:11&lt;00:01, 24.81it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  95%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋      | 400/420 [00:12&lt;00:00, 31.48it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  96%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉     | 404/420 [00:12&lt;00:00, 30.17it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  97%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏   | 408/420 [00:12&lt;00:00, 31.27it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  98%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍  | 412/420 [00:12&lt;00:00, 29.16it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr):  99%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋ | 416/420 [00:12&lt;00:00, 31.05it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 420/420 [00:12&lt;00:00, 31.13it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-tr): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 420/420 [00:12&lt;00:00, 33.00it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):   0%|                                                                                                                                               | 0/420 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):   1%|█▌                                                                                                                                     | 5/420 [00:00&lt;00:08, 49.88it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):   3%|███▌                                                                                                                                  | 11/420 [00:00&lt;00:08, 50.84it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):   4%|█████▍                                                                                                                                | 17/420 [00:00&lt;00:07, 52.10it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):   5%|███████▎                                                                                                                              | 23/420 [00:00&lt;00:07, 52.85it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):   7%|█████████▉                                                                                                                            | 31/420 [00:00&lt;00:06, 60.30it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):   9%|████████████                                                                                                                          | 38/420 [00:00&lt;00:09, 42.32it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  10%|█████████████▋                                                                                                                        | 43/420 [00:00&lt;00:09, 40.23it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  11%|███████████████▎                                                                                                                      | 48/420 [00:01&lt;00:10, 34.79it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  12%|████████████████▌                                                                                                                     | 52/420 [00:01&lt;00:10, 34.35it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  13%|█████████████████▊                                                                                                                    | 56/420 [00:01&lt;00:11, 32.41it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  14%|███████████████████▏                                                                                                                  | 60/420 [00:01&lt;00:11, 31.58it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  15%|████████████████████▍                                                                                                                 | 64/420 [00:01&lt;00:11, 30.29it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  16%|█████████████████████▋                                                                                                                | 68/420 [00:01&lt;00:11, 29.69it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  17%|██████████████████████▉                                                                                                               | 72/420 [00:02&lt;00:12, 27.47it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  18%|████████████████████████▏                                                                                                             | 76/420 [00:02&lt;00:11, 28.67it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  19%|█████████████████████████▏                                                                                                            | 79/420 [00:02&lt;00:13, 24.50it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  20%|██████████████████████████▊                                                                                                           | 84/420 [00:02&lt;00:12, 27.52it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  21%|███████████████████████████▊                                                                                                          | 87/420 [00:02&lt;00:12, 27.51it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  22%|█████████████████████████████                                                                                                         | 91/420 [00:02&lt;00:11, 28.17it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  22%|█████████████████████████████▉                                                                                                        | 94/420 [00:02&lt;00:11, 27.30it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  23%|██████████████████████████████▉                                                                                                       | 97/420 [00:02&lt;00:11, 27.60it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  24%|███████████████████████████████▋                                                                                                     | 100/420 [00:03&lt;00:11, 27.00it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  25%|████████████████████████████████▌                                                                                                    | 103/420 [00:03&lt;00:12, 24.46it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  26%|██████████████████████████████████▏                                                                                                  | 108/420 [00:03&lt;00:11, 26.93it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  27%|███████████████████████████████████▍                                                                                                 | 112/420 [00:03&lt;00:11, 27.09it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  27%|████████████████████████████████████▍                                                                                                | 115/420 [00:03&lt;00:11, 27.61it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  28%|█████████████████████████████████████▎                                                                                               | 118/420 [00:03&lt;00:10, 27.79it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  29%|██████████████████████████████████████▎                                                                                              | 121/420 [00:03&lt;00:12, 24.62it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  30%|███████████████████████████████████████▌                                                                                             | 125/420 [00:03&lt;00:10, 27.17it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  30%|████████████████████████████████████████▌                                                                                            | 128/420 [00:04&lt;00:11, 25.23it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  31%|█████████████████████████████████████████▊                                                                                           | 132/420 [00:04&lt;00:10, 27.75it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  32%|██████████████████████████████████████████▊                                                                                          | 135/420 [00:04&lt;00:10, 26.79it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  33%|███████████████████████████████████████████▋                                                                                         | 138/420 [00:04&lt;00:10, 26.39it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  34%|████████████████████████████████████████████▋                                                                                        | 141/420 [00:04&lt;00:10, 27.03it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  35%|█████████████████████████████████████████████▉                                                                                       | 145/420 [00:04&lt;00:09, 28.22it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  35%|███████████████████████████████████████████████▏                                                                                     | 149/420 [00:04&lt;00:08, 30.96it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  36%|████████████████████████████████████████████████▍                                                                                    | 153/420 [00:04&lt;00:09, 28.48it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  37%|█████████████████████████████████████████████████▍                                                                                   | 156/420 [00:05&lt;00:10, 25.46it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  38%|██████████████████████████████████████████████████▋                                                                                  | 160/420 [00:05&lt;00:09, 26.16it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  39%|███████████████████████████████████████████████████▉                                                                                 | 164/420 [00:05&lt;00:09, 27.48it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  40%|█████████████████████████████████████████████████████▌                                                                               | 169/420 [00:05&lt;00:07, 32.80it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  41%|██████████████████████████████████████████████████████▊                                                                              | 173/420 [00:05&lt;00:09, 27.07it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  42%|███████████████████████████████████████████████████████▋                                                                             | 176/420 [00:05&lt;00:09, 27.02it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  43%|█████████████████████████████████████████████████████████                                                                            | 180/420 [00:05&lt;00:08, 28.92it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  44%|██████████████████████████████████████████████████████████▎                                                                          | 184/420 [00:06&lt;00:09, 25.32it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  45%|███████████████████████████████████████████████████████████▌                                                                         | 188/420 [00:06&lt;00:08, 27.72it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  45%|████████████████████████████████████████████████████████████▍                                                                        | 191/420 [00:06&lt;00:10, 22.43it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  46%|█████████████████████████████████████████████████████████████▊                                                                       | 195/420 [00:06&lt;00:09, 24.58it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  48%|███████████████████████████████████████████████████████████████▎                                                                     | 200/420 [00:06&lt;00:08, 26.84it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  48%|████████████████████████████████████████████████████████████████▎                                                                    | 203/420 [00:06&lt;00:08, 26.80it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  49%|█████████████████████████████████████████████████████████████████▏                                                                   | 206/420 [00:06&lt;00:08, 26.45it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  50%|██████████████████████████████████████████████████████████████████▏                                                                  | 209/420 [00:07&lt;00:07, 26.93it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  50%|███████████████████████████████████████████████████████████████████▏                                                                 | 212/420 [00:07&lt;00:07, 27.23it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  51%|████████████████████████████████████████████████████████████████████                                                                 | 215/420 [00:07&lt;00:07, 26.77it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  52%|█████████████████████████████████████████████████████████████████████▋                                                               | 220/420 [00:07&lt;00:06, 28.89it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  53%|██████████████████████████████████████████████████████████████████████▉                                                              | 224/420 [00:07&lt;00:06, 28.56it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  54%|███████████████████████████████████████████████████████████████████████▉                                                             | 227/420 [00:07&lt;00:06, 28.02it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  55%|████████████████████████████████████████████████████████████████████████▊                                                            | 230/420 [00:07&lt;00:06, 27.69it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  56%|██████████████████████████████████████████████████████████████████████████                                                           | 234/420 [00:08&lt;00:07, 24.08it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  57%|████████████████████████████████████████████████████████████████████████████                                                         | 240/420 [00:08&lt;00:06, 29.72it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  58%|█████████████████████████████████████████████████████████████████████████████▎                                                       | 244/420 [00:08&lt;00:06, 28.91it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  59%|██████████████████████████████████████████████████████████████████████████████▏                                                      | 247/420 [00:08&lt;00:06, 27.02it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  60%|███████████████████████████████████████████████████████████████████████████████▏                                                     | 250/420 [00:08&lt;00:06, 27.14it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  60%|████████████████████████████████████████████████████████████████████████████████▍                                                    | 254/420 [00:08&lt;00:06, 26.41it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  61%|█████████████████████████████████████████████████████████████████████████████████▋                                                   | 258/420 [00:08&lt;00:05, 28.58it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  62%|██████████████████████████████████████████████████████████████████████████████████▋                                                  | 261/420 [00:08&lt;00:05, 27.64it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  63%|███████████████████████████████████████████████████████████████████████████████████▉                                                 | 265/420 [00:09&lt;00:05, 29.38it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  64%|████████████████████████████████████████████████████████████████████████████████████▊                                                | 268/420 [00:09&lt;00:05, 27.40it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  65%|██████████████████████████████████████████████████████████████████████████████████████▏                                              | 272/420 [00:09&lt;00:05, 27.31it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  66%|███████████████████████████████████████████████████████████████████████████████████████▍                                             | 276/420 [00:09&lt;00:04, 29.53it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  66%|████████████████████████████████████████████████████████████████████████████████████████▎                                            | 279/420 [00:09&lt;00:04, 29.22it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  67%|█████████████████████████████████████████████████████████████████████████████████████████▎                                           | 282/420 [00:09&lt;00:05, 26.22it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  68%|██████████████████████████████████████████████████████████████████████████████████████████▌                                          | 286/420 [00:09&lt;00:04, 29.34it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  69%|███████████████████████████████████████████████████████████████████████████████████████████▊                                         | 290/420 [00:09&lt;00:04, 28.75it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  70%|█████████████████████████████████████████████████████████████████████████████████████████████                                        | 294/420 [00:10&lt;00:04, 26.57it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  71%|██████████████████████████████████████████████████████████████████████████████████████████████▎                                      | 298/420 [00:10&lt;00:04, 25.68it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  72%|███████████████████████████████████████████████████████████████████████████████████████████████▉                                     | 303/420 [00:10&lt;00:04, 27.86it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  73%|████████████████████████████████████████████████████████████████████████████████████████████████▉                                    | 306/420 [00:10&lt;00:04, 28.26it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  74%|██████████████████████████████████████████████████████████████████████████████████████████████████▏                                  | 310/420 [00:10&lt;00:03, 28.42it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  75%|███████████████████████████████████████████████████████████████████████████████████████████████████▍                                 | 314/420 [00:10&lt;00:04, 25.77it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  76%|█████████████████████████████████████████████████████████████████████████████████████████████████████                                | 319/420 [00:11&lt;00:03, 28.52it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  77%|█████████████████████████████████████████████████████████████████████████████████████████████████████▉                               | 322/420 [00:11&lt;00:03, 26.37it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  78%|███████████████████████████████████████████████████████████████████████████████████████████████████████▏                             | 326/420 [00:11&lt;00:03, 27.04it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  78%|████████████████████████████████████████████████████████████████████████████████████████████████████████▏                            | 329/420 [00:11&lt;00:03, 25.21it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  79%|█████████████████████████████████████████████████████████████████████████████████████████████████████████▏                           | 332/420 [00:11&lt;00:03, 25.23it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  80%|██████████████████████████████████████████████████████████████████████████████████████████████████████████▋                          | 337/420 [00:11&lt;00:02, 27.89it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  81%|███████████████████████████████████████████████████████████████████████████████████████████████████████████▋                         | 340/420 [00:11&lt;00:02, 27.67it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  82%|████████████████████████████████████████████████████████████████████████████████████████████████████████████▉                        | 344/420 [00:11&lt;00:02, 28.39it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  83%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████▉                       | 347/420 [00:12&lt;00:03, 22.25it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  84%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                     | 352/420 [00:12&lt;00:02, 26.82it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  85%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                    | 356/420 [00:12&lt;00:02, 28.59it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████                   | 360/420 [00:12&lt;00:02, 27.02it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉                  | 363/420 [00:12&lt;00:02, 26.81it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  87%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                | 367/420 [00:12&lt;00:01, 27.95it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  88%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏               | 370/420 [00:12&lt;00:01, 28.08it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  89%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████               | 373/420 [00:13&lt;00:01, 26.73it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  90%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████              | 376/420 [00:13&lt;00:01, 25.59it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  90%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎            | 380/420 [00:13&lt;00:01, 28.97it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  91%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎           | 383/420 [00:13&lt;00:01, 25.33it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  92%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊          | 388/420 [00:13&lt;00:01, 26.93it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  93%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊         | 391/420 [00:13&lt;00:01, 27.22it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  94%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊        | 394/420 [00:13&lt;00:00, 27.21it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  95%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋       | 397/420 [00:14&lt;00:01, 20.11it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  96%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌     | 403/420 [00:14&lt;00:00, 28.38it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  97%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉    | 407/420 [00:14&lt;00:00, 27.53it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  98%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏  | 411/420 [00:14&lt;00:00, 23.78it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  99%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████  | 414/420 [00:14&lt;00:00, 24.17it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te):  99%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████ | 417/420 [00:14&lt;00:00, 25.34it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 420/420 [00:14&lt;00:00, 23.65it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing TCK (tr-te): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 420/420 [00:14&lt;00:00, 28.07it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ktr shape: (270, 270)
-Kte shape: (370, 270)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">51</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">tck</span> <span class="o">=</span> <span class="n">TCK</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Ktr</span> <span class="o">=</span> <span class="n">tck</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;tr-tr&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">Kte</span> <span class="o">=</span> <span class="n">tck</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xte</span><span class="o">=</span><span class="n">Xte</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;tr-te&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ktr shape: </span><span class="si">{</span><span class="n">Ktr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">Kte shape: </span><span class="si">{</span><span class="n">Kte</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/code/Time-Series-Cluster-Kernel/tck/TCK.py:87,</span> in <span class="ni">TCK.fit</span><span class="nt">(self, X, minN, minV, maxV, minT, maxT, I)</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span> <span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span>     <span class="c1"># Pass additional arguments required by process_gmm</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span>     <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_gmm</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="n">minN</span><span class="p">,</span> <span class="n">minT</span><span class="p">,</span> <span class="n">maxT</span><span class="p">,</span> <span class="n">minV</span><span class="p">,</span> <span class="n">maxV</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">missing</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))]</span>
+<span class="ne">---&gt; </span><span class="mi">87</span>     <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">futures</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Fitting GMMs&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span>         <span class="bp">self</span><span class="o">.</span><span class="n">GMM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span> <span class="k">return</span> <span class="bp">self</span>
+
+<span class="ne">AttributeError</span>: type object &#39;tqdm_notebook&#39; has no attribute &#39;tqdm&#39;
 </pre></div>
 </div>
 </div>
@@ -2655,7 +1977,7 @@ Kte shape: (370, 270)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Test accuracy: 0.93
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Test accuracy: 0.92
 </pre></div>
 </div>
 </div>
@@ -2736,12 +2058,12 @@ Kte shape: (370, 270)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded Japanese_Vowels dataset.
-Number of classes: 9
 Data shapes:
-  Xtr: (270, 29, 12)
-  Ytr: (270, 1)
-  Xte: (370, 29, 12)
-  Yte: (370, 1)
+ Xtr: (270, 29, 12)
+ Ytr: (270, 1)
+ Xte: (370, 29, 12)
+ Yte: (370, 1)
+ Number of classes: 9 
 </pre></div>
 </div>
 </div>
@@ -2759,9 +2081,7 @@ Data shapes:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unidir
   H: (270, 29, 300)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bidir
+Bidir
   H: (270, 29, 600)
 </pre></div>
 </div>
@@ -2982,12 +2302,12 @@ where \)</span>\mathbf{H}<em>n \in \mathbb{R}^{T \times H}<span class="math notr
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded Japanese_Vowels dataset.
-Number of classes: 9
 Data shapes:
-  Xtr: (270, 29, 12)
-  Ytr: (270, 1)
-  Xte: (370, 29, 12)
-  Yte: (370, 1)
+ Xtr: (270, 29, 12)
+ Ytr: (270, 1)
+ Xte: (370, 29, 12)
+ Yte: (370, 1)
+ Number of classes: 9 
 </pre></div>
 </div>
 </div>
@@ -3014,7 +2334,7 @@ Data shapes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training completed in 0.01 min
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training completed in 0.03 min
 </pre></div>
 </div>
 </div>
@@ -3029,7 +2349,7 @@ Data shapes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 0.978, F1-score = 0.978
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 0.981, F1-score = 0.981
 </pre></div>
 </div>
 </div>
@@ -3064,12 +2384,12 @@ Data shapes:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded Japanese_Vowels dataset.
-Number of classes: 9
 Data shapes:
-  Xtr: (270, 29, 12)
-  Ytr: (270, 1)
-  Xte: (370, 29, 12)
-  Yte: (370, 1)
+ Xtr: (270, 29, 12)
+ Ytr: (270, 1)
+ Xte: (370, 29, 12)
+ Yte: (370, 1)
+ Number of classes: 9 
 </pre></div>
 </div>
 </div>
@@ -3099,7 +2419,7 @@ Data shapes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training completed in 0.02 min
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training completed in 0.07 min
 </pre></div>
 </div>
 </div>
@@ -3128,7 +2448,7 @@ Data shapes:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 9 clusters
-Normalized Mutual Information (v-score): 0.875
+Normalized Mutual Information (v-score): 0.859
 </pre></div>
 </div>
 </div>
@@ -3189,12 +2509,12 @@ Normalized Mutual Information (v-score): 0.875
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded Libras dataset.
-Number of classes: 15
 Data shapes:
-  Xtr: (180, 45, 2)
-  Ytr: (180, 1)
-  Xte: (180, 45, 2)
-  Yte: (180, 1)
+ Xtr: (180, 45, 2)
+ Ytr: (180, 1)
+ Xte: (180, 45, 2)
+ Yte: (180, 1)
+ Number of classes: 15 
 </pre></div>
 </div>
 </div>
