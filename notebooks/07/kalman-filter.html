@@ -758,8 +758,8 @@ x_{t-1} \\
 <li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{R} \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = \mathbf{H}^{-1}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> weights the residuals more heavily:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-841963cf-58fe-4bf9-a8d3-7d2b31b60e32">
-<span class="eqno">()<a class="headerlink" href="#equation-841963cf-58fe-4bf9-a8d3-7d2b31b60e32" title="Permalink to this equation">#</a></span>\[\begin{align} \hat{\boldsymbol{x}}_{t} &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\Delta_t = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}(\boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t})\\ &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} - \mathbf{H}^{-1}\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} -  \hat{\boldsymbol{x}}^{-}_{t}\\ &amp;= \mathbf{H}^{-1}\boldsymbol{z}_{t} \end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-13c84b53-6a72-419a-ad34-39009f934a73">
+<span class="eqno">()<a class="headerlink" href="#equation-13c84b53-6a72-419a-ad34-39009f934a73" title="Permalink to this equation">#</a></span>\[\begin{align} \hat{\boldsymbol{x}}_{t} &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\Delta_t = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}(\boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t})\\ &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} - \mathbf{H}^{-1}\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} -  \hat{\boldsymbol{x}}^{-}_{t}\\ &amp;= \mathbf{H}^{-1}\boldsymbol{z}_{t} \end{align}\]</div>
 </li>
 </ol>
 <img alt="../../_images/extreme1.png" src="../../_images/extreme1.png" />
@@ -1290,7 +1290,7 @@ x_{t-1} \\
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="exercise-1">
 <h3>Exercise #1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
-<p>This exercise refers to <a class="reference internal" href="#Example-1:-Static-one-dimensional-data"><span class="xref myst">Example 1</span></a>.</p>
+<p>This exercise refers to <a class="reference internal" href="#example-1-static-one-dimensional-data"><span class="xref myst">Example 1</span></a>.</p>
 <ol class="arabic simple">
 <li><p>Choose a value for the estimated model variance <code class="docutils literal notranslate"><span class="pre">Q_est</span></code> that is larger than estimated measurement variance <code class="docutils literal notranslate"><span class="pre">R_est</span></code>.</p></li>
 <li><p>Repeat the analysis of Example 1 for this new value.</p></li>
@@ -1300,7 +1300,7 @@ x_{t-1} \\
 </section>
 <section id="exercise-2">
 <h3>Exercise #2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
-<p>This exercise refers to <a class="reference internal" href="#Example-2:-Dynamic-one-dimensional-data"><span class="xref myst">Example 2</span></a>.</p>
+<p>This exercise refers to <a class="reference internal" href="#example-2-dynamic-one-dimensional-data"><span class="xref myst">Example 2</span></a>.</p>
 <p>In the case we examined above, the KF estimate was close to the measurements and both were different from the true value.
 Change the parameters of the algorithm until you find some combinations that achieve the following:</p>
 <ol class="arabic simple">
@@ -1312,7 +1312,7 @@ Change the parameters of the algorithm until you find some combinations that ach
 </section>
 <section id="exercise-3">
 <h3>Exercise #3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
-<p>This exercise refers to <a class="reference internal" href="#Example-3:-Dynamic-two-dimensional-data"><span class="xref myst">Example 3</span></a>.</p>
+<p>This exercise refers to <a class="reference internal" href="#example-3-dynamic-two-dimensional-data"><span class="xref myst">Example 3</span></a>.</p>
 <p>In the original example, we used both Position and Velocity (PV model) in the state vector, i.e., <span class="math notranslate nohighlight">\(\boldsymbol{x} = \begin{bmatrix} x &amp; y &amp; \dot x &amp; \dot y \end{bmatrix}^T\)</span>.</p>
 <p>What happens if we use only the Position (P model) to describe the state? After all, our measurements only provide position. Do we really need to include the velocity?</p>
 <ol class="arabic simple">
