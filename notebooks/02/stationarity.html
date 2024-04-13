@@ -449,7 +449,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="stationarity">
 <h1>Stationarity<a class="headerlink" href="#stationarity" title="Link to this heading">#</a></h1>
-<img alt="../../_images/cover1.png" class="align-center" src="../../_images/cover1.png" />
+<img alt="../../_images/cover1.png" src="../../_images/cover1.png" />
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -511,8 +511,12 @@ document.write(`
 <section id="strict-stationarity">
 <h4>Strict stationarity<a class="headerlink" href="#strict-stationarity" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>A stochastic process <span class="math notranslate nohighlight">\(X(t): t \in \mathcal{T}\)</span> is called strictly stationary if, for all <span class="math notranslate nohighlight">\(t_1, t_2, \dots, t_n \in \mathcal{T}\)</span> and <span class="math notranslate nohighlight">\(h\)</span> such that <span class="math notranslate nohighlight">\(t_1+h, t_2+h, \dots, t_n+h \in \mathcal{T}\)</span>, it holds that
-$<span class="math notranslate nohighlight">\(\big(X(t_1),X(t_2), \dots, X(t_n)\big) \stackrel{\text{D}}{=} \big(X(t_1+h),X(t_2+h), \dots, X(t_n+h)\big)\)</span><span class="math notranslate nohighlight">\( where \)</span>\stackrel{\text{D}}{=}$ indicates that the distributions are equal.</p></li>
+<li><p>A stochastic process <span class="math notranslate nohighlight">\(X(t): t \in \mathcal{T}\)</span> is called strictly stationary if, for all <span class="math notranslate nohighlight">\(t_1, t_2, \dots, t_n \in \mathcal{T}\)</span> and <span class="math notranslate nohighlight">\(h\)</span> such that <span class="math notranslate nohighlight">\(t_1+h, t_2+h, \dots, t_n+h \in \mathcal{T}\)</span>, it holds that</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\big(X(t_1),X(t_2), \dots, X(t_n)\big) \stackrel{\text{D}}{=} \big(X(t_1+h),X(t_2+h), \dots, X(t_n+h)\big)\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\stackrel{\text{D}}{=}\)</span> indicates that the distributions are equal.</p></li>
 <li><p>In plain words, the joint distribution of any set of observations in the series remains the same regardless of the time at which the observations are taken.</p></li>
 </ul>
 <ul class="simple">
@@ -674,7 +678,12 @@ $<span class="math notranslate nohighlight">\(\big(X(t_1),X(t_2), \dots, X(t_n)\
 <h4>Random walk<a class="headerlink" href="#random-walk" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>The random walk is one of the most important nonstationary time series.</p></li>
-<li><p>Is defined as $<span class="math notranslate nohighlight">\(X_{t} = X_{t-1} + \epsilon_t\)</span><span class="math notranslate nohighlight">\(  where \)</span>\epsilon_t<span class="math notranslate nohighlight">\( are called *innovations* and are iid. E.g., \)</span>\epsilon_t \sim \mathcal{N}(0,\sigma^2)$.</p></li>
+<li><p>Is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X_{t} = X_{t-1} + \epsilon_t\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\epsilon_t\)</span> are called <em>innovations</em> and are iid. E.g., <span class="math notranslate nohighlight">\(\epsilon_t \sim \mathcal{N}(0,\sigma^2)\)</span>.</p></li>
 <li><p>Let’s create a random walk.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -729,20 +738,24 @@ $<span class="math notranslate nohighlight">\(\big(X(t_1),X(t_2), \dots, X(t_n)\
 </ul>
 </li>
 </ol>
-<ol class="arabic simple" start="3">
+<ol class="arabic" start="3">
 <li><p>At <span class="math notranslate nohighlight">\(t = 2\)</span> we have:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(X_2 = X_1 + \epsilon_2 = X_0 + \epsilon_1 + \epsilon_2\)</span>,</p></li>
-<li><p>Since <span class="math notranslate nohighlight">\(\epsilon_1\)</span> and <span class="math notranslate nohighlight">\(\epsilon_2\)</span> are independent we get $<span class="math notranslate nohighlight">\(\text{Var}(X_2) = \text{Var}(\epsilon_1 + \epsilon_2) = \text{Var}(\epsilon_1) + \text{Var}(\epsilon_2) = \sigma^2 + \sigma^2 = 2\sigma^2\)</span>$</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\epsilon_1\)</span> and <span class="math notranslate nohighlight">\(\epsilon_2\)</span> are independent we get</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(X_2) = \text{Var}(\epsilon_1 + \epsilon_2) = \text{Var}(\epsilon_1) + \text{Var}(\epsilon_2) = \sigma^2 + \sigma^2 = 2\sigma^2\]</div>
 </li>
 </ol>
-<ol class="arabic simple" start="4">
+<ol class="arabic" start="4">
 <li><p>At a general time <span class="math notranslate nohighlight">\(t\)</span> we have:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(X_t = X_{t-1} + \epsilon_t = X_0 + \epsilon_1 + \epsilon_2 + \ldots + \epsilon_t\)</span>,</p></li>
-<li><p>Again, using the independence of the <span class="math notranslate nohighlight">\(\epsilon\)</span> terms and the fact that each has variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> we get $<span class="math notranslate nohighlight">\(\text{Var}(X_t) = \text{Var}(\epsilon_1) + \text{Var}(\epsilon_2) + \ldots + \text{Var}(\epsilon_t) = t\sigma^2\)</span>$</p></li>
+<li><p>Again, using the independence of the <span class="math notranslate nohighlight">\(\epsilon\)</span> terms and the fact that each has variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> we get</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(X_t) = \text{Var}(\epsilon_1) + \text{Var}(\epsilon_2) + \ldots + \text{Var}(\epsilon_t) = t\sigma^2\]</div>
 </li>
 </ol>
 </section>
@@ -869,9 +882,12 @@ $<span class="math notranslate nohighlight">\(\big(X(t_1),X(t_2), \dots, X(t_n)\
 <section id="sinusoidal-signal-with-random-phase">
 <h4>Sinusoidal signal with random phase<a class="headerlink" href="#sinusoidal-signal-with-random-phase" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Consider the sinusoidal signal
-$<span class="math notranslate nohighlight">\(x_t = \mu + R \sin(\lambda t + \psi)\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\mu<span class="math notranslate nohighlight">\( is the mean, \)</span>R<span class="math notranslate nohighlight">\( is the amplitude, \)</span>\lambda<span class="math notranslate nohighlight">\( is the frequency, and \)</span>\psi<span class="math notranslate nohighlight">\( is the phase uniformly distributed over the range \)</span>[- \pi, \pi]$.</p></li>
+<li><p>Consider the sinusoidal signal</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[x_t = \mu + R \sin(\lambda t + \psi)\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the mean, <span class="math notranslate nohighlight">\(R\)</span> is the amplitude, <span class="math notranslate nohighlight">\(\lambda\)</span> is the frequency, and <span class="math notranslate nohighlight">\(\psi\)</span> is the phase uniformly distributed over the range <span class="math notranslate nohighlight">\([- \pi, \pi]\)</span>.</p></li>
 <li><p>Is this a periodic signal?</p></li>
 <li><p>Does it satisfy the conditions for weak stationarity?</p></li>
 </ul>
@@ -906,20 +922,27 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 </div>
 </div>
 <ul class="simple">
-<li><p>The <strong>variance</strong> is given by:
-$<span class="math notranslate nohighlight">\(\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2\)</span>$</p></li>
-<li><p>Given that we have already established <span class="math notranslate nohighlight">\(\mathbb{E}[\sin(\lambda t + \psi)] = 0\)</span>, the formula for variance simplifies to
-$<span class="math notranslate nohighlight">\(\text{Var}(\sin(\lambda t + \psi)) = \mathbb{E}[\sin^2(\lambda t + \psi)]\)</span>$</p></li>
+<li><p>The <strong>variance</strong> is given by:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2\]</div>
+<ul class="simple">
+<li><p>Given that we have already established <span class="math notranslate nohighlight">\(\mathbb{E}[\sin(\lambda t + \psi)] = 0\)</span>, the formula for variance simplifies to</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(\sin(\lambda t + \psi)) = \mathbb{E}[\sin^2(\lambda t + \psi)]\]</div>
 <ul class="simple">
 <li><p>Because <span class="math notranslate nohighlight">\(\psi\)</span> is uniformly distributed over <span class="math notranslate nohighlight">\([- \pi, \pi]\)</span>, its pdf is <span class="math notranslate nohighlight">\(\frac{1}{2\pi}\)</span>.</p></li>
-<li><p>Therefore, we have: $<span class="math notranslate nohighlight">\(\mathbb{E}[\sin^2(\lambda t + \psi)] = \frac{1}{2\pi} \int_{-\pi}^{\pi} \sin^2(\lambda t + \psi) d\psi\)</span>$</p></li>
+<li><p>Therefore, we have:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}[\sin^2(\lambda t + \psi)] = \frac{1}{2\pi} \int_{-\pi}^{\pi} \sin^2(\lambda t + \psi) d\psi\]</div>
 <ul class="simple">
-<li><p>Since <span class="math notranslate nohighlight">\(\int_{-\pi}^{\pi} \sin^2(x) dx = \pi\)</span>, we have that:
-$<span class="math notranslate nohighlight">\(\mathbb{E}[\sin^2(\lambda t + \psi)] = \frac{1}{2\pi}\pi = \frac{1}{2}\)</span>$</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\int_{-\pi}^{\pi} \sin^2(x) dx = \pi\)</span>, we have that:</p></li>
 </ul>
-<img alt="../../_images/int.png" class="align-center" src="../../_images/int.png" />
+<div class="math notranslate nohighlight">
+\[\mathbb{E}[\sin^2(\lambda t + \psi)] = \frac{1}{2\pi}\pi = \frac{1}{2}\]</div>
+<img alt="../../_images/int.png" src="../../_images/int.png" />
 <ul class="simple">
 <li><p>Thus, since <span class="math notranslate nohighlight">\(\mathbb{E}[\sin(\lambda t + \psi)] = 0\)</span>, the variance of <span class="math notranslate nohighlight">\(\sin(\lambda t + \psi)\)</span> is:</p></li>
 </ul>
@@ -951,26 +974,38 @@ $<span class="math notranslate nohighlight">\(\mathbb{E}[\sin^2(\lambda t + \psi
 </div>
 </div>
 <ul class="simple">
-<li><p>The autocovariance function for a lag <span class="math notranslate nohighlight">\(h\)</span> is defined as: $<span class="math notranslate nohighlight">\(\text{Cov}(x(t), x(t+h)) = \mathbb{E}[(x(t) - \mu)(x(t+\tau) - \mu)]\)</span>$</p></li>
-<li><p>Since <span class="math notranslate nohighlight">\(x_t = \mu + R \sin(\lambda t + \psi)\)</span>, the autocovariance becomes: $<span class="math notranslate nohighlight">\(\text{Cov}(x_t, x_{t+h}) = \mathbb{E}\left[\left(R \sin(\lambda t + \psi)\right)\left(R \sin(\lambda (t + \tau) + \psi)\right)\right]\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(= R^2 \mathbb{E}\left[\sin(\lambda t + \psi) \sin(\lambda (t + \tau) + \psi)\right]\)</span>$</p></li>
+<li><p>The autocovariance function for a lag <span class="math notranslate nohighlight">\(h\)</span> is defined as:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\text{Cov}(x(t), x(t+h)) = \mathbb{E}[(x(t) - \mu)(x(t+\tau) - \mu)]\]</div>
 <ul class="simple">
-<li><p>Now, we use the trigonometric identity:
-$<span class="math notranslate nohighlight">\(\sin(A) \sin(B) = \frac{1}{2}[\cos(A - B) - \cos(A + B)]\)</span>$</p></li>
-<li><p>Applying this identity, we get:
-$$</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(x_t = \mu + R \sin(\lambda t + \psi)\)</span>, the autocovariance becomes:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-e3a98bd3-6cc9-403b-b863-a1de11399d01">
-<span class="eqno">()<a class="headerlink" href="#equation-e3a98bd3-6cc9-403b-b863-a1de11399d01" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="math notranslate nohighlight">
+\[\text{Cov}(x_t, x_{t+h}) = \mathbb{E}\left[\left(R \sin(\lambda t + \psi)\right)\left(R \sin(\lambda (t + \tau) + \psi)\right)\right]\]</div>
+<div class="math notranslate nohighlight">
+\[= R^2 \mathbb{E}\left[\sin(\lambda t + \psi) \sin(\lambda (t + \tau) + \psi)\right]\]</div>
+<ul class="simple">
+<li><p>Now, we use the trigonometric identity:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\sin(A) \sin(B) = \frac{1}{2}[\cos(A - B) - \cos(A + B)]\]</div>
+<ul class="simple">
+<li><p>Applying this identity, we get:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-d6cd266c-485a-4ae6-97b2-fb56148fb136">
+<span class="eqno">()<a class="headerlink" href="#equation-d6cd266c-485a-4ae6-97b2-fb56148fb136" title="Permalink to this equation">#</a></span>\[\begin{align}
 \text{Cov}(x_t, x_{t+h}) &amp; = R^2 \mathbb{E}\left[\frac{1}{2}[\cos(\lambda t + \psi - \lambda (t + h) - \psi) - \cos(\lambda t + \psi + \lambda (t + h) + \psi)]\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h) - \cos(2\lambda t + 2\psi + \lambda h)\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h)\right] - \frac{R^2}{2} \mathbb{E}\left[\cos(2\lambda t + 2\psi + \lambda h)\right] \end{align}\]</div>
 <ul class="simple">
 <li><p>The expectation is taken over the random variable <span class="math notranslate nohighlight">\(\psi\)</span>.</p></li>
 <li><p>Following the same reasoning we did for the mean, <span class="math notranslate nohighlight">\(\cos(2\lambda t + 2\psi + \lambda \tau)\)</span> averages out to zero because <span class="math notranslate nohighlight">\(\psi\)</span> is uniformly distributed over <span class="math notranslate nohighlight">\([- \pi, \pi]\)</span>.</p></li>
-<li><p>Thus:
-$<span class="math notranslate nohighlight">\(\text{Cov}(x_t, x_{t+h}) = \frac{R^2}{2} \cos(\lambda h)\)</span>$</p></li>
+<li><p>Thus:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{Cov}(x_t, x_{t+h}) = \frac{R^2}{2} \cos(\lambda h)\]</div>
+<ul class="simple">
 <li><p>So, the autocovariance function depends only on the lag <span class="math notranslate nohighlight">\(h\)</span> and is <em>independent</em> of time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p>Also condition #3 is satisfied ✌.</p></li>
 </ul>
@@ -1090,8 +1125,8 @@ $<span class="math notranslate nohighlight">\(\text{Cov}(x_t, x_{t+h}) = \frac{R
 <li><p>Large deviations in either the mean or the variance among chunks might indicate that the time series is nonstationary.</p></li>
 <li><p>It’s not a rigorous method but gives a good hint of whether the data is approximately stationary or not.</p></li>
 </ul>
-<img alt="../../_images/stationary_chunk.png" class="align-center" src="../../_images/stationary_chunk.png" />
-<img alt="../../_images/nonstationary_chunk.png" class="align-center" src="../../_images/nonstationary_chunk.png" />
+<img alt="../../_images/stationary_chunk.png" src="../../_images/stationary_chunk.png" />
+<img alt="../../_images/nonstationary_chunk.png" src="../../_images/nonstationary_chunk.png" />
 <ul class="simple">
 <li><p>Let’s look at an example based on the <code class="docutils literal notranslate"><span class="pre">trend</span></code> time series that we created before.</p></li>
 </ul>
@@ -1620,8 +1655,10 @@ p-value: 0.030
 </ul>
 <ul class="simple">
 <li><p>We know that <code class="docutils literal notranslate"><span class="pre">rand_walk</span></code> was created with a lag of 1.</p></li>
-<li><p>So, a stationary time series can be obtained as $<span class="math notranslate nohighlight">\(\hat{X}(t) = X(t) - X(t-1)\)</span>$</p></li>
+<li><p>So, a stationary time series can be obtained as</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\hat{X}(t) = X(t) - X(t-1)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">difference</span> <span class="o">=</span> <span class="n">rand_walk</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">rand_walk</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -1840,8 +1877,10 @@ Name: squared, dtype: float64
 <ul class="simple">
 <li><p>Consider a time series with a seasonality of period <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
 <li><p>There will be a strong correlation between <span class="math notranslate nohighlight">\(X(t)\)</span> and <span class="math notranslate nohighlight">\(X(t+L)\)</span>.</p></li>
-<li><p>Seasonal differentiation can remove the seasonality and make the time series stationary $<span class="math notranslate nohighlight">\(\hat{X}(t) = X(t+L) - X(t)\)</span>$</p></li>
+<li><p>Seasonal differentiation can remove the seasonality and make the time series stationary</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\hat{X}(t) = X(t+L) - X(t)\]</div>
 <ul class="simple">
 <li><p>After seasonal differencing the time series will become <span class="math notranslate nohighlight">\(L\)</span> steps shorter.</p></li>
 <li><p>Note that we can perform the standard differentiation in cascade to seasonal differentiation if we need to remove also the trend on top of the seasonality.</p></li>
