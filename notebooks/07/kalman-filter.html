@@ -618,9 +618,7 @@ x_{t-1} \\
 \dot{x}_{t-1}
 \end{bmatrix} = \mathbf{A} \boldsymbol{x}_{t-1}
 \end{split}\]</div>
-<div style="text-align: center">
-    <img src="./media/system.png" style="width: 50%">
-</div>
+<img alt="../../_images/system.png" class="align-center" src="../../_images/system.png" />
 <ul class="simple">
 <li><p>The current position and speed will evolve according to this simple dynamical system $<span class="math notranslate nohighlight">\(\boldsymbol{x}_{t} = \mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w}_{t-1}\)</span><span class="math notranslate nohighlight">\( where \)</span>\boldsymbol{w}_t \sim \mathcal{N}(0,\mathbf{Q})$ represents perturbations in the underlying dynamical systems (e.g., holes on the road).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{x}_{t} \in \mathbb{R}^{N}\)</span> represents the state of the system.</p></li>
@@ -628,17 +626,15 @@ x_{t-1} \\
 </ul>
 <p>Where the car will be after 1 minute?</p>
 <p>If we rely only on our simple sistem <span class="math notranslate nohighlight">\(\boldsymbol{x}_{t+1} = \mathbf{A} \boldsymbol{x}_{t}\)</span> without even consider the noise, the car will keep moving at <span class="math notranslate nohighlight">\(60 km/h\)</span> and will be at <span class="math notranslate nohighlight">\(1 km\)</span> distance.</p>
-<div style="text-align: center">
-    <img src="./media/model_pred.png" style="width: 50%">
-</div><p>Let say our car has a GPS.</p>
+<img alt="../../_images/model_pred.png" class="align-center" src="../../_images/model_pred.png" />
+<p>Let say our car has a GPS.</p>
 <ul class="simple">
 <li><p>As all instruments, our GPS will be affected by errors and gives us measurements with uncertainties in it.</p></li>
 <li><p>In addition, our GPS can only measure the position but not the speed.</p></li>
 <li><p>Based on our GPS, after 1 minute we are at <span class="math notranslate nohighlight">\(0.8 km\)</span> from where we started.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="./media/gps.png" style="width: 50%">
-</div><ul class="simple">
+<img alt="../../_images/gps.png" class="align-center" src="../../_images/gps.png" />
+<ul class="simple">
 <li><p>Let the measure of our GPS be $<span class="math notranslate nohighlight">\(\boldsymbol{z}_t = \mathbf{H} \boldsymbol{x}_t + \boldsymbol{v}_t\)</span><span class="math notranslate nohighlight">\( where \)</span>\boldsymbol{v}_t \sim \mathcal{N}(0,\mathbf{R})$ represents the uncertainty in the measures.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{z}_{t} \in \mathbb{R}^{M}\)</span> is the measurements vector.</p></li>
 <li><p>In our case, since the GPS measures only the position, we have <span class="math notranslate nohighlight">\(\mathbf{H} = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R} = \begin{bmatrix} r_{xx} \end{bmatrix}\)</span>.</p></li>
@@ -649,9 +645,7 @@ x_{t-1} \\
 <li><p>a linear stochastic difference equation, representing our imprecise knowledge of a discrete-time controlled process;</p></li>
 <li><p>a source of measurements, that are noisy.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="./media/inputs.png" style="width: 20%">
-</div>
+<img alt="../../_images/inputs.png" class="align-center" src="../../_images/inputs.png" />
 <p>How do we combine them to get the best possible estimate of our system variables?</p>
 </section>
 <section id="the-kf-algorithm">
@@ -698,9 +692,8 @@ x_{t-1} \\
 <li><p>Such time update equations can also be thought of as <em>predictor equations</em>.</p></li>
 </ul>
 <p>State estimate update: $<span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t}^{-} = \mathbf{A} \hat{\boldsymbol{x}}_{t-1}\)</span>$</p>
-<div style="text-align: center">
-    <img src="./media/model_pred.png" style="width: 50%">
-</div><p>Covariance estimate update: $<span class="math notranslate nohighlight">\(\begin{align} \mathbf{P}_{t}^{-} &amp;= \mathbb{E}[e^{-}_t e^{-T}_t] \\
+<img alt="../../_images/model_pred.png" class="align-center" src="../../_images/model_pred.png" />
+<p>Covariance estimate update: $<span class="math notranslate nohighlight">\(\begin{align} \mathbf{P}_{t}^{-} &amp;= \mathbb{E}[e^{-}_t e^{-T}_t] \\
   &amp;= \mathbb{E}[(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})^T] \\
   &amp;= \mathbb{E}[(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})^T] \\
   &amp;= \mathbb{E}[(\mathbf{A}e_{t-1})(e_{t-1}^T \mathbf{A}^T)] + \mathbb{E}[\boldsymbol{w}\boldsymbol{w}^T]\\
@@ -712,9 +705,8 @@ x_{t-1} \\
 <li><p>State estimate.</p></li>
 <li><p>Covariance estimate.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="./media/update.png" style="width: 20%">
-</div></section>
+<img alt="../../_images/update.png" class="align-center" src="../../_images/update.png" />
+</section>
 <section id="correct">
 <h4>Correct<a class="headerlink" href="#correct" title="Link to this heading">#</a></h4>
 <p>The measurement update equations are responsible for the feedback, i.e. for incorporating a new measurement into the prior estimate to obtain an improved a posterior estimate.</p>
@@ -730,9 +722,8 @@ x_{t-1} \\
 <li><p><span class="math notranslate nohighlight">\(\Delta_t\)</span> reflects the difference between our imprecise prediction (<span class="math notranslate nohighlight">\(\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t}\)</span>) and the actual noisy measurement (<span class="math notranslate nohighlight">\(\boldsymbol{z}_{t}\)</span>).</p></li>
 <li><p>A residual of zero means that the two are in complete agreement.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="./media/innovation.png" style="width: 50%">
-</div><p>The matrix <span class="math notranslate nohighlight">\(\mathbf{K} \in \mathbb{R}^{N \times M}\)</span> is chosen to be the <strong>gain</strong> that minimizes the posterior error covariance.</p>
+<img alt="../../_images/innovation.png" class="align-center" src="../../_images/innovation.png" />
+<p>The matrix <span class="math notranslate nohighlight">\(\mathbf{K} \in \mathbb{R}^{N \times M}\)</span> is chosen to be the <strong>gain</strong> that minimizes the posterior error covariance.</p>
 <p>Derivation (sketch)</p>
 <ol class="arabic simple">
 <li><p>Define the posterior error  <span class="math notranslate nohighlight">\(e_t = x_t - \hat{x}_t\)</span>.</p></li>
@@ -768,9 +759,8 @@ x_{t-1} \\
 </ul>
 </li>
 </ol>
-<div style="text-align: center">
-    <img src="./media/extreme1.png" style="width: 50%">
-</div><ol class="arabic simple" start="2">
+<img alt="../../_images/extreme1.png" class="align-center" src="../../_images/extreme1.png" />
+<ol class="arabic simple" start="2">
 <li><p>The covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> approaches zero.</p>
 <ul class="simple">
 <li><p>The model is completely reliable and the measurements are not accounted for.</p></li>
@@ -779,9 +769,8 @@ x_{t-1} \\
 </ul>
 </li>
 </ol>
-<div style="text-align: center">
-    <img src="./media/extreme2.png" style="width: 50%">
-</div><p>The last thing that remains to update is the posterior covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}_t\)</span> to be used in the next predict step.</p>
+<img alt="../../_images/extreme2.png" class="align-center" src="../../_images/extreme2.png" />
+<p>The last thing that remains to update is the posterior covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}_t\)</span> to be used in the next predict step.</p>
 <p>The formula is
 $<span class="math notranslate nohighlight">\(\mathbf{P}_t = (\mathbf{I} - \mathbf{K}_t \mathbf{H})\mathbf{P}^{-}_t\)</span>$</p>
 <p>Let’s look again at the two extreme cases:</p>
@@ -802,12 +791,10 @@ $<span class="math notranslate nohighlight">\(\mathbf{P}_t = (\mathbf{I} - \math
 </li>
 </ul>
 <p>Summary of Correct</p>
-<div style="text-align: center">
-    <img src="./media/correct.png" style="width: 25%">
-</div><p>The whole process is summarized below</p>
-<div style="text-align: center">
-    <img src="./media/kalman.png" style="width: 50%">
-</div></section>
+<img alt="../../_images/correct.png" class="align-center" src="../../_images/correct.png" />
+<p>The whole process is summarized below</p>
+<img alt="../../_images/kalman.png" class="align-center" src="../../_images/kalman.png" />
+</section>
 </section>
 <section id="parameters-estimation">
 <h3>Parameters estimation<a class="headerlink" href="#parameters-estimation" title="Link to this heading">#</a></h3>

@@ -454,7 +454,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-time-series-analysis">
 <h1>Nonlinear time series analysis<a class="headerlink" href="#nonlinear-time-series-analysis" title="Link to this heading">#</a></h1>
-<img alt="../../_images/cover10.png" class="align-center" src="../../_images/cover10.png" />
+<img alt="../../_images/cover10.png" src="../../_images/cover10.png" />
 <blockquote>
 <div><p>“<em>Something as small as the flutter of a butterfly’s wing can ultimately cause a typhoon halfway around the world.</em>”</p>
 </div></blockquote>
@@ -481,22 +481,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
 <span class="kn">from</span> <span class="nn">reservoir_computing.reservoir</span> <span class="kn">import</span> <span class="n">Reservoir</span>
-<span class="kn">from</span> <span class="nn">reservoir_computing.modules</span> <span class="kn">import</span> <span class="n">RC_forecaster</span>
-<span class="kn">from</span> <span class="nn">reservoir_computing.utils</span> <span class="kn">import</span> <span class="n">forecasting_datasets</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">reservoir_computing.reservoir</span> <span class="kn">import</span> <span class="n">Reservoir</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">reservoir_computing.modules</span> <span class="kn">import</span> <span class="n">RC_forecaster</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">reservoir_computing.utils</span> <span class="kn">import</span> <span class="n">forecasting_datasets</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="ne">ImportError</span>: cannot import name &#39;forecasting_datasets&#39; from &#39;reservoir_computing.utils&#39; (/home/filippo/code/Time-series-classification-and-clustering-with-Reservoir-Computing/reservoir_computing/utils.py)
 </pre></div>
 </div>
 </div>
@@ -1220,9 +1205,8 @@ with \)</span>r \in [0,4]$.</p></li>
 <li><p>This system can exhibit a variety of dynamics, including stable limit cycles, where the populations of predators and prey oscillate in a regular, periodic fashion.</p></li>
 <li><p>The attractor in the Lotka-Volterra system, in this case, is typically a closed loop, reflecting the cyclic nature of the predator-prey interactions.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/lokta_volt.png" style="width: 40%">
-</div><ul class="simple">
+<img alt="../../_images/lokta_volt.png" src="../../_images/lokta_volt.png" />
+<ul class="simple">
 <li><p>Let’s define the system of differential equations.</p></li>
 <li><p>The system will run by a numerical solver, <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code>.</p></li>
 <li><p>Since the solver takes a single state variable, we define <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">[x,</span> <span class="pre">y]</span></code>.</p></li>
@@ -1293,7 +1277,7 @@ with \)</span>r \in [0,4]$.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7aa203440181d14cb49f8f0dbe64625f8a99905792cf8378efc022eb6313fe0a.png" src="../../_images/7aa203440181d14cb49f8f0dbe64625f8a99905792cf8378efc022eb6313fe0a.png" />
+<img alt="../../_images/f88988330fae6feba62e6b417f96869ec03332f181c54a10c97c09108eff1ccd.png" src="../../_images/f88988330fae6feba62e6b417f96869ec03332f181c54a10c97c09108eff1ccd.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1318,7 +1302,7 @@ with \)</span>r \in [0,4]$.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f9b2de1505cab2381c8caaed4f32139670181a6acf59e9ea56bf0e280ae6e062.png" src="../../_images/f9b2de1505cab2381c8caaed4f32139670181a6acf59e9ea56bf0e280ae6e062.png" />
+<img alt="../../_images/202f83d7fcde6d4f3b99eb8f81386c2a6e1c4ab4e17617148ae892438c89a943.png" src="../../_images/202f83d7fcde6d4f3b99eb8f81386c2a6e1c4ab4e17617148ae892438c89a943.png" />
 </div>
 </div>
 </section>
@@ -1381,7 +1365,7 @@ with \)</span>r \in [0,4]$.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ac6575cb1baac130a9a47fb227f47ca1bc86770f191ebd94c3a319bacd3242c5.png" src="../../_images/ac6575cb1baac130a9a47fb227f47ca1bc86770f191ebd94c3a319bacd3242c5.png" />
+<img alt="../../_images/93760b732453c7af430a108f949f4288598485e118bfbf614715815caaae1078.png" src="../../_images/93760b732453c7af430a108f949f4288598485e118bfbf614715815caaae1078.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1411,7 +1395,7 @@ with \)</span>r \in [0,4]$.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a9ab397631b95366d97c0d6bb101522e3c9020e169fc7e302f3491532b16ce61.png" src="../../_images/a9ab397631b95366d97c0d6bb101522e3c9020e169fc7e302f3491532b16ce61.png" />
+<img alt="../../_images/742aed6fb0084777638f5b964e69ec28e22cec189536878d8cb895059afb483f.png" src="../../_images/742aed6fb0084777638f5b964e69ec28e22cec189536878d8cb895059afb483f.png" />
 </div>
 </div>
 </section>
@@ -1448,17 +1432,15 @@ with \)</span>r \in [0,4]$.</p></li>
 <li><p>The phase space represents all the possible states of a system.</p></li>
 <li><p>It defines how system variables <span class="math notranslate nohighlight">\(x, y, z, \dots\)</span> interact and evolve.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/phase_space.png" style="width: 90%">
-</div><ul class="simple">
+<img alt="../../_images/phase_space.png" src="../../_images/phase_space.png" />
+<ul class="simple">
 <li><p>The phase space gives us complete knowledge about the current state of system.</p></li>
 <li><p>We are particularly interested its <em>trajectory</em> (or orbit) over time.</p></li>
 <li><p>Knowing it, allows us to make predictions about future states of the system.</p></li>
 <li><p>Clearly, this of key importance in time series forecasting.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/predict.png" style="width: 35%">
-</div><ul class="simple">
+<img alt="../../_images/predict.png" src="../../_images/predict.png" />
+<ul class="simple">
 <li><p>To identify the trajectory of the system in the phase space, we have to identify properties of its attractor.</p></li>
 <li><p>One of these, is its <em>dimensionality</em>.</p></li>
 <li><p>To determine the dimensionality of an attractor, especially strange attractors of chaotics systems, we have to revise our concept of dimensionality.</p></li>
@@ -1472,9 +1454,7 @@ with \)</span>r \in [0,4]$.</p></li>
 <li><p>Common geometrical objects such as a line, a square, or a cube require an increasing number of dimensions to contain them.</p></li>
 <li><p>The concept of dimensions is also tied to common measures on these objects such as their length/perimeter, area, the volume, which require an increasing number of dimensions to express them.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/dimensions.png" style="width: 50%">
-</div>
+<img alt="../../_images/dimensions.png" src="../../_images/dimensions.png" />
 <ul class="simple">
 <li><p>In this perspective, dimensions are integers and the idea of a fractional dimension, e.g., <span class="math notranslate nohighlight">\(d=1.26\)</span>, makes little sense.</p></li>
 </ul>
@@ -1490,9 +1470,7 @@ with \)</span>r \in [0,4]$.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(r\)</span> be the <em>scaling factor</em> and <span class="math notranslate nohighlight">\(N\)</span> the number of pieces we obtain.</p></li>
 <li><p>For the line is straightforward:</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/line.png" style="width: 40%">
-</div>
+<img alt="../../_images/line.png" src="../../_images/line.png" />
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>$<span class="math notranslate nohighlight">\(r\)</span>$</p></th>
@@ -1517,9 +1495,7 @@ with \)</span>r \in [0,4]$.</p></li>
 <ul class="simple">
 <li><p>Let’s move the the square and repeat the same computations.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/square.png" style="width: 40%">
-</div>
+<img alt="../../_images/square.png" src="../../_images/square.png" />
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>$<span class="math notranslate nohighlight">\(r\)</span>$</p></th>
@@ -1544,9 +1520,7 @@ with \)</span>r \in [0,4]$.</p></li>
 <ul class="simple">
 <li><p>Finally, for the cube we have:</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/cube.png" style="width: 40%">
-</div>
+<img alt="../../_images/cube.png" src="../../_images/cube.png" />
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>$<span class="math notranslate nohighlight">\(r\)</span>$</p></th>
@@ -1574,19 +1548,16 @@ with \)</span>r \in [0,4]$.</p></li>
 <li><p>We try to approximate the length of curve with segments of decreasing length.</p></li>
 <li><p>Let’s start with a segment of length <span class="math notranslate nohighlight">\(r=1\)</span>.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/koch1.png" style="width: 50%">
-</div><ul class="simple">
+<img alt="../../_images/koch1.png" src="../../_images/koch1.png" />
+<ul class="simple">
 <li><p>If we split the segment in <span class="math notranslate nohighlight">\(r=3\)</span>, we can fit <span class="math notranslate nohighlight">\(N=4\)</span> pieces.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/koch2.png" style="width: 50%">
-</div><ul class="simple">
+<img alt="../../_images/koch2.png" src="../../_images/koch2.png" />
+<ul class="simple">
 <li><p>If we split it in <span class="math notranslate nohighlight">\(r=9\)</span>, we can fit <span class="math notranslate nohighlight">\(N=16\)</span> pieces, and so on.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/koch3.png" style="width: 50%">
-</div><ul class="simple">
+<img alt="../../_images/koch3.png" src="../../_images/koch3.png" />
+<ul class="simple">
 <li><p>The relationship that we defied before, <span class="math notranslate nohighlight">\(N=r^D\)</span>, is the key to find the dimensionality of this fractal object.</p></li>
 <li><p>In particular, we have $<span class="math notranslate nohighlight">\(4 = 3^D \rightarrow \log(4) = \log(3)\cdot D \rightarrow = D = \frac{\log(4)}{\log(3)} \approx 1.26 \)</span>$</p></li>
 <li><p>Intuitively, think that we need a more “dimensionality” to contain this object than what we need to contain a line, but less than what we need to contain an area.</p></li>
@@ -1594,9 +1565,7 @@ with \)</span>r \in [0,4]$.</p></li>
 <ul class="simple">
 <li><p>Another example is the Sierpinski triangle.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/triangle.png" style="width: 70%">
-</div>
+<img alt="../../_images/triangle.png" src="../../_images/triangle.png" />
 <ul class="simple">
 <li><p>Following the same procedure, we have that <span class="math notranslate nohighlight">\(D = \frac{\log(3)}{\log(2)} \approx  1.58\)</span>.</p></li>
 <li><p>Clearly, we need more “dimensionality” to contain this object than the Koch curve, but, due to all the “holes”, still less than for an area.</p></li>
@@ -1629,9 +1598,8 @@ with \)</span>r \in [0,4]$.</p></li>
 <li><p>In most realistic scenarios, however, we cannot directly observe all system variables.</p></li>
 <li><p>We can only measure <em>partial observations</em>, i.e., a subset of the system variables or a function of them <span class="math notranslate nohighlight">\(y = f(x_1, x_2, \dots, x_D)\)</span>.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/partial.png" style="width: 40%">
-</div><p><strong>Examples</strong></p>
+<img alt="../../_images/partial1.png" src="../../_images/partial1.png" />
+<p><strong>Examples</strong></p>
 <ul class="simple">
 <li><p>In the Lorenz system, we might observe only the variable <span class="math notranslate nohighlight">\(y(t)\)</span>.</p></li>
 <li><p>In weather forecasting, meteorologists often have access only to partial observations of a subset of variables such as temperature, pressure, humidity, wind patterns, and geographic features. However, there are many other variables that are inaccessible such as detailed atmospheric conditions, microclimates, oceans’ temperatures, currents, the presence of pollutants, variations in solar radiation, etc..</p></li>
@@ -1640,9 +1608,8 @@ with \)</span>r \in [0,4]$.</p></li>
 <li><p>Can we reconstruct the trajectory of the system in the state space from partial observations?</p></li>
 <li><p>If we are able to do so, we can predict the future states of the systems, including the observed time series.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/reconstruct.png" style="width: 50%">
-</div><section id="takens-embedding-theorem">
+<img alt="../../_images/reconstruct.png" src="../../_images/reconstruct.png" />
+<section id="takens-embedding-theorem">
 <h3>Takens’ Embedding Theorem<a class="headerlink" href="#takens-embedding-theorem" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Assume a dynamical system with an unknown or partially known state space.</p></li>
@@ -1690,10 +1657,8 @@ $<span class="math notranslate nohighlight">\(\begin{align} e_1(t) &amp;= x(t) \
 <img alt="../../_images/bf324f6ae319287add8ffbba290e9e1945ceaca3c2d17951e262eec79ef46815.png" src="../../_images/bf324f6ae319287add8ffbba290e9e1945ceaca3c2d17951e262eec79ef46815.png" />
 </div>
 </div>
-<p><strong>Theorem’s idea</strong></p>
-<div style="text-align: center">
-    <img src="media/takens.png" style="width: 50%">
-</div><ul class="simple">
+<img alt="../../_images/takens.png" src="../../_images/takens.png" />
+<ul class="simple">
 <li><p>Takens’ theorem does not specify how to choose <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
 <li><p>It only asserts that for a system with an attractor of (fractional) dimension <span class="math notranslate nohighlight">\(D\)</span>, an embedding dimension <span class="math notranslate nohighlight">\(m &gt; 2D\)</span> is sufficient to ensure a diffeomorphic (topologically equivalent) embedding under generic conditions.</p></li>
 <li><p>Intuitively, the embedding dimension must be large enough to unfold the attractor fully in the reconstructed phase space, capturing its dynamics without self-intersections.</p></li>
@@ -1800,7 +1765,7 @@ $<span class="math notranslate nohighlight">\(\begin{align} e_1(t) &amp;= x(t) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/46a109a41d5ae5c35e35e69da8fb35995f075c6dc937a42716dfa2856b3e682b.png" src="../../_images/46a109a41d5ae5c35e35e69da8fb35995f075c6dc937a42716dfa2856b3e682b.png" />
+<img alt="../../_images/a0cbfbd8f80bc1bb3ff1821696b13530fc9392e3f366d595b5c059f2bcc8b5c2.png" src="../../_images/a0cbfbd8f80bc1bb3ff1821696b13530fc9392e3f366d595b5c059f2bcc8b5c2.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1887,7 +1852,7 @@ $<span class="math notranslate nohighlight">\(\frac{|R_{m+1} - R_m|}{R_m} &gt; R
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/378357c7dba449cb0a4f83f178de692cbc7df8318f5e25a8ab48bbfa5191572c.png" src="../../_images/378357c7dba449cb0a4f83f178de692cbc7df8318f5e25a8ab48bbfa5191572c.png" />
+<img alt="../../_images/dc09fe9c78d73e4836816817e76d7434c28625bcdf8729ac70131ae3f8fdc3ef.png" src="../../_images/dc09fe9c78d73e4836816817e76d7434c28625bcdf8729ac70131ae3f8fdc3ef.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1903,7 +1868,7 @@ $<span class="math notranslate nohighlight">\(\frac{|R_{m+1} - R_m|}{R_m} &gt; R
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b47d88b1a9e4463e84a1fd21427a4b8c5533e57c1b76bbd4577d770d201a5e5f.png" src="../../_images/b47d88b1a9e4463e84a1fd21427a4b8c5533e57c1b76bbd4577d770d201a5e5f.png" />
+<img alt="../../_images/8363c442b96e02fae35fae296cfd8f1e2efb538f3ea28ce8cfd601bb69992e44.png" src="../../_images/8363c442b96e02fae35fae296cfd8f1e2efb538f3ea28ce8cfd601bb69992e44.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1987,10 +1952,10 @@ x(T-(m-1)\tau) &amp; x(T-(m-2)\tau) &amp; x(T-(m-3)\tau) &amp; \dots  &amp; x(T)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.080
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.138
 </pre></div>
 </div>
-<img alt="../../_images/910cdb26fd06a004b9b30c85944af293fd18f19fddef28eafc196c33aa754d75.png" src="../../_images/910cdb26fd06a004b9b30c85944af293fd18f19fddef28eafc196c33aa754d75.png" />
+<img alt="../../_images/583dc2dfd2b126cb54227b6e9930ef75917aa31f2125c9e39bc9cb4f49610c92.png" src="../../_images/583dc2dfd2b126cb54227b6e9930ef75917aa31f2125c9e39bc9cb4f49610c92.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2014,10 +1979,15 @@ x(T-(m-1)\tau) &amp; x(T-(m-2)\tau) &amp; x(T-(m-3)\tau) &amp; \dots  &amp; x(T)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Xtr shape: (4495, 2)
-Ytr shape: (4495, 1)
-Xte shape: (495, 2)
-Yte shape: (495, 1)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">51</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">Xtr</span><span class="p">,</span> <span class="n">Ytr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">Yte</span><span class="p">,</span> <span class="n">scaler</span> <span class="o">=</span> <span class="n">forecasting_datasets</span><span class="p">(</span><span class="n">ross_ts</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span> 
+<span class="g g-Whitespace">      </span><span class="mi">2</span>                                                   <span class="n">horizon</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>                                                   <span class="n">test_percent</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Xtr shape: </span><span class="si">{</span><span class="n">Xtr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">Ytr shape: </span><span class="si">{</span><span class="n">Ytr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">Xte shape: </span><span class="si">{</span><span class="n">Xte</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">Yte shape: </span><span class="si">{</span><span class="n">Yte</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;forecasting_datasets&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -2138,9 +2108,7 @@ states_te shape: (485, 3)
 <li><p>Identify the first bifurcation point before the system becomes chaotic.</p></li>
 <li><p>Explain why computing the local maxima (peaks) was not necessary for the logistic map.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/rossler_attractor.png" style="width: 100%">
-</div>
+<img alt="../../_images/rossler_attractor.png" src="../../_images/rossler_attractor.png" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span> <span class="c1"># value of c to explore</span>
@@ -2154,9 +2122,8 @@ states_te shape: (485, 3)
 <ul class="simple">
 <li><p>Compute the (fractal) dimension of the object in the figure below.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/menger-sr.jpeg" style="width: 50%">
-</div></section>
+<img alt="../../_images/menger-sr.jpeg" src="../../_images/menger-sr.jpeg" />
+</section>
 <section id="exercise-3">
 <h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
 <ul class="simple">

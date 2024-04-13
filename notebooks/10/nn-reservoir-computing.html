@@ -500,9 +500,8 @@ document.write(`
 <li><p>Use the elements of the time series within the window <span class="math notranslate nohighlight">\(x(t-P), \dots, x(t-1), x(t)\)</span> to compute the prediction <span class="math notranslate nohighlight">\(x(t+\tau)\)</span>, where <span class="math notranslate nohighlight">\(\tau\)</span> is the forecasting horizon.</p></li>
 <li><p>Different algorithms combine the elements of the window in different ways to make predictions.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/windowed.png" style="width: 40%">
-</div><ul class="simple">
+<img alt="../../_images/windowed.png" class="align-center" src="../../_images/windowed.png" />
+<ul class="simple">
 <li><p>As the window slides along the time series, new predictions are made.</p></li>
 <li><p>An example of windowed approach is the linear AR model of order <span class="math notranslate nohighlight">\(P\)</span>: $<span class="math notranslate nohighlight">\(\hat y(t+1) = \beta_0 + \beta_1 x(t-1) + \beta_2 x(t-2) + \dots + \beta_P x(t-P)+\epsilon_t\)</span>$</p></li>
 </ul>
@@ -518,9 +517,7 @@ document.write(`
 </ol>
 </li>
 </ul>
-<div style="text-align: center">
-    <img src="media/robot.png" style="width: 40%">
-</div>
+<img alt="../../_images/robot.png" class="align-center" src="../../_images/robot.png" />
 <ul class="simple">
 <li><p>A linear model will fail in the second task.</p></li>
 </ul>
@@ -614,7 +611,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/63d34edbd72e0f31bd3d1c9ab9ee78b4c87c47107ff5174cf44c07ca8ec44581.png" src="../../_images/63d34edbd72e0f31bd3d1c9ab9ee78b4c87c47107ff5174cf44c07ca8ec44581.png" />
+<img alt="../../_images/9aa325394759bf4666dc2563d0380a8f3236a606a7d594cc1c56cbf1b06291af.png" src="../../_images/9aa325394759bf4666dc2563d0380a8f3236a606a7d594cc1c56cbf1b06291af.png" />
 </div>
 </div>
 <section id="multi-layer-perceptron">
@@ -643,9 +640,8 @@ document.write(`
 <li><p>Let’s consider a concrete example of an MLP with one input layer, two hidden layers (with <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span> units respectively), and one output layer.</p></li>
 <li><p>The input vectors are of size <span class="math notranslate nohighlight">\(d_\text{in}\)</span>, and the output vectors are of size <span class="math notranslate nohighlight">\(d_\text{out}\)</span>.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/mlp.png" style="width: 40%">
-</div><p><strong>Input Layer</strong></p>
+<img alt="../../_images/mlp.png" class="align-center" src="../../_images/mlp.png" />
+<p><strong>Input Layer</strong></p>
 <ul class="simple">
 <li><p>The size of the input layer corresponds to the size of the input vectors, <span class="math notranslate nohighlight">\(d_\text{in}\)</span>.</p></li>
 <li><p>This layer simply passes the input to the first hidden layer without applying any transformations.</p></li>
@@ -679,10 +675,8 @@ document.write(`
 <li><p>The future value <span class="math notranslate nohighlight">\(x(t+\tau)\)</span> will be the output that the model will learn to predict (<span class="math notranslate nohighlight">\(d_\text{out} = 1\)</span>).</p></li>
 <li><p>We can also train the MLP to predict a sequence of <span class="math notranslate nohighlight">\(d_\text{out} = H\)</span> future predictions, e.g., <span class="math notranslate nohighlight">\(x(t+\tau), x(t+\tau+1) \dots, x(t+\tau+H)\)</span>.</p></li>
 </ul>
-<br>
-<div style="text-align: center">
-    <img src="media/mlp_windowed.png" style="width: 50%">
-</div><ul class="simple">
+<img alt="../../_images/windowed.png" class="align-center" src="../../_images/windowed.png" />
+<ul class="simple">
 <li><p>Key for the training of the MLP is the creation of input-output pairs <span class="math notranslate nohighlight">\(\{\mathbf{x}_i, \mathbf{y}_i\}\)</span> used for training.</p></li>
 <li><p>Given the input <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> the model must learn to predict the output <span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span>.</p></li>
 <li><p>This is done by adapting the model weights to minimize the discrepancy between the prediction <span class="math notranslate nohighlight">\(\mathbf{\hat y}_i\)</span> and the desired output <span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span>.</p></li>
@@ -698,9 +692,8 @@ document.write(`
 </ul>
 </li>
 </ul>
-<div style="text-align: center">
-    <img src="media/data_split.png" style="width: 100%">
-</div></section>
+<img alt="../../_images/data_split.png" class="align-center" src="../../_images/data_split.png" />
+</section>
 <section id="python-example">
 <h3>Python example<a class="headerlink" href="#python-example" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1277,7 +1270,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 34.78
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 33.54
 </pre></div>
 </div>
 </div>
@@ -1304,10 +1297,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 26.89
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 24.95
 </pre></div>
 </div>
-<img alt="../../_images/eae1158589e7898d20fea38a167d8554fc6609934c57aea561a3caec55068a5f.png" src="../../_images/eae1158589e7898d20fea38a167d8554fc6609934c57aea561a3caec55068a5f.png" />
+<img alt="../../_images/df182283783ca4d426d2317be4fa6ed1e55dc657b86f59b46fcf5e36d31a5a4e.png" src="../../_images/df182283783ca4d426d2317be4fa6ed1e55dc657b86f59b46fcf5e36d31a5a4e.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1381,9 +1374,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <li><p>At this point, one can apply the standard backpropagation algorithm.</p></li>
 <li><p>BPTT computes gradients for each parameter across <em>all</em> time steps of the input sequence.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/bptt.png" style="width: 60%">
-</div><section id="challenges-and-shortcomings-in-rnns">
+<img alt="../../_images/bptt.png" class="align-center" src="../../_images/bptt.png" />
+<section id="challenges-and-shortcomings-in-rnns">
 <h3>Challenges and shortcomings in RNNs<a class="headerlink" href="#challenges-and-shortcomings-in-rnns" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>In BPTT the gradient has to go through all time steps and, due to the presence of nonlinearities, it can become too small and not reach distant time steps.</p></li>
@@ -1436,9 +1428,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <li><p>In this case <span class="math notranslate nohighlight">\(g(\cdot)\)</span> corresponds to a weight matrix <span class="math notranslate nohighlight">\(\mathbf{W}_o\)</span>.</p></li>
 <li><p>However, any other regression model can be used to implement the readout, including an MLP.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/Readout.png" style="width: 60%">
-</div><ul class="simple">
+<img alt="../../_images/Readout.png" class="align-center" src="../../_images/Readout.png" />
+<ul class="simple">
 <li><p>Note that fitting an MLP to the readout states is different from the window approach we saw before.</p></li>
 <li><p>Window approach:</p>
 <ul>
@@ -1465,15 +1456,13 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <li><p>Say, we want make a forecast <span class="math notranslate nohighlight">\(\tau_1\)</span> steps ahead.</p></li>
 <li><p>The readout will select a given combination of dynamical features from the Reservoir.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/Reservoir_pred1.png" style="width: 60%">
-</div><ul class="simple">
+<img alt="../../_images/Reservoir_pred1.png" class="align-center" src="../../_images/Reservoir_pred1.png" />
+<ul class="simple">
 <li><p>To predict at a different horizon <span class="math notranslate nohighlight">\(\tau_2\)</span> the readout will select a different group of features.</p></li>
 <li><p>Note that in both cases the Readout produces the same pool of features!</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/Reservoir_pred2.png" style="width: 60%">
-</div><ul class="simple">
+<img alt="../../_images/Reservoir_pred2.png" class="align-center" src="../../_images/Reservoir_pred2.png" />
+<ul class="simple">
 <li><p>The Readout is untrained and its states are generated without <em>supervision</em>, i.e., without an external guidance.</p></li>
 <li><p>Since it does not know what task it will be asked to solve, the Readout is configured to produce a pool of dynamic features that is most rich and varied as possible</p></li>
 <li><p>In other words, the Readout trades the lack of training with a redudancy of features generated.</p></li>
@@ -1499,9 +1488,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <li><p>If the dynamics of the Reservoir is too <em>conctractive</em> this does not happen.</p></li>
 <li><p>We have to find a sweet spot by tuning a parameter <span class="math notranslate nohighlight">\(\rho\)</span> called <em>spectral radius</em>.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/dynamics.png" style="width: 60%">
-</div><ul class="simple">
+<img alt="../../_images/dynamics.png" class="align-center" src="../../_images/dynamics.png" />
+<ul class="simple">
 <li><p>Recall the state update equation $<span class="math notranslate nohighlight">\(\mathbf{h}(t) = \sigma \left(\mathbf{W}_i x(t)+\mathbf{W}_h \mathbf{h}(t-1)\right)\)</span>$</p></li>
 <li><p>The spectral radius is the largest eigenvalue of the state transtion matrix <span class="math notranslate nohighlight">\(W_h\)</span>.</p></li>
 <li><p>We can <em>set</em> the spectral radius by computing the largest eigenvalue <span class="math notranslate nohighlight">\(\lambda_\text{max}\)</span> of <span class="math notranslate nohighlight">\(W_h\)</span> and then letting <span class="math notranslate nohighlight">\(W_h = \rho \frac{W_h}{\lambda_\text{max}}\)</span>.</p></li>
@@ -1561,7 +1549,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/752bb109c00bd1b772e431da2db14fafdf803adb946cebce9bc0fa0ab47703ea.png" src="../../_images/752bb109c00bd1b772e431da2db14fafdf803adb946cebce9bc0fa0ab47703ea.png" />
+<img alt="../../_images/870d5903165c2e764f2618d463203d6f9c0aeeff9b3d41ec67f9962cff0b6ac5.png" src="../../_images/870d5903165c2e764f2618d463203d6f9c0aeeff9b3d41ec67f9962cff0b6ac5.png" />
 </div>
 </div>
 </section>
@@ -1578,9 +1566,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <li><p>Therefore, a small <span class="math notranslate nohighlight">\(\omega_\text{in}\)</span> reduces the amount of nonlinearity in the Reservoir.</p></li>
 <li><p>On the other hand, a large <span class="math notranslate nohighlight">\(\omega_\text{in}\)</span> translates into a more nonlinear beahvior as the <span class="math notranslate nohighlight">\(\texttt{tanh}\)</span> is closer to saturation.</p></li>
 </ul>
-<div style="text-align: center">
-    <img src="media/tanh.png" style="width: 35%">
-</div><ul class="simple">
+<img alt="../../_images/tanh.png" class="align-center" src="../../_images/tanh.png" />
+<ul class="simple">
 <li><p>Like for the spectral radius, <span class="math notranslate nohighlight">\(\omega_\text{in}\)</span> should be tuned carefully.</p></li>
 <li><p>A good starting value is usually around 0.1.</p></li>
 </ul>
@@ -1769,7 +1756,7 @@ states_te shape: (1, 266, 900)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0204s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0191s
 Test time: 0.0003s
 </pre></div>
 </div>
@@ -1789,7 +1776,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a776c2defdb695d4261943f573b976b128e298f8840d00d7f350fbf540c60662.png" src="../../_images/a776c2defdb695d4261943f573b976b128e298f8840d00d7f350fbf540c60662.png" />
+<img alt="../../_images/ad5f817009a8482882ffb310c34d839c29433e75fd01535910722b09f62b5e2a.png" src="../../_images/ad5f817009a8482882ffb310c34d839c29433e75fd01535910722b09f62b5e2a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1800,7 +1787,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 19.73
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 23.18
 </pre></div>
 </div>
 </div>
@@ -2068,9 +2055,9 @@ states_te shape: (266, 75)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0022s
-Test time: 0.0001s
-Mean Squared Error: 20.36
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0023s
+Test time: 0.0002s
+Mean Squared Error: 25.36
 </pre></div>
 </div>
 </div>
@@ -2123,7 +2110,7 @@ Mean Squared Error: 20.36
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 2.58s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 2.63s
 </pre></div>
 </div>
 </div>
@@ -2143,7 +2130,7 @@ Mean Squared Error: 20.36
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5c54d46bbd716ad1a465057fdbc9a2079daa95f2d232f85f6f5c08c12e859421.png" src="../../_images/5c54d46bbd716ad1a465057fdbc9a2079daa95f2d232f85f6f5c08c12e859421.png" />
+<img alt="../../_images/136f20c97ba6c78789782e3d2849b9f0eb3f0a364daa063076c29f447d2e2a47.png" src="../../_images/136f20c97ba6c78789782e3d2849b9f0eb3f0a364daa063076c29f447d2e2a47.png" />
 </div>
 </div>
 <p>Finally, we repeat the training on the states reduced with PCA.</p>
@@ -2175,7 +2162,7 @@ Mean Squared Error: 20.36
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.87s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.88s
 </pre></div>
 </div>
 </div>

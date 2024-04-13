@@ -15,28 +15,20 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import matplotlib.pyplot as plt
-import plotly.graph_objects as go
-from scipy.integrate import solve_ivp
-from sklearn.neighbors import NearestNeighbors 
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
-from sklearn.decomposition import PCA
-from reservoir_computing.reservoir import Reservoir
-from reservoir_computing.modules import RC_forecaster
-from reservoir_computing.utils import forecasting_datasets
-np.random.seed(0)
+Xtr, Ytr, Xte, Yte, scaler = forecasting_datasets(ross_ts[:,None], 
+                                                  horizon=5,
+                                                  test_percent = 0.1)
+print(f"Xtr shape: {Xtr.shape}\nYtr shape: {Ytr.shape}\nXte shape: {Xte.shape}\nYte shape: {Yte.shape}")
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mImportError[0m                               Traceback (most recent call last)
-Cell [0;32mIn[1], line 11[0m
-[1;32m      9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mreservoir_computing[39;00m[38;5;21;01m.[39;00m[38;5;21;01mreservoir[39;00m [38;5;28;01mimport[39;00m Reservoir
-[1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01mreservoir_computing[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodules[39;00m [38;5;28;01mimport[39;00m RC_forecaster
-[0;32m---> 11[0m [38;5;28;01mfrom[39;00m [38;5;21;01mreservoir_computing[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m [38;5;28;01mimport[39;00m forecasting_datasets
-[1;32m     12[0m np[38;5;241m.[39mrandom[38;5;241m.[39mseed([38;5;241m0[39m)
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[51], line 1[0m
+[0;32m----> 1[0m Xtr, Ytr, Xte, Yte, scaler [38;5;241m=[39m [43mforecasting_datasets[49m(ross_ts[:,[38;5;28;01mNone[39;00m], 
+[1;32m      2[0m                                                   horizon[38;5;241m=[39m[38;5;241m5[39m,
+[1;32m      3[0m                                                   test_percent [38;5;241m=[39m [38;5;241m0.1[39m)
+[1;32m      4[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mXtr shape: [39m[38;5;132;01m{[39;00mXtr[38;5;241m.[39mshape[38;5;132;01m}[39;00m[38;5;130;01m\n[39;00m[38;5;124mYtr shape: [39m[38;5;132;01m{[39;00mYtr[38;5;241m.[39mshape[38;5;132;01m}[39;00m[38;5;130;01m\n[39;00m[38;5;124mXte shape: [39m[38;5;132;01m{[39;00mXte[38;5;241m.[39mshape[38;5;132;01m}[39;00m[38;5;130;01m\n[39;00m[38;5;124mYte shape: [39m[38;5;132;01m{[39;00mYte[38;5;241m.[39mshape[38;5;132;01m}[39;00m[38;5;124m"[39m)
 
-[0;31mImportError[0m: cannot import name 'forecasting_datasets' from 'reservoir_computing.utils' (/home/filippo/code/Time-series-classification-and-clustering-with-Reservoir-Computing/reservoir_computing/utils.py)
+[0;31mNameError[0m: name 'forecasting_datasets' is not defined
 
