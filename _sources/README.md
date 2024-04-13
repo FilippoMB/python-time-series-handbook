@@ -1,6 +1,8 @@
 # Time Series Analysis with Python
 
-<img src="logo.png" style="width: 5cm; display: block; margin: auto;">
+<div align="center">
+   <img src="logo.png" style="width: 5cm; display: block; margin: auto;">
+</div>
 
 <br>
 <div align="center">
