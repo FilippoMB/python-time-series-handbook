@@ -2,7 +2,7 @@
 
 <br>
 <div align="center">
-📚 <a href="https://filippomb.github.io/python-time-series-handbook">Read the book</a> 📚
+📚 <a href="https://filippomb.github.io/python-time-series-handbook">Read the book</a>
 </div>
 <br>
 
