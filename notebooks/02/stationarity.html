@@ -481,7 +481,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_351749/757122388.py:6: DeprecationWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_403844/757122388.py:6: DeprecationWarning: 
 Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
 (to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
 but was not found to be installed on your system.
@@ -514,7 +514,7 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 <ul>
 <li><p>Strict stationarity.</p></li>
 <li><p>Weak stationarity.</p></li>
-<li><p>Tbings to check in practice.</p></li>
+<li><p>Things to check in practice.</p></li>
 </ul>
 </li>
 </ul>
@@ -854,7 +854,7 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 <li><p>This violates condition #1.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Similarly, the variance epends on the time interval over which it is measured.</p></li>
+<li><p>Similarly, the variance depends on the time interval over which it is measured.</p></li>
 <li><p>Since the signal’s amplitude varies, the variance calculated over different phases of the sinusoid will also vary.</p></li>
 <li><p>This violates condition #2.</p></li>
 <li><p>A similar argument also hold for the autocorrelation, which violates condition #3.</p></li>
@@ -1003,8 +1003,8 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 <ul class="simple">
 <li><p>Applying this identity, we get:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-f3f712f5-c358-4295-b82d-bec328b82238">
-<span class="eqno">()<a class="headerlink" href="#equation-f3f712f5-c358-4295-b82d-bec328b82238" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-794d3b71-40f3-4976-9162-12e23e1a25dd">
+<span class="eqno">()<a class="headerlink" href="#equation-794d3b71-40f3-4976-9162-12e23e1a25dd" title="Permalink to this equation">#</a></span>\[\begin{align}
 \text{Cov}(x_t, x_{t+h}) &amp; = R^2 \mathbb{E}\left[\frac{1}{2}[\cos(\lambda t + \psi - \lambda (t + h) - \psi) - \cos(\lambda t + \psi + \lambda (t + h) + \psi)]\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h) - \cos(2\lambda t + 2\psi + \lambda h)\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h)\right] - \frac{R^2}{2} \mathbb{E}\left[\cos(2\lambda t + 2\psi + \lambda h)\right] \end{align}\]</div>
@@ -1179,7 +1179,7 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 <ul class="simple">
 <li><p>While the variance is relatively constant over time, the mean is clearly changing, which means this data is not stationary.</p></li>
 <li><p>We do expect some fluctuation in values.</p></li>
-<li><p>It’s highly unlikely that the either the mean or variace will be exactly the same from chunk to chunk, but it should be close.</p></li>
+<li><p>It’s highly unlikely that the either the mean or variance will be exactly the same from chunk to chunk, but it should be close.</p></li>
 </ul>
 <ul class="simple">
 <li><p>To see this better, it’s a good idea to plot the means and variances.</p></li>
@@ -1244,9 +1244,9 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 <li><p>The values <span class="math notranslate nohighlight">\(\alpha=0.05\)</span> or <span class="math notranslate nohighlight">\(\alpha=0.01\)</span>, which yield a confidence of <span class="math notranslate nohighlight">\(95\%\)</span> and <span class="math notranslate nohighlight">\(99\%\)</span>, respectively, are common choices.</p></li>
 </ul>
 <p>Example: <span class="math notranslate nohighlight">\(p = 0.0001 \rightarrow\)</span> reject <span class="math notranslate nohighlight">\(H_0 \rightarrow\)</span> the time series is stationary</p>
-<p>Example: <span class="math notranslate nohighlight">\(p = 0.43 \rightarrow\)</span> failt to reject <span class="math notranslate nohighlight">\(H_0 \rightarrow\)</span> the time series is non-stationary</p>
+<p>Example: <span class="math notranslate nohighlight">\(p = 0.43 \rightarrow\)</span> fail to reject <span class="math notranslate nohighlight">\(H_0 \rightarrow\)</span> the time series is non-stationary</p>
 <ul class="simple">
-<li><p>The ADF test might be inaccurate with small datasets or when heteroscedasticity is present.</p></li>
+<li><p>The ADF test might be inaccurate with small datasets or when heteroskedasticity is present.</p></li>
 <li><p>It is best to pair ADF with other techniques (run-sequence plots, summary statistics, histograms, etc..).</p></li>
 </ul>
 <section id="stationary-data-adf">
@@ -1328,7 +1328,7 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 </div>
 </div>
 <ul class="simple">
-<li><p>Finally, <code class="docutils literal notranslate"><span class="pre">critical_values</span></code> are the test statistic threholds for common significant levels.</p></li>
+<li><p>Finally, <code class="docutils literal notranslate"><span class="pre">critical_values</span></code> are the test statistic thresholds for common significant levels.</p></li>
 <li><p>Here we see a test statistic of roughly -2.9 and lower is sufficient to reject the null using a significance level of 5%.</p></li>
 </ul>
 <ul class="simple">
@@ -1382,7 +1382,7 @@ p-value: 0.933
 </div>
 </div>
 <ul class="simple">
-<li><p>As we discussed before, the random walk is nonstationary because its variance <span class="math notranslate nohighlight">\(\sigma^2t\)</span> is nonconstant over time.</p></li>
+<li><p>As we discussed before, the random walk is nonstationary because its variance <span class="math notranslate nohighlight">\(\sigma^2t\)</span> is not constant over time.</p></li>
 <li><p>In the next section, we’ll learn how to make this time series stationary.</p></li>
 </ul>
 <ul class="simple">
@@ -1418,7 +1418,7 @@ p-value: 0.933
 </tbody>
 </table>
 <ul class="simple">
-<li><p>Often you’ll have to do several of these on one dataset.</p></li>
+<li><p>Often you will have to do several of these on one dataset.</p></li>
 <li><p>Note that this is just a small subset of the total possible ways to transform nonstationary time series.</p></li>
 </ul>
 <section id="subtract-estimated-trend-seasonality">
@@ -1443,7 +1443,7 @@ p-value: 0.994
 </div>
 <ul class="simple">
 <li><p>Nonstationary as expected.</p></li>
-<li><p>Next, we apply the transformation</p></li>
+<li><p>Next, we apply the transformation.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1554,13 +1554,13 @@ p-value: 0.000
 </div>
 </div>
 <ul class="simple">
-<li><p>Now the time series is stationary ✌</p></li>
+<li><p>Now the time series is stationary ✌.</p></li>
 </ul>
 </section>
 <section id="achieve-constant-variance-with-log-transform">
 <h3>Achieve constant variance with log transform<a class="headerlink" href="#achieve-constant-variance-with-log-transform" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>This trick works well when you’re dealing with heteroscedastic data.</p></li>
+<li><p>This trick works well when you’re dealing with heteroskedastic data.</p></li>
 <li><p>The log squashes the larger values so that the variances are closer.</p></li>
 <li><p>Let’s plot that again the times series to remember how it looks.</p></li>
 </ul>
@@ -1602,7 +1602,7 @@ p-value: 0.005
 <li><p>Plotting is a useful tool because some statistical tests like ADF perform bad in some situations:</p>
 <ul>
 <li><p>with few data,</p></li>
-<li><p>when data is heteroschedastic.</p></li>
+<li><p>when data is heteroskedastic.</p></li>
 </ul>
 </li>
 </ul>
@@ -1660,7 +1660,7 @@ p-value: 0.030
 <h3>Removing autocorrelation with differencing<a class="headerlink" href="#removing-autocorrelation-with-differencing" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Remember that the ADF test (correctly) indicated that the <code class="docutils literal notranslate"><span class="pre">rand_walk</span></code> time series is nonstationary.</p></li>
-<li><p>We can transform <code class="docutils literal notranslate"><span class="pre">rand_walk</span></code> into stationary time series by applying deifferencing.</p></li>
+<li><p>We can transform <code class="docutils literal notranslate"><span class="pre">rand_walk</span></code> into stationary time series by applying differencing.</p></li>
 <li><p>This is done by subtracting a past value from the current value.</p></li>
 </ul>
 <ul class="simple">
@@ -1798,7 +1798,7 @@ p-value: 0.000
 </div></div></div>
 </div>
 <ul class="simple">
-<li><p>Stationarize the first time series (<code class="docutils literal notranslate"><span class="pre">original</span></code>) so that mean and variance don’t change for sub-windows.</p></li>
+<li><p>Make stationary the first time series (<code class="docutils literal notranslate"><span class="pre">original</span></code>) so that mean and variance don’t change for sub-windows.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1822,7 +1822,7 @@ Name: original, dtype: float64
 </div>
 </div>
 </div>
-<p><strong>NOTE:</strong> This is similar to taking a first-order derivative.</p>
+<p><strong>📝 NOTE:</strong> This is similar to taking a first-order derivative.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">squared</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
@@ -1850,7 +1850,7 @@ Name: squared, dtype: float64
 <li><p>Every time we do differencing we lose a bit of data.</p></li>
 </ul>
 <ul class="simple">
-<li><p>We can also try to stationarize the second time series (<code class="docutils literal notranslate"><span class="pre">squared</span></code>) with log.</p></li>
+<li><p>We can also try to make stationary the second time series (<code class="docutils literal notranslate"><span class="pre">squared</span></code>) with log.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
