@@ -39,7 +39,7 @@ You can read all the content of this book online. However, to get your hands-on 
 
 To run the code and the notebooks the recommended steps are the following:
 
-1. Download and install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.htmlLinks).
+1. Download and install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html).
 
 2. Download the [env.yml](https://github.com/FilippoMB/python-time-series-handbook/blob/main/env.yml) file.
 

@@ -131,7 +131,7 @@ For more information and for reading the content of this repository, please refe
 
 To run the notebooks the recommended steps are the following:
 
-1. Download and install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.htmlLinks).
+1. Download and install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html).
 
 2. Download the [env.yml](env.yml) file.
 
