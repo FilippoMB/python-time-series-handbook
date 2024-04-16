@@ -1,7 +1,7 @@
 # Time Series Analysis with Python
 
 <div align="center">
-   <img src="logo.png" style="width: 5cm; display: block; margin: auto;">
+   <img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/logo.png" style="width: 5cm; display: block; margin: auto;">
 </div>
 
 <br>
@@ -160,14 +160,14 @@ To run the notebooks the recommended steps are the following:
 The notebooks are structured as a sequence of slides to be presented using [RISE](https://rise.readthedocs.io/en/latest/).
 If you open a notebook you will see the following structure:
 
-<img src="notebooks/00/media/slides_nb.png" style="width: 50%" align="center">
+<img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/notebooks/00/media/slides_nb.png" style="width: 50%" align="center">
 
 The top-right button indicates the type of slide, which is stored in the metadata of the cell. To enable the visualization of the slide type you must first install RISE and then on the top menu select `View -> Cell Toolbar -> Slieshow`. Also, to split the cells like in the example, you must enable `Split Cells Notebook` from the [nbextensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/index.html).
 
 By pressing the `Enter\Exit RISE Slideshow` button at the top you can enter the slideshow presentation.
 
-<img src="notebooks/00/media/slides_rise.png" style="width: 40%" align="center">
-<img src="notebooks/00/media/slides_rise2.png" style="width: 40%" align="center">
-<img src="notebooks/00/media/slides_rise3.png" style="width: 40%" align="center">
+<img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/notebooks/00/media/slides_rise.png" style="width: 40%" align="center">
+<img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/notebooks/00/media/slides_rise2.png" style="width: 40%" align="center">
+<img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/notebooks/00/media/slides_rise3.png" style="width: 40%" align="center">
 
 See the [RISE documentation](https://rise.readthedocs.io/en/latest/) for more info.
