@@ -104,7 +104,7 @@ def _variational_equation(t, Phi, x, func_jac, p=()):
     The output is a flattened array representing the time derivative of the variational matrix, which can be used for numerical integration.
     
     Example usage:
-    
+    --------------
     >>> t = np.linspace(0, 10, 100)
     >>> Phi = np.eye(num_dimensions, dtype=np.float64).flatten()
     >>> x = np.array([1.0, 2.0, 3.0])
@@ -237,34 +237,42 @@ def computeLE(func, func_jac, x0, t, p=(), ttrans=None):
     return LEs, LE_history
 
 
-def plot_bifurcation_diagram(func, func_jac, s0, time_vector, parameters, p_idx, max_time=None):
+def plot_bifurcation_diagram(func, func_jac, x0, time_vector, parameters, p_idx, max_time=None):
     """
-    This function computes and plots the bifurcation diagram for a set of ordinary differential equations (ODEs). 
-    It takes as input the ODE function, its Jacobian, initial conditions, time vector, range of parameter values, 
-    and the index of the parameter to vary in the bifurcation diagram. The ODE function should be defined as a 
-    callable that takes arguments for the current state and time, and returns the derivative of the state with 
-    respect to time. The Jacobian function should be defined as a callable that takes arguments for the current 
-    state and time, and returns the Jacobian matrix of the ODE function. The initial conditions should be specified 
-    as an array-like object. The time vector should be an array-like object representing the time points at which 
-    to evaluate the ODEs. The range of parameter values should be specified as an array-like object. The index of 
-    the parameter to vary in the bifurcation diagram should be an integer. The function will compute the solution 
-    of the ODEs for each parameter value in the range, and plot the bifurcation diagram showing the local maxima 
-    and minima of the state variables, as well as the maximum Lyapunov exponents as a function of the parameter value.
-    
-    :param func: ODE function. Must take arguments like func(t, x, p) where x and t are 
-                 the state and time *now*, and p is a tuple of parameters. If there are 
-                 no model parameters, p should be set to the empty tuple.
-    :type func: callable
-    :param func_jac: Jacobian of func.
-    :type func_jac: callable
-    :param s0: Initial conditions.
-    :type s0: array_like
-    :param time_vector: Time vector for the integration.
-    :type time_vector: array_like
-    :param parameters: Range of parameter values to explore.
-    :type parameters: array_like
-    :param p_idx: Index of the parameter to vary in the bifurcation diagram.
-    :type p_idx: int
+    Computes and plots the bifurcation diagram for a set of ordinary differential equations (ODEs).
+
+    Parameters:
+    ----------
+    func : function
+        ODE function. Must take arguments like func(t, x, p) where x and t are 
+        the state and time *now*, and p is a tuple of parameters. If there are 
+        no model parameters, p should be set to the empty tuple.
+    func_jac : function
+        Jacobian of func.
+    x0 : array_like
+        Initial conditions.
+    time_vector : array_like
+        Time vector for the integration.
+    parameters : array_like
+        Range of parameter values to explore.
+    p_idx : int
+        Index of the parameter to vary in the bifurcation diagram.
+
+    Notes:
+    ------
+    The ODE function should be defined as a callable that takes arguments for the current state and time, and returns the derivative of the state with respect to time.
+
+    The Jacobian function should be defined as a callable that takes arguments for the current state and time, and returns the Jacobian matrix of the ODE function.
+
+    The initial conditions should be specified as an array-like object.
+
+    The time vector should be an array-like object representing the time points at which to evaluate the ODEs.
+
+    The range of parameter values should be specified as an array-like object.
+
+    The index of the parameter to vary in the bifurcation diagram should be an integer.
+
+    The function will compute the solution of the ODEs for each parameter value in the range, and plot the bifurcation diagram showing the local maxima and minima of the state variables, as well as the maximum Lyapunov exponents as a function of the parameter value.
     """
     maxima_x = []
     minima_x = []
@@ -282,7 +290,7 @@ def plot_bifurcation_diagram(func, func_jac, s0, time_vector, parameters, p_idx,
 
     for _p in tqdm(parameters):
 
-        solution = solve_ivp(func, [time_vector[0], time_vector[-1]], s0, args=_p, t_eval=time_vector)
+        solution = solve_ivp(func, [time_vector[0], time_vector[-1]], x0, args=_p, t_eval=time_vector)
 
         local_max_x, _ = find_peaks(solution.y[0])
         local_min_x, _ = find_peaks(-1*solution.y[0])
@@ -305,28 +313,28 @@ def plot_bifurcation_diagram(func, func_jac, s0, time_vector, parameters, p_idx,
         pz_min.extend([_p[p_idx]] * len(local_min_z))
 
         LE_time = time_vector if max_time is None else time_vector[:max_time]
-        LEs, _ = computeLE(func, func_jac, s0, LE_time, p=_p)
+        LEs, _ = computeLE(func, func_jac, x0, LE_time, p=_p)
         le_list.append(LEs.max())
 
-        s0 = solution.y[:,-1]
+        x0 = solution.y[:,-1]
 
     mle = np.array(le_list)
     pos_idx = np.where(mle > 0)[0]
     neg_idx = np.where(mle < 0)[0]
-    _, axes = plt.subplots(4, 1, figsize=(20, 20))
-    axes[0].plot(px_max, maxima_x, 'ko', markersize=0.5, alpha=0.3, label="Local maxima")
-    axes[0].plot(px_min, minima_x, 'ro', markersize=0.5, alpha=0.3, label="Local minima")
-    axes[0].legend(loc='upper left', markerscale=10)
+    _, axes = plt.subplots(4, 1, figsize=(15, 15))
+    axes[0].plot(px_max, maxima_x, 'ko', markersize=0.2, alpha=0.3, label="Local maxima")
+    axes[0].plot(px_min, minima_x, 'o', color='tab:blue', markersize=0.2, alpha=0.3, label="Local minima")
+    axes[0].legend(loc='upper left', markerscale=15)
     axes[0].set_ylabel("x-values")
-    axes[1].plot(py_max, maxima_y, 'ko', markersize=0.5, alpha=0.3, label="Local maxima")
-    axes[1].plot(py_min, minima_y, 'ro', markersize=0.5, alpha=0.3, label="Local minima")
-    axes[1].legend(loc='upper left', markerscale=10)
+    axes[1].plot(py_max, maxima_y, 'ko', markersize=0.2, alpha=0.3, label="Local maxima")
+    axes[1].plot(py_min, minima_y, 'o', color='tab:blue', markersize=0.2, alpha=0.3, label="Local minima")
+    axes[1].legend(loc='upper left', markerscale=15)
     axes[1].set_ylabel("y-values")
-    axes[2].plot(pz_max, maxima_z, 'ko', markersize=0.5, alpha=0.3, label="Local maxima")
-    axes[2].plot(pz_min, minima_z, 'ro', markersize=0.5, alpha=0.3, label="Local minima")
-    axes[2].legend(loc='upper left', markerscale=10)
+    axes[2].plot(pz_max, maxima_z, 'ko', markersize=0.2, alpha=0.3, label="Local maxima")
+    axes[2].plot(pz_min, minima_z, 'o', color='tab:blue', markersize=0.2, alpha=0.3, label="Local minima")
+    axes[2].legend(loc='upper left', markerscale=15)
     axes[2].set_ylabel("z-values")
-    axes[3].plot(parameters[:,p_idx][pos_idx], mle[pos_idx], 'ro', markersize=2.5, alpha=0.5)
+    axes[3].plot(parameters[:,p_idx][pos_idx], mle[pos_idx], 'o', color='tab:red', markersize=2.5, alpha=0.5)
     axes[3].plot(parameters[:,p_idx][neg_idx], mle[neg_idx], 'ko', markersize=2.5, alpha=0.5)
     axes[3].set_ylabel("Maximum Lyapunov Exponents")
     axes[3].set_xlabel("Parameter Value")
