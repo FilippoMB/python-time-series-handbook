@@ -336,6 +336,6 @@ def plot_bifurcation_diagram(func, func_jac, x0, time_vector, parameters, p_idx,
     axes[2].set_ylabel("z-values")
     axes[3].plot(parameters[:,p_idx][pos_idx], mle[pos_idx], 'o', color='tab:red', markersize=2.5, alpha=0.5)
     axes[3].plot(parameters[:,p_idx][neg_idx], mle[neg_idx], 'ko', markersize=2.5, alpha=0.5)
-    axes[3].set_ylabel("Maximum Lyapunov Exponents")
+    axes[3].set_ylabel("Maximum Lyapunov Exponent")
     axes[3].set_xlabel("Parameter Value")
     axes[3].axhline(0, color='k', lw=.5, alpha=.5)
