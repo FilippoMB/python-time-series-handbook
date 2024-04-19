@@ -1,6 +1,8 @@
 # Time Series Analysis with Python
 
-<img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/logo.png" style="width: 5cm; display: block; margin: auto;">
+<div align="center">
+   <img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/logo.png" style="width: 5cm; display: block; margin: auto;">
+</div>
 
 <br>
 <div align="center">
@@ -9,7 +11,7 @@
 <br>
 
 This is the collection of notebooks for the course *Time Series Analysis with Python*.
-For more information and for reading the content of this repository, please refer to the [book](https://filippomb.github.io/python-time-series-handbook) version.
+For reading the notebooks online you can either open the links below or read them as a [book](https://filippomb.github.io/python-time-series-handbook).
 
 ## 📑 Content
 
@@ -127,11 +129,11 @@ For more information and for reading the content of this repository, please refe
 
 ## 🚀 Getting started with coding
 
-To run the notebooks the recommended steps are the following:
+To run the notebooks locally the recommended steps are the following:
 
 1. Download and install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html).
 
-2. Download the [env.yml](env.yml) file.
+2. Download the [env.yml](https://github.com/FilippoMB/python-time-series-handbook/blob/main/env.yml) file.
 
 3. Open the shell and navigate to the location with the yml file you just downloaded.
     - If you are on Windows, open the Miniconda shell.
