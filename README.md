@@ -1,12 +1,10 @@
 # Time Series Analysis with Python
 
-<div align="center">
-   <img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/logo.png" style="width: 5cm; display: block; margin: auto;">
-</div>
+<img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/logo.png" style="width: 5cm; display: block; margin: auto;">
 
 <br>
 <div align="center">
-📚 <a href="https://filippomb.github.io/python-time-series-handbook">Read the book</a>
+📚 <a href="https://filippomb.github.io/python-time-series-handbook">Read it as a book</a>
 </div>
 <br>
 
