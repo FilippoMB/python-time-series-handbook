@@ -435,6 +435,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-forecasts-with-fourier-transforms">Making Forecasts with Fourier Transforms</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecast-example-1">Forecast example 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecast-example-2">Forecast example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detrending-example">Detrending example</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
@@ -483,6 +484,10 @@ document.write(`
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">cumulative_trapezoid</span>
 <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 <span class="kn">from</span> <span class="nn">tsa_course.lecture8</span> <span class="kn">import</span> <span class="n">annotated_sin_plot</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_pacf</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima_process</span> <span class="kn">import</span> <span class="n">arma_generate_sample</span>
+<span class="kn">from</span> <span class="nn">tsa_course.lecture2</span> <span class="kn">import</span> <span class="n">run_sequence_plot</span>
 </pre></div>
 </div>
 </div>
@@ -504,18 +509,12 @@ document.write(`
 <ul class="simple">
 <li><p>where <span class="math notranslate nohighlight">\(A\)</span> is the amplitude, <span class="math notranslate nohighlight">\(f\)</span> is the frequency, and <span class="math notranslate nohighlight">\(\psi\)</span> is the phase in radians.</p></li>
 </ul>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annotated_sin_plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/940f2c4cc9422b2560a68c3db6813aed2f32c8d1f865515f32e855f56e1072e9.png" src="../../_images/940f2c4cc9422b2560a68c3db6813aed2f32c8d1f865515f32e855f56e1072e9.png" />
 </div>
@@ -527,8 +526,8 @@ document.write(`
 </ul>
 <img alt="../../_images/ft.png" src="../../_images/ft.png" />
 <p>The Fourier Transform mathematical formulation is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-736f54e6-9529-4798-8e5b-27c385820e8a">
-<span class="eqno">()<a class="headerlink" href="#equation-736f54e6-9529-4798-8e5b-27c385820e8a" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-76797d06-2895-400c-af11-18cb8f0dec1c">
+<span class="eqno">()<a class="headerlink" href="#equation-76797d06-2895-400c-af11-18cb8f0dec1c" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
 <ul class="simple">
 <li><p>where:</p>
 <ul>
@@ -545,7 +544,7 @@ document.write(`
 <p><strong>Explanation</strong></p>
 <ul class="simple">
 <li><p>The term <span class="math notranslate nohighlight">\(e^{-i \omega t}\)</span> is a complex exponential.</p></li>
-<li><p>It can be decomposed as <span class="math notranslate nohighlight">\(e^{-i \omega t} = \cos(\omega t) -i \sin(\omega t)\)</span></p></li>
+<li><p>It can be decomposed as <span class="math notranslate nohighlight">\(e^{-i \omega t} = \cos(\omega t) -i \sin(\omega t)\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(e^{-i \omega t}\)</span> can be thought of as a rotating vector (phasor) in the complex plane, where <span class="math notranslate nohighlight">\(\omega\)</span> dictates the speed of rotation and <span class="math notranslate nohighlight">\(t\)</span> represents time.</p></li>
 </ul>
 <ul class="simple">
@@ -640,7 +639,7 @@ document.write(`
 <h2>Common Fourier Transforms<a class="headerlink" href="#common-fourier-transforms" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>First, we make a list of the most common FT of known functions and report the analytic expression.</p></li>
-<li><p>The list is adapted from <a class="reference external" href="https://github.com/cpjobling/eg-247-textbook">here</a>.</p></li>
+<li><p>This list is adapted from <a class="reference external" href="https://github.com/cpjobling/eg-247-textbook">here</a>.</p></li>
 </ul>
 <table class="table">
 <thead>
@@ -674,7 +673,7 @@ document.write(`
 <td><p><em>Signum</em></p></td>
 <td><p><span class="math notranslate nohighlight">\(\operatorname{sgn} t\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\displaystyle{\frac{2}{i\omega}}\)</span></p></td>
-<td><p>also known as sign function</p></td>
+<td><p>Also known as sign function</p></td>
 </tr>
 <tr class="row-even"><td><p>5.</p></td>
 <td><p>Unit step</p></td>
@@ -730,7 +729,12 @@ document.write(`
 </ul>
 </li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convenience function that creates both a time domain and frequency domain plot.</span>
 <span class="k">def</span> <span class="nf">plot_time_freq</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -763,6 +767,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <section id="sine">
 <h3>Sine<a class="headerlink" href="#sine" title="Link to this heading">#</a></h3>
@@ -971,7 +976,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0985dadec6701e88bb4988514e19be74debc09d216e38309d997a1db7e6610e2.png" src="../../_images/0985dadec6701e88bb4988514e19be74debc09d216e38309d997a1db7e6610e2.png" />
+<img alt="../../_images/2802015d79b593a56559a3cb7a65341128a57466e9a4fd069d52128834ee6dc3.png" src="../../_images/2802015d79b593a56559a3cb7a65341128a57466e9a4fd069d52128834ee6dc3.png" />
 </div>
 </div>
 <p>We can observe that in the Frequency Domain:</p>
@@ -1072,7 +1077,12 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_linearity</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f_t</span><span class="p">,</span> <span class="n">g_t</span><span class="p">,</span> <span class="n">combination</span><span class="p">,</span> <span class="n">F_combination</span><span class="p">,</span> <span class="n">linear_combination_F</span><span class="p">):</span>
     <span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -1112,6 +1122,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1154,7 +1165,12 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_time_shift</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f_t</span><span class="p">,</span> <span class="n">f_t_shifted</span><span class="p">,</span> <span class="n">F_f_t</span><span class="p">,</span> <span class="n">F_f_t_shifted</span><span class="p">):</span>
 
@@ -1194,6 +1210,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1235,7 +1252,12 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_freq_shift</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f_t</span><span class="p">,</span> <span class="n">f_shifted_t</span><span class="p">,</span> <span class="n">F_f_t</span><span class="p">,</span> <span class="n">F_shifted_t</span><span class="p">):</span>
 
@@ -1266,6 +1288,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1307,7 +1330,12 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_scaling</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f_t</span><span class="p">,</span> <span class="n">f_scaled</span><span class="p">,</span> <span class="n">F_f_t</span><span class="p">,</span> <span class="n">F_scaled_t</span><span class="p">):</span>
 
@@ -1338,6 +1366,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1354,7 +1383,7 @@ document.write(`
 <h3>Convolution<a class="headerlink" href="#convolution" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The Fourier Transform converts convolution in time domain into multiplication in frequency domain.</p></li>
-<li><p>The convolution is defined as</p></li>
+<li><p>The convolution is defined as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[f(t) * g(t) = \int \limits_{-\infty}^{\infty} f(\tau)g(t -\tau) d\tau\]</div>
@@ -1390,7 +1419,12 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_convolution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">convolution_time</span><span class="p">,</span> <span class="n">convolution_freq_domain</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -1413,6 +1447,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1454,7 +1489,12 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_derivative</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dy_dt_numerical</span><span class="p">,</span> <span class="n">dy_dt_from_frequency_domain</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -1469,6 +1509,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1517,7 +1558,12 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_integration</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f_t</span><span class="p">,</span> <span class="n">integrated_f_t</span><span class="p">,</span> <span class="n">F_w</span><span class="p">,</span> <span class="n">Integrated_F_w</span><span class="p">,</span> <span class="n">Theoretical_F_w</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -1551,6 +1597,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1612,7 +1659,7 @@ Energy in the frequency domain: 312.5
 <section id="filters">
 <h2>Filters<a class="headerlink" href="#filters" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>In the context of signal processing and time series analysis, a filter is a tool used to modify or enhance a signal by selectively amplifying certain frequencies and attenuating others</p></li>
+<li><p>In the context of signal processing and time series analysis, a filter is a tool used to modify or enhance a signal by selectively amplifying certain frequencies and attenuating others.</p></li>
 <li><p>A filter processes a signal to remove unwanted components or features, such as noise, or to extract useful information from the signal.</p></li>
 <li><p>Filters are characterized by their <strong>frequency response</strong> and <strong>transfer function</strong>.</p></li>
 </ul>
@@ -1711,7 +1758,12 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_bode_plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">omega_signal</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -1740,6 +1792,7 @@ Energy in the frequency domain: 312.5
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1802,7 +1855,12 @@ Energy in the frequency domain: 312.5
 <li><p>Unfortuantely we do not see much in the frequency domain since the response is compressed in a very short interval.</p></li>
 <li><p>To visualize these kind of signals we must apply some transformations that allows us to “zoom in” and see the details.</p></li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_hann</span><span class="p">():</span>
     <span class="n">window</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">hann</span><span class="p">(</span><span class="mi">51</span><span class="p">)</span>
@@ -1831,6 +1889,7 @@ Energy in the frequency domain: 312.5
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <ul class="simple">
 <li><p>This is a typical visualization of the window that we generated before.</p></li>
@@ -1854,7 +1913,12 @@ Energy in the frequency domain: 312.5
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split} w(n)={\begin{cases}{\frac{1}{2}}\left[1+\cos \left(\pi \left({\frac {2n}{\alpha (N-1)}}-1\right)\right)\right]&amp;0\leqslant n&lt;{\frac {\alpha (N-1)}{2}}\\1&amp;{\frac {\alpha (N-1)}{2}}\leqslant n\leqslant (N-1)(1-{\frac {\alpha }{2}})\\{\frac {1}{2}}\left[1+\cos \left(\pi \left({\frac {2n}{\alpha (N-1)}}-{\frac {2}{\alpha }}+1\right)\right)\right]&amp;(N-1)(1-{\frac {\alpha }{2}})&lt;n\leqslant (N-1)\end{cases}}\end{split}\]</div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_tukey</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
     <span class="n">window</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">tukey</span><span class="p">(</span><span class="mi">51</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
@@ -1882,6 +1946,7 @@ Energy in the frequency domain: 312.5
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1980,7 +2045,7 @@ Energy in the frequency domain: 312.5
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Window length: 32
 </pre></div>
 </div>
-<img alt="../../_images/9a0497fc27574075721a0fc15ffa0fea7c846480fe31cb33b77218233c726f08.png" src="../../_images/9a0497fc27574075721a0fc15ffa0fea7c846480fe31cb33b77218233c726f08.png" />
+<img alt="../../_images/9bb84735efaf8ef1431a0bba10bc685a094d0ba7f84f107949e2e49687c5a591.png" src="../../_images/9bb84735efaf8ef1431a0bba10bc685a094d0ba7f84f107949e2e49687c5a591.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2021,8 +2086,8 @@ Energy in the frequency domain: 312.5
 </ul>
 <ul class="simple">
 <li><p>Let’s consider a signal given by the sum of two sinusoids.</p></li>
-<li><p>The first sinusoid <span class="math notranslate nohighlight">\(y_1\)</span> has a frequency <span class="math notranslate nohighlight">\(f_1 = 10\)</span>Hz.</p></li>
-<li><p>The second sinusoid <span class="math notranslate nohighlight">\(y_2\)</span> has frequency <span class="math notranslate nohighlight">\(f_2 = 15\)</span>Hz.</p></li>
+<li><p>The first sinusoid <span class="math notranslate nohighlight">\(y_1\)</span> has a frequency <span class="math notranslate nohighlight">\(f_1 = 10\)</span> Hz.</p></li>
+<li><p>The second sinusoid <span class="math notranslate nohighlight">\(y_2\)</span> has frequency <span class="math notranslate nohighlight">\(f_2 = 15\)</span> Hz.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2125,7 +2190,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3acaaeef3965d1fc0a18c71ffe283aa17605b7bd4c09bf1fc90516f267d2b875.png" src="../../_images/3acaaeef3965d1fc0a18c71ffe283aa17605b7bd4c09bf1fc90516f267d2b875.png" />
+<img alt="../../_images/108eafbb701b521ca66bd51d282968f09abbfe4556ddec7671925d9a8ed65e44.png" src="../../_images/108eafbb701b521ca66bd51d282968f09abbfe4556ddec7671925d9a8ed65e44.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2200,7 +2265,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/04c732278e3d551d56fdb7923e5c5cd540e35dd45d93b901fd83019d755b7b2e.png" src="../../_images/04c732278e3d551d56fdb7923e5c5cd540e35dd45d93b901fd83019d755b7b2e.png" />
+<img alt="../../_images/a66b9763316b0e56cc7e6341516c99893bafba14c1f9f0067241826975d298e9.png" src="../../_images/a66b9763316b0e56cc7e6341516c99893bafba14c1f9f0067241826975d298e9.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2253,7 +2318,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a36e8b252a2d3353dc0b376a5acd30a927dad668cf241af65f2646f050a673c6.png" src="../../_images/a36e8b252a2d3353dc0b376a5acd30a927dad668cf241af65f2646f050a673c6.png" />
+<img alt="../../_images/299aa35f387c5d65e2fc659f155591cf6486dcc579ce49ab0e23e11c8f895d7c.png" src="../../_images/299aa35f387c5d65e2fc659f155591cf6486dcc579ce49ab0e23e11c8f895d7c.png" />
 </div>
 </div>
 <p>We observe that the original signal has been de-trended, and the noise has been removed.</p>
@@ -2462,7 +2527,9 @@ Energy in the frequency domain: 312.5
 </div>
 <section id="forecast-example-1">
 <h3>Forecast example 1<a class="headerlink" href="#forecast-example-1" title="Link to this heading">#</a></h3>
-<p>Prediction of the noisy sinusoid with trend.</p>
+<ul class="simple">
+<li><p>Here, we will consider the prediction of the noisy sinusoid with trend.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">fourierPrediction</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">n_predict</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">n_harm</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -2472,13 +2539,15 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/93de2cc2ab015a466eb5bdc0b07df36cd724dfb13d549a1a8d306dc73620ccc2.png" src="../../_images/93de2cc2ab015a466eb5bdc0b07df36cd724dfb13d549a1a8d306dc73620ccc2.png" />
+<img alt="../../_images/7be09b87c837647a4589f8c6dcce2d3dee2cdc5a392fe00d660763b3f6553bd7.png" src="../../_images/7be09b87c837647a4589f8c6dcce2d3dee2cdc5a392fe00d660763b3f6553bd7.png" />
 </div>
 </div>
 </section>
 <section id="forecast-example-2">
 <h3>Forecast example 2<a class="headerlink" href="#forecast-example-2" title="Link to this heading">#</a></h3>
-<p>CO2 Data.</p>
+<ul class="simple">
+<li><p>Here, we try to predict the CO2 Data.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;co2&quot;</span><span class="p">,</span> <span class="s2">&quot;datasets&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
@@ -2543,6 +2612,104 @@ Resampled:
 </div>
 <div class="cell_output docutils container">
 <img alt="../../_images/1ce145b37445b85f4bd403874eb0239f0e105274119f1a5ee7d78a6611543ab6.png" src="../../_images/1ce145b37445b85f4bd403874eb0239f0e105274119f1a5ee7d78a6611543ab6.png" />
+</div>
+</div>
+</section>
+<section id="detrending-example">
+<h3>Detrending example<a class="headerlink" href="#detrending-example" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The forecasting approach based on FT can also be used to remove trend and seasonality.</p></li>
+<li><p>In the following, we repeat the same example from Lecture 4: forecasting with an AR model.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data from an AR(2) process</span>
+<span class="n">ar_data</span> <span class="o">=</span> <span class="n">arma_generate_sample</span><span class="p">(</span><span class="n">ar</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]),</span> <span class="n">ma</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">nsample</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">burnin</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Add trend and seasonality</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">trend</span> <span class="o">=</span> <span class="n">time</span> <span class="o">*</span> <span class="mf">0.2</span>
+<span class="n">seasonality</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">time</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">time_series_ar</span> <span class="o">=</span> <span class="n">trend</span> <span class="o">+</span> <span class="n">seasonality</span> <span class="o">+</span> <span class="n">ar_data</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_series_ar</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/23635e4e6633db83a64d8ae7bc543a30114bafff1a47fb2eb39b40b5bdabe24f.png" src="../../_images/23635e4e6633db83a64d8ae7bc543a30114bafff1a47fb2eb39b40b5bdabe24f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train/test split</span>
+<span class="n">train_data_ar</span> <span class="o">=</span> <span class="n">time_series_ar</span><span class="p">[:</span><span class="mi">164</span><span class="p">]</span>
+<span class="n">test_data_ar</span> <span class="o">=</span> <span class="n">time_series_ar</span><span class="p">[</span><span class="mi">164</span><span class="p">:]</span>
+
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">fourierPrediction</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">,</span> <span class="n">n_predict</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data_ar</span><span class="p">),</span> <span class="n">n_harm</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fourierPredictionPlot</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bbe6baa61bb95a34a497c982fe0dd2babab18f690d59af287949d75029dc07ea.png" src="../../_images/bbe6baa61bb95a34a497c982fe0dd2babab18f690d59af287949d75029dc07ea.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Estimate trend and seasonality and remove them</span>
+<span class="n">trend_and_seasonality</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)]</span>
+<span class="n">resid</span> <span class="o">=</span> <span class="n">train_data_ar</span> <span class="o">-</span> <span class="n">trend_and_seasonality</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">ar_data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF Original AR process&quot;</span><span class="p">)</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF of TES residuals&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/333f6729946ae3d29a7b962a52e63b82c445fbd7e1fca024e50e9eb86e779f1f.png" src="../../_images/333f6729946ae3d29a7b962a52e63b82c445fbd7e1fca024e50e9eb86e779f1f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Compute predictions</span>
+<span class="n">resid_preds</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data_ar</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">resid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">resid_preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Residuals&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Differenced time series&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/09e1fc05b60b3e989545c65b2e8c9b39b2512f9eb07cea34699aacdd5156cd03.png" src="../../_images/09e1fc05b60b3e989545c65b2e8c9b39b2512f9eb07cea34699aacdd5156cd03.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add back trend and seasonality to the predictions</span>
+<span class="n">ft_preds</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):]</span>
+<span class="n">final_preds</span> <span class="o">=</span> <span class="n">ft_preds</span> <span class="o">+</span> <span class="n">resid_preds</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">train_data_ar</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">test_data_ar</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test Data&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">final_preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predictions&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bf5528a6c75f60a8c8f1f02b1d3d5c1eaaf690461a7db4feee30fa21d2f8a5ab.png" src="../../_images/bf5528a6c75f60a8c8f1f02b1d3d5c1eaaf690461a7db4feee30fa21d2f8a5ab.png" />
 </div>
 </div>
 </section>
@@ -2760,6 +2927,7 @@ Resampled:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-forecasts-with-fourier-transforms">Making Forecasts with Fourier Transforms</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecast-example-1">Forecast example 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecast-example-2">Forecast example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detrending-example">Detrending example</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>

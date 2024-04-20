@@ -460,6 +460,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">tsa_course.lecture2</span> <span class="kn">import</span> <span class="n">run_sequence_plot</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># reproducibility</span>
 </pre></div>
 </div>
@@ -493,21 +494,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate stationary data</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">stationary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_sequence_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Values&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mf">3.5</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ax</span>
 </pre></div>
 </div>
 </div>
@@ -1117,8 +1103,8 @@ moving_average: 448.32
 </li>
 </ul>
 <p>Expanding the formula we get</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9fc39499-37bb-4531-95a9-885e541b68cc">
-<span class="eqno">()<a class="headerlink" href="#equation-9fc39499-37bb-4531-95a9-885e541b68cc" title="Permalink to this equation">#</a></span>\[\begin{align} S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
+<div class="amsmath math notranslate nohighlight" id="equation-41946aa0-c2fb-460e-a10f-9d4eb40be730">
+<span class="eqno">()<a class="headerlink" href="#equation-41946aa0-c2fb-460e-a10f-9d4eb40be730" title="Permalink to this equation">#</a></span>\[\begin{align} S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
 S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha X(1) + \alpha(1 - \alpha)X(0)]\\
 &amp; = \alpha X(2) + \alpha(1 - \alpha)X(1) + \alpha(1 - \alpha)^2 X(0) \end{align}\]</div>
 <p>The explicit formula for a generic time step <span class="math notranslate nohighlight">\(\tau\)</span> is</p>
@@ -1148,8 +1134,8 @@ S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha 
 <ul class="simple">
 <li><p>💡 It has all the benefits of Single Exponential plus the ability to pickup on trend.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-8191d54f-7e17-4e63-abf2-3c4b6fb29459">
-<span class="eqno">()<a class="headerlink" href="#equation-8191d54f-7e17-4e63-abf2-3c4b6fb29459" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
+<div class="amsmath math notranslate nohighlight" id="equation-813b0161-3c1d-4ca5-819c-f9bbe86a3682">
+<span class="eqno">()<a class="headerlink" href="#equation-813b0161-3c1d-4ca5-819c-f9bbe86a3682" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
 b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ \hat{X}(t+1) = S(t) + b(t) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <ul class="simple">
 <li><p>The parameter <span class="math notranslate nohighlight">\(\beta \in [0,1]\)</span> controls the decay of the influence of change in the trend.</p></li>
@@ -1178,12 +1164,12 @@ b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text
 </li>
 </ul>
 <p><strong>Additive seasonality model</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-26cef7a2-4f32-4a48-b9c4-04b92738e9bf">
-<span class="eqno">()<a class="headerlink" href="#equation-26cef7a2-4f32-4a48-b9c4-04b92738e9bf" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+<div class="amsmath math notranslate nohighlight" id="equation-a03c33d7-fb8f-4e78-9e3a-2aa65979a232">
+<span class="eqno">()<a class="headerlink" href="#equation-a03c33d7-fb8f-4e78-9e3a-2aa65979a232" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
 b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \big(X(t) - S(t-1) - b(t-1)\big) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = S(t) + \tau b(t) + c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <p><strong>Multiplicative seasonality model</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-5a3c1141-8e4f-4706-8189-033a1cc60dbb">
-<span class="eqno">()<a class="headerlink" href="#equation-5a3c1141-8e4f-4706-8189-033a1cc60dbb" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+<div class="amsmath math notranslate nohighlight" id="equation-b24ca285-8cf0-4ad9-96a7-d23c30241357">
+<span class="eqno">()<a class="headerlink" href="#equation-b24ca285-8cf0-4ad9-96a7-d23c30241357" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
 b(t) = \beta \big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = \big( S(t) + \tau b(t) \big)c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
 <p><strong>Initialization</strong></p>
 <ul class="simple">

@@ -464,6 +464,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.arima_process</span> <span class="kn">import</span> <span class="n">arma_generate_sample</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.holtwinters</span> <span class="kn">import</span> <span class="n">ExponentialSmoothing</span>
+<span class="kn">from</span> <span class="nn">tsa_course.lecture2</span> <span class="kn">import</span> <span class="n">run_sequence_plot</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># For reproducibility</span>
 </pre></div>
 </div>
@@ -471,16 +472,16 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same function from the previous lecture</span>
-<span class="k">def</span> <span class="nf">run_sequence_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Values&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ax</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Same function from the previous lecture</span>
+<span class="c1"># def run_sequence_plot(x, y, title, xlabel=&quot;Time&quot;, ylabel=&quot;Values&quot;, ax=None):</span>
+<span class="c1">#     if ax is None:</span>
+<span class="c1">#         _, ax = plt.subplots(1,1, figsize=(10, 3.5))</span>
+<span class="c1">#     ax.plot(x, y, &#39;k-&#39;)</span>
+<span class="c1">#     ax.set_title(title)</span>
+<span class="c1">#     ax.set_xlabel(xlabel)</span>
+<span class="c1">#     ax.set_ylabel(ylabel)</span>
+<span class="c1">#     ax.grid(alpha=0.3)</span>
+<span class="c1">#     return ax</span>
 </pre></div>
 </div>
 </div>
@@ -814,10 +815,13 @@ document.write(`
 <ol class="arabic simple">
 <li><p>Apply standard and seasonal differencing to the time series.</p></li>
 </ol>
-<p>\begin{aligned}
-R’(t) = X(t + 1) - X(t) &amp; \qquad \text{removes trend} \
-R(t) = R’(t + L) - R’(t) &amp; \qquad \text{removes seasonality}
-\end{aligned}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    R'(t) = X(t + 1) - X(t) &amp; \qquad \text{removes trend} \\
+    R(t) = R'(t + L) - R'(t) &amp; \qquad \text{removes seasonality}
+    \end{aligned}
+    \end{split}\]</div>
 <ol class="arabic simple" start="2">
 <li><p>Estimate trend <span class="math notranslate nohighlight">\(T\)</span> and seasonality <span class="math notranslate nohighlight">\(S\)</span> (e.g., by using seasonal decomposition or smoothing techniques) and subtract them:</p></li>
 </ol>
@@ -1198,7 +1202,7 @@ R(t) = R’(t + L) - R’(t) &amp; \qquad \text{removes seasonality}
 <span class="n">final_preds</span> <span class="o">=</span> <span class="n">tes_pred</span> <span class="o">+</span> <span class="n">resid_preds</span>
 
 <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_series_ar</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">train_data_ar</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">test_data_ar</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test Data&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">final_preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predictions&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
@@ -1206,7 +1210,7 @@ R(t) = R’(t + L) - R’(t) &amp; \qquad \text{removes seasonality}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8aaf38e92a9ab97880fb80c68361e7b2b769276cd6fb4ebde8fdf3478edad06f.png" src="../../_images/8aaf38e92a9ab97880fb80c68361e7b2b769276cd6fb4ebde8fdf3478edad06f.png" />
+<img alt="../../_images/6efda27109fbaefb375485fe320b3478ddb833ddb9d88a7df5ff70bbbd9ac679.png" src="../../_images/6efda27109fbaefb375485fe320b3478ddb833ddb9d88a7df5ff70bbbd9ac679.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1479,16 +1483,16 @@ p-value (differenced ts): 0.000
 <span class="n">trend_and_seasonality</span> <span class="o">=</span> <span class="n">tes_ma</span><span class="o">.</span><span class="n">fittedvalues</span> 
 
 <span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trend_and_seasonality_default</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trend_and_seasonality_default</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Default smoothing&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trend_and_seasonality</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trend_and_seasonality</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">alpha=0.01$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/381dabfe8213604a19c4ddc970ed7e123cdf3378cae06a7f87abe5d784dee386.png" src="../../_images/381dabfe8213604a19c4ddc970ed7e123cdf3378cae06a7f87abe5d784dee386.png" />
+<img alt="../../_images/dedee8e1f90e0d47c879198bb4f3a6750b6560b8f1bc4479a67efc4b68b6b2ed.png" src="../../_images/dedee8e1f90e0d47c879198bb4f3a6750b6560b8f1bc4479a67efc4b68b6b2ed.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1604,7 +1608,7 @@ p-value (differenced ts): 0.000
 <span class="n">final_preds</span> <span class="o">=</span> <span class="n">tes_pred</span> <span class="o">+</span> <span class="n">resid_preds</span>
 
 <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_series_ma</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ma</span><span class="p">)],</span> <span class="n">train_data_ma</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ma</span><span class="p">):],</span> <span class="n">test_data_ma</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test Data&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ma</span><span class="p">):],</span> <span class="n">final_preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predictions&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
@@ -1612,7 +1616,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c2705198176bfd69b9d99fb2ee6678ca92296915e6e4c7040e11bcda87e05a55.png" src="../../_images/c2705198176bfd69b9d99fb2ee6678ca92296915e6e4c7040e11bcda87e05a55.png" />
+<img alt="../../_images/a44badbf2c078cf46b3f40bf01b557539191c0f3d43b10ec8d5c8fcc7c7f794a.png" src="../../_images/a44badbf2c078cf46b3f40bf01b557539191c0f3d43b10ec8d5c8fcc7c7f794a.png" />
 </div>
 </div>
 <ul class="simple">
