@@ -692,13 +692,16 @@ x_{t-1} \\
 <img alt="../../_images/model_pred.png" src="../../_images/model_pred.png" />
 <p>Covariance estimate update:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align} \mathbf{P}_{t}^{-} &amp;= \mathbb{E}[e^{-}_t e^{-T}_t] \\
+\[\begin{split}
+\begin{aligned} 
+\mathbf{P}_{t}^{-} &amp;= \mathbb{E}[e^{-}_t e^{-T}_t] \\
   &amp;= \mathbb{E}[(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})^T] \\
   &amp;= \mathbb{E}[(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})^T] \\
   &amp;= \mathbb{E}[(\mathbf{A}e_{t-1})(e_{t-1}^T \mathbf{A}^T)] + \mathbb{E}[\boldsymbol{w}\boldsymbol{w}^T]\\
   &amp;= \mathbf{A}\mathbb{E}[e_{t-1}e_{t-1}^T ]\mathbf{A}^T + \mathbf{Q} \\
   &amp;= \mathbf{A}\mathbf{P}_{t-1}\mathbf{A}^T + \mathbf{Q}
-  \end{align}\end{split}\]</div>
+\end{aligned}
+\end{split}\]</div>
 <p>In summary, the Predict step consists of two equations to update:</p>
 <ul class="simple">
 <li><p>State estimate.</p></li>
@@ -756,8 +759,14 @@ x_{t-1} \\
 <li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{R} \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = \mathbf{H}^{-1}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> weights the residuals more heavily:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-84a49393-4cee-410b-ac69-3f10dd816647">
-<span class="eqno">()<a class="headerlink" href="#equation-84a49393-4cee-410b-ac69-3f10dd816647" title="Permalink to this equation">#</a></span>\[\begin{align} \hat{\boldsymbol{x}}_{t} &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\Delta_t = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}(\boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t})\\ &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} - \mathbf{H}^{-1}\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} -  \hat{\boldsymbol{x}}^{-}_{t}\\ &amp;= \mathbf{H}^{-1}\boldsymbol{z}_{t} \end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{aligned} 
+   \hat{\boldsymbol{x}}_{t} &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\Delta_t = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}(\boldsymbol{z}_{t} - \mathbf{H} \hat{\boldsymbol{x}}^{-}_{t})\\ 
+   &amp;= \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} - \mathbf{H}^{-1}\mathbf{H} \hat{\boldsymbol{x}}^{-}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{H}^{-1}\boldsymbol{z}_{t} -  \hat{\boldsymbol{x}}^{-}_{t}\\ 
+   &amp;= \mathbf{H}^{-1}\boldsymbol{z}_{t} 
+   \end{aligned}
+   \end{split}\]</div>
 </li>
 </ol>
 <img alt="../../_images/extreme1.png" src="../../_images/extreme1.png" />
@@ -965,7 +974,12 @@ x_{t-1} \\
 <li><p>Now, plot an estimate for the value <span class="math notranslate nohighlight">\(x_t\)</span> on top of the measurements <span class="math notranslate nohighlight">\(z_t\)</span>.</p></li>
 <li><p>We also plot how the covariance estimate <span class="math notranslate nohighlight">\(P_t\)</span> changes during the process.</p></li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_1d_comparison</span><span class="p">(</span><span class="n">measurements_made</span><span class="p">,</span> <span class="n">estimate</span><span class="p">,</span> <span class="n">true_value</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
     <span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">measurements_made</span><span class="p">,</span><span class="s1">&#39;k+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;measurements&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
@@ -992,6 +1006,7 @@ x_{t-1} \\
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1014,7 +1029,7 @@ x_{t-1} \\
 <h3>Example 2: Dynamic one-dimensional data<a class="headerlink" href="#example-2-dynamic-one-dimensional-data" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Let’s now consider the system we saw earlier, a car that moves approximately at a constant velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p></li>
-<li><p>The position changes over time according to the following formula</p></li>
+<li><p>The position changes over time according to the following formula:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[x_{t} = x_{t-1} + \delta t \cdot v_0 + w_t\]</div>
@@ -1023,7 +1038,7 @@ x_{t-1} \\
 </ul>
 <ul class="simple">
 <li><p>Now, assume we have measurements only for the position, but not the velocity.</p></li>
-<li><p>Let the measurements be generated according to the following distribution</p></li>
+<li><p>Let the measurements be generated according to the following distribution:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[z_t = z_{t-1} + \delta t \cdot v_t\]</div>
@@ -1123,13 +1138,15 @@ x_{t-1} \\
 <li><p>Measurement matrix <span class="math notranslate nohighlight">\(\mathbf{H} = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">measurementMatrix</span></code> in OpenCV).</p></li>
 </ul>
 <ul class="simple">
-<li><p>The covariance of the model noise <span class="math notranslate nohighlight">\(\mathbf{Q} = \begin{bmatrix}  q &amp; 0 &amp; 0 &amp; 0 \\  0 &amp; q &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; q &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; q  \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">processNoiseCov</span></code> in OpenCV)</p></li>
-<li><p>The covariance of the measurements noise <span class="math notranslate nohighlight">\(\mathbf{R} = \begin{bmatrix}  r &amp; 0 \\ 0 &amp; r  \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">measurementNoiseCov</span></code> in OpenCV)</p></li>
+<li><p>The covariance of the model noise <span class="math notranslate nohighlight">\(\mathbf{Q} = \begin{bmatrix}  q &amp; 0 &amp; 0 &amp; 0 \\  0 &amp; q &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; q &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; q  \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">processNoiseCov</span></code> in OpenCV).</p></li>
+<li><p>The covariance of the measurements noise <span class="math notranslate nohighlight">\(\mathbf{R} = \begin{bmatrix}  r &amp; 0 \\ 0 &amp; r  \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">measurementNoiseCov</span></code> in OpenCV).</p></li>
 </ul>
 <p>For simplicity, we use diagonal covariances in this example.</p>
 <p>The constructor has has the following sintax</p>
-<p><code class="docutils literal notranslate"><span class="pre">KalmanFilter(state_size,</span> <span class="pre">measurements_size,</span> <span class="pre">control_size)</span></code></p>
-<p>where</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">KalmanFilter(state_size,</span> <span class="pre">measurements_size,</span> <span class="pre">control_size)</span></code></p>
+</div></blockquote>
+<p>where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">state_size</span></code> is the dimension of the state vector <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, which is 4 in our case.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">measurements_size</span></code> is the dimension of the state vector <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, which is 2 in our case.</p></li>
@@ -1164,13 +1181,19 @@ x_{t-1} \\
 <ul class="simple">
 <li><p>Generate the <span class="math notranslate nohighlight">\((z_x, z_y)\)</span> measurements by clicking with a mouse on the screen.</p></li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
 <span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://guoguibing.github.io/librec/datagen.html&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe

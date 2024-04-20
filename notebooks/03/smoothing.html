@@ -855,7 +855,14 @@ moving_average: 448.32
 <li><p>A simple way is to define them as follows:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}&amp; w + w^2 + w^3 = 1\\ &amp; w_1 = w \approx 0.543 \\ &amp; w_2 = w^2 \approx 0.294 \\ &amp; w_3 = w^3 \approx 0.16 \end{align}\end{split}\]</div>
+\[\begin{split}
+\begin{aligned}
+&amp; w + w^2 + w^3 = 1\\ 
+&amp; w_1 = w \approx 0.543 \\ 
+&amp; w_2 = w^2 \approx 0.294 \\ 
+&amp; w_3 = w^3 \approx 0.16 
+\end{aligned}
+\end{split}\]</div>
 <img alt="../../_images/ExpWMA.gif" src="../../_images/ExpWMA.gif" />
 <p><strong>📝Note</strong></p>
 <ul class="simple">
@@ -983,7 +990,7 @@ moving_average: 448.32
 <h3>Forecasting with WMA<a class="headerlink" href="#forecasting-with-wma" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Next, we use the WMA to generate forecasts.</p></li>
-<li><p>The previous <a class="reference internal" href="#forecasting-with-ma"><span class="xref myst">forecasting formula</span></a> is modified to weight differently the past observations in the window</p></li>
+<li><p>The previous <a class="reference internal" href="#forecasting-with-ma"><span class="xref myst">forecasting formula</span></a> is modified to weight differently the past observations in the window:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\hat{X}(t+1) = \frac{w_1 \cdot X(t) + w_2 \cdot X(t-1) + \dots + w_P \cdot X(t-P+1)}{P}\]</div>
@@ -1050,7 +1057,7 @@ moving_average: 448.32
 <li><p>WMA solves some issues of MA.</p>
 <ul>
 <li><p>It is more sensitive to local changes.</p></li>
-<li><p>Is more flexible, as it can adjust the importance of different time steps</p></li>
+<li><p>Is more flexible, as it can adjust the importance of different time steps.</p></li>
 <li><p>It does not require a fixed window size as it applies an exponentially decreasing weight to all past observations.</p></li>
 </ul>
 </li>
@@ -1089,27 +1096,31 @@ moving_average: 448.32
 <ul class="simple">
 <li><p>💡 Useful if your data lacks trend and seasonality and you want to approximately extract patterns.</p></li>
 <li><p>It is analogous to the WMA we saw previously.</p></li>
-<li><p>The basic formulation is</p></li>
+<li><p>The basic formulation is:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S(t) = \alpha X(t) + (1-\alpha)S(t-1)\]</div>
 <ul class="simple">
-<li><p>where</p>
+<li><p>where:</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(S(t)\)</span> is the smoothed value at time <em>t</em></p></li>
-<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is a smoothing constant</p></li>
-<li><p><span class="math notranslate nohighlight">\(X(t)\)</span> is the value of the series at time <em>t</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(S(t)\)</span> is the smoothed value at time <em>t</em>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is a smoothing constant,</p></li>
+<li><p><span class="math notranslate nohighlight">\(X(t)\)</span> is the value of the series at time <em>t</em>.</p></li>
 </ul>
 </li>
 </ul>
-<p>Expanding the formula we get</p>
-<div class="amsmath math notranslate nohighlight" id="equation-41946aa0-c2fb-460e-a10f-9d4eb40be730">
-<span class="eqno">()<a class="headerlink" href="#equation-41946aa0-c2fb-460e-a10f-9d4eb40be730" title="Permalink to this equation">#</a></span>\[\begin{align} S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
-S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha X(1) + \alpha(1 - \alpha)X(0)]\\
-&amp; = \alpha X(2) + \alpha(1 - \alpha)X(1) + \alpha(1 - \alpha)^2 X(0) \end{align}\]</div>
-<p>The explicit formula for a generic time step <span class="math notranslate nohighlight">\(\tau\)</span> is</p>
+<p>Expanding the formula we get:</p>
 <div class="math notranslate nohighlight">
-\[ S(T) = \sum_{t=0}^{\tau} \alpha(1 - \alpha)^{\tau-t}X(t) \]</div>
+\[\begin{split}
+\begin{aligned} 
+S(0) &amp;= \alpha X(0) \\ S(1) &amp;= \alpha X(1) + (1 - \alpha)S(0) = \alpha X(1) + \alpha(1 - \alpha)X(0) \\
+S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha X(1) + \alpha(1 - \alpha)X(0)]\\
+&amp; = \alpha X(2) + \alpha(1 - \alpha)X(1) + \alpha(1 - \alpha)^2 X(0) 
+\end{aligned}
+\end{split}\]</div>
+<p>The formula for a generic time step <span class="math notranslate nohighlight">\(\tau\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[ S(\tau) = \sum_{t=0}^{\tau} \alpha(1 - \alpha)^{\tau-t}X(t) \]</div>
 <section id="initialization">
 <h4>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h4>
 <ul class="simple">
@@ -1134,21 +1145,26 @@ S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha 
 <ul class="simple">
 <li><p>💡 It has all the benefits of Single Exponential plus the ability to pickup on trend.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-813b0161-3c1d-4ca5-819c-f9bbe86a3682">
-<span class="eqno">()<a class="headerlink" href="#equation-813b0161-3c1d-4ca5-819c-f9bbe86a3682" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
-b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ \hat{X}(t+1) = S(t) + b(t) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned} 
+S(t) = \alpha X(t) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values of the series} \\
+b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ 
+\hat{X}(t+1) = S(t) + b(t) &amp; \hspace{2cm} \text{Forecasts} 
+\end{aligned}
+\end{split}\]</div>
 <ul class="simple">
 <li><p>The parameter <span class="math notranslate nohighlight">\(\beta \in [0,1]\)</span> controls the decay of the influence of change in the trend.</p></li>
 </ul>
 <p><strong>Initialization</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(S(0) = X(0)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(b(0) = X(1) - X(0)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S(0) = X(0)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(b(0) = X(1) - X(0)\)</span>.</p></li>
 <li><p>Other initializations are also possible.</p></li>
 </ul>
 <p><strong>Forecasts beyond 1-step ahead</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\hat{X}(t+\tau) = S(t) + \tau b(t)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{X}(t+\tau) = S(t) + \tau b(t)\)</span>.</p></li>
 </ul>
 </section>
 <section id="triple-exponential-smoothing">
@@ -1158,19 +1174,31 @@ b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text
 <li><p>It does by adding a third component that smooths out seasonality of length <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
 <li><p>There are two variants in the model:</p>
 <ul>
-<li><p>additive seasonality</p></li>
-<li><p>multiplicative seasonality</p></li>
+<li><p>additive seasonality,</p></li>
+<li><p>multiplicative seasonality.</p></li>
 </ul>
 </li>
 </ul>
 <p><strong>Additive seasonality model</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-a03c33d7-fb8f-4e78-9e3a-2aa65979a232">
-<span class="eqno">()<a class="headerlink" href="#equation-a03c33d7-fb8f-4e78-9e3a-2aa65979a232" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
-b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \big(X(t) - S(t-1) - b(t-1)\big) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = S(t) + \tau b(t) + c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned} 
+S(t) = \alpha \big(X(t) + c(t-L)\big) + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ 
+c(t) = \gamma \big(X(t) - S(t-1) - b(t-1)\big) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ 
+\hat{X}(t+\tau) = S(t) + \tau b(t) + c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} 
+\end{aligned}
+\end{split}\]</div>
 <p><strong>Multiplicative seasonality model</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-b24ca285-8cf0-4ad9-96a7-d23c30241357">
-<span class="eqno">()<a class="headerlink" href="#equation-b24ca285-8cf0-4ad9-96a7-d23c30241357" title="Permalink to this equation">#</a></span>\[\begin{align} S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
-b(t) = \beta \big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ \hat{X}(t+\tau) = \big( S(t) + \tau b(t) \big)c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} \end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned} 
+S(t) = \alpha \frac{X(t)}{c(t-L)} + (1-\alpha) \big(S(t-1) + b(t-1)\big) &amp; \hspace{2cm} \text{Smoothed values} \\
+b(t) = \beta \big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text{Estimated trend} \\ 
+c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{2cm} \text{Seasonal correction} \\ 
+\hat{X}(t+\tau) = \big( S(t) + \tau b(t) \big)c(t-L + 1 + (\tau - 1)\text{mod}(L)) &amp; \hspace{2cm} \text{Forecasts} 
+\end{aligned}
+\end{split}\]</div>
 <p><strong>Initialization</strong></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(b(0) = \frac{1}{L} \left( \frac{X(L+1) - X(1)}{L} + \frac{X(L+2) - X(2)}{L} + \dots + \frac{X(L+L) - X(L)}{L} \right)\)</span></p></li>
