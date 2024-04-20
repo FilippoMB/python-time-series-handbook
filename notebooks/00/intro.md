@@ -19,17 +19,17 @@ To reinforce learning and encourage active engagement, each chapter concludes wi
 
 Whether you are new to time series analysis or looking to refine your expertise, this course offers a broad exploration of the field, with Python as your toolkit. I hope that you will find this material both educational and entertaining, brining you a step closer to mastering time series analysis.
 
-```{note}
-The notebooks are presented in class as slides using RISE (see [here](https://github.com/FilippoMB/python-time-series-handbook?tab=readme-ov-file#-notebook-format-and-slides) for more details). 
-For this reason, the text in the notebooks is organized with bullet points.
-```
-
 
 ## 📖 Chapters
 
 The course is organized into the following chapters.
 
 ```{tableofcontents}
+```
+
+```{note}
+The notebooks are presented in class as slides using RISE (see [here](https://github.com/FilippoMB/python-time-series-handbook?tab=readme-ov-file#-notebook-format-and-slides) for more details). 
+For this reason, the text in the notebooks is organized with bullet points.
 ```
 
 ## 🎓 University courses
