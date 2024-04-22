@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -42,7 +42,7 @@
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
@@ -473,6 +473,17 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># Install dependencies if the notebook is running in Colab</span>
+<span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>-qq<span class="w"> </span>tsa-course
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
@@ -483,11 +494,11 @@ document.write(`
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">cumulative_trapezoid</span>
 <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="kn">from</span> <span class="nn">tsa_course.lecture8</span> <span class="kn">import</span> <span class="n">annotated_sin_plot</span>
 <span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_pacf</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.arima_process</span> <span class="kn">import</span> <span class="n">arma_generate_sample</span>
 <span class="kn">from</span> <span class="nn">tsa_course.lecture2</span> <span class="kn">import</span> <span class="n">run_sequence_plot</span>
+<span class="kn">from</span> <span class="nn">tsa_course.lecture8</span> <span class="kn">import</span> <span class="n">annotated_sin_plot</span>
 </pre></div>
 </div>
 </div>
@@ -516,7 +527,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/940f2c4cc9422b2560a68c3db6813aed2f32c8d1f865515f32e855f56e1072e9.png" src="../../_images/940f2c4cc9422b2560a68c3db6813aed2f32c8d1f865515f32e855f56e1072e9.png" />
+<img alt="../../_images/03064d24fa5bd6547199e13313b611191308e07f21c848adde691469ba215ba0.png" src="../../_images/03064d24fa5bd6547199e13313b611191308e07f21c848adde691469ba215ba0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -526,8 +537,8 @@ document.write(`
 </ul>
 <img alt="../../_images/ft.png" src="../../_images/ft.png" />
 <p>The Fourier Transform mathematical formulation is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ffb9a0e0-48ec-4266-8f00-41ac7e828425">
-<span class="eqno">()<a class="headerlink" href="#equation-ffb9a0e0-48ec-4266-8f00-41ac7e828425" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-606bc5b4-9034-41f7-b403-2191eac6c411">
+<span class="eqno">(2)<a class="headerlink" href="#equation-606bc5b4-9034-41f7-b403-2191eac6c411" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
 <ul class="simple">
 <li><p>where:</p>
 <ul>
@@ -802,7 +813,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d8b44bcd49f4db950d81a01b5bc1199d92d410d981f961a424a533099a010a0c.png" src="../../_images/d8b44bcd49f4db950d81a01b5bc1199d92d410d981f961a424a533099a010a0c.png" />
+<img alt="../../_images/398710c964cfd4e79cac56b5d36d5f624d6a3902772be6d28c0fbd97960d2f85.png" src="../../_images/398710c964cfd4e79cac56b5d36d5f624d6a3902772be6d28c0fbd97960d2f85.png" />
 </div>
 </div>
 <ul class="simple">
@@ -822,7 +833,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9ce54a39ab688a93507b7fbbaf3be513619c430ce7cabba8f92a0ee76cd65787.png" src="../../_images/9ce54a39ab688a93507b7fbbaf3be513619c430ce7cabba8f92a0ee76cd65787.png" />
+<img alt="../../_images/1891b1acd1cf111fb0c8f46a1355f395b6142fe78a47fda53f0201eafa6dd874.png" src="../../_images/1891b1acd1cf111fb0c8f46a1355f395b6142fe78a47fda53f0201eafa6dd874.png" />
 </div>
 </div>
 </section>
@@ -860,7 +871,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c55ac884f7288ad3a940f527590d4502dbade97b7bb9d5a71ccb40ecc16cb856.png" src="../../_images/c55ac884f7288ad3a940f527590d4502dbade97b7bb9d5a71ccb40ecc16cb856.png" />
+<img alt="../../_images/696b4ed66b3c7322516418d281e74b67a88c832b329d1241afe80c294dc7c5ff.png" src="../../_images/696b4ed66b3c7322516418d281e74b67a88c832b329d1241afe80c294dc7c5ff.png" />
 </div>
 </div>
 <ul class="simple">
@@ -876,7 +887,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e390e4a8c919a38c14c9426d211e99728f8221805ff357465b08fa59a21dc489.png" src="../../_images/e390e4a8c919a38c14c9426d211e99728f8221805ff357465b08fa59a21dc489.png" />
+<img alt="../../_images/561c23a67753a37e0ab0143eaf4d99068ba78eb00c0dac2013df1a535444508f.png" src="../../_images/561c23a67753a37e0ab0143eaf4d99068ba78eb00c0dac2013df1a535444508f.png" />
 </div>
 </div>
 </section>
@@ -906,7 +917,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/eacfda18e29707ea306fde70c894ecf02fcb1232207c3f95c7e3de2d91930729.png" src="../../_images/eacfda18e29707ea306fde70c894ecf02fcb1232207c3f95c7e3de2d91930729.png" />
+<img alt="../../_images/fc0ed4d4194a4084f29e940adb169bdb98fe944ad4c895bdd8ba5007f71e4906.png" src="../../_images/fc0ed4d4194a4084f29e940adb169bdb98fe944ad4c895bdd8ba5007f71e4906.png" />
 </div>
 </div>
 </section>
@@ -936,7 +947,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a7f4d0c92fa31bfc3e33c66894051dbc6ef815af6ea5c31ad5b425a1413780d9.png" src="../../_images/a7f4d0c92fa31bfc3e33c66894051dbc6ef815af6ea5c31ad5b425a1413780d9.png" />
+<img alt="../../_images/6b8834028a4a9a421f15ce2e41de5c2647cdd5c11fd93bead15d395aced718aa.png" src="../../_images/6b8834028a4a9a421f15ce2e41de5c2647cdd5c11fd93bead15d395aced718aa.png" />
 </div>
 </div>
 </section>
@@ -960,7 +971,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/70e48443037cc4ca055c6c2dbc0c58bb92eb7e2625a4a37eb8658e3449f2fe12.png" src="../../_images/70e48443037cc4ca055c6c2dbc0c58bb92eb7e2625a4a37eb8658e3449f2fe12.png" />
+<img alt="../../_images/59f0a851d9fd2a0b4e3d283a62fd228c3231a51b1275a2c0450cdd40eac1c9d0.png" src="../../_images/59f0a851d9fd2a0b4e3d283a62fd228c3231a51b1275a2c0450cdd40eac1c9d0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -971,7 +982,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0370834e3ab330453be5a943190d285f54900db6200ceb6a47bc7002ba9a76b7.png" src="../../_images/0370834e3ab330453be5a943190d285f54900db6200ceb6a47bc7002ba9a76b7.png" />
+<img alt="../../_images/d054b5d3c33c3cf3c4d5d8e92c88fbd5340db075d042d5dc455d30e56bbcaa7d.png" src="../../_images/d054b5d3c33c3cf3c4d5d8e92c88fbd5340db075d042d5dc455d30e56bbcaa7d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -982,7 +993,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/73a3a4a7451bbbee7de4a4ba2929ca6edf4329c32305e5ec5643f57c039b4c9a.png" src="../../_images/73a3a4a7451bbbee7de4a4ba2929ca6edf4329c32305e5ec5643f57c039b4c9a.png" />
+<img alt="../../_images/6d537afe7d6a8de4f1296a344e6d8b8fbf56f28e2b365f992f1a3fcd442801a4.png" src="../../_images/6d537afe7d6a8de4f1296a344e6d8b8fbf56f28e2b365f992f1a3fcd442801a4.png" />
 </div>
 </div>
 <p>We can observe that in the Frequency Domain:</p>
@@ -1041,7 +1052,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dea02253da5273a7fea03980d2f0df12f81f4eaa527e10611e5245d035407091.png" src="../../_images/dea02253da5273a7fea03980d2f0df12f81f4eaa527e10611e5245d035407091.png" />
+<img alt="../../_images/32f19493449b10e2ec472fc7892cc9df7fcf64bb319fd6ad0be47c62ded6ffdd.png" src="../../_images/32f19493449b10e2ec472fc7892cc9df7fcf64bb319fd6ad0be47c62ded6ffdd.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1137,7 +1148,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ce50e2662f85486fac73509067d9fda5d66ea9a84dba88eac33a4faf5044330f.png" src="../../_images/ce50e2662f85486fac73509067d9fda5d66ea9a84dba88eac33a4faf5044330f.png" />
+<img alt="../../_images/23b293d8d35384c9ba0861fe55cdbb77afa4ab5baaf52e7a4e3bac91bcf879ab.png" src="../../_images/23b293d8d35384c9ba0861fe55cdbb77afa4ab5baaf52e7a4e3bac91bcf879ab.png" />
 </div>
 </div>
 </section>
@@ -1225,7 +1236,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5d29d43331bdba4f48f328375b1df105064f2fc46d1902193e8d9b32bdb65916.png" src="../../_images/5d29d43331bdba4f48f328375b1df105064f2fc46d1902193e8d9b32bdb65916.png" />
+<img alt="../../_images/1d9325fdf61ecd68b22d01a5bc07d62ab6c1d3d7cf9e9bfa0ddd7e87533af427.png" src="../../_images/1d9325fdf61ecd68b22d01a5bc07d62ab6c1d3d7cf9e9bfa0ddd7e87533af427.png" />
 </div>
 </div>
 </section>
@@ -1303,7 +1314,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b503d328bb45c7e0c92215b6c4e49f585cd0eb7b932ef072e8433e55c2c577c8.png" src="../../_images/b503d328bb45c7e0c92215b6c4e49f585cd0eb7b932ef072e8433e55c2c577c8.png" />
+<img alt="../../_images/8e01fe985c8a5e27a10f1fbb35d77527a5e74876934af74c858a14e51da5f849.png" src="../../_images/8e01fe985c8a5e27a10f1fbb35d77527a5e74876934af74c858a14e51da5f849.png" />
 </div>
 </div>
 </section>
@@ -1381,7 +1392,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/24ebe287c234108d0c821afae71232e5df298da5ef8ed39f6bbf3d767da738a9.png" src="../../_images/24ebe287c234108d0c821afae71232e5df298da5ef8ed39f6bbf3d767da738a9.png" />
+<img alt="../../_images/025df0fc175269f118161fd8df752677c818b041d6ac15e46c1eb768e63cafa9.png" src="../../_images/025df0fc175269f118161fd8df752677c818b041d6ac15e46c1eb768e63cafa9.png" />
 </div>
 </div>
 </section>
@@ -1462,7 +1473,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d971670bdc73ac941d7f490ee1eb25590ff3dfe19c648b923656d1e8dc4b6b88.png" src="../../_images/d971670bdc73ac941d7f490ee1eb25590ff3dfe19c648b923656d1e8dc4b6b88.png" />
+<img alt="../../_images/6a6e96222134506a12706cad6ca4ecd83ab731d98ac3b83411b162c4f1f70845.png" src="../../_images/6a6e96222134506a12706cad6ca4ecd83ab731d98ac3b83411b162c4f1f70845.png" />
 </div>
 </div>
 </section>
@@ -1524,7 +1535,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d351e7b255ac67d456855ef0cfb2f417b1c9949d8e439cf4ea93e9afe509b680.png" src="../../_images/d351e7b255ac67d456855ef0cfb2f417b1c9949d8e439cf4ea93e9afe509b680.png" />
+<img alt="../../_images/ac4e81e6aa69ff20cfc6c3f2626d4c172937bb82ad867b0d3e2ec4eb8257dab8.png" src="../../_images/ac4e81e6aa69ff20cfc6c3f2626d4c172937bb82ad867b0d3e2ec4eb8257dab8.png" />
 </div>
 </div>
 </section>
@@ -1612,7 +1623,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b00c128ebce58725322b0e3ebe9f3e68252bd0f57d94184f49b48aee58365769.png" src="../../_images/b00c128ebce58725322b0e3ebe9f3e68252bd0f57d94184f49b48aee58365769.png" />
+<img alt="../../_images/dae853f1004481b13eaaf271d230e045ec8983cf750655ed1cb047131b4c25bf.png" src="../../_images/dae853f1004481b13eaaf271d230e045ec8983cf750655ed1cb047131b4c25bf.png" />
 </div>
 </div>
 </section>
@@ -1807,7 +1818,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f8f951d61f8ec3f89c94ee86bc3df308ef8e562103abfbccef6fcec723593ae0.png" src="../../_images/f8f951d61f8ec3f89c94ee86bc3df308ef8e562103abfbccef6fcec723593ae0.png" />
+<img alt="../../_images/2a70286aa3854d9403f8ab9044fc9683e1af7a53a647f4a39c435127c52d834d.png" src="../../_images/2a70286aa3854d9403f8ab9044fc9683e1af7a53a647f4a39c435127c52d834d.png" />
 </div>
 </div>
 <p><strong>Magnitude Plot (Left)</strong></p>
@@ -1854,7 +1865,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/98f7c8e229cb31ddce019cb6cec8bc4e60808d757106729b7f081602edd3e41b.png" src="../../_images/98f7c8e229cb31ddce019cb6cec8bc4e60808d757106729b7f081602edd3e41b.png" />
+<img alt="../../_images/1e67a3d1cbeb740ab0eb52f997f3dfdc12c8c59dc861f6cb0a60ff288a3ab5a6.png" src="../../_images/1e67a3d1cbeb740ab0eb52f997f3dfdc12c8c59dc861f6cb0a60ff288a3ab5a6.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1907,7 +1918,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/27a4cbc1a35398d0e074ff4439d3366dd78fb12ca23cff6273c28a1ac47bef5b.png" src="../../_images/27a4cbc1a35398d0e074ff4439d3366dd78fb12ca23cff6273c28a1ac47bef5b.png" />
+<img alt="../../_images/d4167cc18103b55d0d134da64df564c315d81e21ea00db792a7f1d3de9aee2c3.png" src="../../_images/d4167cc18103b55d0d134da64df564c315d81e21ea00db792a7f1d3de9aee2c3.png" />
 </div>
 </div>
 </section>
@@ -1961,7 +1972,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/40f77775f3e305675c9db2dca608c39e569e542ebd1631659da10144ffbc93ae.png" src="../../_images/40f77775f3e305675c9db2dca608c39e569e542ebd1631659da10144ffbc93ae.png" />
+<img alt="../../_images/6d2b92e41867f252f0a166ffdfff95d1f9fefd33e2d45c52b4195dac3c76711e.png" src="../../_images/6d2b92e41867f252f0a166ffdfff95d1f9fefd33e2d45c52b4195dac3c76711e.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1974,7 +1985,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/42f1f765f9c67f9e8d93cc7f49c4d4ba4d684cf45c544663adef53872840cacc.png" src="../../_images/42f1f765f9c67f9e8d93cc7f49c4d4ba4d684cf45c544663adef53872840cacc.png" />
+<img alt="../../_images/0e38d15f7c343eccecdef6ba24a959716f9ff829824ef33cb4ce2152493ea1b7.png" src="../../_images/0e38d15f7c343eccecdef6ba24a959716f9ff829824ef33cb4ce2152493ea1b7.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1987,7 +1998,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4978f2d08a3f670286c9af389a51cbeadfe684384a3023e23508b71a534bb0fe.png" src="../../_images/4978f2d08a3f670286c9af389a51cbeadfe684384a3023e23508b71a534bb0fe.png" />
+<img alt="../../_images/5dabcbd16887c16ba904da49d9c0b208d22b0699c2fbc858f0b55cdba8ac0005.png" src="../../_images/5dabcbd16887c16ba904da49d9c0b208d22b0699c2fbc858f0b55cdba8ac0005.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2051,7 +2062,7 @@ Energy in the frequency domain: 312.5
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Window length: 32
 </pre></div>
 </div>
-<img alt="../../_images/fbbf170a6fda690843518eb30654ba0d1ae9df4159b4dcd2ad95e58f2ab2e626.png" src="../../_images/fbbf170a6fda690843518eb30654ba0d1ae9df4159b4dcd2ad95e58f2ab2e626.png" />
+<img alt="../../_images/2144ed09389265ffc3ee6b2d94ecab92cc482092a6679905f0d1f12b2c21479f.png" src="../../_images/2144ed09389265ffc3ee6b2d94ecab92cc482092a6679905f0d1f12b2c21479f.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2111,7 +2122,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6d0583666dfb860876a956e07451dc17cfcd5f14efe0dc7057c6a38fd2de595b.png" src="../../_images/6d0583666dfb860876a956e07451dc17cfcd5f14efe0dc7057c6a38fd2de595b.png" />
+<img alt="../../_images/02785baa1f93fc06e833c1b220625359afcdf0f1fa327b0c0c79b59ac323ea1d.png" src="../../_images/02785baa1f93fc06e833c1b220625359afcdf0f1fa327b0c0c79b59ac323ea1d.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2137,7 +2148,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cb9e29621acdf49c2a1e737ce43bcde6ed1c973096737f7853d40ecbc9296f89.png" src="../../_images/cb9e29621acdf49c2a1e737ce43bcde6ed1c973096737f7853d40ecbc9296f89.png" />
+<img alt="../../_images/3f996f7714c35e516ff16c0ef04e102ae3a955d6eb4fab4b593e9d7a792aeaba.png" src="../../_images/3f996f7714c35e516ff16c0ef04e102ae3a955d6eb4fab4b593e9d7a792aeaba.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2196,7 +2207,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c6b8bccbb9389478b6d4da321193d074af67c269e940ca5559b7673bd6001e51.png" src="../../_images/c6b8bccbb9389478b6d4da321193d074af67c269e940ca5559b7673bd6001e51.png" />
+<img alt="../../_images/7bd29007bdeeff6a2cdcfdbf7fe7b4e5cde28f293209709fec533a415c647e9b.png" src="../../_images/7bd29007bdeeff6a2cdcfdbf7fe7b4e5cde28f293209709fec533a415c647e9b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2219,7 +2230,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c06b9951fce42d214a118362faa475c2ef3029b64c6f78b159ccbe8952981ccb.png" src="../../_images/c06b9951fce42d214a118362faa475c2ef3029b64c6f78b159ccbe8952981ccb.png" />
+<img alt="../../_images/24b32c3a71f9f4758135f3348c0ba0c6be2cf229318e72e990968b79f94661a7.png" src="../../_images/24b32c3a71f9f4758135f3348c0ba0c6be2cf229318e72e990968b79f94661a7.png" />
 </div>
 </div>
 </section>
@@ -2250,7 +2261,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7fe185d1a2801562ab4cf4648f0cfff72d11d1beeb402d64fec61464c30405d1.png" src="../../_images/7fe185d1a2801562ab4cf4648f0cfff72d11d1beeb402d64fec61464c30405d1.png" />
+<img alt="../../_images/5330215773b0be5a8838db23205e829e9641a8afb3f1be9efb2285f9a91d5a7d.png" src="../../_images/5330215773b0be5a8838db23205e829e9641a8afb3f1be9efb2285f9a91d5a7d.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2271,7 +2282,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c0f42d3493964ca84e073e2daccaa63eb4326028cdf237d4155e09b0030fd7fc.png" src="../../_images/c0f42d3493964ca84e073e2daccaa63eb4326028cdf237d4155e09b0030fd7fc.png" />
+<img alt="../../_images/dd2477fe01682f6915391ad1b8be86e8317b1a19db633b0da6a010f345d2f787.png" src="../../_images/dd2477fe01682f6915391ad1b8be86e8317b1a19db633b0da6a010f345d2f787.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2307,7 +2318,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dd0ea9be77a9b8a8c04bf3eec7063f3a27c80e7b6997fd3a2fc5a8de808bdd18.png" src="../../_images/dd0ea9be77a9b8a8c04bf3eec7063f3a27c80e7b6997fd3a2fc5a8de808bdd18.png" />
+<img alt="../../_images/f3fec5695d2072efef28f4060802dbb567b3f76cb232364654c031baa8afb2a7.png" src="../../_images/f3fec5695d2072efef28f4060802dbb567b3f76cb232364654c031baa8afb2a7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2324,7 +2335,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cadf390253f66c6d6651edaba4cecc1336c44cfce2a31be35cc6bdf255e2e436.png" src="../../_images/cadf390253f66c6d6651edaba4cecc1336c44cfce2a31be35cc6bdf255e2e436.png" />
+<img alt="../../_images/7c6034fe655f1d4f4966153025e341d4e0f6af2ef970bfd6ef5bca295956c6e9.png" src="../../_images/7c6034fe655f1d4f4966153025e341d4e0f6af2ef970bfd6ef5bca295956c6e9.png" />
 </div>
 </div>
 <p>We observe that the original signal has been de-trended, and the noise has been removed.</p>
@@ -2362,7 +2373,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f0a05dd5681e4030178ff80b542a3e604e58c494a5e59e60d3702fed0f539cdb.png" src="../../_images/f0a05dd5681e4030178ff80b542a3e604e58c494a5e59e60d3702fed0f539cdb.png" />
+<img alt="../../_images/34fc19ac484128781f1d2d3ed1d9155c728e943f911f2212455ccc1a8f701405.png" src="../../_images/34fc19ac484128781f1d2d3ed1d9155c728e943f911f2212455ccc1a8f701405.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2396,7 +2407,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3c0d0c97185fe21aa072b5f718bab86a31f9437f104f1cc9e5aee07446f45dd9.png" src="../../_images/3c0d0c97185fe21aa072b5f718bab86a31f9437f104f1cc9e5aee07446f45dd9.png" />
+<img alt="../../_images/cc795810450ca5c45dca53c7b5d5d5a0edfd8a318de25874f6d1781a617e8a2a.png" src="../../_images/cc795810450ca5c45dca53c7b5d5d5a0edfd8a318de25874f6d1781a617e8a2a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2413,7 +2424,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7254224e19acd264b3975aaf2cc3a8576765ec4a5670af13862b8ca249ec1daf.png" src="../../_images/7254224e19acd264b3975aaf2cc3a8576765ec4a5670af13862b8ca249ec1daf.png" />
+<img alt="../../_images/e9adc1d7991ee020d642f62dc545e112008ba1b2d53726c90017452022564c7b.png" src="../../_images/e9adc1d7991ee020d642f62dc545e112008ba1b2d53726c90017452022564c7b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2545,7 +2556,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/76d77421daf8b61acc49c0a0e7ec8ea29e9d8fd4867529a9206f082c99fbb912.png" src="../../_images/76d77421daf8b61acc49c0a0e7ec8ea29e9d8fd4867529a9206f082c99fbb912.png" />
+<img alt="../../_images/67ae779247e27873740022228dbfe82bfc6b29deab59b67f1a90faf4c739f108.png" src="../../_images/67ae779247e27873740022228dbfe82bfc6b29deab59b67f1a90faf4c739f108.png" />
 </div>
 </div>
 </section>
@@ -2617,7 +2628,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1ce145b37445b85f4bd403874eb0239f0e105274119f1a5ee7d78a6611543ab6.png" src="../../_images/1ce145b37445b85f4bd403874eb0239f0e105274119f1a5ee7d78a6611543ab6.png" />
+<img alt="../../_images/f28265488d9d0ba681e60d60d325a0e08178b5f1a24fd34fb63dc0a48a9bb5f0.png" src="../../_images/f28265488d9d0ba681e60d60d325a0e08178b5f1a24fd34fb63dc0a48a9bb5f0.png" />
 </div>
 </div>
 </section>
@@ -2644,7 +2655,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5ca839220b6a2306431e262920634103cb290501b5f0ad4462e3141ab3844dd2.png" src="../../_images/5ca839220b6a2306431e262920634103cb290501b5f0ad4462e3141ab3844dd2.png" />
+<img alt="../../_images/863f024451cccc67f98f6496e10613564798df379b6ac4bc0d2532e2e203e700.png" src="../../_images/863f024451cccc67f98f6496e10613564798df379b6ac4bc0d2532e2e203e700.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2660,7 +2671,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cae35993d2622320c1d6943ec108b2b508a3821cd230ce7f5166ea8495d81947.png" src="../../_images/cae35993d2622320c1d6943ec108b2b508a3821cd230ce7f5166ea8495d81947.png" />
+<img alt="../../_images/bbb0e361e75cf0d95d2f5d3b3c529745c313177df28b05fa1a891046d820125d.png" src="../../_images/bbb0e361e75cf0d95d2f5d3b3c529745c313177df28b05fa1a891046d820125d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2677,7 +2688,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9d375bf6f2228d9076b5c314449dfc4ef8ea3c48989237067ba9927100c687e3.png" src="../../_images/9d375bf6f2228d9076b5c314449dfc4ef8ea3c48989237067ba9927100c687e3.png" />
+<img alt="../../_images/1461ee50f896eaef4c69ddb62452d429ed0ff2250a56dcdc721a0aa8c3b649d3.png" src="../../_images/1461ee50f896eaef4c69ddb62452d429ed0ff2250a56dcdc721a0aa8c3b649d3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2697,7 +2708,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6038f34afbe907aa5b3883d8de8edd0039cfe95d873a3185be59210954bdda9e.png" src="../../_images/6038f34afbe907aa5b3883d8de8edd0039cfe95d873a3185be59210954bdda9e.png" />
+<img alt="../../_images/f04d9275b275185c3f072dde9a486f9f0a84e9b63b172b91c865d7cdc22cdb09.png" src="../../_images/f04d9275b275185c3f072dde9a486f9f0a84e9b63b172b91c865d7cdc22cdb09.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2715,7 +2726,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ad10f4676ac7463c37f9373e91827a11c90e59a2e015e98775d28c87081d55bb.png" src="../../_images/ad10f4676ac7463c37f9373e91827a11c90e59a2e015e98775d28c87081d55bb.png" />
+<img alt="../../_images/b4dce2f2d7c655474d2c2e3233c4902b6bef3a620ccd463db5cda5ef92782ec1.png" src="../../_images/b4dce2f2d7c655474d2c2e3233c4902b6bef3a620ccd463db5cda5ef92782ec1.png" />
 </div>
 </div>
 </section>

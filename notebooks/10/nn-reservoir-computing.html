@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -42,7 +42,7 @@
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
@@ -467,6 +467,17 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># Install dependencies if the notebook is running in Colab</span>
+<span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>-qq<span class="w"> </span>reservoir_computing
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -616,7 +627,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/633db167a1fd975645e01aec39e3ae146e16ef81889cfd7a4af6d18a765fbe6c.png" src="../../_images/633db167a1fd975645e01aec39e3ae146e16ef81889cfd7a4af6d18a765fbe6c.png" />
+<img alt="../../_images/75f6793c29171fb63045ccdd4a415c299f796144ba5ae5e855b147c8572669b2.png" src="../../_images/75f6793c29171fb63045ccdd4a415c299f796144ba5ae5e855b147c8572669b2.png" />
 </div>
 </div>
 <section id="multi-layer-perceptron">
@@ -788,7 +799,7 @@ Data shape:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ebe69b756f97a13c42b10c8cecfdee211dddde32e0697c06ea5b0f1db1896637.png" src="../../_images/ebe69b756f97a13c42b10c8cecfdee211dddde32e0697c06ea5b0f1db1896637.png" />
+<img alt="../../_images/184efdcb3ef09d2d509c2efb2a116a6e3e83b2c76f07e7822b4c4762ac1a7ca9.png" src="../../_images/184efdcb3ef09d2d509c2efb2a116a6e3e83b2c76f07e7822b4c4762ac1a7ca9.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1275,7 +1286,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 35.39
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 36.73
 </pre></div>
 </div>
 </div>
@@ -1302,10 +1313,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 27.99
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 28.13
 </pre></div>
 </div>
-<img alt="../../_images/e150c193841178592379b4948a0f26eab43eea614bb947358348ea49748377b7.png" src="../../_images/e150c193841178592379b4948a0f26eab43eea614bb947358348ea49748377b7.png" />
+<img alt="../../_images/3c5b1a123d6bc47c6b0345bab9f8925ae50468f1ff451d9ceda5dcaeea150d0e.png" src="../../_images/3c5b1a123d6bc47c6b0345bab9f8925ae50468f1ff451d9ceda5dcaeea150d0e.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1332,7 +1343,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 27.14
 </pre></div>
 </div>
-<img alt="../../_images/df997195f0acc6a3f86f37cd6bf113e7f4d51fca348f0cfacea5e098eb445855.png" src="../../_images/df997195f0acc6a3f86f37cd6bf113e7f4d51fca348f0cfacea5e098eb445855.png" />
+<img alt="../../_images/863156f2e7521713c9f80663a3d6f83776b4d65f2f21bc36f6b1758ec0a7757b.png" src="../../_images/863156f2e7521713c9f80663a3d6f83776b4d65f2f21bc36f6b1758ec0a7757b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1574,7 +1585,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4a086ab8cba8b9a811435908a12d5c5fe0081dd8c9443d020e6014988383d00d.png" src="../../_images/4a086ab8cba8b9a811435908a12d5c5fe0081dd8c9443d020e6014988383d00d.png" />
+<img alt="../../_images/c1047e1834b6f4d9abc9039b031945b251c008aa71609bd5a59e2a60a701d834.png" src="../../_images/c1047e1834b6f4d9abc9039b031945b251c008aa71609bd5a59e2a60a701d834.png" />
 </div>
 </div>
 </section>
@@ -1786,7 +1797,7 @@ states_te shape: (1, 266, 900)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0204s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0260s
 Test time: 0.0003s
 </pre></div>
 </div>
@@ -1806,7 +1817,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f6451b04a8becdc8c0d30a916d956e0fee4ffa57928962395acd45b991e7aab0.png" src="../../_images/f6451b04a8becdc8c0d30a916d956e0fee4ffa57928962395acd45b991e7aab0.png" />
+<img alt="../../_images/d9a64401e98536840c5895bfb3c5a10948a2436783a0e47f994db33c391a33fe.png" src="../../_images/d9a64401e98536840c5895bfb3c5a10948a2436783a0e47f994db33c391a33fe.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1817,7 +1828,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 21.63
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 21.24
 </pre></div>
 </div>
 </div>
@@ -1903,7 +1914,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9fcfc4f93cbd4d03995462975891ef9e9f5556aef207cedb0bac8ab6e8e2da76.png" src="../../_images/9fcfc4f93cbd4d03995462975891ef9e9f5556aef207cedb0bac8ab6e8e2da76.png" />
+<img alt="../../_images/84c3ad095ac2475cb4b8956eae578e8df479640793ddaffbee26b007f67290c6.png" src="../../_images/84c3ad095ac2475cb4b8956eae578e8df479640793ddaffbee26b007f67290c6.png" />
 </div>
 </div>
 <p>Reducing the data dimensionality with PCA invole the following steps:</p>
@@ -2013,7 +2024,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/93305926179d2b54a73827c208a7d26f69e09f230d7159cf7edc524b6b07d851.png" src="../../_images/93305926179d2b54a73827c208a7d26f69e09f230d7159cf7edc524b6b07d851.png" />
+<img alt="../../_images/91234fc1e4c878756cdc7a567f06c0341926f6aa094c4522f287267eb873d99e.png" src="../../_images/91234fc1e4c878756cdc7a567f06c0341926f6aa094c4522f287267eb873d99e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2027,7 +2038,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a39e3ddc00bd334b5cef86bfa92a553dc3a53df4d16ff38dcaed79c355d575a5.png" src="../../_images/a39e3ddc00bd334b5cef86bfa92a553dc3a53df4d16ff38dcaed79c355d575a5.png" />
+<img alt="../../_images/4f69d22f9113d1637f51d1e1f0073a22cd112951339a9eba8f53c855d5cbe37a.png" src="../../_images/4f69d22f9113d1637f51d1e1f0073a22cd112951339a9eba8f53c855d5cbe37a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2048,7 +2059,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c9a5a97fc0c5a941bd059cb5baeab1c6cb93f91f7b2fd4835ff80286fb220335.png" src="../../_images/c9a5a97fc0c5a941bd059cb5baeab1c6cb93f91f7b2fd4835ff80286fb220335.png" />
+<img alt="../../_images/6b878a880722f1c88c444f65cb0363bae3ba2dad7226df62df734e9c0f5e98b4.png" src="../../_images/6b878a880722f1c88c444f65cb0363bae3ba2dad7226df62df734e9c0f5e98b4.png" />
 </div>
 </div>
 <p>Check <a class="reference external" href="https://setosa.io/ev/principal-component-analysis/">this blog</a> for an excellent visual explanation and interactive examples about PCA.</p>
@@ -2097,9 +2108,9 @@ states_te shape: (266, 75)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0023s
-Test time: 0.0001s
-Mean Squared Error: 22.73
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0022s
+Test time: 0.0002s
+Mean Squared Error: 22.32
 </pre></div>
 </div>
 </div>
@@ -2152,7 +2163,7 @@ Mean Squared Error: 22.73
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 2.61s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 3.36s
 </pre></div>
 </div>
 </div>
@@ -2172,7 +2183,7 @@ Mean Squared Error: 22.73
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bc8bb4546c36c48d7b46481a73f17a6ca081abb9800746140b8b3fe9975cbc4b.png" src="../../_images/bc8bb4546c36c48d7b46481a73f17a6ca081abb9800746140b8b3fe9975cbc4b.png" />
+<img alt="../../_images/44aaca5f32c43f446ec0249424e14cabcfa6c15608ed710d9b215422ddb20356.png" src="../../_images/44aaca5f32c43f446ec0249424e14cabcfa6c15608ed710d9b215422ddb20356.png" />
 </div>
 </div>
 <p>Finally, we repeat the training on the states reduced with PCA.</p>
@@ -2204,7 +2215,7 @@ Mean Squared Error: 22.73
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.87s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 1.17s
 </pre></div>
 </div>
 </div>
@@ -2281,7 +2292,7 @@ The dataset consists of a data frame with 6572 observations on the following 3 v
 4  10/3/2016 4:00       86.0  5
 </pre></div>
 </div>
-<img alt="../../_images/5daf5255117e4bea0f961a90978144fbb8cc746b7916a037438a8b12d3260ad0.png" src="../../_images/5daf5255117e4bea0f961a90978144fbb8cc746b7916a037438a8b12d3260ad0.png" />
+<img alt="../../_images/da1add8367c0a5c9206d16dc43cf674f9e534fae01ea34ce267141542515c908.png" src="../../_images/da1add8367c0a5c9206d16dc43cf674f9e534fae01ea34ce267141542515c908.png" />
 </div>
 </div>
 <ul class="simple">

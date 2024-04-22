@@ -15,15 +15,17 @@ For reading the notebooks online you can either open the links below or read the
 
 ## 📑 Content
 
-1. **Introduction to time series analysis**
+1. **Introduction to time series analysis** 
    - Definition of time series data
    - Main applications of time series analysis
    - Statistical vs dynamical models perspective
    - Components of a time series
    - Additive vs multiplicative models
    - Time series decomposition
-  
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb)
+
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb)
+
+<br>
 
 2. **Stationarity in time series**
    - Stationarity in time series
@@ -33,7 +35,9 @@ For reading the notebooks online you can either open the links below or read the
    - How to identify stationarity
    - Transformations to achieve stationarity
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/02/stationarity.ipynb) 
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/02/stationarity.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/02/stationarity.ipynb)
+
+<br>
 
 3. **Smoothing**
    - Smoothing in time series data
@@ -41,15 +45,20 @@ For reading the notebooks online you can either open the links below or read the
    - Simple average, moving average, and weighted moving average
    - Single, double, and triple exponential smoothing
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/03/smoothing.ipynb) 
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/03/smoothing.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/03/smoothing.ipynb)
+
+<br>
 
 4. **AR-MA**
    - The autocorrelation function
    - The partial autocorrelation function
    - The Auto-Regressive model
    - The Moving-Average model
+   - Reverting stationarity transformations in forecasting
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/04/ar-ma.ipynb)
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/04/ar-ma.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/04/ar-ma.ipynb)
+
+<br>
 
 5. **ARMA, ARIMA, SARIMA**
    - Autoregressive Moving Average (ARMA) models
@@ -58,7 +67,9 @@ For reading the notebooks online you can either open the links below or read the
    - Automatic model selection with AutoARIMA
    - Model selection with exploratory data analysis
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/05/arma_arima_sarima.ipynb)
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/05/arma_arima_sarima.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/05/arma_arima_sarima.ipynb)
+
+<br>
 
 6. **Unit root test and Hurst exponent**
    - Unit root test
@@ -67,7 +78,9 @@ For reading the notebooks online you can either open the links below or read the
    - Geometric Brownian Motion
    - Applications in quantitative finance
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/06/unit-root-hurst.ipynb)
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/06/unit-root-hurst.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/06/unit-root-hurst.ipynb)
+
+<br>
 
 7. **Kalman filter**
    - Introduction to Kalman Filter
@@ -76,7 +89,9 @@ For reading the notebooks online you can either open the links below or read the
    - Application to static and dynamic one-dimensional data
    - Application to higher-dimensional data
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/07/kalman-filter.ipynb) 
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/07/kalman-filter.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/07/kalman-filter.ipynb)
+
+<br>
 
 8. **Signal transforms and filters**
    - Introduction to Fourier Transform and Discrete Fourier Transform, and FFT
@@ -85,14 +100,18 @@ For reading the notebooks online you can either open the links below or read the
    - Signal filtering with low-pass, high-pass, band-pass, and bass-stop filters
    - Application of Fourier Transform for time series forecasting
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb)
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb)
+
+<br>
 
 9. **Prophet**
    - Introduction to Prophet for time series forecasting
    - Advanced modelling of trend, seasonality, and holidays
    - The Prophet library in Python
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb)
+   [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb)
+
+<br>
 
 10. **Neural networks and Reservoir Computing**
     - Windowed approaches and Neural Networks for time series forecasting
@@ -102,7 +121,9 @@ For reading the notebooks online you can either open the links below or read the
     - Dimensionality reduction with Principal Component Analysis
     - Forecasting electricity consumption with Multi Layer Perceptron and Echo State Network
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb)
+    [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb)
+
+<br>
 
 11. **Non-linear time series analysis**
     - Dynamical systems and nonlinear dynamics
@@ -113,7 +134,9 @@ For reading the notebooks online you can either open the links below or read the
     - Phase space reconstruction and Taken's embedding theorem
     - Forecasting nonlinear time series
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb)
+    [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb)
+
+<br>
 
 12. **Time series classification and clustering**
     - Multivariate time series
@@ -125,7 +148,7 @@ For reading the notebooks online you can either open the links below or read the
     - Clustering of time series
     - Visualization with kernel PCA
 
-> [notebook](https://nbviewer.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb)
+    [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb)
 
 ## 🚀 Getting started with coding
 

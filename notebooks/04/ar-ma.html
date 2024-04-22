@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -42,7 +42,7 @@
   <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
@@ -450,6 +450,17 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># Install dependencies if the notebook is running in Colab</span>
+<span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>-qq<span class="w"> </span>tsa-course
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tools.sm_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceWarning</span>
@@ -514,7 +525,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/68d02040b177c6aeebd34613198ee7906f1efeda165d7bbe661dd544a2078eef.png" src="../../_images/68d02040b177c6aeebd34613198ee7906f1efeda165d7bbe661dd544a2078eef.png" />
+<img alt="../../_images/aa354e3b46056217a2bacba2a1acb26a919b7d91a18d0421608c79c19646ef6c.png" src="../../_images/aa354e3b46056217a2bacba2a1acb26a919b7d91a18d0421608c79c19646ef6c.png" />
 </div>
 </div>
 <ul class="simple">
@@ -562,7 +573,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cbf216564b97c655c24a558c7048fd1b1550fc83f300510c9bc5048fbaaf98b5.png" src="../../_images/cbf216564b97c655c24a558c7048fd1b1550fc83f300510c9bc5048fbaaf98b5.png" />
+<img alt="../../_images/477e88355f1eef987dfea6505c0c7228a7b5d4fcb4a3bb2185ad77599dce1564.png" src="../../_images/477e88355f1eef987dfea6505c0c7228a7b5d4fcb4a3bb2185ad77599dce1564.png" />
 </div>
 </div>
 </section>
@@ -652,7 +663,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4cac0df823d29409068251d0019cdcbdcc4a84b5f8590db7ad7681cbc942d9f0.png" src="../../_images/4cac0df823d29409068251d0019cdcbdcc4a84b5f8590db7ad7681cbc942d9f0.png" />
+<img alt="../../_images/4d40bb260eec930ec08b001946158dfda7570a5241c916731ddd337514b57278.png" src="../../_images/4d40bb260eec930ec08b001946158dfda7570a5241c916731ddd337514b57278.png" />
 </div>
 </div>
 </section>
@@ -745,7 +756,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/af210c05095bbca1bb8d07d24e7609641110521984cf650bfc50f932c3fef3d8.png" src="../../_images/af210c05095bbca1bb8d07d24e7609641110521984cf650bfc50f932c3fef3d8.png" />
+<img alt="../../_images/e7080d89839270c4ef351a3c4319f7163a5ec6e43fa38e017aa2d6216547ee1e.png" src="../../_images/e7080d89839270c4ef351a3c4319f7163a5ec6e43fa38e017aa2d6216547ee1e.png" />
 </div>
 </div>
 <ul class="simple">
@@ -774,7 +785,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c57afc33c4e19f5cfd256d482c8d5b2b89babbdfcac02294a291f16d3b351dbf.png" src="../../_images/c57afc33c4e19f5cfd256d482c8d5b2b89babbdfcac02294a291f16d3b351dbf.png" />
+<img alt="../../_images/00caf048c480f68181a07f118c3f58c54973cfc13de39378db0cb34639119227.png" src="../../_images/00caf048c480f68181a07f118c3f58c54973cfc13de39378db0cb34639119227.png" />
 </div>
 </div>
 <p><strong>⚙ Try it yourself</strong></p>
@@ -860,7 +871,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b5c574ee91726721658884939c3fd6036c36680f59914d6246d07edd270faea8.png" src="../../_images/b5c574ee91726721658884939c3fd6036c36680f59914d6246d07edd270faea8.png" />
+<img alt="../../_images/2c5985165ca924fb73693842fbd9633570fd4fdab557de02463ec8ba68d296ac.png" src="../../_images/2c5985165ca924fb73693842fbd9633570fd4fdab557de02463ec8ba68d296ac.png" />
 </div>
 </div>
 <ul class="simple">
@@ -887,7 +898,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8e68bdb19fa05f451d8d64c889bdc3ac0a0ed63473e6a3356138fc6aee9d22da.png" src="../../_images/8e68bdb19fa05f451d8d64c889bdc3ac0a0ed63473e6a3356138fc6aee9d22da.png" />
+<img alt="../../_images/33a5db6b220a4770b1599bddfe0297f95d577cf1ee19f3a8fad7ee289a850263.png" src="../../_images/33a5db6b220a4770b1599bddfe0297f95d577cf1ee19f3a8fad7ee289a850263.png" />
 </div>
 </div>
 <ul class="simple">
@@ -967,7 +978,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/511943c3078128e0386e2b87884f63981dbcb092d33e3bf667aaf57c5d3fc0c7.png" src="../../_images/511943c3078128e0386e2b87884f63981dbcb092d33e3bf667aaf57c5d3fc0c7.png" />
+<img alt="../../_images/4735e1be6e749e867a22db089deb57ae513cb3bd1ef38055ffba26313a364701.png" src="../../_images/4735e1be6e749e867a22db089deb57ae513cb3bd1ef38055ffba26313a364701.png" />
 </div>
 </div>
 <ul class="simple">
@@ -985,7 +996,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/71238009242517ad79e356e2358a1a9b0fb5349acea5ff08053b29c672803cd2.png" src="../../_images/71238009242517ad79e356e2358a1a9b0fb5349acea5ff08053b29c672803cd2.png" />
+<img alt="../../_images/0e368f54d9bcecff59d129b85eca42d1dd872394d6d3684816325d22e4eeeb60.png" src="../../_images/0e368f54d9bcecff59d129b85eca42d1dd872394d6d3684816325d22e4eeeb60.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1011,7 +1022,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8700ab487c84af1b6f5939106f690200ab0f51a97f2d5217b658b0fdb51389a8.png" src="../../_images/8700ab487c84af1b6f5939106f690200ab0f51a97f2d5217b658b0fdb51389a8.png" />
+<img alt="../../_images/f0ac4f67e824ec044cb57551d8227ab6ca8b665057700b117390b08452c89b72.png" src="../../_images/f0ac4f67e824ec044cb57551d8227ab6ca8b665057700b117390b08452c89b72.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1055,7 +1066,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1840953b7d4655d8a49edd1e765a7252079d767fb393ed512cb5d7e76372fe89.png" src="../../_images/1840953b7d4655d8a49edd1e765a7252079d767fb393ed512cb5d7e76372fe89.png" />
+<img alt="../../_images/08ca506c4cfa1876dd9f8192827841327d6f2fd02f979844cae47ffe57343ace.png" src="../../_images/08ca506c4cfa1876dd9f8192827841327d6f2fd02f979844cae47ffe57343ace.png" />
 </div>
 </div>
 <p><strong>💡 Hint</strong></p>
@@ -1117,7 +1128,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b671eec49b12aea269d458b0e2560c8c97d6d23254054c9c5fcc42ad4ab566df.png" src="../../_images/b671eec49b12aea269d458b0e2560c8c97d6d23254054c9c5fcc42ad4ab566df.png" />
+<img alt="../../_images/f6b17476ea4c410fcb76b66ecd2ba60ba921cd32837eb7ab808762f969985a4d.png" src="../../_images/f6b17476ea4c410fcb76b66ecd2ba60ba921cd32837eb7ab808762f969985a4d.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1143,7 +1154,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b4473a8f3cd446e9a53f381913a6d1546190c84a02146744f33cab90573c0d5d.png" src="../../_images/b4473a8f3cd446e9a53f381913a6d1546190c84a02146744f33cab90573c0d5d.png" />
+<img alt="../../_images/13e038454a79887f3eb1feb4c6c7a13918f1aeb703839a3bf24bdf3e10bd226a.png" src="../../_images/13e038454a79887f3eb1feb4c6c7a13918f1aeb703839a3bf24bdf3e10bd226a.png" />
 </div>
 </div>
 <p><strong>⚠ Attention</strong></p>
@@ -1171,7 +1182,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ea6b5aee48b917ad4bf684de6ff86657668af9312f065c7931f830a5734a5a3d.png" src="../../_images/ea6b5aee48b917ad4bf684de6ff86657668af9312f065c7931f830a5734a5a3d.png" />
+<img alt="../../_images/19049f756eead032c67a3782a8be4a62fef2633d7ebc204c30e4d8c7954af186.png" src="../../_images/19049f756eead032c67a3782a8be4a62fef2633d7ebc204c30e4d8c7954af186.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1194,7 +1205,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6efda27109fbaefb375485fe320b3478ddb833ddb9d88a7df5ff70bbbd9ac679.png" src="../../_images/6efda27109fbaefb375485fe320b3478ddb833ddb9d88a7df5ff70bbbd9ac679.png" />
+<img alt="../../_images/713c05dfb8cb005d5e7cb6237c6e761de0f0d30b5251f41076bc494463bfb414.png" src="../../_images/713c05dfb8cb005d5e7cb6237c6e761de0f0d30b5251f41076bc494463bfb414.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1286,7 +1297,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cadd59928ff5defcd4cfbc585f9ddf8871de00b0d792f498f9c36d55762465cc.png" src="../../_images/cadd59928ff5defcd4cfbc585f9ddf8871de00b0d792f498f9c36d55762465cc.png" />
+<img alt="../../_images/0cd394b048cb542f1b36ed7775eafe9cca9e395374d0ed12b72c3c52838c3aed.png" src="../../_images/0cd394b048cb542f1b36ed7775eafe9cca9e395374d0ed12b72c3c52838c3aed.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1306,7 +1317,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b4519539eafdb6ecd03a8e5c6cc05a6d37f4652593d44acce62bcffb463bdb55.png" src="../../_images/b4519539eafdb6ecd03a8e5c6cc05a6d37f4652593d44acce62bcffb463bdb55.png" />
+<img alt="../../_images/1936945242f2e1f7051c5a4c73595275cea11f8e3645be2d1f45bffe20b697fe.png" src="../../_images/1936945242f2e1f7051c5a4c73595275cea11f8e3645be2d1f45bffe20b697fe.png" />
 </div>
 </div>
 <p><strong>⚙ Try it yourself</strong></p>
@@ -1331,7 +1342,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0a0834d93d6f0d37a9eed469acca44aff15080d123b1ca3a5b13c81b15a64718.png" src="../../_images/0a0834d93d6f0d37a9eed469acca44aff15080d123b1ca3a5b13c81b15a64718.png" />
+<img alt="../../_images/4dd29c71de493eb643bdfdf2383ffce2a76bba9898b88ac382216128fb721e5d.png" src="../../_images/4dd29c71de493eb643bdfdf2383ffce2a76bba9898b88ac382216128fb721e5d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1356,7 +1367,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0f427045d9e27f5022d39a11cb47e5b1ddd0213da702fb6cdffc88237455ed39.png" src="../../_images/0f427045d9e27f5022d39a11cb47e5b1ddd0213da702fb6cdffc88237455ed39.png" />
+<img alt="../../_images/f12cef4be58425da5b8ccff3d206456be896ece54f69bb6aa9fe2b63a2d1f516.png" src="../../_images/f12cef4be58425da5b8ccff3d206456be896ece54f69bb6aa9fe2b63a2d1f516.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1407,7 +1418,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1909beeb4351c52934fb9ff1cab4b67ccac51130142a297bfd33333d03ec6c2a.png" src="../../_images/1909beeb4351c52934fb9ff1cab4b67ccac51130142a297bfd33333d03ec6c2a.png" />
+<img alt="../../_images/0525fa1c2daf92c0446449b16c88b6e46946a25697f5fb2fbde62aff26ea4dcf.png" src="../../_images/0525fa1c2daf92c0446449b16c88b6e46946a25697f5fb2fbde62aff26ea4dcf.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1433,7 +1444,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b082555a6a4e6f3502a01a8712a8f05e0181eb205af626ce5f4c436f8b173c96.png" src="../../_images/b082555a6a4e6f3502a01a8712a8f05e0181eb205af626ce5f4c436f8b173c96.png" />
+<img alt="../../_images/e1d4bc4ba099183783ba64d9eb51b7dd1dd64c7612a83bd2c0d8a21c9a856816.png" src="../../_images/e1d4bc4ba099183783ba64d9eb51b7dd1dd64c7612a83bd2c0d8a21c9a856816.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1476,7 +1487,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dedee8e1f90e0d47c879198bb4f3a6750b6560b8f1bc4479a67efc4b68b6b2ed.png" src="../../_images/dedee8e1f90e0d47c879198bb4f3a6750b6560b8f1bc4479a67efc4b68b6b2ed.png" />
+<img alt="../../_images/0439946d44e4ce8c5bec57b1eab39e09842ddb31f83bddf36cd6b8b536c525f1.png" src="../../_images/0439946d44e4ce8c5bec57b1eab39e09842ddb31f83bddf36cd6b8b536c525f1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1496,7 +1507,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0f59063699d7b0c4f81fd9687db1294de3d01a63596d99c13045af9cb50efbeb.png" src="../../_images/0f59063699d7b0c4f81fd9687db1294de3d01a63596d99c13045af9cb50efbeb.png" />
+<img alt="../../_images/d60aad6ca2fd2fdc248e65e94bf5938da014d6c542537042a0746f77dfae07b4.png" src="../../_images/d60aad6ca2fd2fdc248e65e94bf5938da014d6c542537042a0746f77dfae07b4.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1526,7 +1537,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7076288dbcc8b5955916beeada5d2113604b340b818a4df108efd836b3b0e7fd.png" src="../../_images/7076288dbcc8b5955916beeada5d2113604b340b818a4df108efd836b3b0e7fd.png" />
+<img alt="../../_images/410590a9b8d593a70a151ab18cd29a6fbe81cad6b9b39927d564e1135876fd6f.png" src="../../_images/410590a9b8d593a70a151ab18cd29a6fbe81cad6b9b39927d564e1135876fd6f.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1552,7 +1563,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/17957512180d93a05c9759601d1ae08a4abc38ad478b0d3cbcad4acd253f62ff.png" src="../../_images/17957512180d93a05c9759601d1ae08a4abc38ad478b0d3cbcad4acd253f62ff.png" />
+<img alt="../../_images/000f62d3f1af36d6c522a1436eca5d085301ad39880c123f79bacebcc6346def.png" src="../../_images/000f62d3f1af36d6c522a1436eca5d085301ad39880c123f79bacebcc6346def.png" />
 </div>
 </div>
 <p><strong>TES-based approach</strong></p>
@@ -1574,7 +1585,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/53cc1c78c7cd8c9c812af5a958a2400385155cdeb52e1561399165947fa0a319.png" src="../../_images/53cc1c78c7cd8c9c812af5a958a2400385155cdeb52e1561399165947fa0a319.png" />
+<img alt="../../_images/18cb5a27710bf26839308214fb07adee04c0769dba83389f0bcaa8f33749bc8a.png" src="../../_images/18cb5a27710bf26839308214fb07adee04c0769dba83389f0bcaa8f33749bc8a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1600,7 +1611,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a44badbf2c078cf46b3f40bf01b557539191c0f3d43b10ec8d5c8fcc7c7f794a.png" src="../../_images/a44badbf2c078cf46b3f40bf01b557539191c0f3d43b10ec8d5c8fcc7c7f794a.png" />
+<img alt="../../_images/d4c7f650355ae01085dad81f9971cd97efff42ed6b06add133596bc1dd916c0c.png" src="../../_images/d4c7f650355ae01085dad81f9971cd97efff42ed6b06add133596bc1dd916c0c.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1617,7 +1628,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE of differencing: 2.09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE of differencing: 2.08
 MSE of TES: 1.44
 </pre></div>
 </div>
