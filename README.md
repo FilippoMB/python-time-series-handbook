@@ -11,7 +11,9 @@
 <br>
 
 This is the collection of notebooks for the course *Time Series Analysis with Python*.
-For reading the notebooks online you can either open the links below or read them as a [book](https://filippomb.github.io/python-time-series-handbook).
+You can view and execute the notebooks by clicking on the links below.
+
+More info about the course are [here](https://filippomb.github.io/python-time-series-handbook).
 
 ## 📑 Content
 
@@ -149,6 +151,8 @@ For reading the notebooks online you can either open the links below or read the
     - Visualization with kernel PCA
 
     [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb)
+
+<br>
 
 ## 🚀 Getting started with coding
 
