@@ -28,10 +28,6 @@ html:
   use_issues_button: true
   use_repository_button: true
 
-# sphinx:
-#   config:
-#     html_static_path: ['media']
-
 parse:
   myst_enable_extensions:
     # Defaults here: https://jupyterbook.org/en/stable/customize/config.html
