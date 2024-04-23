@@ -11,7 +11,9 @@
 <br>
 
 This is the collection of notebooks for the course *Time Series Analysis with Python*.
-For reading the notebooks online you can either open the links below or read them as a [book](https://filippomb.github.io/python-time-series-handbook).
+You can view and execute the notebooks by clicking on the links below.
+
+More info about the course is [here](https://filippomb.github.io/python-time-series-handbook).
 
 ## 📑 Content
 
@@ -21,7 +23,7 @@ For reading the notebooks online you can either open the links below or read the
    - Statistical vs dynamical models perspective
    - Components of a time series
    - Additive vs multiplicative models
-   - Time series decomposition
+   - Time series decomposition techniques
 
    [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb)
 
@@ -49,7 +51,7 @@ For reading the notebooks online you can either open the links below or read the
 
 <br>
 
-4. **AR-MA**
+1. **AR-MA**
    - The autocorrelation function
    - The partial autocorrelation function
    - The Auto-Regressive model
@@ -74,7 +76,7 @@ For reading the notebooks online you can either open the links below or read the
 6. **Unit root test and Hurst exponent**
    - Unit root test
    - Mean Reversion
-   - Hurst Exponent
+   - The Hurst exponent
    - Geometric Brownian Motion
    - Applications in quantitative finance
 
@@ -94,11 +96,11 @@ For reading the notebooks online you can either open the links below or read the
 <br>
 
 8. **Signal transforms and filters**
-   - Introduction to Fourier Transform and Discrete Fourier Transform, and FFT
+   - Introduction to Fourier Transform, Discrete Fourier Transform, and FFT
    - Fourier Transform of common signals
    - Properties of the Fourier Transform
    - Signal filtering with low-pass, high-pass, band-pass, and bass-stop filters
-   - Application of Fourier Transform for time series forecasting
+   - Application of Fourier Transform to time series forecasting
 
    [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb)
 
@@ -106,7 +108,7 @@ For reading the notebooks online you can either open the links below or read the
 
 9. **Prophet**
    - Introduction to Prophet for time series forecasting
-   - Advanced modelling of trend, seasonality, and holidays
+   - Advanced modeling of trend, seasonality, and holidays components
    - The Prophet library in Python
 
    [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb)
@@ -115,7 +117,7 @@ For reading the notebooks online you can either open the links below or read the
 
 10. **Neural networks and Reservoir Computing**
     - Windowed approaches and Neural Networks for time series forecasting
-    - Forecasting with the Multi Layer Perceptron
+    - Forecasting with a Multi Layer Perceptron
     - Recurrent Neural Networks: advantages and challenges
     - Reservoir Computing and the Echo State Network
     - Dimensionality reduction with Principal Component Analysis
@@ -132,7 +134,7 @@ For reading the notebooks online you can either open the links below or read the
     - High-dimensional continuous-time systems
     - Fractal dimensions
     - Phase space reconstruction and Taken's embedding theorem
-    - Forecasting nonlinear time series
+    - Forecasting time series from nonlinear systems
 
     [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb)
 
@@ -140,17 +142,19 @@ For reading the notebooks online you can either open the links below or read the
 
 12. **Time series classification and clustering**
     - Multivariate time series
-    - Time series similarity
+    - Time series similarities and dissimilarities
     - Dynamic Time Warping
     - Time series kernels
-    - Time series embedding
+    - Embedding time series into vectors
     - Classification of time series
     - Clustering of time series
-    - Visualization with kernel PCA
+    - Visualize time series with kernel PCA
 
     [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb)
 
-## 🚀 Getting started with coding
+<br>
+
+## 💻 How to code locally
 
 To run the notebooks locally the recommended steps are the following:
 

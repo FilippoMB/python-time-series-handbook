@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -424,7 +424,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-transformations-to-achieve-stationarity">Common transformations to achieve stationarity</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtract-estimated-trend-seasonality">Subtract estimated trend &amp; seasonality</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#achieve-constant-variance-with-log-transform">Achieve constant variance with log transform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stabilize-variance-with-log-transform">Stabilize variance with log transform</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-autocorrelation-with-differencing">Removing autocorrelation with differencing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-differentiation">Seasonal differentiation</a></li>
 </ul>
@@ -490,10 +490,10 @@ document.write(`
 <section id="why-is-stationarity-important">
 <h3>Why is stationarity important?<a class="headerlink" href="#why-is-stationarity-important" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Stationarity is a fundamental assumption in many time-series forecasting models.</p></li>
-<li><p>Without it many basic time-series models would break.</p></li>
+<li><p>Stationarity is a fundamental assumption in many time series forecasting models.</p></li>
+<li><p>Without it many basic time series models would break.</p></li>
 <li><p>Transformations can be applied to convert a nonstationary time series to a stationary one.</p></li>
-<li><p>There are advanced time-series models that can handle nonstationary data (beyond the scope of this lecture).</p></li>
+<li><p>There are advanced time series models that can handle nonstationary data (beyond the scope of this lecture).</p></li>
 </ul>
 </section>
 <section id="what-is-stationarity">
@@ -526,11 +526,15 @@ document.write(`
 </section>
 <section id="weak-stationarity">
 <h4>Weak stationarity<a class="headerlink" href="#weak-stationarity" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>A time series <span class="math notranslate nohighlight">\(X\)</span> is weakly stationary if:</p>
 <ol class="arabic simple">
 <li><p>The mean is constant over time <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)] = m, \;\; \forall t \in \mathcal{T}\)</span></p></li>
 <li><p>The variance is finite <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)^2] &lt; \infty, \;\; \forall t \in \mathcal{T}\)</span></p></li>
-<li><p>The covariance of <span class="math notranslate nohighlight">\(X(t)\)</span> and <span class="math notranslate nohighlight">\(X(t+h)\)</span> depends only on <span class="math notranslate nohighlight">\(h\)</span>, i.e., is shift-invariance on time.</p></li>
+<li><p>The covariance of <span class="math notranslate nohighlight">\(X(t)\)</span> and <span class="math notranslate nohighlight">\(X(t+h)\)</span> depends only on <span class="math notranslate nohighlight">\(h\)</span>, i.e., is shift-invariance in time.</p></li>
 </ol>
+</li>
+</ul>
 <ul class="simple">
 <li><p>Strict stationarity implies weak stationarity, but not the opposite.</p></li>
 </ul>
@@ -546,7 +550,7 @@ document.write(`
 <ul class="simple">
 <li><p>Mean, variance, and periodic component (aka seasonality) should be familiar from the previous lecture.</p></li>
 <li><p>Autocorrelation may not be.</p></li>
-<li><p>Let’s start with a simples example of a stationary time series.</p></li>
+<li><p>Let’s start with a simple example of a stationary time series.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Let’s create an utility function to make plots.</p></li>
@@ -608,7 +612,7 @@ document.write(`
 <ul class="simple">
 <li><p>Say you wanted to know if today’s temperature correlates more with yesterday’s temperature or the temperature from two days ago.</p></li>
 <li><p>You could test this by computing the correlation between the original time series and the same series delayed 1 time step.</p></li>
-<li><p>The second value of the original time series would be compared with the first of the delayed.</p></li>
+<li><p>The second value of the original time series would be compared with the first of the delayed time series.</p></li>
 <li><p>The third original value would be compared with the second of the delayed.</p></li>
 <li><p>And so on.</p></li>
 </ul>
@@ -626,8 +630,8 @@ document.write(`
 <li><p>Autocovariance: <span class="math notranslate nohighlight">\(C_{xy}(h)=\mathbb{E}[(x(t+\tau)−\mu_x)(y(t)−\mu_y)]=R_{xy}(h)−\mu_x\mu_y\)</span></p></li>
 </ul>
 </li>
-<li><p>If <span class="math notranslate nohighlight">\(X(t)\)</span> has zero-mean, autocorrelation and autocovariance coincide. And obtaining zero-mean is trivial.</p></li>
-<li><p>We’ll use the two terms somewhat interchangeably in the following.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X(t)\)</span> has zero-mean, autocorrelation and autocovariance coincide.</p></li>
+<li><p>Since obtaining a time series with zero-mean is trivial, we’ll use the two terms interchangeably.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Assumption #3 in weak stationarity requires the time series to have constant (time-independent) autocovariance.</p></li>
@@ -679,12 +683,12 @@ document.write(`
 <h4>Random walk<a class="headerlink" href="#random-walk" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>The random walk is one of the most important nonstationary time series.</p></li>
-<li><p>Is defined as</p></li>
+<li><p>It is defined as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[X_{t} = X_{t-1} + \epsilon_t\]</div>
+\[X(t) = X(t-1) + \epsilon_t\]</div>
 <ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\(\epsilon_t\)</span> are called <em>innovations</em> and are iid. E.g., <span class="math notranslate nohighlight">\(\epsilon_t \sim \mathcal{N}(0,\sigma^2)\)</span>.</p></li>
+<li><p>where <span class="math notranslate nohighlight">\(\epsilon_t\)</span> are called <em>innovations</em> and are iid, e.g., <span class="math notranslate nohighlight">\(\epsilon_t \sim \mathcal{N}(0,\sigma^2)\)</span>.</p></li>
 <li><p>Let’s create a random walk.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -729,34 +733,34 @@ document.write(`
 <li><p>Let’s see this in detail.</p></li>
 </ul>
 <ol class="arabic simple">
-<li><p>We start at <span class="math notranslate nohighlight">\(t = 0\)</span> and we let <span class="math notranslate nohighlight">\(X_0 = 0\)</span> for simplicity.</p></li>
+<li><p>We start at <span class="math notranslate nohighlight">\(t = 0\)</span> and we let <span class="math notranslate nohighlight">\(X(0) = 0\)</span> for simplicity.</p></li>
 </ol>
 <ol class="arabic simple" start="2">
 <li><p>At <span class="math notranslate nohighlight">\(t = 1\)</span> we have:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(X_1 = X_0 + \epsilon_1\)</span>,</p></li>
-<li><p>Variance: <span class="math notranslate nohighlight">\(\text{Var}(X_1) = \text{Var}(\epsilon_1) = \sigma^2\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X(1) = X(0) + \epsilon_1\)</span>,</p></li>
+<li><p>Variance: <span class="math notranslate nohighlight">\(\text{Var}(X(1)) = \text{Var}(\epsilon_1) = \sigma^2\)</span>.</p></li>
 </ul>
 </li>
 </ol>
 <ol class="arabic" start="3">
 <li><p>At <span class="math notranslate nohighlight">\(t = 2\)</span> we have:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(X_2 = X_1 + \epsilon_2 = X_0 + \epsilon_1 + \epsilon_2\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(X(2) = X(1) + \epsilon_2 = X(0) + \epsilon_1 + \epsilon_2\)</span>,</p></li>
 <li><p>Since <span class="math notranslate nohighlight">\(\epsilon_1\)</span> and <span class="math notranslate nohighlight">\(\epsilon_2\)</span> are independent we get</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\text{Var}(X_2) = \text{Var}(\epsilon_1 + \epsilon_2) = \text{Var}(\epsilon_1) + \text{Var}(\epsilon_2) = \sigma^2 + \sigma^2 = 2\sigma^2\]</div>
+\[\text{Var}(X(2)) = \text{Var}(\epsilon_1 + \epsilon_2) = \text{Var}(\epsilon_1) + \text{Var}(\epsilon_2) = \sigma^2 + \sigma^2 = 2\sigma^2\]</div>
 </li>
 </ol>
 <ol class="arabic" start="4">
 <li><p>At a general time <span class="math notranslate nohighlight">\(t\)</span> we have:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(X_t = X_{t-1} + \epsilon_t = X_0 + \epsilon_1 + \epsilon_2 + \ldots + \epsilon_t\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(X(t) = X(t-1) + \epsilon_t = X(0) + \epsilon_1 + \epsilon_2 + \ldots + \epsilon_t\)</span>,</p></li>
 <li><p>Again, using the independence of the <span class="math notranslate nohighlight">\(\epsilon\)</span> terms and the fact that each has variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> we get</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\text{Var}(X_t) = \text{Var}(\epsilon_1) + \text{Var}(\epsilon_2) + \ldots + \text{Var}(\epsilon_t) = t\sigma^2\]</div>
+\[\text{Var}(X(t)) = \text{Var}(\epsilon_1) + \text{Var}(\epsilon_2) + \ldots + \text{Var}(\epsilon_t) = t\sigma^2\]</div>
 </li>
 </ol>
 </section>
@@ -894,7 +898,7 @@ document.write(`
 </ul>
 <ul class="simple">
 <li><p>Due to the periodic and symmetric nature of the sine function, when <span class="math notranslate nohighlight">\(\psi\)</span> is uniformly distributed over <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span>, every value of <span class="math notranslate nohighlight">\(\psi\)</span> that leads to a positive value is balanced by a corresponding value of <span class="math notranslate nohighlight">\(\psi\)</span> that leads to a negative value of the same magnitude.
-This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\big[ \sin(\lambda t + \psi\big]=0\)</span></p></li>
+This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\big[ \sin(\lambda t + \psi) \big]=0\)</span></p></li>
 <li><p>Therefore, the <strong>mean</strong> of <span class="math notranslate nohighlight">\(\mu + R \sin(\lambda t + \psi)\)</span> is <span class="math notranslate nohighlight">\(\mu\)</span>, which is constant.</p></li>
 <li><p>Condition #1 is satisfied ✌.</p></li>
 <li><p>Let’s prove it also with code.</p></li>
@@ -978,7 +982,7 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 <li><p>The autocovariance function for a lag <span class="math notranslate nohighlight">\(h\)</span> is defined as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\text{Cov}(x(t), x(t+h)) = \mathbb{E}[(x(t) - \mu)(x(t+\tau) - \mu)]\]</div>
+\[\text{Cov}(x_t, x_{t+h}) = \mathbb{E}[(x(t) - \mu)(x(t+\tau) - \mu)]\]</div>
 <ul class="simple">
 <li><p>Since <span class="math notranslate nohighlight">\(x_t = \mu + R \sin(\lambda t + \psi)\)</span>, the autocovariance becomes:</p></li>
 </ul>
@@ -994,8 +998,8 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 <ul class="simple">
 <li><p>Applying this identity, we get:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-64fe06d2-5093-4869-8653-9b42d6e00a5f">
-<span class="eqno">(1)<a class="headerlink" href="#equation-64fe06d2-5093-4869-8653-9b42d6e00a5f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-08cdb057-69b4-41ef-b508-bf4e52886431">
+<span class="eqno">(1)<a class="headerlink" href="#equation-08cdb057-69b4-41ef-b508-bf4e52886431" title="Permalink to this equation">#</a></span>\[\begin{align}
 \text{Cov}(x_t, x_{t+h}) &amp; = R^2 \mathbb{E}\left[\frac{1}{2}[\cos(\lambda t + \psi - \lambda (t + h) - \psi) - \cos(\lambda t + \psi + \lambda (t + h) + \psi)]\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h) - \cos(2\lambda t + 2\psi + \lambda h)\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h)\right] - \frac{R^2}{2} \mathbb{E}\left[\cos(2\lambda t + 2\psi + \lambda h)\right] \end{align}\]</div>
@@ -1018,8 +1022,8 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 </ul>
 <p><strong>📨 Take-away message</strong></p>
 <ul class="simple">
-<li><p>A time series obtained from a periodic function might be weakly stationarity.</p></li>
-<li><p>The presence of periodic components is not explicitly stated in the 3 conditions.</p></li>
+<li><p>A time series obtained from a periodic function might be weakly stationary.</p></li>
+<li><p>The presence of periodic functions is not explicitly stated in the 3 conditions.</p></li>
 <li><p>Be careful when you determine weak stationarity based on periodic components.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1040,59 +1044,56 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 <section id="constant-vs-non-constant-autocorrelation">
 <h4>Constant vs non-constant autocorrelation<a class="headerlink" href="#constant-vs-non-constant-autocorrelation" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Consider two time series.</p>
+<li><p>Consider two time series <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
 <ul>
-<li><p>The first, has the same autocorrelation.</p></li>
-<li><p>In the second time series, the autocorrelation changes after 100 steps.</p></li>
+<li><p>In <span class="math notranslate nohighlight">\(X\)</span> the autocorrelation is constant over time.</p></li>
+<li><p>In <span class="math notranslate nohighlight">\(Y\)</span> the autocorrelation changes after 100 steps.</p></li>
 </ul>
 </li>
 <li><p>We will use an AR process for this example (more details on AR later on).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define an AR(1) process with a specific autocorrelation coefficient</span>
-<span class="n">ar1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">])</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ar1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">])</span> 
 <span class="n">ma1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">AR_object1</span> <span class="o">=</span> <span class="n">ArmaProcess</span><span class="p">(</span><span class="n">ar1</span><span class="p">,</span> <span class="n">ma1</span><span class="p">)</span>
 <span class="n">constant_autocorr_ts</span> <span class="o">=</span> <span class="n">AR_object1</span><span class="o">.</span><span class="n">generate_sample</span><span class="p">(</span><span class="n">nsample</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
-<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">constant_autocorr_ts</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time Series with Constant Autocorrelation&quot;</span><span class="p">);</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">constant_autocorr_ts</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with constant autocorrelation ($X$)&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/83140d7392429ac0d022bd3c30af62304f3cf2c37b438c0bf9cd353ee1b01282.png" src="../../_images/83140d7392429ac0d022bd3c30af62304f3cf2c37b438c0bf9cd353ee1b01282.png" />
+<img alt="../../_images/c6c87699f2f1c202a0d26f16c24187198e51b0755bb5909638adaa8311c2ce99.png" src="../../_images/c6c87699f2f1c202a0d26f16c24187198e51b0755bb5909638adaa8311c2ce99.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define two different AR(1) processes</span>
-<span class="n">ar2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">])</span>  <span class="c1"># Higher AR coefficient</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ar2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">])</span> 
 <span class="n">AR_object2</span> <span class="o">=</span> <span class="n">ArmaProcess</span><span class="p">(</span><span class="n">ar2</span><span class="p">,</span> <span class="n">ma1</span><span class="p">)</span>
-<span class="n">ar3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>   <span class="c1"># Lower AR coefficient</span>
+<span class="n">ar3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span> 
 <span class="n">AR_object3</span> <span class="o">=</span> <span class="n">ArmaProcess</span><span class="p">(</span><span class="n">ar3</span><span class="p">,</span> <span class="n">ma1</span><span class="p">)</span>
 
-<span class="c1"># Generate samples from both and concatenate</span>
 <span class="n">time_dependent_autocorr_ts_1</span> <span class="o">=</span> <span class="n">AR_object2</span><span class="o">.</span><span class="n">generate_sample</span><span class="p">(</span><span class="n">nsample</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">time_dependent_autocorr_ts_2</span> <span class="o">=</span> <span class="n">AR_object3</span><span class="o">.</span><span class="n">generate_sample</span><span class="p">(</span><span class="n">nsample</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">time_dependent_autocorr_ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">time_dependent_autocorr_ts_1</span><span class="p">,</span> 
                                              <span class="n">time_dependent_autocorr_ts_2</span><span class="p">])</span>
 
-<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_dependent_autocorr_ts</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time Series with Time-dependent Autocorrelation&quot;</span><span class="p">);</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_dependent_autocorr_ts</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with time-dependent autocorrelation ($Y$)&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7ccf9438bb51f4d8a92cb80f34cab5f6d9749f40c10b282a915ead5a068d3e81.png" src="../../_images/7ccf9438bb51f4d8a92cb80f34cab5f6d9749f40c10b282a915ead5a068d3e81.png" />
+<img alt="../../_images/ac5a3b9445e4a2ed5f5e5c6c970a875fb29643e1eb1c9ee69e6633e7539b7c44.png" src="../../_images/ac5a3b9445e4a2ed5f5e5c6c970a875fb29643e1eb1c9ee69e6633e7539b7c44.png" />
 </div>
 </div>
 <ul class="simple">
-<li><p>Notice how the first half of the time series shows a <em>stronger autocorrelation</em>.</p></li>
+<li><p>Notice how the first half of <span class="math notranslate nohighlight">\(Y\)</span> shows a <em>stronger autocorrelation</em>.</p></li>
 <li><p>Each value is heavily influenced by its immediate predecessor, leading to a smooth and predictable pattern.</p></li>
 </ul>
 <ul class="simple">
-<li><p>The second part is characterized by a <em>weaker autocorrelation</em>.</p></li>
-<li><p>The time series appears more random and less influenced by past values.</p></li>
+<li><p>The second part of <span class="math notranslate nohighlight">\(Y\)</span> characterized by a <em>weaker autocorrelation</em>.</p></li>
+<li><p>The time series appears more random and less influenced by its past values.</p></li>
 </ul>
 </section>
 </section>
@@ -1320,7 +1321,7 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 </div>
 <ul class="simple">
 <li><p>Finally, <code class="docutils literal notranslate"><span class="pre">critical_values</span></code> are the test statistic thresholds for common significant levels.</p></li>
-<li><p>Here we see a test statistic of roughly -2.9 and lower is sufficient to reject the null using a significance level of 5%.</p></li>
+<li><p>Here we see a test statistic lower than -2.87 is sufficient to reject <span class="math notranslate nohighlight">\(H_0\)</span> at a significance level of 5%.</p></li>
 </ul>
 <ul class="simple">
 <li><p>You may have noticed two outputs we didn’t discuss.</p></li>
@@ -1385,7 +1386,7 @@ p-value: 0.933
 <section id="common-transformations-to-achieve-stationarity">
 <h2>Common transformations to achieve stationarity<a class="headerlink" href="#common-transformations-to-achieve-stationarity" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>There are several ways to transform nonstationary time-series data:</p></li>
+<li><p>There are several ways to transform nonstationary time series data:</p></li>
 </ul>
 <table class="table">
 <thead>
@@ -1404,7 +1405,7 @@ p-value: 0.933
 <td class="text-left"><p>Remove autocorrelation</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>Seasonal differencing</p></td>
-<td class="text-left"><p>remove periodic component</p></td>
+<td class="text-left"><p>Remove periodic component</p></td>
 </tr>
 </tbody>
 </table>
@@ -1548,21 +1549,22 @@ p-value: 0.000
 <li><p>Now the time series is stationary ✌.</p></li>
 </ul>
 </section>
-<section id="achieve-constant-variance-with-log-transform">
-<h3>Achieve constant variance with log transform<a class="headerlink" href="#achieve-constant-variance-with-log-transform" title="Link to this heading">#</a></h3>
+<section id="stabilize-variance-with-log-transform">
+<h3>Stabilize variance with log transform<a class="headerlink" href="#stabilize-variance-with-log-transform" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>This trick works well when you’re dealing with heteroskedastic data.</p></li>
-<li><p>The log squashes the larger values so that the variances are closer.</p></li>
-<li><p>Let’s plot that again the times series to remember how it looks.</p></li>
+<li><p>This trick is useful when dealing with heteroskedastic data.</p></li>
+<li><p>The log squashes the parts of the time series where the variance is higher.</p></li>
+<li><p>In this way, the variance becomes more uniform.</p></li>
+<li><p>Let’s plot again the heteroskedastic times series to remember how it looks.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">heteroscedasticity</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Heterodastic time series&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">heteroscedasticity</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Heteroskedastic time series&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e370d0921cb8619b52a52e3597da8a5b1d298b47983743658b40409d7a912ce1.png" src="../../_images/e370d0921cb8619b52a52e3597da8a5b1d298b47983743658b40409d7a912ce1.png" />
+<img alt="../../_images/232d17d53663fccd3d06e2719b07f4396a8d171add8ff3ae91a9ef9ebbf30777.png" src="../../_images/232d17d53663fccd3d06e2719b07f4396a8d171add8ff3ae91a9ef9ebbf30777.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1586,11 +1588,11 @@ p-value: 0.005
 <p><strong>⚠ Attention ⚠</strong></p>
 <ul class="simple">
 <li><p>ADF is saying we reject <span class="math notranslate nohighlight">\(H_0\)</span> (at least at <span class="math notranslate nohighlight">\(\alpha=0.05\)</span> confidence level) in favor of the alternative that the time series is stationary.</p></li>
-<li><p>However, the plot clearly shows that the variance is not constant with time.</p></li>
+<li><p>However, the plot clearly shows that the variance is not constant over time.</p></li>
 </ul>
 <ul class="simple">
 <li><p>This is an important lesson.</p></li>
-<li><p>Plotting is a useful tool because some statistical tests like ADF perform bad in some situations:</p>
+<li><p>Some statistical tests like ADF perform bad in some situations:</p>
 <ul>
 <li><p>with few data,</p></li>
 <li><p>when data is heteroskedastic.</p></li>
@@ -1598,8 +1600,9 @@ p-value: 0.005
 </li>
 </ul>
 <ul class="simple">
-<li><p>Before applying the log we subtract the minimum and add a small constant</p></li>
-<li><p>In this way, we ensure all values are positive.</p></li>
+<li><p>Let’s now apply the log transformation.</p></li>
+<li><p>Before that, we subtract the minimum and add a small constant</p></li>
+<li><p>In this way we ensure that all values are positive.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1614,37 +1617,23 @@ p-value: 0.005
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">log_new_hetero</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Log Heterodastic time series&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">log_new_hetero</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Log heteroskedastic time series&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/43894a0e0a8fbede06ae2b9da31433ebdf6f538568563fda74ba4bb75df53875.png" src="../../_images/43894a0e0a8fbede06ae2b9da31433ebdf6f538568563fda74ba4bb75df53875.png" />
+<img alt="../../_images/3ef0d2070b0e382cf9335d61c708b742f09c5076935ffd291cfce1ed1ecf539b.png" src="../../_images/3ef0d2070b0e382cf9335d61c708b742f09c5076935ffd291cfce1ed1ecf539b.png" />
 </div>
 </div>
 <ul class="simple">
+<li><p>Look at the values on the <span class="math notranslate nohighlight">\(y\)</span> axis.</p></li>
 <li><p>Notice how the variance has collapsed to a large extent.</p></li>
-<li><p>Let’s view the ADF test statistics again.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adf_after</span><span class="p">,</span> <span class="n">pvalue_after</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">log_new_hetero</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ADF: </span><span class="si">{</span><span class="n">adf_after</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value: </span><span class="si">{</span><span class="n">pvalue_after</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ADF: -3.06
-p-value: 0.030
-</pre></div>
-</div>
-</div>
-</div>
-<p>Takeaways:</p>
+<p>📨 Takeaway message:</p>
 <ul class="simple">
-<li><p>The ADF test can fail to detect nonstationarity.</p></li>
-<li><p>Nevertheless, the confidence that the log transformed time series is stationary increased.</p></li>
+<li><p>The ADF test can fail to detect nonstationarity due to heteroskedasticity.</p></li>
+<li><p>Always plot the data.</p></li>
+<li><p>Do not rely on a single tool to determine stationarity.</p></li>
 </ul>
 </section>
 <section id="removing-autocorrelation-with-differencing">
@@ -1837,7 +1826,7 @@ Name: squared, dtype: float64
 </div>
 </div>
 <ul class="simple">
-<li><p>Notice that we need to difference twice on the exponential time series.</p></li>
+<li><p>Notice that we need to differentiate twice on the exponential time series.</p></li>
 <li><p>Every time we do differencing we lose a bit of data.</p></li>
 </ul>
 <ul class="simple">
@@ -2085,7 +2074,7 @@ p-value: 0.000
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-transformations-to-achieve-stationarity">Common transformations to achieve stationarity</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtract-estimated-trend-seasonality">Subtract estimated trend &amp; seasonality</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#achieve-constant-variance-with-log-transform">Achieve constant variance with log transform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stabilize-variance-with-log-transform">Stabilize variance with log transform</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-autocorrelation-with-differencing">Removing autocorrelation with differencing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-differentiation">Seasonal differentiation</a></li>
 </ul>

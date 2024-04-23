@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -386,7 +386,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content">📑 Content</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-coding">🚀 Getting started with coding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-code-locally">💻 How to code locally</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-format-and-slides">🎥 Notebook format and slides</a></li>
 </ul>
             </nav>
@@ -410,7 +410,8 @@ document.write(`
 </div>
 <br>
 <p>This is the collection of notebooks for the course <em>Time Series Analysis with Python</em>.
-For reading the notebooks online you can either open the links below or read them as a <a class="reference external" href="https://filippomb.github.io/python-time-series-handbook">book</a>.</p>
+You can view and execute the notebooks by clicking on the links below.</p>
+<p>More info about the course is <a class="reference external" href="https://filippomb.github.io/python-time-series-handbook">here</a>.</p>
 <section id="content">
 <h2>📑 Content<a class="headerlink" href="#content" title="Link to this heading">#</a></h2>
 <ol class="arabic">
@@ -421,7 +422,7 @@ For reading the notebooks online you can either open the links below or read the
 <li><p>Statistical vs dynamical models perspective</p></li>
 <li><p>Components of a time series</p></li>
 <li><p>Additive vs multiplicative models</p></li>
-<li><p>Time series decomposition</p></li>
+<li><p>Time series decomposition techniques</p></li>
 </ul>
 <p><a class="reference external" href="https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb"><img alt="nbviewer" src="https://img.shields.io/badge/-View-blue?logo=jupyter&amp;style=flat&amp;labelColor=gray" /></a> or <a class="reference external" href="https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/01/introduction_to_time_series.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 </li>
@@ -453,7 +454,7 @@ For reading the notebooks online you can either open the links below or read the
 </li>
 </ol>
 <br>
-<ol class="arabic" start="4">
+<ol class="arabic">
 <li><p><strong>AR-MA</strong></p>
 <ul class="simple">
 <li><p>The autocorrelation function</p></li>
@@ -484,7 +485,7 @@ For reading the notebooks online you can either open the links below or read the
 <ul class="simple">
 <li><p>Unit root test</p></li>
 <li><p>Mean Reversion</p></li>
-<li><p>Hurst Exponent</p></li>
+<li><p>The Hurst exponent</p></li>
 <li><p>Geometric Brownian Motion</p></li>
 <li><p>Applications in quantitative finance</p></li>
 </ul>
@@ -508,11 +509,11 @@ For reading the notebooks online you can either open the links below or read the
 <ol class="arabic" start="8">
 <li><p><strong>Signal transforms and filters</strong></p>
 <ul class="simple">
-<li><p>Introduction to Fourier Transform and Discrete Fourier Transform, and FFT</p></li>
+<li><p>Introduction to Fourier Transform, Discrete Fourier Transform, and FFT</p></li>
 <li><p>Fourier Transform of common signals</p></li>
 <li><p>Properties of the Fourier Transform</p></li>
 <li><p>Signal filtering with low-pass, high-pass, band-pass, and bass-stop filters</p></li>
-<li><p>Application of Fourier Transform for time series forecasting</p></li>
+<li><p>Application of Fourier Transform to time series forecasting</p></li>
 </ul>
 <p><a class="reference external" href="https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb"><img alt="nbviewer" src="https://img.shields.io/badge/-View-blue?logo=jupyter&amp;style=flat&amp;labelColor=gray" /></a> or <a class="reference external" href="https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/08/signal-transforms-filters.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 </li>
@@ -522,7 +523,7 @@ For reading the notebooks online you can either open the links below or read the
 <li><p><strong>Prophet</strong></p>
 <ul class="simple">
 <li><p>Introduction to Prophet for time series forecasting</p></li>
-<li><p>Advanced modelling of trend, seasonality, and holidays</p></li>
+<li><p>Advanced modeling of trend, seasonality, and holidays components</p></li>
 <li><p>The Prophet library in Python</p></li>
 </ul>
 <p><a class="reference external" href="https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb"><img alt="nbviewer" src="https://img.shields.io/badge/-View-blue?logo=jupyter&amp;style=flat&amp;labelColor=gray" /></a> or <a class="reference external" href="https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/09/prophet.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
@@ -533,7 +534,7 @@ For reading the notebooks online you can either open the links below or read the
 <li><p><strong>Neural networks and Reservoir Computing</strong></p>
 <ul class="simple">
 <li><p>Windowed approaches and Neural Networks for time series forecasting</p></li>
-<li><p>Forecasting with the Multi Layer Perceptron</p></li>
+<li><p>Forecasting with a Multi Layer Perceptron</p></li>
 <li><p>Recurrent Neural Networks: advantages and challenges</p></li>
 <li><p>Reservoir Computing and the Echo State Network</p></li>
 <li><p>Dimensionality reduction with Principal Component Analysis</p></li>
@@ -552,7 +553,7 @@ For reading the notebooks online you can either open the links below or read the
 <li><p>High-dimensional continuous-time systems</p></li>
 <li><p>Fractal dimensions</p></li>
 <li><p>Phase space reconstruction and Taken’s embedding theorem</p></li>
-<li><p>Forecasting nonlinear time series</p></li>
+<li><p>Forecasting time series from nonlinear systems</p></li>
 </ul>
 <p><a class="reference external" href="https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb"><img alt="nbviewer" src="https://img.shields.io/badge/-View-blue?logo=jupyter&amp;style=flat&amp;labelColor=gray" /></a> or <a class="reference external" href="https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/11/nonlinear-ts.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 </li>
@@ -562,20 +563,21 @@ For reading the notebooks online you can either open the links below or read the
 <li><p><strong>Time series classification and clustering</strong></p>
 <ul class="simple">
 <li><p>Multivariate time series</p></li>
-<li><p>Time series similarity</p></li>
+<li><p>Time series similarities and dissimilarities</p></li>
 <li><p>Dynamic Time Warping</p></li>
 <li><p>Time series kernels</p></li>
-<li><p>Time series embedding</p></li>
+<li><p>Embedding time series into vectors</p></li>
 <li><p>Classification of time series</p></li>
 <li><p>Clustering of time series</p></li>
-<li><p>Visualization with kernel PCA</p></li>
+<li><p>Visualize time series with kernel PCA</p></li>
 </ul>
 <p><a class="reference external" href="https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb"><img alt="nbviewer" src="https://img.shields.io/badge/-View-blue?logo=jupyter&amp;style=flat&amp;labelColor=gray" /></a> or <a class="reference external" href="https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/12/classification-clustering.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 </li>
 </ol>
+<br>
 </section>
-<section id="getting-started-with-coding">
-<h2>🚀 Getting started with coding<a class="headerlink" href="#getting-started-with-coding" title="Link to this heading">#</a></h2>
+<section id="how-to-code-locally">
+<h2>💻 How to code locally<a class="headerlink" href="#how-to-code-locally" title="Link to this heading">#</a></h2>
 <p>To run the notebooks locally the recommended steps are the following:</p>
 <ol class="arabic simple">
 <li><p>Download and install <a class="reference external" href="https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html">Miniconda</a>.</p></li>
@@ -652,7 +654,7 @@ If you open a notebook you will see the following structure:</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#content">📑 Content</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-coding">🚀 Getting started with coding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-code-locally">💻 How to code locally</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-format-and-slides">🎥 Notebook format and slides</a></li>
 </ul>
   </nav></div>
