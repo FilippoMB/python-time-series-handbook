@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -191,7 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources and acknowledgments</a></li>
 </ul>
 
     </div>
@@ -400,16 +400,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-the-adf-test">More on the ADF test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-testing">Mean Reversion Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-test">Mean reversion test</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-finance">Applications in finance</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-for-mean-reversion">Testing for mean reversion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-vs-stationarity">Mean reversion VS stationarity</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion-recap">Brownian Motion (recap)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hurst-exponent">Hurst Exponent</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hurst-exponent-in-finance">Interpretation of the Hurst Exponent in Finance:</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical Considerations:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hurst-exponent">Hurst exponent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hurst-exponent-in-finance">Interpretation of the Hurst exponent in finance:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical considerations:</a></li>
 </ul>
 </li>
 </ul>
@@ -438,17 +438,17 @@ document.write(`
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>In this lecture, we will first recap and provide more details about some concepts from previous lectures.</p></li>
-<li><p>Then, we will look into new analytics tools and some of their application in financial time series.</p></li>
+<li><p>We will first recap and provide more details about some concepts we saw in the previous lectures.</p></li>
+<li><p>Then, we will introduce new analytics tools and some of their application in financial applications.</p></li>
 </ul>
 <ul class="simple">
 <li><p>The content of the lecture is organized as follows:</p>
 <ol class="arabic simple">
-<li><p>Small recap</p></li>
-<li><p>Unit root test</p></li>
-<li><p>Mean Reversion</p></li>
-<li><p>Hurst Exponent</p></li>
-<li><p>Geometric Brownian Motion</p></li>
+<li><p>Small recap.</p></li>
+<li><p>Unit root test.</p></li>
+<li><p>Mean reversion.</p></li>
+<li><p>Hurst Exponent.</p></li>
+<li><p>Geometric Brownian motion.</p></li>
 </ol>
 </li>
 </ul>
@@ -471,20 +471,24 @@ document.write(`
 <hr class="docutils" />
 <section id="small-recap">
 <h2>Small recap<a class="headerlink" href="#small-recap" title="Link to this heading">#</a></h2>
-<p>We’ve covered lots of material in the previous four lessons.</p>
-<p>Now is a good time to step back and rehash what we’ve covered.</p>
+<ul class="simple">
+<li><p>We’ve covered lots of material in the previous lessons.</p></li>
+<li><p>Now is a good time to step back and rehash what we’ve covered.</p></li>
+</ul>
 <section id="decomposition">
 <h3>Decomposition<a class="headerlink" href="#decomposition" title="Link to this heading">#</a></h3>
-<p>Time series data can often be decomposed into trend, seasonal, and random fluctuation components.</p>
+<ul class="simple">
+<li><p>Time series data can be decomposed into trend, seasonal, and random fluctuation components.</p></li>
+</ul>
 <p><strong>Trends</strong></p>
 <ul class="simple">
-<li><p>Up.</p></li>
-<li><p>Down.</p></li>
+<li><p>Increasing.</p></li>
+<li><p>Decreasing.</p></li>
 <li><p>Flat.</p></li>
 <li><p>Larger trends can be made up of smaller trends.</p></li>
-<li><p>There is no defined timeframe for what constitutes a trend as it depends on your data and task at hand.</p></li>
+<li><p>There is no defined timeframe for what constitutes a trend: it depends on your data and task at hand.</p></li>
 </ul>
-<p><strong>Seasonal Effects</strong></p>
+<p><strong>Seasonal effects</strong></p>
 <ul class="simple">
 <li><p>Weekend retail sales spikes.</p></li>
 <li><p>Holiday shopping.</p></li>
@@ -500,25 +504,29 @@ document.write(`
 </section>
 <section id="additive-vs-multiplicative">
 <h3>Additive vs Multiplicative<a class="headerlink" href="#additive-vs-multiplicative" title="Link to this heading">#</a></h3>
-<p>Time series models can fall into categories:</p>
+<ul class="simple">
+<li><p>Time series models can fall into categories:</p></li>
+</ul>
 <p><strong>Additive</strong></p>
 <ul class="simple">
-<li><p>Data = Trend + Seasonal + Random</p></li>
-<li><p>What we will be using for our modeling</p></li>
+<li><p>Data = Trend + Seasonal + Random.</p></li>
+<li><p>If our seasonality and fluctuations are stable, we likely have an additive model.</p></li>
 </ul>
-<p>If our seasonality and fluctuations are stable, we likely have an additive model.</p>
 <p><strong>Multiplicative</strong></p>
 <ul class="simple">
-<li><p>Data = Trend x Seasonal x Random</p></li>
-<li><p>As easy to fit as Additive if we take the log:
-<code class="docutils literal notranslate"><span class="pre">log(Data)</span> <span class="pre">=</span> <span class="pre">log(Trend</span> <span class="pre">+</span> <span class="pre">Seasonal</span> <span class="pre">+</span> <span class="pre">Random)</span></code></p></li>
+<li><p>Data = Trend <span class="math notranslate nohighlight">\(\times\)</span> Seasonal <span class="math notranslate nohighlight">\(\times\)</span> Random.</p></li>
+<li><p>As easy to fit as Additive if we take the log: <code class="docutils literal notranslate"><span class="pre">log(Data)</span> <span class="pre">=</span> <span class="pre">log(Trend</span> <span class="pre">+</span> <span class="pre">Seasonal</span> <span class="pre">+</span> <span class="pre">Random)</span></code>.</p></li>
+<li><p>Use multiplicative models if:</p>
+<ul>
+<li><p>the amplitude in seasonal and random fluctuations grows with the trend,</p></li>
+<li><p>the percentage change of our data is more important than the absolute value change (e.g. stocks, commodities).</p></li>
 </ul>
-<p>Use multiplicative models if the amplitude in seasonal and random fluctuations grows as the trend rises.</p>
-<p>Also, use multiplicative models when the percentage change of our data is more important than the absolute value change (e.g. stocks, commodities).</p>
+</li>
+</ul>
 </section>
 <section id="stationarity">
 <h3>Stationarity<a class="headerlink" href="#stationarity" title="Link to this heading">#</a></h3>
-<p>A time series is stationary if</p>
+<p>A time series is stationary if:</p>
 <ul class="simple">
 <li><p>The mean of the series is constant.</p></li>
 <li><p>The variance does not change over time (homoscedasticity).</p></li>
@@ -532,26 +540,27 @@ document.write(`
 <li><p>Make a run-sequence plot.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Compute (and plot) rolling statistics</p>
+<li><p>Rolling statistics:</p>
 <ul>
-<li><p>Compute and plot the moving average/variance on chunks of data and check if it changes with time.</p></li>
+<li><p>Compute and plot rolling statistics such as moving average/variance on chunks of data.</p></li>
+<li><p>Check if the statistics change over time.</p></li>
 <li><p>This technique can be done on different windows (small windows are noisy, large windows too conservative).</p></li>
 </ul>
 </li>
 </ul>
 <ul class="simple">
-<li><p>Histogram of time series</p>
+<li><p>Histogram of time series:</p>
 <ul>
-<li><p>Normal? <span class="math notranslate nohighlight">\(\rightarrow\)</span> stationary.</p></li>
-<li><p>Non-normal (e.g., uniform)? <span class="math notranslate nohighlight">\(\rightarrow\)</span> non-stationary.</p></li>
+<li><p>Does it look Normal? <span class="math notranslate nohighlight">\(\rightarrow\)</span> stationary.</p></li>
+<li><p>Does it look non-normal (e.g., uniform)? <span class="math notranslate nohighlight">\(\rightarrow\)</span> non-stationary.</p></li>
 </ul>
 </li>
 </ul>
 <ul class="simple">
-<li><p>Augmented Dickey-Fuller (ADF) test</p>
+<li><p>Augmented Dickey-Fuller (ADF) test:</p>
 <ul>
 <li><p>Statistical tests for checking stationarity.</p></li>
-<li><p>The null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> is that the TS is non-stationary.</p></li>
+<li><p>The null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> is that the time series is non-stationary.</p></li>
 <li><p>If the test statistic is small enough and the <span class="math notranslate nohighlight">\(p\)</span>-value below the target <span class="math notranslate nohighlight">\(\alpha\)</span>, we <em>can</em> reject <span class="math notranslate nohighlight">\(H_0\)</span> and say that the series is stationary.</p></li>
 </ul>
 </li>
@@ -562,6 +571,7 @@ document.write(`
 <ul class="simple">
 <li><p>Take the log of the data.</p></li>
 <li><p>Difference (multiple times if needed) to remove trends and seasonality.</p></li>
+<li><p>Subtract estimated trend and seasonal components.</p></li>
 </ul>
 </section>
 </section>
@@ -582,22 +592,22 @@ document.write(`
 <li><p>This can be represented as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[Y_t = \phi Y_{t-1} + \epsilon_t,\]</div>
+\[Y(t) = \phi Y(t-1) + \epsilon_t,\]</div>
 <ul class="simple">
 <li><p>where</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(Y_t\)</span> is the value of the series at time <span class="math notranslate nohighlight">\(t\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y(t)\)</span> is the value of the series at time <span class="math notranslate nohighlight">\(t\)</span>,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\phi\)</span> is a coefficient,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\epsilon_t\)</span> is a white noise error term.</p></li>
 </ul>
 </li>
 </ul>
 <ul class="simple">
-<li><p>To analyze the properties of this process, we can rewrite the equation in terms of <strong>lag operator</strong> <span class="math notranslate nohighlight">\(L\)</span> where <span class="math notranslate nohighlight">\(LY_t = Y_{t-1}\)</span>.</p></li>
+<li><p>To analyze the properties of this process, we can rewrite the equation in terms of <strong>lag operator</strong> <span class="math notranslate nohighlight">\(L\)</span> where <span class="math notranslate nohighlight">\(LY(t) = Y(t-1)\)</span>.</p></li>
 <li><p>The equation becomes:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[(1 - \phi L)Y_t = \epsilon_t.\]</div>
+\[(1 - \phi L)Y(t) = \epsilon_t\]</div>
 <ul class="simple">
 <li><p>The term <span class="math notranslate nohighlight">\((1 - \phi L)\)</span> is known as the <strong>characteristic equation</strong> of the AR(1) process.</p></li>
 </ul>
@@ -606,9 +616,9 @@ document.write(`
 <li><p>The solution gives <span class="math notranslate nohighlight">\(L = 1/\phi\)</span>, which is the <strong>root of the characteristic equation</strong>.</p></li>
 </ul>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(\phi = 1\)</span>, then <span class="math notranslate nohighlight">\(L = 1/\phi = 1\)</span>, meaning the root of the characteristic equation is equal to 1, or a “unit” value.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\phi = 1\)</span>, then <span class="math notranslate nohighlight">\(L = 1/\phi = 1\)</span>, meaning that the root of the characteristic equation has a “unit” value.</p></li>
 <li><p>This is what is known as a “unit root”.</p></li>
-<li><p>When an AR(1) process has a unit root (i.e., <span class="math notranslate nohighlight">\(\phi = 1\)</span>), it implies that the series is non-stationary as it becomes a random walk: <span class="math notranslate nohighlight">\(Y_t = Y_{t-1} + \epsilon_t\)</span></p></li>
+<li><p>When an AR(1) process has a unit root (i.e., <span class="math notranslate nohighlight">\(\phi = 1\)</span>), it implies that the series is non-stationary as it becomes a random walk: <span class="math notranslate nohighlight">\(Y(t) = Y(t-1) + \epsilon_t\)</span></p></li>
 <li><p>The value of the series will be highly dependent on its previous values (the shocks to the series have a permanent effect).</p></li>
 </ul>
 <blockquote>
@@ -616,21 +626,20 @@ document.write(`
 </div></blockquote>
 <section id="more-on-the-adf-test">
 <h3>More on the ADF test<a class="headerlink" href="#more-on-the-adf-test" title="Link to this heading">#</a></h3>
-<p><strong>Formulation of the Test</strong></p>
+<p><strong>Formulation of the test</strong></p>
 <ul class="simple">
 <li><p>The basic idea of the ADF test is to assess whether lagged values of the time series are useful in predicting current values.</p></li>
 <li><p>The test starts with a model that includes the time series lagged by one period (lag-1).</p></li>
 <li><p>Then, other lagged terms are added to control for higher-order correlation (this is the “augmented” part of the ADF test).</p></li>
 </ul>
-<p><strong>ADF Test Equation</strong></p>
+<p><strong>ADF test equation</strong></p>
 <p>The ADF test model the time series with the following equation:</p>
 <div class="math notranslate nohighlight">
-\[\Delta Y_t = \alpha + \beta t + \gamma Y_{t-1} + \sum_{i=1}^{p} \delta_i \Delta Y_{t-i} + \epsilon_t\]</div>
+\[\Delta Y(t) = \alpha + \beta t + \gamma Y(t-1) + \sum_{i=1}^{p} \delta_i \Delta_{t-i} + \epsilon_t\]</div>
 <ul class="simple">
 <li><p>where</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(\Delta Y_t\)</span> is the difference of the series at time <span class="math notranslate nohighlight">\(t\)</span>, i.e., <span class="math notranslate nohighlight">\(\Delta Y_t = Y_t - Y_{t-1}\)</span>,</p></li>
-<li><p><span class="math notranslate nohighlight">\(Y_{t-1}\)</span> is the lagged value of the series,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta_t\)</span> is the difference of the series at time <span class="math notranslate nohighlight">\(t\)</span>, i.e., <span class="math notranslate nohighlight">\(\Delta_t = Y(t) - Y(t-1)\)</span>,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is a constant,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\beta\)</span> represents the trend,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\gamma\)</span> is the coefficient on the lagged value of the series,</p></li>
@@ -644,28 +653,28 @@ document.write(`
 <li><p>Assume <span class="math notranslate nohighlight">\(\alpha=\beta=0\)</span> (i.e., zero-mean and no trend) and do not consider the higher-order terms (<span class="math notranslate nohighlight">\(\delta_i=0\)</span>).</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(\gamma = (\phi -1)\)</span>.</p>
 <ul>
-<li><p>We get <span class="math notranslate nohighlight">\(\Delta Y_t = (\phi -1) Y_t + \epsilon_t\)</span>.</p></li>
+<li><p>We get <span class="math notranslate nohighlight">\(\Delta_t = (\phi -1) Y(t) + \epsilon_t\)</span>.</p></li>
 </ul>
 </li>
 <li><p>If <span class="math notranslate nohighlight">\(\gamma = 0\)</span>, then <span class="math notranslate nohighlight">\(\phi = 1\)</span> (unit root).</p>
 <ul>
-<li><p>Then <span class="math notranslate nohighlight">\(\Delta Y_t = \epsilon_t \rightarrow Y_t = Y_{t-1} + \epsilon_t\)</span>, which is the non-stationary random walk.</p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(\Delta_t = \epsilon_t \rightarrow Y(t) = Y(t-1) + \epsilon_t\)</span>, which is the non-stationary random walk.</p></li>
 </ul>
 </li>
 </ul>
-<p><strong>Null and Alternative Hypotheses (again)</strong></p>
+<p><strong>Null and alternative hypotheses (revised)</strong></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(\gamma = 0\)</span> the time series has unit root, i.e., it is not stationary.</p></li>
 <li><p><span class="math notranslate nohighlight">\(H_1\)</span>: <span class="math notranslate nohighlight">\(\gamma &lt; 0\)</span> the series does not have a unit root.</p></li>
 </ul>
-<p><strong>Test Statistics</strong>:</p>
+<p><strong>Test statistics</strong>:</p>
 <ul class="simple">
 <li><p>The ADF test statistic is calculated based on the estimated coefficient <span class="math notranslate nohighlight">\(\hat{\gamma}\)</span>.</p></li>
 <li><p>This statistic is then compared to critical values for the ADF distribution.</p></li>
 <li><p>If the test statistic is more negative than the critical value, <span class="math notranslate nohighlight">\(H_0\)</span> is rejected.</p></li>
 <li><p>If the test statistic is less negative than the critical value, <span class="math notranslate nohighlight">\(H_0\)</span> cannot be rejected.</p></li>
 </ul>
-<p><strong>Choosing Lag Length</strong>:</p>
+<p><strong>Choosing lag length</strong>:</p>
 <ul class="simple">
 <li><p>The number of lags (<span class="math notranslate nohighlight">\(p\)</span>) included in the test equation is important.</p></li>
 <li><p>Too few lags might leave out necessary corrections for autocorrelation.</p></li>
@@ -700,16 +709,16 @@ Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;
 </div>
 </div>
 </div>
-<p><strong>Types of ADF Tests</strong></p>
+<p><strong>Types of ADF tests</strong></p>
 <ul class="simple">
 <li><p>There are three versions of the ADF test depending on whether the equation includes none, both, or one of the terms <span class="math notranslate nohighlight">\(\alpha\)</span> (constant) and <span class="math notranslate nohighlight">\(\beta t\)</span> (trend):</p>
 <ul>
-<li><p>No constant or trend.</p></li>
-<li><p>Constant, but no trend.</p></li>
-<li><p>Both constant and trend.</p></li>
+<li><p>No constant or trend (<code class="docutils literal notranslate"><span class="pre">'n'</span></code>).</p></li>
+<li><p>Constant, but no trend (<code class="docutils literal notranslate"><span class="pre">'c'</span></code>).</p></li>
+<li><p>Both constant and trend (<code class="docutils literal notranslate"><span class="pre">'ct'</span></code>).</p></li>
 </ul>
 </li>
-<li><p>The choice among these depends on the nature of the underlying time series.</p></li>
+<li><p>The choice among these depends on the nature of the underlying time series and on what we want to test.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -722,13 +731,13 @@ Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Critical Values: </span><span class="si">{</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">zip</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span><span class="w"> </span><span class="n">out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># 1. No Constant or Trend</span>
-<span class="n">series_no_const_no_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">series_no_const_no_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 
 <span class="c1"># 2. Constant, but No Trend</span>
-<span class="n">series_const_no_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">series_const_no_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 
 <span class="c1"># 3. Both Constant and Trend</span>
-<span class="n">series_const_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">series_const_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -747,7 +756,7 @@ Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/35a1a682fa19a350fcb5eb171c5c5650eeb049b2c25b443561588b6e5e3f7e57.png" src="../../_images/35a1a682fa19a350fcb5eb171c5c5650eeb049b2c25b443561588b6e5e3f7e57.png" />
+<img alt="../../_images/6b955426e9ff24901a98cfbaa12f4749bfd2c86722f28f19df0bad5d351a3f1b.png" src="../../_images/6b955426e9ff24901a98cfbaa12f4749bfd2c86722f28f19df0bad5d351a3f1b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -765,19 +774,19 @@ Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Results for No Constant, No Trend:
-ADF Statistic: -9.96
+ADF Statistic: -15.47
 p-value: 0.000
-Critical Values: [&#39;1%: -2.59&#39;, &#39;5%: -1.94&#39;, &#39;10%: -1.61&#39;]
+Critical Values: [&#39;1%: -2.58&#39;, &#39;5%: -1.94&#39;, &#39;10%: -1.62&#39;]
 
 Results for Constant, No Trend:
-ADF Statistic: -1.55
-p-value: 0.511
-Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;]
+ADF Statistic: -13.95
+p-value: 0.000
+Critical Values: [&#39;1%: -3.46&#39;, &#39;5%: -2.88&#39;, &#39;10%: -2.57&#39;]
 
 Results for Constant and Trend:
-ADF Statistic: -5.70
+ADF Statistic: -14.68
 p-value: 0.000
-Critical Values: [&#39;1%: -4.06&#39;, &#39;5%: -3.46&#39;, &#39;10%: -3.16&#39;]
+Critical Values: [&#39;1%: -4.00&#39;, &#39;5%: -3.43&#39;, &#39;10%: -3.14&#39;]
 </pre></div>
 </div>
 </div>
@@ -789,8 +798,8 @@ Critical Values: [&#39;1%: -4.06&#39;, &#39;5%: -3.46&#39;, &#39;10%: -3.16&#39;
 </section>
 </section>
 <hr class="docutils" />
-<section id="mean-reversion-testing">
-<h2>Mean Reversion Testing<a class="headerlink" href="#mean-reversion-testing" title="Link to this heading">#</a></h2>
+<section id="mean-reversion-test">
+<h2>Mean reversion test<a class="headerlink" href="#mean-reversion-test" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Mean reversion refers to the property of a time series to revert to its historical mean.</p></li>
 <li><p>This concept is particularly popular in financial economics, where it is often assumed that asset prices and revert to their historical average over the long term.</p></li>
@@ -915,24 +924,24 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li><p>Recall the random walk</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[X_t = X_{t-1} + \epsilon_t\]</div>
+\[X(t) = X(t-1) + \epsilon_t\]</div>
 <ul class="simple">
 <li><p>where <span class="math notranslate nohighlight">\(\epsilon_t \sim \mathcal{N}(0,\sigma^2)\)</span>.</p></li>
 <li><p>This is also be expressed as</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[X_t = X_0 + W_t\]</div>
+\[X(t) = X(0) + W(t)\]</div>
 <ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\(W_t\)</span> is the <em>Wiener Process</em></p></li>
+<li><p>where <span class="math notranslate nohighlight">\(W(t)\)</span> is the <em>Wiener Process</em></p></li>
 <li><p>or as</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[X_t = X_0 + B(t)\]</div>
+\[X(t) = X(0) + B(t)\]</div>
 <ul class="simple">
 <li><p>where <span class="math notranslate nohighlight">\(B(t)\)</span> is the <em>Brownian Motion</em></p></li>
 <li><p><span class="math notranslate nohighlight">\(W_t\)</span> and <span class="math notranslate nohighlight">\(B(t)\)</span> represents the cumulative sum of normally distributed increments <span class="math notranslate nohighlight">\(\epsilon_1 + \epsilon_2 + \dots \epsilon_t\)</span>.</p></li>
 </ul>
-<p><strong>Variance of Brownian Motion at Time Lag <span class="math notranslate nohighlight">\(\tau\)</span></strong></p>
+<p><strong>Variance of Brownian Motion at time lag <span class="math notranslate nohighlight">\(\tau\)</span></strong></p>
 <ul class="simple">
 <li><p>For a time series <span class="math notranslate nohighlight">\(X(t)\)</span>, the variance at a time lag <span class="math notranslate nohighlight">\(\tau\)</span> can be defined as:</p></li>
 </ul>
@@ -947,7 +956,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </section>
 <hr class="docutils" />
 <section id="hurst-exponent">
-<h2>Hurst Exponent<a class="headerlink" href="#hurst-exponent" title="Link to this heading">#</a></h2>
+<h2>Hurst exponent<a class="headerlink" href="#hurst-exponent" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The Hurst exponent (<span class="math notranslate nohighlight">\(H\)</span>) is a measure used to characterize the long-term memory of time series.</p></li>
 <li><p>It helps to determine the presence of autocorrelation or persistence in the data.</p></li>
@@ -959,10 +968,14 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </ul>
 </li>
 </ul>
-<p>The key insight is that, if any <em>autocorrelation</em> exists, then</p>
+<ul class="simple">
+<li><p>The key insight is that, if any <em>autocorrelation</em> exists, then</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[\text{Var}(X(t + \tau) - X(t)) \propto \tau^{2H},\]</div>
-<p>where <span class="math notranslate nohighlight">\(H\)</span> is the Hurst exponent.</p>
+\[\text{Var}(X(t + \tau) - X(t)) \propto \tau^{2H}\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(H\)</span> is the Hurst exponent.</p></li>
+</ul>
 <p>A time series can then be characterised in the following manner:</p>
 <ul class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(H = 0.5\)</span>, the time series is similar to a random walk (Brownian motion). In this case, the variance increases linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
@@ -1053,7 +1066,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/233e98ba43d64570145b301168eb374d89b16fe162c83c5a1ef95bf2595affd0.png" src="../../_images/233e98ba43d64570145b301168eb374d89b16fe162c83c5a1ef95bf2595affd0.png" />
+<img alt="../../_images/664e534fa8e6923fc92c8b1f77bbe9653e1c8e53071be9c8ce1f29ac05f1e88f.png" src="../../_images/664e534fa8e6923fc92c8b1f77bbe9653e1c8e53071be9c8ce1f29ac05f1e88f.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1076,7 +1089,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li><p>What does this mean in practice?</p></li>
 </ul>
 <section id="interpretation-of-the-hurst-exponent-in-finance">
-<h3>Interpretation of the Hurst Exponent in Finance:<a class="headerlink" href="#interpretation-of-the-hurst-exponent-in-finance" title="Link to this heading">#</a></h3>
+<h3>Interpretation of the Hurst exponent in finance:<a class="headerlink" href="#interpretation-of-the-hurst-exponent-in-finance" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The Hurst exponent, <span class="math notranslate nohighlight">\(H\)</span>, is a critical metric in the analysis of financial time series.</p></li>
 <li><p>Offers insights into the behavior of assets such as stocks.</p></li>
@@ -1099,22 +1112,20 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <p><strong>Case 3: <span class="math notranslate nohighlight">\(H &gt; 0.5\)</span></strong></p>
 <ul class="simple">
 <li><p>Suggests a trending series, where increases or decreases in stock prices are likely to be followed by further increases or decreases, respectively.</p></li>
-<li><p>This persistence indicates potential momentum in stock prices, which can be exploited by momentum strategies—buying stocks that have been going up in the hope that they will continue to do so, and selling those in a downtrend.</p></li>
+<li><p>This persistence indicates potential momentum in stock prices, which can be exploited by momentum strategies:</p>
+<ul>
+<li><p>Buying stocks that have been going up in the hope that they will continue to do so, and selling those in a downtrend.</p></li>
+</ul>
+</li>
 </ul>
 <section id="practical-considerations">
-<h4>Practical Considerations:<a class="headerlink" href="#practical-considerations" title="Link to this heading">#</a></h4>
-<p>Before applying these interpretations, investors should consider:</p>
+<h4>Practical considerations:<a class="headerlink" href="#practical-considerations" title="Link to this heading">#</a></h4>
+<p>Before applying these interpretations, investors should also make the following considerations:</p>
 <ul class="simple">
-<li><p><strong>Time Frame</strong>: The observed value of <span class="math notranslate nohighlight">\(H\)</span> can vary over different time frames: analyze <span class="math notranslate nohighlight">\(H\)</span> over the period relevant to the investment horizon.</p></li>
-</ul>
-<ul class="simple">
-<li><p><strong>Market Conditions</strong>: External factors such as market conditions, economic indicators, and geopolitical events can influence stock prices and should be considered alongside <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
-</ul>
-<ul class="simple">
-<li><p><strong>Risk Management</strong>: Regardless of the value of <span class="math notranslate nohighlight">\(H\)</span>, implementing proper risk management strategies is essential to protect against unexpected market movements.</p></li>
-</ul>
-<ul class="simple">
-<li><p><strong>Significance</strong>: is the <span class="math notranslate nohighlight">\(H\)</span> computed on a specific time series statistically significant?</p></li>
+<li><p>The observed value of <span class="math notranslate nohighlight">\(H\)</span> can vary over different time frames: analyze <span class="math notranslate nohighlight">\(H\)</span> over the period relevant to the investment horizon.</p></li>
+<li><p>External factors such as market conditions, economic indicators, and geopolitical events can influence stock prices and should be considered alongside <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+<li><p>Regardless of the value of <span class="math notranslate nohighlight">\(H\)</span>, implementing proper risk management strategies is essential to protect against unexpected market movements.</p></li>
+<li><p>If the time series is to short, the value of <span class="math notranslate nohighlight">\(H\)</span> might not reliable.</p></li>
 </ul>
 </section>
 </section>
@@ -1123,11 +1134,12 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <section id="geometric-brownian-motion">
 <h2>Geometric Brownian Motion<a class="headerlink" href="#geometric-brownian-motion" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The <em>Geometric Brownian Motion</em> (GBM) is a stochastic process often used to model stock prices and other financial variables that do not revert to a mean but rather exhibit trends with a drift <span class="math notranslate nohighlight">\(\mu\)</span> and volatility <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+<li><p>The <em>Geometric Brownian Motion</em> (GBM) is a stochastic process.</p></li>
+<li><p>Is is often used to model stock prices and other financial variables that do not revert to a mean but rather exhibit trends with a drift <span class="math notranslate nohighlight">\(\mu\)</span> and volatility <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
 </ul>
 <p>The GBM is defined as:</p>
 <div class="math notranslate nohighlight">
-\[S(t) = S_0 \exp\left((\mu - \frac{1}{2} \sigma^2)t + \sigma W_t\right)\]</div>
+\[S(t) = S_0 \exp\left((\mu - \frac{1}{2} \sigma^2)t + \sigma W(t)\right)\]</div>
 <ul class="simple">
 <li><p>where</p>
 <ul>
@@ -1135,7 +1147,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li><p><span class="math notranslate nohighlight">\(S_0\)</span> is the initial stock price at time <span class="math notranslate nohighlight">\(t = 0\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the expected annual return (drift coefficient).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the volatility (standard deviation of returns).</p></li>
-<li><p><span class="math notranslate nohighlight">\(W_t\)</span> is a Wiener process (standard Brownian motion).</p></li>
+<li><p><span class="math notranslate nohighlight">\(W(t)\)</span> is a Wiener process (standard Brownian motion).</p></li>
 </ul>
 </li>
 </ul>
@@ -1164,7 +1176,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8c9930505a0870d1dda5975e68f6d3e7601cd853bff058b27353d8f8cbb8115b.png" src="../../_images/8c9930505a0870d1dda5975e68f6d3e7601cd853bff058b27353d8f8cbb8115b.png" />
+<img alt="../../_images/e4cfe9445173a8356686a3f679675bfce1ab0cda60dfd39d8d7478548336dc2d.png" src="../../_images/e4cfe9445173a8356686a3f679675bfce1ab0cda60dfd39d8d7478548336dc2d.png" />
 </div>
 </div>
 <section id="variance-of-gbm">
@@ -1187,7 +1199,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li><p>GBM can be used to model real stock prices and simulate their future behavior.</p></li>
 <li><p>First, we estimate <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> from historical stock price data.</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(\mu\)</span> could be the historical average of the stock’s logarithmic returns</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> could be the historical average of the stock’s logarithmic returns.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\sigma\)</span> could be the standard deviation of those returns.</p></li>
 </ul>
 </li>
@@ -1196,7 +1208,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <ul class="simple">
 <li><p>This method is widely used for option pricing, risk management, and investment strategy simulations.</p></li>
 <li><p>However, GBM has limitations, such as assuming a <em>constant drift and volatility</em>.</p></li>
-<li><p>This, may not hold true in real markets.</p></li>
+<li><p>These assumptions may not hold true in real markets.</p></li>
 <li><p>Therefore, it’s often used as a component of a broader analysis or modeling strategy.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1272,7 +1284,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/74856cfee601c37c2d5f71b0c49443b61ae5ffe0624c76130808c820bea6cafa.png" src="../../_images/74856cfee601c37c2d5f71b0c49443b61ae5ffe0624c76130808c820bea6cafa.png" />
+<img alt="../../_images/f56a3a95b1dc02c72e3552984a1e373a0554508fd5dc988a5a1fc1ca88ddbed2.png" src="../../_images/f56a3a95b1dc02c72e3552984a1e373a0554508fd5dc988a5a1fc1ca88ddbed2.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1317,7 +1329,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/674b8999e9c5554e85e4d0cee2b9afd186bac9d928d23f2854feb0f1d461f324.png" src="../../_images/674b8999e9c5554e85e4d0cee2b9afd186bac9d928d23f2854feb0f1d461f324.png" />
+<img alt="../../_images/f2847d82661e3bd542889fc58d0c3778e29d9aedea749cde6bea50585e8c2dd2.png" src="../../_images/f2847d82661e3bd542889fc58d0c3778e29d9aedea749cde6bea50585e8c2dd2.png" />
 </div>
 </div>
 </section>
@@ -1340,7 +1352,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li><p>Download and plot the historical closing prices of Tesla (<code class="docutils literal notranslate"><span class="pre">TSLA</span></code>) and Equinor (<code class="docutils literal notranslate"><span class="pre">EQNR</span></code>) for the years <code class="docutils literal notranslate"><span class="pre">2019-12-31</span></code>- <code class="docutils literal notranslate"><span class="pre">2022-12-31</span></code>.</p></li>
 <li><p>For each time series:</p>
 <ul>
-<li><p>Test if the time series look stationary</p></li>
+<li><p>Test if the time series look stationary.</p></li>
 <li><p>Compute the Hurst coefficient for both time series.</p></li>
 <li><p>Which stock would you like to invest into? Motivate your answer based on the tests and the value of <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
 <li><p>Simulate the stock prices using GBM.</p></li>
@@ -1435,16 +1447,16 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-the-adf-test">More on the ADF test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-testing">Mean Reversion Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-test">Mean reversion test</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-finance">Applications in finance</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-for-mean-reversion">Testing for mean reversion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-vs-stationarity">Mean reversion VS stationarity</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion-recap">Brownian Motion (recap)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hurst-exponent">Hurst Exponent</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hurst-exponent-in-finance">Interpretation of the Hurst Exponent in Finance:</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical Considerations:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hurst-exponent">Hurst exponent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hurst-exponent-in-finance">Interpretation of the Hurst exponent in finance:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical considerations:</a></li>
 </ul>
 </li>
 </ul>

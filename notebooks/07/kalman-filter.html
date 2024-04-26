@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -191,7 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources and acknowledgments</a></li>
 </ul>
 
     </div>
@@ -389,14 +389,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-kalman-filter">What is a Kalman Filter?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundations">Theoretical Foundations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundations">Theoretical foundations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-ingredients">What are the ingredients?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-noise">The role of noise</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-strategy">Update strategy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-assumptions">Fundamental Assumptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-linear-model">Assumption 1: Linear Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-assumptions">Fundamental assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-linearity">Assumption 1: linearity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-2-whiteness">Assumption 2: Whiteness</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-gaussian-noise">Assumption 3: Gaussian Noise</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-gaussian-noise">Assumption 3: Gaussian noise</a></li>
 </ul>
 </li>
 </ul>
@@ -445,11 +445,11 @@ document.write(`
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture will cover the following topics:</p>
 <ul class="simple">
-<li><p>Introduction to Kalman Filter</p></li>
-<li><p>Model components and assumptions</p></li>
-<li><p>The Kalman Filter algorithm</p></li>
-<li><p>Application to static and dynamic one-dimensional data</p></li>
-<li><p>Application to higher-dimensional data</p></li>
+<li><p>Introduction to Kalman Filter.</p></li>
+<li><p>Model components and assumptions.</p></li>
+<li><p>The Kalman Filter algorithm.</p></li>
+<li><p>Application to static and dynamic one-dimensional data.</p></li>
+<li><p>Application to higher-dimensional data.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -482,7 +482,7 @@ document.write(`
 </li>
 </ul>
 <section id="theoretical-foundations">
-<h3>Theoretical Foundations<a class="headerlink" href="#theoretical-foundations" title="Link to this heading">#</a></h3>
+<h3>Theoretical foundations<a class="headerlink" href="#theoretical-foundations" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Dynamic systems are systems that change over time.</p></li>
 <li><p>They are described by a set of equations that predict the future state of the system based on its current state.</p></li>
@@ -497,7 +497,7 @@ document.write(`
 <li><p>The true value of the variables we want to estimate.</p></li>
 <li><p>The state vector represents all the information needed to describe the current state of the system.</p></li>
 </ul>
-<p><strong>Observation Model</strong></p>
+<p><strong>Observation model</strong></p>
 <ul class="simple">
 <li><p>Relates the current state to the measurements or observations.</p></li>
 </ul>
@@ -524,7 +524,7 @@ document.write(`
 </section>
 <section id="update-strategy">
 <h3>Update strategy<a class="headerlink" href="#update-strategy" title="Link to this heading">#</a></h3>
-<p>KF is a recursive algorithm</p>
+<p>KF is a recursive algorithm:</p>
 <ul class="simple">
 <li><p>Uses information from previous time step to update the estimates.</p></li>
 <li><p>Does not keep in memory all the data acquired so far.</p></li>
@@ -538,15 +538,15 @@ document.write(`
 </ul>
 </section>
 <section id="fundamental-assumptions">
-<h3>Fundamental Assumptions<a class="headerlink" href="#fundamental-assumptions" title="Link to this heading">#</a></h3>
+<h3>Fundamental assumptions<a class="headerlink" href="#fundamental-assumptions" title="Link to this heading">#</a></h3>
 <p>The Kalman filter approach is based on three fundamental assumptions:</p>
 <ol class="arabic simple">
 <li><p>The system can be described or approximated by a linear model.</p></li>
 <li><p>All noise (from both the system and the measurements) is white.</p></li>
 <li><p>All noise is Gaussian.</p></li>
 </ol>
-<section id="assumption-1-linear-model">
-<h4>Assumption 1: Linear Model<a class="headerlink" href="#assumption-1-linear-model" title="Link to this heading">#</a></h4>
+<section id="assumption-1-linearity">
+<h4>Assumption 1: linearity<a class="headerlink" href="#assumption-1-linearity" title="Link to this heading">#</a></h4>
 <p>Each variable at the current time is a linear function of the variables at previous times.</p>
 <ul class="simple">
 <li><p>Many systems can be approximated this way.</p></li>
@@ -564,7 +564,7 @@ document.write(`
 </ul>
 </section>
 <section id="assumption-3-gaussian-noise">
-<h4>Assumption 3: Gaussian Noise<a class="headerlink" href="#assumption-3-gaussian-noise" title="Link to this heading">#</a></h4>
+<h4>Assumption 3: Gaussian noise<a class="headerlink" href="#assumption-3-gaussian-noise" title="Link to this heading">#</a></h4>
 <p>At any point in time, the probability density of the noise is a Gaussian.</p>
 <ul class="simple">
 <li><p>System and measurement noise are often a combination of many small sources of noise.</p></li>
@@ -647,8 +647,8 @@ x_{t-1} \\
 <h3>The KF algorithm<a class="headerlink" href="#the-kf-algorithm" title="Link to this heading">#</a></h3>
 <p>The KF is an interative procedure that consists of two steps:</p>
 <ul class="simple">
-<li><p><strong>Predict</strong> (Time Update)</p></li>
-<li><p><strong>Correct</strong> (Measurement Update)</p></li>
+<li><p><strong>Predict</strong> (Time update)</p></li>
+<li><p><strong>Correct</strong> (Measurement update)</p></li>
 </ul>
 <p>These two steps are used to update two quantities:</p>
 <ul class="simple">
@@ -659,8 +659,8 @@ x_{t-1} \\
 <p><strong>Covariance estimate</strong></p>
 <p>There are two sources of error in the estimate of the state of our system.</p>
 <ul class="simple">
-<li><p>The <em>a priori</em> estimate error <span class="math notranslate nohighlight">\(e^{-}_t = x_t - \hat{x}^{-}_t\)</span></p></li>
-<li><p>The <em>a posteriori</em> estimate error <span class="math notranslate nohighlight">\(e_t = x_t - \hat{x}_t\)</span></p></li>
+<li><p>The <em>prior</em> estimate error <span class="math notranslate nohighlight">\(e^{-}_t = x_t - \hat{x}^{-}_t\)</span>.</p></li>
+<li><p>The <em>posterior</em> estimate error <span class="math notranslate nohighlight">\(e_t = x_t - \hat{x}_t\)</span>.</p></li>
 </ul>
 <p>Where:</p>
 <ul class="simple">
@@ -669,8 +669,8 @@ x_{t-1} \\
 </ul>
 <p>Each type of error is associated with a covariance matrix, which reflects the amount of uncertainty in the state estimates.</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbb{E}[e^{-}_t e^{-T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>a priori</em> covariance estimate).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t = \mathbb{E}[e_t e^{T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>a posteriori</em> covariance estimate).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbb{E}[e^{-}_t e^{-T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>prior</em> covariance estimate).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t = \mathbb{E}[e_t e^{T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>posterior</em> covariance estimate).</p></li>
 <li><p>In our case, we have  <span class="math notranslate nohighlight">\(\mathbf{P}_t = \begin{bmatrix} p_{xx} &amp; p_{\dot x x} \\ p_{\dot x x} &amp; p_{\dot x \dot x} \end{bmatrix}\)</span> (for readability, the index <span class="math notranslate nohighlight">\(t\)</span> on the matrix elements is omitted):</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(p_{xx}\)</span> is the uncertainty about the position;</p></li>
@@ -683,7 +683,7 @@ x_{t-1} \\
 <section id="predict">
 <h4>Predict<a class="headerlink" href="#predict" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>The dynamics equations are responsible for projecting forward (in time) the current state and error covariance estimates to obtain the <em>a priori</em> estimate for the next time step.</p></li>
+<li><p>The dynamics equations are responsible for projecting forward (in time) the current state and error covariance estimates to obtain the <em>prior</em> estimate for the next time step.</p></li>
 <li><p>Such time update equations can also be thought of as <em>predictor equations</em>.</p></li>
 </ul>
 <p>State estimate update:</p>
@@ -726,7 +726,7 @@ x_{t-1} \\
 </ul>
 <img alt="../../_images/innovation.png" src="../../_images/innovation.png" />
 <p>The matrix <span class="math notranslate nohighlight">\(\mathbf{K} \in \mathbb{R}^{N \times M}\)</span> is chosen to be the <strong>gain</strong> that minimizes the posterior error covariance.</p>
-<p>Derivation (sketch)</p>
+<p>Derivation (sketch):</p>
 <ol class="arabic simple">
 <li><p>Define the posterior error  <span class="math notranslate nohighlight">\(e_t = x_t - \hat{x}_t\)</span>.</p></li>
 <li><p>Define the posterior error covariance <span class="math notranslate nohighlight">\(P_t = \mathbb{E}[e_t e^{T}_t]\)</span>.</p></li>
@@ -739,18 +739,20 @@ x_{t-1} \\
 <p>The previous derivation give us the following result:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{K}_t = \mathbf{P}^{-}_t \mathbf{H}^T (\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R})^{-1}= \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}}\]</div>
-<p>Back to our car example, we have</p>
+<p>Back to our car example, we have:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{K}_t = \frac{\begin{bmatrix} p^{-}_{xx} &amp; p^{-}_{\dot x x} \\ p^{-}_{\dot x x} &amp; p^{-}_{\dot x \dot x} \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix}}{\begin{bmatrix} 1 &amp; 0 \end{bmatrix} \begin{bmatrix} p^{-}_{xx} &amp; p^{-}_{\dot x x} \\ p^{-}_{\dot x x} &amp; p^{-}_{\dot x \dot x} \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} + \begin{bmatrix} r_{xx} \end{bmatrix}} = \frac{\begin{bmatrix} p^{-}_{xx} \\ p^{-}_{x \dot x} \end{bmatrix}}{p^{-}_{xx} + r_{xx}}\end{split}\]</div>
-<p>where, once again, the index <span class="math notranslate nohighlight">\(t\)</span> has been dropped from the elements of <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> for readability.</p>
+<p>Once again, the index <span class="math notranslate nohighlight">\(t\)</span> has been dropped from the elements of <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> for readability.</p>
 <p>The update equations for the position and speed become:</p>
 <ul class="simple">
 <li><p>Position: <span class="math notranslate nohighlight">\(\hat{x}_t = \hat{x}_t^{-} + \frac{p^{-}_{xx}}{p^{-}_{xx} + r_{xx}} \Delta_t\)</span></p></li>
 <li><p>Speed: <span class="math notranslate nohighlight">\(\hat{\dot x}_t = \hat{\dot x}_t^{-} + \frac{p^{-}_{x \dot x}}{p^{-}_{xx} + r_{xx}} \Delta_t\)</span></p></li>
 </ul>
-<p>One key observation is that the speed is updated even if we do not have a direct measure for it in our measurement <span class="math notranslate nohighlight">\(\boldsymbol{z}_t\)</span>.</p>
-<p>The update is possible thanks to the term <span class="math notranslate nohighlight">\(p^{-}_{x \dot x}\)</span> in <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> that relates the position (and its measurement) to the velocity.</p>
-<p>This showcases one of the main strengths of KF: it can handle <em>partial observations</em>.</p>
+<ul class="simple">
+<li><p>One key observation is that the speed is updated even if we do not have a direct measure for it in our measurement <span class="math notranslate nohighlight">\(\boldsymbol{z}_t\)</span>.</p></li>
+<li><p>The update is possible thanks to the term <span class="math notranslate nohighlight">\(p^{-}_{x \dot x}\)</span> in <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> that relates the position (and its measurement) to the velocity.</p></li>
+<li><p>This showcases one of the main strengths of KF: it can handle <em>partial observations</em>.</p></li>
+</ul>
 <p>Let’s consider the two extreme cases for the values of <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span></p>
 <ol class="arabic">
 <li><p>The measurement error covariance <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> approaches zero, i.e., there is no noise in the measurements.</p>
@@ -780,16 +782,20 @@ x_{t-1} \\
 </li>
 </ol>
 <img alt="../../_images/extreme2.png" src="../../_images/extreme2.png" />
-<p>The last thing that remains to update is the posterior covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}_t\)</span> to be used in the next predict step.</p>
-<p>The formula is:</p>
+<ul class="simple">
+<li><p>The last thing that remains to update is the posterior covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}_t\)</span> to be used in the next predict step.</p></li>
+<li><p>The formula is:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\mathbf{P}_t = (\mathbf{I} - \mathbf{K}_t \mathbf{H})\mathbf{P}^{-}_t\]</div>
-<p>Let’s look again at the two extreme cases:</p>
+<ul class="simple">
+<li><p>Let’s look again at the two extreme cases:</p></li>
+</ul>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t = \mathbf{H}^{-1} \rightarrow \mathbf{P}_t = 0\)</span></p>
 <ul>
 <li><p>This is the case where the measurements are completely reliable.</p></li>
-<li><p>The only source of uncertainty at the next Predict step will be the one of the model: <span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbf{A}\mathbf{P}_t\mathbf{A}^T + \mathbf{Q} = \mathbf{Q}\)</span></p></li>
+<li><p>The only source of uncertainty at the next Predict step will be the one of the model: <span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbf{A}\mathbf{P}_t\mathbf{A}^T + \mathbf{Q} = \mathbf{Q}\)</span>.</p></li>
 </ul>
 </li>
 </ul>
@@ -850,16 +856,16 @@ x_{t-1} \\
 <h3>The algorithm<a class="headerlink" href="#the-algorithm" title="Link to this heading">#</a></h3>
 <p>This is the workflow of the algorithm we are going to implement:</p>
 <ol class="arabic simple">
-<li><p>Make an initial estimate of your state vector and covariance matrix</p></li>
-<li><p>Predict the state and covariance for the next time step</p></li>
-<li><p>Computer the Kalman gain</p></li>
-<li><p>Make a measurement</p></li>
-<li><p>Update estimates of state and covariance</p></li>
-<li><p>Repeat from step 2</p></li>
+<li><p>Make an initial estimate of your state vector and covariance matrix.</p></li>
+<li><p>Predict the state and covariance for the next time step.</p></li>
+<li><p>Computer the Kalman gain.</p></li>
+<li><p>Make a measurement.</p></li>
+<li><p>Update estimates of state and covariance.</p></li>
+<li><p>Repeat from step 2.</p></li>
 </ol>
 <p>For one-dimensional examples, there are a couple of simplifications:</p>
 <ul class="simple">
-<li><p>the state vector is a single number (a scalar)</p></li>
+<li><p>the state vector is a single number (a scalar).</p></li>
 <li><p>the covariance matrix reduces to the variance (also a scalar).</p></li>
 </ul>
 <p>Therefore, only normal multiplication (as opposed to matrix multiplication) is involved.</p>
@@ -870,10 +876,10 @@ x_{t-1} \\
 <li><p>Let’s start by considering a simple example: determine the position of a stationary car.</p></li>
 <li><p>We’ll assume that all we are interested in is a one-dimensional value, such as the distance along a road from a landmark.</p></li>
 <li><p>We are going to try to predict the true position based on some noisy measurements of the distance.</p></li>
-<li><p>Since we are going to generate the noisy measurements by hand and we will know the true position and we can see how well our algorithm performs.</p></li>
+<li><p>Since we are going to generate the noisy measurements by hand, we will know the true position and we can see how well our algorithm performs.</p></li>
 </ul>
 <ul class="simple">
-<li><p>We assume the measurements to follow this distribution</p></li>
+<li><p>We assume the measurements to follow this distribution:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[z_t = \mu + v_t \;\; \text{with}\;\; v_t \sim \mathcal{N}(0, R)\]</div>
@@ -903,11 +909,11 @@ x_{t-1} \\
 </div>
 </div>
 <ul class="simple">
-<li><p>As discussed previously, since the actual measurement noise covariance is unknown, we have to provide an estimate</p></li>
+<li><p>As discussed previously, since the actual measurement noise covariance is unknown, we have to provide an estimate.</p></li>
 <li><p>This is usually feasible as we can estimate <span class="math notranslate nohighlight">\(R\)</span> from the available measurements.</p></li>
 <li><p>In addition, we need to estimate the process noise covariance <span class="math notranslate nohighlight">\(Q\)</span>, which is usually harder to guess.</p></li>
 <li><p>Remember that <span class="math notranslate nohighlight">\(Q\)</span> represents the noise of the model used to describe the actual position.</p></li>
-<li><p>In our case</p></li>
+<li><p>In our case:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[x_t = x_0 + w_t \;\; \text{with}\;\; w_t \sim \mathcal{N}(0,Q)\]</div>
@@ -917,8 +923,9 @@ x_{t-1} \\
 <li><p>Therefore, since we usually don’t <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, we have to make reasonable estimates.</p></li>
 </ul>
 <ul class="simple">
-<li><p>In this example, we know the actual variance for the measurements (since we are generating the measurements ourselves), so we can see the effect of making a good or a bad estimate for this parameter.</p></li>
-<li><p>Also, we are going to choose the actual position of our car, so we can see how quickly the KF converges to the true algorithm.</p></li>
+<li><p>In this example, we know the actual variance for the measurements (since we are generating the measurements ourselves).</p></li>
+<li><p>We can see the effect of making a good or a bad estimate for this parameter.</p></li>
+<li><p>Also, we choose the actual position of our car, so we can see how quickly the KF converges to the true value.</p></li>
 <li><p>Finally, we need to guess initial values for the initial position of the car and the variance in this initial estimate.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -931,7 +938,7 @@ x_{t-1} \\
 </div>
 </div>
 <ul class="simple">
-<li><p>Create a function that computes the estimated position and associated error using the Kalman filter.</p></li>
+<li><p>Create a function that computes the estimated position and associated error using the KF.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -952,7 +959,7 @@ x_{t-1} \\
 </div>
 </div>
 <ul class="simple">
-<li><p>Apply the filter to the 1D static measurements</p></li>
+<li><p>Apply the filter to the 1D static measurements.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1021,7 +1028,9 @@ x_{t-1} \\
 <img alt="../../_images/b17ed76e1c8b3d92bc517d22aa0ed5a7eee13a2c7cf1dbec765f60efb8c85128.png" src="../../_images/b17ed76e1c8b3d92bc517d22aa0ed5a7eee13a2c7cf1dbec765f60efb8c85128.png" />
 </div>
 </div>
-<p>We see that for the parameters we’ve chosen, the filter converges to the true value quickly and the noise is filtered out.</p>
+<ul class="simple">
+<li><p>We see that for the parameters we’ve chosen, the filter converges to the true value quickly and the noise is filtered out.</p></li>
+</ul>
 <p><strong>Question:</strong> How much the KF estimate fluctuates around the true value?</p>
 <p><strong>Answer:</strong> The fluctuations around the true value are approximately the size of the standard deviation of the estimate, which is <span class="math notranslate nohighlight">\(\sqrt{P_t}\)</span>.</p>
 </section>
@@ -1114,8 +1123,10 @@ x_{t-1} \\
 </div>
 <p><strong>Question:</strong> Neither the measurements nor the KF estimate are close to the true value. Why?</p>
 <p><strong>Answer:</strong> The measurements are not close to the true value because the variance of the measurements error <span class="math notranslate nohighlight">\(R\)</span> is large compared to the velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p>
-<p>The KF estimate is tracking the measurements, so it won’t be close to the true value.</p>
-<p>In addition, we do not have measurements for the instant velocity.</p>
+<ul class="simple">
+<li><p>The KF estimate is tracking the measurements, so it won’t be close to the true value.</p></li>
+<li><p>In addition, we do not have measurements for the instant velocity.</p></li>
+</ul>
 <ul class="simple">
 <li><p>With dynamic models, there are more parameters to tune, so it can be more challenging to reach convergence.</p></li>
 <li><p>If we had a way to measure velocity, we could use that information too.</p></li>
@@ -1142,7 +1153,7 @@ x_{t-1} \\
 <li><p>The covariance of the measurements noise <span class="math notranslate nohighlight">\(\mathbf{R} = \begin{bmatrix}  r &amp; 0 \\ 0 &amp; r  \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">measurementNoiseCov</span></code> in OpenCV).</p></li>
 </ul>
 <p>For simplicity, we use diagonal covariances in this example.</p>
-<p>The constructor has has the following sintax</p>
+<p>The constructor has has the following sintax:</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">KalmanFilter(state_size,</span> <span class="pre">measurements_size,</span> <span class="pre">control_size)</span></code></p>
 </div></blockquote>
@@ -1243,7 +1254,7 @@ x_{t-1} \\
 </div>
 </div>
 <ul class="simple">
-<li><p>We are now ready to apply the Kalman Filter.</p></li>
+<li><p>We are now ready to apply the KF.</p></li>
 <li><p>In the OpenCV implementation of the KF there is no initialization options.</p></li>
 <li><p>Both the state vector <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> and the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> are always initialized to zero.</p></li>
 </ul>
@@ -1270,7 +1281,7 @@ x_{t-1} \\
 </div>
 </div>
 </div>
-<p>Now plot the data and the KF estimate</p>
+<p>Now plot the data and the KF estimate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_est</span><span class="p">,</span> <span class="n">y_est</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">KF_estimate_xy</span><span class="p">)</span>
@@ -1302,7 +1313,7 @@ x_{t-1} \\
 <ol class="arabic simple">
 <li><p>What is the Kalman Filter</p></li>
 <li><p>The recursive formulation used to update the predictions.</p></li>
-<li><p>The importance of tuning the parameters of the Kalman Filter</p></li>
+<li><p>The importance of tuning the parameters of the Kalman Filter.</p></li>
 <li><p>How to apply the Kalman Filter in various situations.</p></li>
 </ol>
 </section>
@@ -1410,14 +1421,14 @@ Change the parameters of the algorithm until you find some combinations that ach
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-kalman-filter">What is a Kalman Filter?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundations">Theoretical Foundations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundations">Theoretical foundations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-ingredients">What are the ingredients?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-noise">The role of noise</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-strategy">Update strategy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-assumptions">Fundamental Assumptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-linear-model">Assumption 1: Linear Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-assumptions">Fundamental assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-linearity">Assumption 1: linearity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-2-whiteness">Assumption 2: Whiteness</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-gaussian-noise">Assumption 3: Gaussian Noise</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-gaussian-noise">Assumption 3: Gaussian noise</a></li>
 </ul>
 </li>
 </ul>
