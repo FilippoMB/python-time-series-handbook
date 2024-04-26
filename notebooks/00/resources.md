@@ -1,4 +1,4 @@
-# Resources
+# Resources and acknowledgments
 
 The following resources served as inspiration and provided very useful content to write some of the sections of the book. 
 
@@ -19,3 +19,10 @@ The following resources served as inspiration and provided very useful content t
 - Introduction to Taken's Embedding [[link](https://www.kaggle.com/code/tigurius/introduction-to-taken-s-embedding/notebook)].
 - An introduction to Dynamic Time Warping [[link](https://rtavenar.github.io/blog/dtw.html)].
 - An intuitive approach to DTW — Dynamic Time Warping [[link](https://towardsdatascience.com/an-intuitive-approach-to-dtw-dynamic-time-warping-f660ccb77ff4)].
+
+## Acknowledgments
+
+I whish to thank:
+
+- [Simone Scardapane](https://www.sscardapane.it/) for spotting many typos, giving feedback, and suggestions.
+- Jonas Berg Hansen for helping preparing the exercises.
