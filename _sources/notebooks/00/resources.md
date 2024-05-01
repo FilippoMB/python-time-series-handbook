@@ -22,7 +22,7 @@ The following resources served as inspiration and provided very useful content t
 
 ## Acknowledgments
 
-I whish to thank:
+Thanks to:
 
 - [Simone Scardapane](https://www.sscardapane.it/) for spotting many typos, giving feedback, and suggestions.
-- Jonas Berg Hansen for helping preparing the exercises.
+- Jonas Berg Hansen for giving feedback on the exercises.

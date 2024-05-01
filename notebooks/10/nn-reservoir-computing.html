@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -191,7 +191,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Neural networks and Reservoir Computing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources and acknowledgments</a></li>
 </ul>
 
     </div>
@@ -398,12 +398,12 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural networks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron">Multi-Layer Perceptron</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-example-of-an-mlp">Simple Example of an MLP</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-simple-mlp">Example: a simple MLP</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp-for-time-series-forecasting">MLP for time series forecasting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-example">Python example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windowed-approaches-drawback">Windowed approaches drawback</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windowed-approaches-drawbacks">Windowed approaches drawbacks</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-neural-networks">Recurrent Neural Networks</a><ul class="nav section-nav flex-column">
@@ -426,7 +426,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-a-linear-readout">Fit a linear readout</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-the-dimensionality-of-the-reservoir-states">Reducing the dimensionality of the Reservoir states</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-pca">Principal Component Analysis (PCA)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-the-dimensionality-of-the-actual-reservoir-states">Reducing the dimensionality of the actual Reservoir states</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Reducing the dimensionality of the Reservoir states</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-a-gbrt-readout">Fit a GBRT readout</a></li>
@@ -456,11 +456,11 @@ document.write(`
 <img alt="../../_images/cover9.png" src="../../_images/cover9.png" />
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>In this lecture we will cover the following topics.</p>
+<p>In this lecture we will cover the following topics:</p>
 <ul class="simple">
 <li><p>Windowed approaches and nonlinear models for time series forecasting.</p></li>
 <li><p>Neural networks and the Multi-Layer Perceptron.</p></li>
-<li><p>A brief overview of Recurrent Neural Networks: advantages and difficulties.</p></li>
+<li><p>A brief overview of Recurrent Neural Networks.</p></li>
 <li><p>The ESN, a randomized RNN from the family of Reservoir Computing.</p></li>
 <li><p>An introduction to dimensionality reduction with Principal Component Analysis.</p></li>
 <li><p>Examples of forecasting with MLP and ESN on real-world electricity data.</p></li>
@@ -519,7 +519,11 @@ document.write(`
 <section id="limitation-of-linear-models">
 <h3>Limitation of linear models<a class="headerlink" href="#limitation-of-linear-models" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Linear models fail in capturing nonlinear relationships among the variables.</p></li>
+<li><p>Linear models are widely used for their simplicity and interpretiveness.</p></li>
+<li><p>However, they assume a constant relationship between input and target variables.</p></li>
+<li><p>As such, they cannot capture these nonlinearities and interactions effectively.</p></li>
+</ul>
+<ul class="simple">
 <li><p>Consider the following examples:</p>
 <ol class="arabic simple">
 <li><p>Compute the <em>position</em> <span class="math notranslate nohighlight">\(y\)</span> of a robotic arm given the positions <span class="math notranslate nohighlight">\(x_1, x_2, \dots\)</span> of the joints.</p></li>
@@ -534,14 +538,8 @@ document.write(`
 <section id="example-forecasting-electricity-demand">
 <h4>Example: forecasting electricity demand<a class="headerlink" href="#example-forecasting-electricity-demand" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Time series forecasting involves predicting future values based on previously observed values.</p></li>
-<li><p>While linear models are widely used for their simplicity and interpretiveness.</p></li>
-<li><p>However, they assume a constant relationship between input and target variables.</p></li>
-<li><p>As such, they cannot capture these nonlinearities and interactions effectively.</p></li>
-<li><p>A classic example is the forecasting of electricity demand.</p></li>
-</ul>
-<ul class="simple">
-<li><p>The electricity demand is often governed by complex and nonlinear interactions with other factors.</p></li>
+<li><p>This is a classic example where linear models fail.</p></li>
+<li><p>Electricity demand is often governed by complex and nonlinear interactions with other factors.</p></li>
 </ul>
 <p><strong>Temperature and Demand</strong></p>
 <ul class="simple">
@@ -562,11 +560,14 @@ document.write(`
 </section>
 <section id="advantages-of-nonlinear-models">
 <h3>Advantages of Nonlinear Models<a class="headerlink" href="#advantages-of-nonlinear-models" title="Link to this heading">#</a></h3>
-<p>Nonlinear models, such as neural networks, SVM, tree-based methods, etc…, can handle complex dependencies in the data. For example:</p>
 <ul class="simple">
-<li><p>They can model the nonlinear relationships between demand and factors like temperature, capturing the U-shaped curve accurately.</p></li>
-<li><p>They can take into account the interactions between different variables, such as the combined effect of time, holidays, and temperature on demand.</p></li>
-<li><p>They can adapt to various patterns and changes in trends over time, making them more robust in dynamic environments.</p></li>
+<li><p>Nonlinear models, such as neural networks, SVM, tree-based methods, etc…, can:</p>
+<ul>
+<li><p>model the nonlinear relationships between demand and factors like temperature, capturing the U-shaped curve accurately,</p></li>
+<li><p>take into account the interactions between different variables, such as the combined effect of time, holidays, and temperature on demand,</p></li>
+<li><p>adapt to various patterns and changes in trends over time, making them more robust in dynamic environments.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 </section>
@@ -574,7 +575,7 @@ document.write(`
 <section id="neural-networks">
 <h2>Neural networks<a class="headerlink" href="#neural-networks" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Powerful class of nonlinear models that are <em>universal approximators</em>, i.e., they can learn to approximate any function.</p></li>
+<li><p>Neural Nets are powerful nonlinear models that are <em>universal approximators</em>, i.e., they can learn to approximate any function.</p></li>
 <li><p>Basic idea:</p>
 <ol class="arabic simple">
 <li><p>Map the data into a high dimensional space (bless of dimensionality).</p></li>
@@ -619,7 +620,9 @@ document.write(`
 </div>
 </details>
 </div>
-<p>This figure illustrates how mapping the data from a lower dimension (2D) to a higher dimension (3D) and applying a nonlinear function can make data linearly separable by an hyperplane.</p>
+<ul class="simple">
+<li><p>This figure illustrates how mapping the data from a lower dimension (2D) to a higher dimension (3D) and applying a nonlinear function makes data linearly separable by an hyperplane.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_3D</span><span class="p">()</span>
@@ -627,7 +630,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/75f6793c29171fb63045ccdd4a415c299f796144ba5ae5e855b147c8572669b2.png" src="../../_images/75f6793c29171fb63045ccdd4a415c299f796144ba5ae5e855b147c8572669b2.png" />
+<img alt="../../_images/aacc22ec39ea0e45d665ca2a9ed7f71cc010e4345ffcdcfb69bac4c71db2e7a7.png" src="../../_images/aacc22ec39ea0e45d665ca2a9ed7f71cc010e4345ffcdcfb69bac4c71db2e7a7.png" />
 </div>
 </div>
 <section id="multi-layer-perceptron">
@@ -650,26 +653,26 @@ document.write(`
 <li><p>The weights are stored in matrices <span class="math notranslate nohighlight">\(W\)</span> and are the trainable parameters of the model.</p></li>
 <li><p>The MLP can learn complex mappings from inputs to outputs to perform a wide range of data modeling and prediction tasks.</p></li>
 </ul>
-<section id="simple-example-of-an-mlp">
-<h4>Simple Example of an MLP<a class="headerlink" href="#simple-example-of-an-mlp" title="Link to this heading">#</a></h4>
+<section id="example-a-simple-mlp">
+<h4>Example: a simple MLP<a class="headerlink" href="#example-a-simple-mlp" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Let’s consider a concrete example of an MLP with one input layer, two hidden layers (with <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span> units respectively), and one output layer.</p></li>
 <li><p>The input vectors are of size <span class="math notranslate nohighlight">\(d_\text{in}\)</span>, and the output vectors are of size <span class="math notranslate nohighlight">\(d_\text{out}\)</span>.</p></li>
 </ul>
 <img alt="../../_images/mlp.png" src="../../_images/mlp.png" />
-<p><strong>Input Layer</strong></p>
+<p><strong>Input layer</strong></p>
 <ul class="simple">
 <li><p>The size of the input layer corresponds to the size of the input vectors, <span class="math notranslate nohighlight">\(d_\text{in}\)</span>.</p></li>
-<li><p>This layer simply passes the input to the first hidden layer without applying any transformations.</p></li>
+<li><p>This layer simply passes the input to the first hidden layer without applying any transformation.</p></li>
 </ul>
-<p><strong>First Hidden Layer</strong></p>
+<p><strong>First hidden layer</strong></p>
 <ul class="simple">
 <li><p>This layer has <span class="math notranslate nohighlight">\(h_1\)</span> nodes.</p></li>
 <li><p>Each node connects to all the <span class="math notranslate nohighlight">\(d_{\text{in}}\)</span> inputs.</p></li>
 <li><p>It applies a weight matrix <span class="math notranslate nohighlight">\(W_\text{in} \in \mathbb{R}^{d_\text{in} \times h_1}\)</span> that transforms the input from vectors in <span class="math notranslate nohighlight">\(\mathbb{R}^{d_\text{in}}\)</span> to vectors in <span class="math notranslate nohighlight">\(\mathbb{R}^{h_1}\)</span>.</p></li>
-<li><p>Then, applies a nonlinear activation function <span class="math notranslate nohighlight">\(\sigma\)</span>, and outputs <span class="math notranslate nohighlight">\(h_1\)</span> intermediate results.</p></li>
+<li><p>Then, it applies a nonlinear activation function <span class="math notranslate nohighlight">\(\sigma\)</span>, and outputs <span class="math notranslate nohighlight">\(h_1\)</span> intermediate results.</p></li>
 </ul>
-<p><strong>Second Hidden Layer</strong></p>
+<p><strong>Second hidden layer</strong></p>
 <ul class="simple">
 <li><p>This layer has <span class="math notranslate nohighlight">\(h_2\)</span> nodes.</p></li>
 <li><p>It takes the <span class="math notranslate nohighlight">\(h_1\)</span> outputs from the first hidden layer.</p></li>
@@ -677,7 +680,7 @@ document.write(`
 </ul>
 <p><strong>Output Layer</strong></p>
 <ul class="simple">
-<li><p>Finally, the output layer has <span class="math notranslate nohighlight">\(d_\text{out}\)</span> units.</p></li>
+<li><p>The output layer has <span class="math notranslate nohighlight">\(d_\text{out}\)</span> units.</p></li>
 <li><p>It takes the <span class="math notranslate nohighlight">\(h_2\)</span> outputs from the second hidden layer, applies weights and possibly a different activation function that depends on the task (usually, softmax for classification or no activation for regression).</p></li>
 <li><p>The final output vector is of size <span class="math notranslate nohighlight">\(d_\text{out}\)</span>.</p></li>
 </ul>
@@ -686,10 +689,10 @@ document.write(`
 <section id="mlp-for-time-series-forecasting">
 <h3>MLP for time series forecasting<a class="headerlink" href="#mlp-for-time-series-forecasting" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The MLP can be used as a windowed technique to perform time series forecasting</p></li>
-<li><p>The sequence of past values <span class="math notranslate nohighlight">\(x(t-P), \dots, x(t-1), x(t)\)</span> will represent our input vector (<span class="math notranslate nohighlight">\(d_\text{in} = P\)</span>)</p></li>
+<li><p>The MLP can be used as a windowed technique to perform time series forecasting.</p></li>
+<li><p>The sequence of past values <span class="math notranslate nohighlight">\(x(t-P), \dots, x(t-1), x(t)\)</span> will represent our input vector (<span class="math notranslate nohighlight">\(d_\text{in} = P\)</span>).</p></li>
 <li><p>The future value <span class="math notranslate nohighlight">\(x(t+\tau)\)</span> will be the output that the model will learn to predict (<span class="math notranslate nohighlight">\(d_\text{out} = 1\)</span>).</p></li>
-<li><p>We can also train the MLP to predict a sequence of <span class="math notranslate nohighlight">\(d_\text{out} = H\)</span> future predictions, e.g., <span class="math notranslate nohighlight">\(x(t+\tau), x(t+\tau+1) \dots, x(t+\tau+H)\)</span>.</p></li>
+<li><p>We can also train the MLP to predict a sequence of <span class="math notranslate nohighlight">\(d_\text{out} = H\)</span> future predictions, e.g., <span class="math notranslate nohighlight">\(x(t+\tau), x(t+\tau+1), \dots, x(t+\tau+H)\)</span>.</p></li>
 </ul>
 <img alt="../../_images/mlp_windowed.png" src="../../_images/mlp_windowed.png" />
 <ul class="simple">
@@ -713,10 +716,10 @@ document.write(`
 <section id="python-example">
 <h3>Python example<a class="headerlink" href="#python-example" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>In this example we will consider a time series of electricity consumption registered on one of the backbones of the energy distribution network of the city of Rome.</p></li>
+<li><p>In this example we will consider a time series of electricity consumption registered on a backbone of the energy distribution network of Rome.</p></li>
 <li><p>The original time series has 10min resolution.</p></li>
 <li><p>For this example, we will resample it to 1h resolution as it will become more smooth (and easier to predict).</p></li>
-<li><p>We will also consider only the first <code class="docutils literal notranslate"><span class="pre">3000</span></code> samples, to train our models faster.</p></li>
+<li><p>To train our models faster, we will consider only the first <code class="docutils literal notranslate"><span class="pre">3000</span></code> samples.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -755,9 +758,9 @@ Data shape:
 </div>
 <ul class="simple">
 <li><p>Next, we define the function to create input-output pairs.</p></li>
-<li><p>For example, we can create inputs that have window size <span class="math notranslate nohighlight">\(P=12\)</span> by specifying <code class="docutils literal notranslate"><span class="pre">window_size=12</span></code>.</p></li>
+<li><p>For example, we create as input windows of size <span class="math notranslate nohighlight">\(P=12\)</span> by specifying <code class="docutils literal notranslate"><span class="pre">window_size=12</span></code>.</p></li>
 <li><p>Similarly, we create as ouput windows of size <code class="docutils literal notranslate"><span class="pre">forecast_horizon=12</span></code>.</p></li>
-<li><p>If we are interested in predicting only one sample, e.g., <span class="math notranslate nohighlight">\(\tau=12\)</span> and <span class="math notranslate nohighlight">\(H=1\)</span>, we simply take the last element of the forecast window.</p></li>
+<li><p>If we are interested in predicting only one sample, e.g., <span class="math notranslate nohighlight">\(\tau=12\)</span> and <span class="math notranslate nohighlight">\(H=1\)</span>, we simply take the last element of the output window.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -781,8 +784,8 @@ Data shape:
 </div>
 <ul class="simple">
 <li><p>We can see how the input-output pairs look like in the following plot.</p></li>
-<li><p>The blue dots will represent our input <span class="math notranslate nohighlight">\(x_{t-P}, \dots x_{t-1}, x_t\)</span> with <span class="math notranslate nohighlight">\(P=12\)</span>.</p></li>
-<li><p>The orange dot our output <span class="math notranslate nohighlight">\(x_{t+\tau}\)</span> with <span class="math notranslate nohighlight">\(\tau=12\)</span>.</p></li>
+<li><p>The blue dots will represent the input <span class="math notranslate nohighlight">\(x_{t-P}, \dots x_{t-1}, x_t\)</span> with <span class="math notranslate nohighlight">\(P=12\)</span>.</p></li>
+<li><p>The orange dot is the output <span class="math notranslate nohighlight">\(x_{t+\tau}\)</span> with <span class="math notranslate nohighlight">\(\tau=12\)</span>.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -825,9 +828,10 @@ Data shape:
 </div>
 <ul class="simple">
 <li><p>Most neural nets, including the MLP, want the data to be normalized in a small range.</p></li>
-<li><p>We can obtain that by applying the <code class="docutils literal notranslate"><span class="pre">StandardScaler()</span></code> from the sklearn library.</p></li>
+<li><p>We can do that by applying the <code class="docutils literal notranslate"><span class="pre">StandardScaler()</span></code> from the sklearn library.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scaler.fit_transform(X_train)</span></code> will subtract from <code class="docutils literal notranslate"><span class="pre">X_train</span></code> its mean and divide by its variance.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">scaler.transform(X_test)</span></code> will subtract from <code class="docutils literal notranslate"><span class="pre">X_test</span></code> the mean of <code class="docutils literal notranslate"><span class="pre">X_train</span></code> and divide by the variance of <code class="docutils literal notranslate"><span class="pre">X_train</span></code>. Why?</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">scaler.transform(X_test)</span></code> will subtract from <code class="docutils literal notranslate"><span class="pre">X_test</span></code> the mean of <code class="docutils literal notranslate"><span class="pre">X_train</span></code> and divide by the variance of <code class="docutils literal notranslate"><span class="pre">X_train</span></code>.</p></li>
+<li><p>Why not normalizing with the test set statistics?</p>
 <ul>
 <li><p>Because we do not have access to the test data beforehand, so we cannot compute statistics such as its mean and variance.</p></li>
 </ul>
@@ -845,9 +849,9 @@ Data shape:
 </div>
 <ul class="simple">
 <li><p>Next, we define the MLP.</p></li>
-<li><p>We specify the size of the hidden layers as <span class="math notranslate nohighlight">\(h_1=16\)</span> and <span class="math notranslate nohighlight">\(h_2=8\)</span>. Larger numbers increase the model capacity, but can lead to overfit.</p></li>
+<li><p>We specify the size of the hidden layers as <span class="math notranslate nohighlight">\(h_1=16\)</span> and <span class="math notranslate nohighlight">\(h_2=8\)</span>. Using larger values increases the model capacity, but can lead to overfit.</p></li>
 <li><p>As the activation function we use a <a class="reference external" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>.</p></li>
-<li><p>As the algorithms to compute the gradients and update the values of the weights <span class="math notranslate nohighlight">\(W\)</span> we use <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Adam">Adam</a>.</p></li>
+<li><p>As the algorithms to compute the gradients and update the values of the parameters <span class="math notranslate nohighlight">\(W\)</span> we use <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Adam">Adam</a>.</p></li>
 <li><p>Finally, we train the model for <code class="docutils literal notranslate"><span class="pre">1000</span></code> iterations.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1268,7 +1272,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <ul class="simple">
 <li><p>Once the model is trained, we can compute the prediction on the test set.</p></li>
 <li><p>We can also compute predictions beyond the whole dataset that we have available.</p></li>
-<li><p>In the latter case, we do not have a way to check how well the model is doing since we do not have the true data available.</p></li>
+<li><p>In this case, we do not have a way to check how well the model is doing since we do not have the actual data available.</p></li>
 <li><p>However, it reflects a realistic forecasting scenario where we, indeed, do not know the future.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1286,14 +1290,14 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 36.73
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 36.09
 </pre></div>
 </div>
 </div>
 </div>
 <ul class="simple">
-<li><p>To check the performance of the model we can compute the MSE on the prediction of the test set.</p></li>
-<li><p>We can also visualize the prediction against the real data</p></li>
+<li><p>To check the performance of the model we can compute the MSE on the predictions of the test set.</p></li>
+<li><p>We can also visualize the predictions against the real data.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1313,10 +1317,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 28.13
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 28.74
 </pre></div>
 </div>
-<img alt="../../_images/3c5b1a123d6bc47c6b0345bab9f8925ae50468f1ff451d9ceda5dcaeea150d0e.png" src="../../_images/3c5b1a123d6bc47c6b0345bab9f8925ae50468f1ff451d9ceda5dcaeea150d0e.png" />
+<img alt="../../_images/6229f110f5fee5aa72092a827bff0d6b3d0ef0488cdde36b33da9792ecae9a9c.png" src="../../_images/6229f110f5fee5aa72092a827bff0d6b3d0ef0488cdde36b33da9792ecae9a9c.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1350,8 +1354,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <li><p>Any reasonable forecasting method must beat this baseline.</p></li>
 </ul>
 </section>
-<section id="windowed-approaches-drawback">
-<h3>Windowed approaches drawback<a class="headerlink" href="#windowed-approaches-drawback" title="Link to this heading">#</a></h3>
+<section id="windowed-approaches-drawbacks">
+<h3>Windowed approaches drawbacks<a class="headerlink" href="#windowed-approaches-drawbacks" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>What is the optimal value of <span class="math notranslate nohighlight">\(P\)</span>?</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(P\)</span> is fixed, how can we deal with different temporal dependencies?</p></li>
@@ -1387,7 +1391,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <ul class="simple">
 <li><p>BPTT is the algorithm used for training RNNs.</p></li>
 <li><p>It involves unfolding the RNN through time to obtain a standard feed-forward neural network (like an MLP).</p></li>
-<li><p>At this point, one can apply the standard backpropagation algorithm.</p></li>
+<li><p>After unfolding, one can apply the standard backpropagation algorithm.</p></li>
 <li><p>BPTT computes gradients for each parameter across <em>all</em> time steps of the input sequence.</p></li>
 </ul>
 <img alt="../../_images/bptt.png" src="../../_images/bptt.png" />
@@ -1413,7 +1417,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <ul class="simple">
 <li><p>RC is a familily of randomized RNNs, popularized in machine learning by Echo State Networks (ESNs).</p></li>
 <li><p>RC and ESNs are terms ofen used interchangeably.</p></li>
-<li><p>There are two main differences that separate an ESN from an RNN.</p></li>
+<li><p>There are two main differences that separate an ESN from an RNN:</p></li>
 </ul>
 <img alt="../../_images/Reservoir.gif" src="../../_images/Reservoir.gif" />
 <ul class="simple">
@@ -1430,7 +1434,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 \[\mathbf{h}_t = \sigma \left(\mathbf{W}_i x(t)+\mathbf{W}_h \mathbf{h}(t-1)\right)\]</div>
 <ul class="simple">
 <li><p>for each time step <span class="math notranslate nohighlight">\(t=1,2, \dots, T\)</span> of the input sequence.</p></li>
-<li><p>The nonlinearity <span class="math notranslate nohighlight">\(\sigma\)</span> is usually an hyperbolic tangent <span class="math notranslate nohighlight">\(\texttt{tanh}\)</span>.</p></li>
+<li><p>The nonlinearity <span class="math notranslate nohighlight">\(\sigma\)</span> is usually an hyperbolic tangent (<span class="math notranslate nohighlight">\(\texttt{tanh}\)</span>).</p></li>
 </ul>
 </li>
 </ol>
@@ -1474,24 +1478,24 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <ul class="simple">
 <li><p>The Reservoir extracts a rich pool dynamical features from the time series.</p></li>
 <li><p>These are embedded into the high-dimensional Reservoir state <span class="math notranslate nohighlight">\(\mathbf{h}(t)\)</span>.</p></li>
-<li><p>Contrary to a fixed window, the state <span class="math notranslate nohighlight">\(\mathbf{h}(t)\)</span> maintains a memory of all the previous inputs, back to the origin of the series <span class="math notranslate nohighlight">\(x(0)\)</span>.</p></li>
-<li><p>Some of the features are relevant for the task at hand, while some are not.</p></li>
-<li><p>The task of the readout is to select just those features that relevant for the task.</p></li>
+<li><p>Contrary to a fixed window, <span class="math notranslate nohighlight">\(\mathbf{h}(t)\)</span> maintains a memory of all the previous inputs, back to the origin of the series <span class="math notranslate nohighlight">\(x(0)\)</span>.</p></li>
+<li><p>Some of the features are relevant for the task at hand, while others are not.</p></li>
+<li><p>The task of the readout is to select those features relevant for the task.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Say, we want make a forecast <span class="math notranslate nohighlight">\(\tau_1\)</span> steps ahead.</p></li>
-<li><p>The readout will select a given combination of dynamical features from the Reservoir.</p></li>
+<li><p>The readout will select a certain combination of dynamical features from the Reservoir.</p></li>
 </ul>
 <img alt="../../_images/Reservoir_pred1.png" src="../../_images/Reservoir_pred1.png" />
 <ul class="simple">
 <li><p>To predict at a different horizon <span class="math notranslate nohighlight">\(\tau_2\)</span> the readout will select a different group of features.</p></li>
-<li><p>Note that in both cases the Readout produces the same pool of features!</p></li>
+<li><p>Note that in both cases the Readout produces always the same pool of features!</p></li>
 </ul>
 <img alt="../../_images/Reservoir_pred2.png" src="../../_images/Reservoir_pred2.png" />
 <ul class="simple">
 <li><p>The Readout is untrained and its states are generated without <em>supervision</em>, i.e., without an external guidance.</p></li>
-<li><p>Since it does not know what task it will be asked to solve, the Readout is configured to produce a pool of dynamic features that is most rich and varied as possible</p></li>
-<li><p>In other words, the Readout trades the lack of training with a redudancy of features generated.</p></li>
+<li><p>Since it does not know what task it will have to solve, the Readout is configured to produce a pool of dynamic features that is most rich and varied as possible.</p></li>
+<li><p>In other words, the Readout trades the lack of training with a redudancy of generated features.</p></li>
 </ul>
 </section>
 <section id="reservoir-configuration">
@@ -1503,11 +1507,12 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <section id="spectral-radius">
 <h4>Spectral radius<a class="headerlink" href="#spectral-radius" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Cleary, the contribution of more recent inputs must have a stronger influence.</p></li>
-<li><p>This means that the Reservoir should gradually forget the past inputs.</p></li>
-<li><p>This property also ensure to not model noise, to forget shocks that occur sporadically, and to forget the initial state <span class="math notranslate nohighlight">\(\mathbf{h}(0)\)</span> that is uninformative.</p></li>
+<li><p>Cleary, the contribution of more recent inputs must have a stronger influence on the current state.</p></li>
+<li><p>This means that the Reservoir should gradually forget its past states.</p></li>
+<li><p>This property, called <em>echo state property</em>, gives the name to the Echo State Network.</p></li>
+<li><p>It ensures to not model noise, to forget sporadic shocks, and the initial state <span class="math notranslate nohighlight">\(\mathbf{h}(0)\)</span> that is uninformative.</p></li>
 <li><p>In control theory, this translate in having a dynamic that is <em>contractive</em>.</p></li>
-<li><p>A dynamic is contractive if two different initial states eventually converge.</p></li>
+<li><p>A dynamic is contractive if two initially different states eventually converge.</p></li>
 </ul>
 <ul class="simple">
 <li><p>On the other hand, we want the Reservoir to produce a rich pool of features.</p></li>
@@ -1526,11 +1531,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </ul>
 <ul class="simple">
 <li><p>A rule of thumb is to set <span class="math notranslate nohighlight">\(\rho\)</span> just below 1.</p></li>
-<li><p>However, to achieve good performance it is often necessary to fine-tune <span class="math notranslate nohighlight">\(\rho\)</span> to values that could be lower or even higher than 1.</p></li>
+<li><p>However, to achieve good performance it is often necessary to fine-tune <span class="math notranslate nohighlight">\(\rho\)</span> to values that can be lower or even higher than 1.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Another way of determining a good value of <span class="math notranslate nohighlight">\(\rho\)</span> is to look at the <em>transient</em> phase of the Reservoir.</p></li>
-<li><p>This is how much times it takes to forget the initialization.</p></li>
+<li><p>This is how much time it takes to forget the initialization.</p></li>
 <li><p>Assume two different inizializations of the Reservoir state: <span class="math notranslate nohighlight">\(\mathbf{h}_1(0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{h}_2(0)\)</span>.</p></li>
 <li><p>If the Reservoir dynamics is contractive, the effect of the different initalizations will enventually fade.</p></li>
 <li><p>If it is chaotic, it will persist.</p></li>
@@ -1567,7 +1572,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
         <span class="n">states_1</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">get_states</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bidir</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">h1</span><span class="p">)</span> <span class="c1"># states using initial state 1</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">states_0</span> <span class="o">-</span> <span class="n">states_1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;rho=</span><span class="si">{</span><span class="n">rho</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># L2 norm of the difference</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time steps&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\|\mathbf</span><span class="si">{h}</span><span class="s1">_1(t) - \mathbf</span><span class="si">{h}</span><span class="s1">_2(t)\|_2$&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -1585,7 +1590,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c1047e1834b6f4d9abc9039b031945b251c008aa71609bd5a59e2a60a701d834.png" src="../../_images/c1047e1834b6f4d9abc9039b031945b251c008aa71609bd5a59e2a60a701d834.png" />
+<img alt="../../_images/ce5e1c9a284ce651be2635379f41b8da365f8a0368ee413534ab1fee729b51b1.png" src="../../_images/ce5e1c9a284ce651be2635379f41b8da365f8a0368ee413534ab1fee729b51b1.png" />
 </div>
 </div>
 </section>
@@ -1597,7 +1602,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <li><p>This is key to control the amount of nonlinearity in the model.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Reservoir units are equipped with a <span class="math notranslate nohighlight">\(\texttt{tanh}\)</span> activation.</p></li>
+<li><p>Reservoir units are usually equipped with a <span class="math notranslate nohighlight">\(\texttt{tanh}\)</span> activation.</p></li>
 <li><p>A small value <span class="math notranslate nohighlight">\(\omega_\text{in}\)</span> maps the Reservoir inputs towards the centre of the <span class="math notranslate nohighlight">\(\texttt{tanh}\)</span> where is more linear.</p></li>
 <li><p>Therefore, a small <span class="math notranslate nohighlight">\(\omega_\text{in}\)</span> reduces the amount of nonlinearity in the Reservoir.</p></li>
 <li><p>On the other hand, a large <span class="math notranslate nohighlight">\(\omega_\text{in}\)</span> translates into a more nonlinear beahvior as the <span class="math notranslate nohighlight">\(\texttt{tanh}\)</span> is closer to saturation.</p></li>
@@ -1614,8 +1619,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </ul>
 <ul class="simple">
 <li><p>There are also other hyperparameters in the ESN, such as the sparsity of the Readout and an optional noise to inject in the state update equation.</p></li>
-<li><p>These are usually less critical than <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(\omega_\text{in}\)</span> and can be left to their default value in most applications.</p></li>
-<li><p>In general, tuning hyperparameters in randomized architectures such as the ESN is much more important than in trainable neural networks, since there is no training that can adapt the weights to compensate for poorly configured models.</p></li>
+<li><p>These are usually less critical than <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(\omega_\text{in}\)</span> and can be left to their default value in most cases.</p></li>
+<li><p>Tuning hyperparameters in randomized architectures such as the ESN is much more important than in trainable neural networks, since there is no training that can compensate for poorly initialized models.</p></li>
 </ul>
 </section>
 </section>
@@ -1625,7 +1630,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <h2>Python example: electricity load forecasting with ESN<a class="headerlink" href="#python-example-electricity-load-forecasting-with-esn" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>In the following, we will use the <a class="reference external" href="https://github.com/FilippoMB/Time-series-classification-and-clustering-with-Reservoir-Computing">Python library</a> <code class="docutils literal notranslate"><span class="pre">reservoir-computing</span></code>.</p></li>
-<li><p>The library allows us to perform time series classification, clustering, and forecasting.</p></li>
+<li><p>The library allows us to perform time series classification, clustering, and forecasting with Reservoir Computing.</p></li>
 <li><p>In this lecture, we will focus on <em>forecasting</em>.</p></li>
 </ul>
 <section id="load-the-data">
@@ -1652,8 +1657,8 @@ Data shape:
 </div>
 </div>
 <ul class="simple">
-<li><p>To train our ESN we need input and target data <code class="docutils literal notranslate"><span class="pre">Xtr</span></code> and <code class="docutils literal notranslate"><span class="pre">Ytr</span></code>.</p></li>
-<li><p>We also need test data <code class="docutils literal notranslate"><span class="pre">Xte</span></code> and <code class="docutils literal notranslate"><span class="pre">Yte</span></code> to test our model and validation data <code class="docutils literal notranslate"><span class="pre">Xval</span></code> and <code class="docutils literal notranslate"><span class="pre">Yval</span></code> if we need to do hyperparameters tuning.</p></li>
+<li><p>To train the ESN we need input and target data <code class="docutils literal notranslate"><span class="pre">Xtr</span></code> and <code class="docutils literal notranslate"><span class="pre">Ytr</span></code>.</p></li>
+<li><p>We also need test data <code class="docutils literal notranslate"><span class="pre">Xte</span></code> and <code class="docutils literal notranslate"><span class="pre">Yte</span></code> to test the model and validation data <code class="docutils literal notranslate"><span class="pre">Xval</span></code> and <code class="docutils literal notranslate"><span class="pre">Yval</span></code> if we need to do hyperparameters tuning.</p></li>
 <li><p>We will use the function <code class="docutils literal notranslate"><span class="pre">forecasting_datasets</span></code> that given a time series <code class="docutils literal notranslate"><span class="pre">X</span></code> does the following computations.</p></li>
 </ul>
 <ol class="arabic simple">
@@ -1675,8 +1680,8 @@ Data shape:
 </ul>
 </li>
 </ul>
-<ol class="arabic simple" start="3">
-<li><p>Normalizes the data using a scaler object from <code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code>.</p>
+<ol class="arabic simple">
+<li><p>Normalizes the data using a scaler from <code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code>.</p>
 <ul class="simple">
 <li><p>If no scalers are passed, a <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> is created.</p></li>
 <li><p>The scaler is fit on <code class="docutils literal notranslate"><span class="pre">Xtr</span></code> and then used to transform <code class="docutils literal notranslate"><span class="pre">Ytr</span></code>, <code class="docutils literal notranslate"><span class="pre">Xval</span></code>, and <code class="docutils literal notranslate"><span class="pre">Xte</span></code>.</p></li>
@@ -1686,7 +1691,7 @@ Data shape:
 </ol>
 <ul class="simple">
 <li><p>The code below exemplifies the use of the function.</p></li>
-<li><p>Note that we loose some data.</p></li>
+<li><p>Note that we loose some data due to splitting and shifting.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1715,9 +1720,10 @@ Yte:  [[33 34 35]]
 </div>
 </div>
 <ul class="simple">
-<li><p>Back to our real data, we want to make forecast 24h ahead.</p></li>
-<li><p>Also, since this is just an example, we don’t optimize the hyperparameters and so we do not need a valiation set.</p></li>
-<li><p>We leave the default <code class="docutils literal notranslate"><span class="pre">val_percent=0</span></code> and the validation data will not be returned.</p></li>
+<li><p>Back to our real data: we want to make forecast 24h ahead.</p></li>
+<li><p>In a real use case, we must optimize the hyperparameters on a valiation set.</p></li>
+<li><p>However, since this is just a demonstration, we will use the default hyperparameters.</p></li>
+<li><p>Therefore, we leave the default <code class="docutils literal notranslate"><span class="pre">val_percent=0</span></code> and the validation set is not created.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1741,7 +1747,9 @@ Yte shape: (276, 1)
 </section>
 <section id="define-the-reservoir-and-compute-the-states">
 <h3>Define the Reservoir and compute the states<a class="headerlink" href="#define-the-reservoir-and-compute-the-states" title="Link to this heading">#</a></h3>
-<p>First, we specify the Reservoir hyperparameters and we initialize it.</p>
+<ul class="simple">
+<li><p>First, we specify the Reservoir hyperparameters and we initialize it.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">=</span> <span class="n">Reservoir</span><span class="p">(</span><span class="n">n_internal_units</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
@@ -1755,7 +1763,7 @@ Yte shape: (276, 1)
 <ul class="simple">
 <li><p>Then, we compute the sequence of the Reservoir states <code class="docutils literal notranslate"><span class="pre">states_tr</span></code> and <code class="docutils literal notranslate"><span class="pre">states_te</span></code> associated with the training and test data, respecitvely.</p></li>
 <li><p>Since the initial states of the Reservoir mostly depend on the initialization, e.g.,  <span class="math notranslate nohighlight">\(\mathbf{h}(0) = [0,0,\dots,0]\)</span>, we want to get rid of the initial transient phase.</p></li>
-<li><p>This can be done by setting <code class="docutils literal notranslate"><span class="pre">n_drop</span></code> that specifies how many of the initial states we want to drop.</p></li>
+<li><p>This can be done by setting <code class="docutils literal notranslate"><span class="pre">n_drop</span></code> that specifies how many of the initial states we drop.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1777,7 +1785,7 @@ states_te shape: (1, 266, 900)
 <section id="fit-a-linear-readout">
 <h3>Fit a linear readout<a class="headerlink" href="#fit-a-linear-readout" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>We are now ready to train the readout to predict the desired output given the sequence of (reduced) Reservoir states.</p></li>
+<li><p>We are now ready to train the readout to predict the desired output given the sequence of Reservoir states.</p></li>
 <li><p>We start by using a linear readout implemented by a Ridge regressor.</p></li>
 <li><p>After the readout is trained, we use it to compute the predictions <span class="math notranslate nohighlight">\(\hat{Y}_\text{te}\)</span> of the test data.</p></li>
 </ul>
@@ -1797,13 +1805,15 @@ states_te shape: (1, 266, 900)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0260s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0261s
 Test time: 0.0003s
 </pre></div>
 </div>
 </div>
 </div>
-<p>Finally, we plot the results and compute the MSE.</p>
+<ul class="simple">
+<li><p>Finally, we plot the results and compute the MSE.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
@@ -1817,7 +1827,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d9a64401e98536840c5895bfb3c5a10948a2436783a0e47f994db33c391a33fe.png" src="../../_images/d9a64401e98536840c5895bfb3c5a10948a2436783a0e47f994db33c391a33fe.png" />
+<img alt="../../_images/0fdefe7f0959ecd5057e062803c8ffac239513452c84d4400200e7ad82ee1369.png" src="../../_images/0fdefe7f0959ecd5057e062803c8ffac239513452c84d4400200e7ad82ee1369.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1828,7 +1838,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 21.24
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 19.78
 </pre></div>
 </div>
 </div>
@@ -1843,7 +1853,7 @@ Test time: 0.0003s
 <li><p>In addition, working with high dimensional data can increase the risk of multicollinearity, which destabilizes certain models, and overfitting.</p></li>
 </ul>
 <ul class="simple">
-<li><p>It would be desirable reducing to some extent the redundancy in the Reservoir states.</p></li>
+<li><p>It can be desirable reducing to some extent the redundancy in the Reservoir states.</p></li>
 <li><p>This can be done with an unsupervised dimensionality reduction procedure.</p></li>
 <li><p>The most common and efficient dimensionality reduction procedure is PCA.</p></li>
 </ul>
@@ -1857,7 +1867,7 @@ Test time: 0.0003s
 <ul class="simple">
 <li><p>Our data is a sequence of length <span class="math notranslate nohighlight">\(T\)</span> of Reservoir states, each one of size <span class="math notranslate nohighlight">\(N_h\)</span>.</p></li>
 <li><p>They can be arranged in a matrix <span class="math notranslate nohighlight">\(\mathbf{H} \in \mathbb{R}^{T \times N_h}\)</span>.</p></li>
-<li><p>To illustrate the procedure, we will consider a toy example with only <span class="math notranslate nohighlight">\(N_h = 3\)</span> features.</p></li>
+<li><p>To illustrate the procedure, let’s first consider a toy example with only <span class="math notranslate nohighlight">\(N_h = 3\)</span> features.</p></li>
 <li><p>In addition, we will create some structure in the data, by dividing the samples in 4 groups/clusters.</p></li>
 <li><p>This will help us to see how PCA preserves the structure in the data.</p></li>
 </ul>
@@ -1922,18 +1932,18 @@ Test time: 0.0003s
 <li><p><strong>Standardization</strong></p></li>
 </ol>
 <ul class="simple">
-<li><p>Scale your data so that each feature has a mean of 0 and a standard deviation of 1.</p></li>
+<li><p>Scale the data so that each feature has a mean of 0 and a standard deviation of 1.</p></li>
 <li><p>This is important because PCA is affected by scale.</p></li>
 </ul>
 <ol class="arabic simple" start="2">
-<li><p><strong>Covariance Matrix Computation</strong>:</p></li>
+<li><p><strong>Covariance matrix computation</strong>:</p></li>
 </ol>
 <ul class="simple">
 <li><p>Calculate the empirical covariance matrix <span class="math notranslate nohighlight">\(\mathbf{H}^T\mathbf{H}\)</span>.</p></li>
-<li><p>It shows how changes in one variable are associated with changes in another variable.</p></li>
+<li><p>The matrix shows how changes in one variable are associated with changes in another variable.</p></li>
 </ul>
 <ol class="arabic simple" start="3">
-<li><p><strong>Eigenvalue and Eigenvector Computation</strong></p></li>
+<li><p><strong>Eigenvalues and eigenvectors computation</strong></p></li>
 </ol>
 <ul class="simple">
 <li><p>The eigenvectors of the covariance matrix represent the directions of maximum variance.</p></li>
@@ -1941,20 +1951,20 @@ Test time: 0.0003s
 <li><p>The eigenvalues indicate the variance explained by each principal component.</p></li>
 </ul>
 <ol class="arabic simple" start="4">
-<li><p><strong>Sorting Eigenpairs</strong>:</p></li>
+<li><p><strong>Sorting eigenvectors</strong>:</p></li>
 </ol>
 <ul class="simple">
 <li><p>The eigenvectors are sorted by decreasing eigenvalues.</p></li>
-<li><p>The top-<span class="math notranslate nohighlight">\(k\)</span> eigenvectors are selected, where <span class="math notranslate nohighlight">\(k\)</span> is the number of dimensions you want to keep.</p></li>
-<li><p>In our case, we want to keep <span class="math notranslate nohighlight">\(k=2\)</span> dimensions.</p></li>
+<li><p>The top-<span class="math notranslate nohighlight">\(k\)</span> eigenvectors are selected, where <span class="math notranslate nohighlight">\(k\)</span> is the number of dimensions we want to keep.</p></li>
+<li><p>In our case, we keep <span class="math notranslate nohighlight">\(k=2\)</span> dimensions.</p></li>
 </ul>
 <ol class="arabic simple" start="5">
-<li><p><strong>Projection Onto the New Feature Space</strong>:</p></li>
+<li><p><strong>Projection onto the new feature space</strong>:</p></li>
 </ol>
 <ul class="simple">
-<li><p>The original data are projected onto the principal components selected in the previous step.</p></li>
+<li><p>The original data are projected onto the selected principal components.</p></li>
 <li><p>In our case, the 3-dimensional data are projected onto the plane spanned by the first two principale components.</p></li>
-<li><p>The projected data are our the reduced-dimensional data.</p></li>
+<li><p>The projected data are the reduced-dimensional data.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2062,10 +2072,12 @@ Test time: 0.0003s
 <img alt="../../_images/6b878a880722f1c88c444f65cb0363bae3ba2dad7226df62df734e9c0f5e98b4.png" src="../../_images/6b878a880722f1c88c444f65cb0363bae3ba2dad7226df62df734e9c0f5e98b4.png" />
 </div>
 </div>
-<p>Check <a class="reference external" href="https://setosa.io/ev/principal-component-analysis/">this blog</a> for an excellent visual explanation and interactive examples about PCA.</p>
+<ul class="simple">
+<li><p>💡 Check <a class="reference external" href="https://setosa.io/ev/principal-component-analysis/">this blog</a> for an excellent visual explanation and interactive examples about PCA.</p></li>
+</ul>
 </section>
-<section id="reducing-the-dimensionality-of-the-actual-reservoir-states">
-<h4>Reducing the dimensionality of the actual Reservoir states<a class="headerlink" href="#reducing-the-dimensionality-of-the-actual-reservoir-states" title="Link to this heading">#</a></h4>
+<section id="id1">
+<h4>Reducing the dimensionality of the Reservoir states<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Let’s go back to our Reservoir states, which in our case are very high-dimensional vectors.</p></li>
 <li><p>In particular, since <code class="docutils literal notranslate"><span class="pre">n_internal_units=900</span></code>, we end up with a sequence of length <code class="docutils literal notranslate"><span class="pre">T</span></code> of vectors with size <code class="docutils literal notranslate"><span class="pre">900</span></code>.</p></li>
@@ -2087,7 +2099,9 @@ states_te shape: (266, 75)
 </div>
 </div>
 </div>
-<p>Below, we fit the readout on the new data and compute the results on the test set.</p>
+<ul class="simple">
+<li><p>Below, we fit the readout on the new data and compute the results on the test set.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the ridge regression model</span>
@@ -2108,9 +2122,9 @@ states_te shape: (266, 75)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0022s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0018s
 Test time: 0.0002s
-Mean Squared Error: 22.32
+Mean Squared Error: 21.15
 </pre></div>
 </div>
 </div>
@@ -2183,10 +2197,12 @@ Mean Squared Error: 22.32
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/44aaca5f32c43f446ec0249424e14cabcfa6c15608ed710d9b215422ddb20356.png" src="../../_images/44aaca5f32c43f446ec0249424e14cabcfa6c15608ed710d9b215422ddb20356.png" />
+<img alt="../../_images/eb29b7d703d302a5d18b1a92f080346dff30081d3251c1e52beae047019147b1.png" src="../../_images/eb29b7d703d302a5d18b1a92f080346dff30081d3251c1e52beae047019147b1.png" />
 </div>
 </div>
-<p>Finally, we repeat the training on the states reduced with PCA.</p>
+<ul class="simple">
+<li><p>Finally, we repeat the training on the states reduced with PCA.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -2215,12 +2231,14 @@ Mean Squared Error: 22.32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 1.17s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 1.18s
 </pre></div>
 </div>
 </div>
 </div>
-<p>The improvement in terms of computing time now is significant.</p>
+<ul class="simple">
+<li><p>The improvement in terms of computing time now is significant.</p></li>
+</ul>
 </section>
 </section>
 <section id="summary">
@@ -2266,9 +2284,9 @@ Mean Squared Error: 22.32
 The hourly temperatures are provided from October 3, 2016 to October 3, 2017
 The dataset consists of a data frame with 6572 observations on the following 3 variables.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">DateTime</span></code> Date and time of reading (format mm/dd/yyyy h:00)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">WaterTemp</span></code>: Water temperature (in degrees Fahrenheit)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">t</span></code>: Time index (1 to 673)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DateTime</span></code> Date and time of reading (format mm/dd/yyyy h:00).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WaterTemp</span></code>: Water temperature (in degrees Fahrenheit).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">t</span></code>: Time index (1 to 673).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2299,18 +2317,18 @@ The dataset consists of a data frame with 6572 observations on the following 3 v
 <li><p>Apply the MLP on the temperature data.</p></li>
 <li><p>Perform a small grid search to try different values for the following hyperparameters:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">hidden_layer_sizes</span></code> (e.g., try more layers <code class="docutils literal notranslate"><span class="pre">[16,</span> <span class="pre">16,</span> <span class="pre">8]</span></code>, layers with more units <code class="docutils literal notranslate"><span class="pre">[32,</span> <span class="pre">16]</span></code>, etc…)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate_init</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">activation</span></code> (try at least <code class="docutils literal notranslate"><span class="pre">tanh</span></code> and <code class="docutils literal notranslate"><span class="pre">relu</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hidden_layer_sizes</span></code> (e.g., try more layers <code class="docutils literal notranslate"><span class="pre">[16,</span> <span class="pre">16,</span> <span class="pre">8]</span></code>, layers with more units <code class="docutils literal notranslate"><span class="pre">[32,</span> <span class="pre">16]</span></code>, etc…).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate_init</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">activation</span></code> (try at least <code class="docutils literal notranslate"><span class="pre">tanh</span></code> and <code class="docutils literal notranslate"><span class="pre">relu</span></code>).</p></li>
 </ul>
 </li>
 <li><p>Apply the ESN on the temperature data.</p></li>
 <li><p>Perform a small grid search to try different values for the following hyperparameters:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">spectral_radius</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">input_scaling</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n_internal_units</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">connectivity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spectral_radius</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input_scaling</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_internal_units</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connectivity</span></code>.</p></li>
 </ul>
 </li>
 </ul>
@@ -2394,12 +2412,12 @@ The dataset consists of a data frame with 6572 observations on the following 3 v
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural networks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron">Multi-Layer Perceptron</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-example-of-an-mlp">Simple Example of an MLP</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-simple-mlp">Example: a simple MLP</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp-for-time-series-forecasting">MLP for time series forecasting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-example">Python example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windowed-approaches-drawback">Windowed approaches drawback</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windowed-approaches-drawbacks">Windowed approaches drawbacks</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-neural-networks">Recurrent Neural Networks</a><ul class="nav section-nav flex-column">
@@ -2422,7 +2440,7 @@ The dataset consists of a data frame with 6572 observations on the following 3 v
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-a-linear-readout">Fit a linear readout</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-the-dimensionality-of-the-reservoir-states">Reducing the dimensionality of the Reservoir states</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-pca">Principal Component Analysis (PCA)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-the-dimensionality-of-the-actual-reservoir-states">Reducing the dimensionality of the actual Reservoir states</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Reducing the dimensionality of the Reservoir states</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-a-gbrt-readout">Fit a GBRT readout</a></li>
