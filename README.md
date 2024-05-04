@@ -11,9 +11,7 @@
 <br>
 
 This is the collection of notebooks for the course *Time Series Analysis with Python*.
-You can view and execute the notebooks by clicking on the links below.
-
-More info about the course is [here](https://filippomb.github.io/python-time-series-handbook).
+You can view and execute the notebooks by clicking on the buttons below.
 
 ## 📑 Content
 
