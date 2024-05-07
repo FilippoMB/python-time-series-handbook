@@ -16,4 +16,5 @@ chapters:
 - file: notebooks/10/nn-reservoir-computing
 - file: notebooks/11/nonlinear-ts
 - file: notebooks/12/classification-clustering
+- file: notebooks/00/knowledge_test
 - file: notebooks/00/resources
