@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -624,13 +624,13 @@ document.write(`
 <li><p>Autocorrelation often results in a pattern, whereas a time series without autocorrelation looks random.</p></li>
 </ul>
 <ul class="simple">
-<li><p>The covariance of <span class="math notranslate nohighlight">\(X(t)\)</span> and <span class="math notranslate nohighlight">\(X(t+h)\)</span> is called <em>autocovariance</em> and is slightly different from the autocorrelation.</p></li>
-<li><p>Given two time series <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p>
+<li><p>The covariance of <span class="math notranslate nohighlight">\(X(t_1)\)</span> and <span class="math notranslate nohighlight">\(X(t_2)\)</span> is called <em>autocovariance</em> and is slightly different from the autocorrelation.</p>
 <ul>
-<li><p>Autocorrelation: <span class="math notranslate nohighlight">\(R_{xy}(h)=\mathbb{E}[x(t+h)y(t)]\)</span></p></li>
-<li><p>Autocovariance: <span class="math notranslate nohighlight">\(C_{xy}(h)=\mathbb{E}[(x(t+\tau)−\mu_x)(y(t)−\mu_y)]=R_{xy}(h)−\mu_x\mu_y\)</span></p></li>
+<li><p>Autocorrelation: <span class="math notranslate nohighlight">\(R_{xx}(t_1,t_2)=\mathbb{E}[X(t_1)X(t_2)]\)</span></p></li>
+<li><p>Autocovariance: <span class="math notranslate nohighlight">\(C_{xx}(t_1,t_2)=\mathbb{E}[(X(t_1)−\mu_{t_1})(X(t_2)−\mu_{t_2})]=R_{xx}(t_1,t_2)−\mu_{t_1}\mu_{t_2}\)</span></p></li>
 </ul>
 </li>
+<li><p><span class="math notranslate nohighlight">\(\mu_{t_1}\)</span> and <span class="math notranslate nohighlight">\(\mu_{t_2}\)</span> are the means of the time series at times <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span>, respectively.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(X(t)\)</span> has zero-mean, autocorrelation and autocovariance coincide.</p></li>
 <li><p>Since obtaining a time series with zero-mean is trivial, we’ll use the two terms interchangeably.</p></li>
 </ul>
@@ -845,10 +845,11 @@ document.write(`
 <li><p>Is this time series stationary?</p></li>
 </ul>
 <ul class="simple">
-<li><p>The mean of a periodic signal over a complete cycle is zero.</p></li>
-<li><p>However, over any half-cycle or any period not equal to an integer multiple of the full cycle, the mean is not zero.</p></li>
+<li><p>The mean of a periodic signal over a complete cycle always assumes the same value (<code class="docutils literal notranslate"><span class="pre">20</span></code> in our case).</p></li>
+<li><p>However, over an half-cycle or any period not equal to an integer multiple of the full cycle, the mean changes (is different from <code class="docutils literal notranslate"><span class="pre">20</span></code>).</p></li>
 <li><p>This violates condition #1.</p></li>
 </ul>
+<img alt="../../_images/periodic_mean.png" src="../../_images/periodic_mean.png" />
 <ul class="simple">
 <li><p>Similarly, the variance depends on the time interval over which it is measured.</p></li>
 <li><p>Since the signal’s amplitude varies, the variance calculated over different phases of the sinusoid will also vary.</p></li>
@@ -999,8 +1000,8 @@ This balance means that <span class="math notranslate nohighlight">\(\mathbb{E}\
 <ul class="simple">
 <li><p>Applying this identity, we get:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-eed6b376-8163-450b-b6ce-43e9fda86049">
-<span class="eqno">(1)<a class="headerlink" href="#equation-eed6b376-8163-450b-b6ce-43e9fda86049" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0ffe7201-074f-469f-a1d7-52bd81301ac4">
+<span class="eqno">(1)<a class="headerlink" href="#equation-0ffe7201-074f-469f-a1d7-52bd81301ac4" title="Permalink to this equation">#</a></span>\[\begin{align}
 \text{Cov}(x_t, x_{t+h}) &amp; = R^2 \mathbb{E}\left[\frac{1}{2}[\cos(\lambda t + \psi - \lambda (t + h) - \psi) - \cos(\lambda t + \psi + \lambda (t + h) + \psi)]\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h) - \cos(2\lambda t + 2\psi + \lambda h)\right]\\
 &amp; = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h)\right] - \frac{R^2}{2} \mathbb{E}\left[\cos(2\lambda t + 2\psi + \lambda h)\right] \end{align}\]</div>

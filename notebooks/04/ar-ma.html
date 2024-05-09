@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -555,26 +555,28 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(\mu_x, \mu_y\)</span> are their means, and <span class="math notranslate nohighlight">\(\sigma_x, \sigma_y\)</span> are their standard deviations.</p></li>
 </ul>
 </li>
-<li><p>The CCF is used to find lead-lag relationships between two time series.</p></li>
+<li><p>The CCF is commonly used for searching a shorter, known feature, within a long signal.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_series_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_series_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">17</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 
 <span class="c1"># Calculate CCF between the two time series</span>
-<span class="n">ccf_vals</span> <span class="o">=</span> <span class="n">ccf</span><span class="p">(</span><span class="n">time_series_1</span><span class="p">,</span> <span class="n">time_series_2</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">ccf_vals</span> <span class="o">=</span> <span class="n">ccf</span><span class="p">(</span><span class="n">time_series_1</span><span class="p">,</span> <span class="n">time_series_2</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Plot CCF</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ccf_vals</span><span class="p">)),</span> <span class="n">ccf_vals</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cross-Correlation Function&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ccf_vals</span><span class="p">)),</span> <span class="n">ccf_vals</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CCF&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_series_1</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1st time series&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_series_2</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2nd time series&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Lag&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Correlation&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">.6</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;expand&quot;</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/477e88355f1eef987dfea6505c0c7228a7b5d4fcb4a3bb2185ad77599dce1564.png" src="../../_images/477e88355f1eef987dfea6505c0c7228a7b5d4fcb4a3bb2185ad77599dce1564.png" />
+<img alt="../../_images/bb3fe47b058f3b19c03e976aeca7f9011e8090adad4710acd865e41431917fcb.png" src="../../_images/bb3fe47b058f3b19c03e976aeca7f9011e8090adad4710acd865e41431917fcb.png" />
 </div>
 </div>
 </section>
@@ -667,6 +669,9 @@ document.write(`
 <img alt="../../_images/4d40bb260eec930ec08b001946158dfda7570a5241c916731ddd337514b57278.png" src="../../_images/4d40bb260eec930ec08b001946158dfda7570a5241c916731ddd337514b57278.png" />
 </div>
 </div>
+<ul class="simple">
+<li><p>Lag estimation with ACF and PACF is helpful in modelling time-series with autoregressive and moving-average models that we’ll introduce in the next sections.</p></li>
+</ul>
 </section>
 </section>
 <hr class="docutils" />
@@ -724,8 +729,13 @@ document.write(`
 <ul class="simple">
 <li><p>AR models require the time series to be <em>stationary</em>.</p></li>
 <li><p>Higher order AR models can <em>overfit</em> the training data and perform bad in prediction.</p></li>
-<li><p>AR models do not account for <em>exogenous factors</em>.</p></li>
 <li><p>They cannot model non-linear relationships in the data.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Natively, the AR models do not account for <em>exogenous factors</em>.</p></li>
+<li><p>These, usually are additional time series that are relevant for the prediction.</p></li>
+<li><p>For example, the time series of the temperatures when predicting the electricity load.</p></li>
+<li><p>There are extensions (ARMAX) that allow to include exogenous variables in the model.</p></li>
 </ul>
 <section id="ar-model-identification">
 <h3>AR model identification<a class="headerlink" href="#ar-model-identification" title="Link to this heading">#</a></h3>
@@ -757,7 +767,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e7080d89839270c4ef351a3c4319f7163a5ec6e43fa38e017aa2d6216547ee1e.png" src="../../_images/e7080d89839270c4ef351a3c4319f7163a5ec6e43fa38e017aa2d6216547ee1e.png" />
+<img alt="../../_images/837d5d8a2b4c6d874cd9be00a7d430cc2db35fcd27c99da81f00c02f07e77fda.png" src="../../_images/837d5d8a2b4c6d874cd9be00a7d430cc2db35fcd27c99da81f00c02f07e77fda.png" />
 </div>
 </div>
 <ul class="simple">
@@ -770,7 +780,7 @@ document.write(`
 </ul>
 <ul class="simple">
 <li><p>This means that the process has a <em>memory</em> of length 2.</p></li>
-<li><p>In other words, all the correlations are explained by the previous 2 time steps.</p></li>
+<li><p>In other words, (most of) the correlations in the data are explained by the previous 2 time steps.</p></li>
 <li><p>If we want to fit an AR model to our data we would choose <span class="math notranslate nohighlight">\(p=2\)</span>, which is a AR(2) model.</p></li>
 </ul>
 <ul class="simple">
@@ -786,7 +796,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/00caf048c480f68181a07f118c3f58c54973cfc13de39378db0cb34639119227.png" src="../../_images/00caf048c480f68181a07f118c3f58c54973cfc13de39378db0cb34639119227.png" />
+<img alt="../../_images/ad559791de8ea1638ba6d70fedf239ffd1ead36c86ec07a368c3d34a4c953ebb.png" src="../../_images/ad559791de8ea1638ba6d70fedf239ffd1ead36c86ec07a368c3d34a4c953ebb.png" />
 </div>
 </div>
 <p><strong>⚙ Try it yourself</strong></p>
@@ -807,6 +817,7 @@ document.write(`
 <h4>Step 1: Remove trend and seasonality<a class="headerlink" href="#step-1-remove-trend-and-seasonality" title="Link to this heading">#</a></h4>
 <ul>
 <li><p>Before applying an AR model is necessary to make the time series stationary.</p></li>
+<li><p>This can be done using techniques we saw in the previous chapters.</p></li>
 <li><p>Two possibile ways of doing it are:</p>
 <ol class="arabic simple">
 <li><p>Apply standard and seasonal differencing to the time series.</p></li>
@@ -837,7 +848,7 @@ document.write(`
 <section id="step-3-reconstruct-the-forecast">
 <h4>Step 3: Reconstruct the forecast<a class="headerlink" href="#step-3-reconstruct-the-forecast" title="Link to this heading">#</a></h4>
 <ul>
-<li><p>DThe reconstruction procedure depends on how we made the time series stationary at step 1.</p></li>
+<li><p>The reconstruction procedure depends on how we made the time series stationary at step 1.</p></li>
 <li><p>If we used differencing:</p>
 <ul class="simple">
 <li><p>We must undo the differentiation by taking cumulative sums of the residuals.</p></li>
@@ -872,7 +883,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2c5985165ca924fb73693842fbd9633570fd4fdab557de02463ec8ba68d296ac.png" src="../../_images/2c5985165ca924fb73693842fbd9633570fd4fdab557de02463ec8ba68d296ac.png" />
+<img alt="../../_images/650a05c7cc7fafc7c083658948269b0aeccf25a1181d1d2a73f57b232538f481.png" src="../../_images/650a05c7cc7fafc7c083658948269b0aeccf25a1181d1d2a73f57b232538f481.png" />
 </div>
 </div>
 <ul class="simple">
@@ -899,7 +910,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/33a5db6b220a4770b1599bddfe0297f95d577cf1ee19f3a8fad7ee289a850263.png" src="../../_images/33a5db6b220a4770b1599bddfe0297f95d577cf1ee19f3a8fad7ee289a850263.png" />
+<img alt="../../_images/ff04436bff07489b2986c5abbf19eba58f617a5422d0258e144d3a8320658aa2.png" src="../../_images/ff04436bff07489b2986c5abbf19eba58f617a5422d0258e144d3a8320658aa2.png" />
 </div>
 </div>
 <ul class="simple">
@@ -910,7 +921,7 @@ document.write(`
 <li><p>If they don’t, that’s a sign that your data is not stationary.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Since we generated the time series by hands we know that it has trend and seasonality and, therefore, it is not stationary.</p></li>
+<li><p>Since we generated the time series by hand we know that it has trend and seasonality and, therefore, it is not stationary.</p></li>
 <li><p>However, to be rigorous we’ll test the time series with the Augmented Dickey-Fuller (ADF) test.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -921,7 +932,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value: 0.833
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value: 0.985
 </pre></div>
 </div>
 </div>
@@ -941,7 +952,7 @@ document.write(`
 <section id="stationairty-through-differencing">
 <h4>Stationairty through differencing<a class="headerlink" href="#stationairty-through-differencing" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>We start by applying 1st-order differencing to remove trend.</p></li>
+<li><p>We start by applying 1st-order differencing to remove the trend.</p></li>
 <li><p>Then, we check the stationarity of the differenced data with the ADF test.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -962,7 +973,7 @@ document.write(`
 <ul class="simple">
 <li><p>The ADF test suggests that now the time series is stationary.</p></li>
 <li><p>We might want to apply also <em>seasonal differentiation</em> to get rid of the seasonal component.</p></li>
-<li><p>However, taking too much differencing might compromise the structure of the data.</p></li>
+<li><p>However, differencing too many times might compromise the structure of the data.</p></li>
 <li><p>This problem is called <em>overdifferencing</em>.</p></li>
 <li><p>See <a class="reference external" href="https://people.duke.edu/~rnau/411arim2.htm">this explanation</a> for how to determine the optimal order of differentiation.</p></li>
 </ul>
@@ -979,7 +990,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4735e1be6e749e867a22db089deb57ae513cb3bd1ef38055ffba26313a364701.png" src="../../_images/4735e1be6e749e867a22db089deb57ae513cb3bd1ef38055ffba26313a364701.png" />
+<img alt="../../_images/f66b7d79b211b154fab92d0a7ebd46d5af1bdf2da944bfd49db71d89d6836631.png" src="../../_images/f66b7d79b211b154fab92d0a7ebd46d5af1bdf2da944bfd49db71d89d6836631.png" />
 </div>
 </div>
 <ul class="simple">
@@ -997,7 +1008,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0e368f54d9bcecff59d129b85eca42d1dd872394d6d3684816325d22e4eeeb60.png" src="../../_images/0e368f54d9bcecff59d129b85eca42d1dd872394d6d3684816325d22e4eeeb60.png" />
+<img alt="../../_images/f6d641489a73efaa8969bc860c4e1ca67e64c8fe1c8aca78739558ae308bc16a.png" src="../../_images/f6d641489a73efaa8969bc860c4e1ca67e64c8fe1c8aca78739558ae308bc16a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1023,7 +1034,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f0ac4f67e824ec044cb57551d8227ab6ca8b665057700b117390b08452c89b72.png" src="../../_images/f0ac4f67e824ec044cb57551d8227ab6ca8b665057700b117390b08452c89b72.png" />
+<img alt="../../_images/40338c39514bc5b4b749cb955dd6b890271a2f95256261ee0332b6d26554c4cf.png" src="../../_images/40338c39514bc5b4b749cb955dd6b890271a2f95256261ee0332b6d26554c4cf.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1067,7 +1078,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/08ca506c4cfa1876dd9f8192827841327d6f2fd02f979844cae47ffe57343ace.png" src="../../_images/08ca506c4cfa1876dd9f8192827841327d6f2fd02f979844cae47ffe57343ace.png" />
+<img alt="../../_images/dcfface2e2d67e6e6de7670d0d4e84c39ffa0521af206e6b6012849a70cc0a24.png" src="../../_images/dcfface2e2d67e6e6de7670d0d4e84c39ffa0521af206e6b6012849a70cc0a24.png" />
 </div>
 </div>
 <p><strong>💡 Hint</strong></p>
@@ -1129,7 +1140,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f6b17476ea4c410fcb76b66ecd2ba60ba921cd32837eb7ab808762f969985a4d.png" src="../../_images/f6b17476ea4c410fcb76b66ecd2ba60ba921cd32837eb7ab808762f969985a4d.png" />
+<img alt="../../_images/95f3d4b13dc6057a3da84f2e7eb26064d569d53cfb4d9278475f0ea33e6a798b.png" src="../../_images/95f3d4b13dc6057a3da84f2e7eb26064d569d53cfb4d9278475f0ea33e6a798b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1155,7 +1166,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/13e038454a79887f3eb1feb4c6c7a13918f1aeb703839a3bf24bdf3e10bd226a.png" src="../../_images/13e038454a79887f3eb1feb4c6c7a13918f1aeb703839a3bf24bdf3e10bd226a.png" />
+<img alt="../../_images/e979c7897afd0eca74bc88e9caced959c4fd6209b44bcb741a61b0a095a70fa6.png" src="../../_images/e979c7897afd0eca74bc88e9caced959c4fd6209b44bcb741a61b0a095a70fa6.png" />
 </div>
 </div>
 <p><strong>⚠ Attention</strong></p>
@@ -1183,7 +1194,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/19049f756eead032c67a3782a8be4a62fef2633d7ebc204c30e4d8c7954af186.png" src="../../_images/19049f756eead032c67a3782a8be4a62fef2633d7ebc204c30e4d8c7954af186.png" />
+<img alt="../../_images/f1826c63ba6247eb48966db4cd572adc6c34c0ee13f470a6cdec4cb88ceeab87.png" src="../../_images/f1826c63ba6247eb48966db4cd572adc6c34c0ee13f470a6cdec4cb88ceeab87.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1206,7 +1217,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/713c05dfb8cb005d5e7cb6237c6e761de0f0d30b5251f41076bc494463bfb414.png" src="../../_images/713c05dfb8cb005d5e7cb6237c6e761de0f0d30b5251f41076bc494463bfb414.png" />
+<img alt="../../_images/83df23022f50a8f3f7db4bf977345d4dfbb5f9d118488d00fdde757439412f40.png" src="../../_images/83df23022f50a8f3f7db4bf977345d4dfbb5f9d118488d00fdde757439412f40.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1224,8 +1235,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE of differencing: 7.16
-MSE of TES: 1.11
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE of differencing: 8.03
+MSE of TES: 1.12
 </pre></div>
 </div>
 </div>
@@ -1298,7 +1309,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0cd394b048cb542f1b36ed7775eafe9cca9e395374d0ed12b72c3c52838c3aed.png" src="../../_images/0cd394b048cb542f1b36ed7775eafe9cca9e395374d0ed12b72c3c52838c3aed.png" />
+<img alt="../../_images/145a872f813000cef2e1056f6f117a9252906d3bf83e9a0b9f663cf5a79d723c.png" src="../../_images/145a872f813000cef2e1056f6f117a9252906d3bf83e9a0b9f663cf5a79d723c.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1318,7 +1329,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1936945242f2e1f7051c5a4c73595275cea11f8e3645be2d1f45bffe20b697fe.png" src="../../_images/1936945242f2e1f7051c5a4c73595275cea11f8e3645be2d1f45bffe20b697fe.png" />
+<img alt="../../_images/dbe0cb4dfca058e6124bd6578b8155776df8445fb32ac3c29dda8386fb11f3fe.png" src="../../_images/dbe0cb4dfca058e6124bd6578b8155776df8445fb32ac3c29dda8386fb11f3fe.png" />
 </div>
 </div>
 <p><strong>⚙ Try it yourself</strong></p>
@@ -1343,7 +1354,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4dd29c71de493eb643bdfdf2383ffce2a76bba9898b88ac382216128fb721e5d.png" src="../../_images/4dd29c71de493eb643bdfdf2383ffce2a76bba9898b88ac382216128fb721e5d.png" />
+<img alt="../../_images/c6905b6eb469d88b78b4d865de8de954a5fab1e0785fcef79df2ce2d59122dc4.png" src="../../_images/c6905b6eb469d88b78b4d865de8de954a5fab1e0785fcef79df2ce2d59122dc4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1368,7 +1379,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f12cef4be58425da5b8ccff3d206456be896ece54f69bb6aa9fe2b63a2d1f516.png" src="../../_images/f12cef4be58425da5b8ccff3d206456be896ece54f69bb6aa9fe2b63a2d1f516.png" />
+<img alt="../../_images/c9b49956f3fd641e9decd14a5bfeb667f03138774b6ff72d4373f61ff696bc18.png" src="../../_images/c9b49956f3fd641e9decd14a5bfeb667f03138774b6ff72d4373f61ff696bc18.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1400,7 +1411,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value (original ts): 0.925
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p-value (original ts): 0.959
 p-value (differenced ts): 0.000
 </pre></div>
 </div>
@@ -1419,7 +1430,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0525fa1c2daf92c0446449b16c88b6e46946a25697f5fb2fbde62aff26ea4dcf.png" src="../../_images/0525fa1c2daf92c0446449b16c88b6e46946a25697f5fb2fbde62aff26ea4dcf.png" />
+<img alt="../../_images/717b41d547aa8c3061828d4446093baa147331add5c3bd6fab42fd7eead6b8bd.png" src="../../_images/717b41d547aa8c3061828d4446093baa147331add5c3bd6fab42fd7eead6b8bd.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1445,7 +1456,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e1d4bc4ba099183783ba64d9eb51b7dd1dd64c7612a83bd2c0d8a21c9a856816.png" src="../../_images/e1d4bc4ba099183783ba64d9eb51b7dd1dd64c7612a83bd2c0d8a21c9a856816.png" />
+<img alt="../../_images/f2073ba3ff892977316886122b4737c5c62bfc55a83b0c09b09ed9b688730a36.png" src="../../_images/f2073ba3ff892977316886122b4737c5c62bfc55a83b0c09b09ed9b688730a36.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1462,7 +1473,7 @@ p-value (differenced ts): 0.000
 <section id="id2">
 <h4>Stationarity by subtracting estimated trend and seasonality<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>In the follwing we repeat the same procedure to estimate trend and seasonality with TES.</p></li>
+<li><p>In the following we repeat the same procedure to estimate trend and seasonality with TES.</p></li>
 <li><p>Since the MA process is more “noisy” that the AR process, we increase the level of smoothing by setting <span class="math notranslate nohighlight">\(\alpha=0.01\)</span>.</p></li>
 <li><p>As shown in the plot below, this leads to a smoother estimate of the trend and seasonality.</p></li>
 </ul>
@@ -1488,7 +1499,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0439946d44e4ce8c5bec57b1eab39e09842ddb31f83bddf36cd6b8b536c525f1.png" src="../../_images/0439946d44e4ce8c5bec57b1eab39e09842ddb31f83bddf36cd6b8b536c525f1.png" />
+<img alt="../../_images/f6c33654e0a2c5f2f67054998435da7b722eee78d354f62004afd6ce29a4a64e.png" src="../../_images/f6c33654e0a2c5f2f67054998435da7b722eee78d354f62004afd6ce29a4a64e.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1508,7 +1519,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d60aad6ca2fd2fdc248e65e94bf5938da014d6c542537042a0746f77dfae07b4.png" src="../../_images/d60aad6ca2fd2fdc248e65e94bf5938da014d6c542537042a0746f77dfae07b4.png" />
+<img alt="../../_images/42191816ab22da642614d2e36f1aed51802ef62dc20e393d11f42b070a718401.png" src="../../_images/42191816ab22da642614d2e36f1aed51802ef62dc20e393d11f42b070a718401.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1538,7 +1549,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/410590a9b8d593a70a151ab18cd29a6fbe81cad6b9b39927d564e1135876fd6f.png" src="../../_images/410590a9b8d593a70a151ab18cd29a6fbe81cad6b9b39927d564e1135876fd6f.png" />
+<img alt="../../_images/ab3978203948ee1430cae4f129f15849d76feed359922480b4d56da65a210bae.png" src="../../_images/ab3978203948ee1430cae4f129f15849d76feed359922480b4d56da65a210bae.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1564,7 +1575,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/000f62d3f1af36d6c522a1436eca5d085301ad39880c123f79bacebcc6346def.png" src="../../_images/000f62d3f1af36d6c522a1436eca5d085301ad39880c123f79bacebcc6346def.png" />
+<img alt="../../_images/5eb9574c243904fa22784da3b49eebb46e79fbe91ff0eff4fd2f0677f2fdd194.png" src="../../_images/5eb9574c243904fa22784da3b49eebb46e79fbe91ff0eff4fd2f0677f2fdd194.png" />
 </div>
 </div>
 <p><strong>TES-based approach</strong></p>
@@ -1586,7 +1597,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/18cb5a27710bf26839308214fb07adee04c0769dba83389f0bcaa8f33749bc8a.png" src="../../_images/18cb5a27710bf26839308214fb07adee04c0769dba83389f0bcaa8f33749bc8a.png" />
+<img alt="../../_images/c568d1c8bfa896fceb21cce42b3b73fda8d2ab7a781163a131f95f52773ad752.png" src="../../_images/c568d1c8bfa896fceb21cce42b3b73fda8d2ab7a781163a131f95f52773ad752.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1612,7 +1623,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d4c7f650355ae01085dad81f9971cd97efff42ed6b06add133596bc1dd916c0c.png" src="../../_images/d4c7f650355ae01085dad81f9971cd97efff42ed6b06add133596bc1dd916c0c.png" />
+<img alt="../../_images/7b05879bca8df3f4f56735d6b0f9cb478a2b05242c2c25cbaf68797c526b450a.png" src="../../_images/7b05879bca8df3f4f56735d6b0f9cb478a2b05242c2c25cbaf68797c526b450a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1629,8 +1640,8 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE of differencing: 2.08
-MSE of TES: 1.44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE of differencing: 9.49
+MSE of TES: 1.69
 </pre></div>
 </div>
 </div>
