@@ -1642,11 +1642,9 @@ C
 ```
 
 
-
-
 ## Chapter 11
 
-**Question 147: How is a dynamical system typically defined in the context of time series analysis?**
+**How is a dynamical system typically defined in the context of time series analysis?**
 - A) A system where output values are independent of previous states.
 - B) A system described by a deterministic process where the state evolves over time in a predictable manner.
 - C) A random process with inputs that are not related to the time variable.
@@ -1657,7 +1655,7 @@ C
 B
 ```
 
-**Question 148: In terms of mathematical modeling, how are continuous dynamical systems typically represented compared to discrete systems?**
+**In terms of mathematical modeling, how are continuous dynamical systems typically represented compared to discrete systems?**
 - A) Using difference equations for continuous and differential equations for discrete.
 - B) Using differential equations for continuous and difference equations for discrete.
 - C) Both use differential equations but apply them differently.
@@ -1668,7 +1666,7 @@ B
 B
 ```
 
-**Question 149: What distinguishes the outcomes of stochastic systems from those of deterministic systems in dynamical modeling?**
+**What distinguishes the outcomes of stochastic systems from those of deterministic systems in dynamical modeling?**
 - A) Stochastic systems provide identical outcomes under identical conditions.
 - B) Deterministic systems yield different outcomes under the same initial conditions.
 - C) Stochastic systems may produce different outcomes even under identical initial conditions.
@@ -1679,7 +1677,7 @@ B
 C
 ```
 
-**Question 150: In terms of system behavior, how do linear and nonlinear dynamical systems differ?**
+**In terms of system behavior, how do linear and nonlinear dynamical systems differ?**
 - A) Linear systems show exponential growth or decay, nonlinear systems do not.
 - B) Linear systems' outputs are directly proportional to their inputs; nonlinear systems' outputs are not.
 - C) Nonlinear systems are less predictable over time than linear systems.
@@ -1690,7 +1688,7 @@ C
 B
 ```
 
-**Question 151: What role does the parameter $r$ play in the logistic map related to population growth?**
+**What role does the parameter $r$ play in the logistic map related to population growth?**
 - A) It represents the death rate of the population.
 - B) It signifies the population’s initial size.
 - C) It controls the growth rate of the population.
@@ -1701,7 +1699,7 @@ B
 C
 ```
 
-**Question 152: Why is the logistic map classified as a nonlinear system?**
+**Why is the logistic map classified as a nonlinear system?**
 - A) It depends solely on linear equations to predict future states.
 - B) It features a quadratic term that determines the rate of change.
 - C) It behaves linearly regardless of parameter values.
@@ -1712,7 +1710,7 @@ C
 B
 ```
 
-**Question 153: What happens when the growth rate $r$ in the logistic map is increased beyond a critical threshold?**
+**What happens when the growth rate $r$ in the logistic map is increased beyond a critical threshold?**
 - A) The system remains in a steady state.
 - B) The system transitions from contractive to chaotic dynamics.
 - C) Population growth becomes linear and predictable.
@@ -1723,7 +1721,7 @@ B
 B
 ```
 
-**Question 154: What is the characteristic of a two-points attractor in a dynamical system?**
+**What is the characteristic of a two-points attractor in a dynamical system?**
 - A) The system settles into one of two possible stable states.
 - B) The system’s states alternate randomly between two points.
 - C) The system never reaches any of the two points but orbits around them.
@@ -1734,7 +1732,7 @@ B
 A
 ```
 
-**Question 155: What can period-doubling bifurcations indicate about a system’s dynamics?**
+**What can period-doubling bifurcations indicate about a system’s dynamics?**
 - A) They signal a transition towards simpler, more predictable behavior.
 - B) They show a system is becoming less sensitive to initial conditions.
 - C) They indicate a system’s route to chaotic behavior as parameters vary.
@@ -1745,7 +1743,7 @@ A
 C
 ```
 
-**Question 156: In a system with multiple points attractors, how do different initial conditions affect the outcome?**
+**In a system with multiple points attractors, how do different initial conditions affect the outcome?**
 - A) All initial conditions lead to the same attractor point.
 - B) Initial conditions determine which of the several attractor points the system converges to.
 - C) Multiple attractors lead to a chaotic system where outcomes are unpredictable.
@@ -1756,7 +1754,7 @@ C
 B
 ```
 
-**Question 157: What are Lyapunov exponents used for in the analysis of dynamical systems?**
+**What are Lyapunov exponents used for in the analysis of dynamical systems?**
 - A) To measure the rate of separation of infinitesimally close trajectories.
 - B) To calculate the exact future state of chaotic systems.
 - C) To reduce the complexity of modeling chaotic systems.
@@ -1767,7 +1765,7 @@ B
 A
 ```
 
-**Question 158: What is a return map in the context of dynamical systems?**
+**What is a return map in the context of dynamical systems?**
 - A) A graphical representation of linear system trajectories.
 - B) A tool for measuring the periodicity of a system.
 - C) A plot showing the relationship between sequential points in a time series.
@@ -1778,7 +1776,7 @@ A
 C
 ```
 
-**Question 159: What is a difference equation in the context of dynamical systems?**
+**What is a difference equation in the context of dynamical systems?**
 - A) An equation that describes changes in continuous systems over infinitesimal time increments.
 - B) An equation that models the discrete steps in which systems evolve over time.
 - C) A method for determining the equilibrium state of a continuous system.
@@ -1789,7 +1787,7 @@ C
 B
 ```
 
-**Question 160: What are the Lotka-Volterra equations commonly used to model?**
+**What are the Lotka-Volterra equations commonly used to model?**
 - A) The interaction between predator and prey populations in an ecological system.
 - B) The growth patterns of a single species in isolation.
 - C) The economic dynamics between competing businesses.
@@ -1800,7 +1798,7 @@ B
 A
 ```
 
-**Question 161: What makes the Lotka-Volterra equations a continuous-time dynamical system?**
+**What makes the Lotka-Volterra equations a continuous-time dynamical system?**
 - A) They model population changes at discrete intervals only.
 - B) They are based on continuous changes over time, not just at specific points.
 - C) They predict exact population sizes at fixed times.
@@ -1811,7 +1809,7 @@ A
 B
 ```
 
-**Question 162: How does the Rössler system exemplify a chaotic dynamical system?**
+**How does the Rössler system exemplify a chaotic dynamical system?**
 - A) By exhibiting low sensitivity to initial conditions.
 - B) Through its linear interaction of variables.
 - C) By showing chaotic behavior when parameters reach certain values.
@@ -1822,7 +1820,7 @@ B
 C
 ```
 
-**Question 163: What is the implication of a zero Lyapunov exponent in a dynamical system?**
+**What is the implication of a zero Lyapunov exponent in a dynamical system?**
 - A) It signals exponential divergence of system trajectories.
 - B) It indicates neutral stability where trajectories neither converge nor diverge.
 - C) It suggests the system will always return to a stable equilibrium.
@@ -1833,7 +1831,7 @@ C
 B
 ```
 
-**Question 164: What is the phase space of a dynamical system?**
+**What is the phase space of a dynamical system?**
 - A) A graphical representation of all possible system states.
 - B) A specific region where the system's energy is minimized.
 - C) The timeline over which a system's behavior is observed.
@@ -1844,7 +1842,7 @@ B
 A
 ```
 
-**Question 165: Why are fractal dimensions important in the analysis of chaotic systems?**
+**Why are fractal dimensions important in the analysis of chaotic systems?**
 - A) They help in designing the system’s mechanical structure.
 - B) They are crucial for understanding the complexity and scale properties of chaotic attractors.
 - C) Fractal dimensions are used to simplify the mathematical model of the system.
@@ -1855,7 +1853,7 @@ A
 B
 ```
 
-**Question 166: What is the formula relating the ratio $r$, the number of parts $N$, and the dimensionality $D$ in fractal geometry?**
+**What is the formula relating the ratio $r$, the number of parts $N$, and the dimensionality $D$ in fractal geometry?**
 - A) $N = r^D$
 - B) $D = \frac{\log N}{\log r}$
 - C) $r = D \times N$
@@ -1866,7 +1864,7 @@ B
 B
 ```
 
-**Question 167: What does a non-integer fractal dimension signify about the structure of a fractal?**
+**What does a non-integer fractal dimension signify about the structure of a fractal?**
 - A) It represents simple, predictable patterns within the fractal.
 - B) It indicates a higher degree of complexity and fine structure at infinitesimal scales.
 - C) Non-integer dimensions are errors in mathematical calculations.
@@ -1877,7 +1875,7 @@ B
 B
 ```
 
-**Question 168: What does the dimensionality of an attractor reveal about a dynamical system?**
+**What does the dimensionality of an attractor reveal about a dynamical system?**
 - A) The precision of measurements in the system.
 - B) The potential energy levels throughout the system’s operation.
 - C) The complexity and predictability of the system’s dynamics.
@@ -1888,7 +1886,7 @@ B
 C
 ```
 
-**Question 169: What does it imply when we say a dynamical system is observed partially?**
+**What does it imply when we say a dynamical system is observed partially?**
 - A) It implies complete observation of all variables and interactions within the system.
 - B) Observations are limited to a subset of the system's variables, not capturing the entire state.
 - C) It means observations are made continuously without any interruption.
@@ -1899,7 +1897,7 @@ C
 B
 ```
 
-**Question 170: What is the primary statement of Takens' Embedding Theorem?**
+**What is the primary statement of Takens' Embedding Theorem?**
 - A) It states that a fully observable dynamical system can always be understood from partial observations.
 - B) It suggests that a single observed variable is sufficient to reconstruct a dynamical system’s full state under certain conditions.
 - C) It asserts that dynamical systems cannot be understood without complete data.
@@ -1910,7 +1908,7 @@ B
 B
 ```
 
-**Question 171: What hyperparameters must be specified to construct time-delay embedding vectors?**
+**What hyperparameters must be specified to construct time-delay embedding vectors?**
 - A) The embedding dimension and the delay time.
 - B) The system's total energy and mass.
 - C) The variables' initial and final values.
@@ -1921,7 +1919,7 @@ B
 A
 ```
 
-**Question 172: What is a potential consequence of setting $\tau$ too short or too long in Takens' Embedding?**
+**What is a potential consequence of setting $\tau$ too short or too long in Takens' Embedding?**
 - A) Too short or too long $\tau$ may cause overlap or excessive separation between data points in the embedding, obscuring the system's true dynamics.
 - B) It can change the fundamental properties of the dynamical system.
 - C) The dimensionality of the attractor will decrease.
@@ -1932,7 +1930,7 @@ A
 A
 ```
 
-**Question 173: What method is used to ascertain the appropriate $m$ for Takens' Embedding?**
+**What method is used to ascertain the appropriate $m$ for Takens' Embedding?**
 - A) The method of false nearest neighbors is employed to find the smallest $m$ where points that appear close in the embedding are close in the original space.
 - B) Using a complex algorithm that integrates all known variables of the system.
 - C) Setting $m$ based on the total number of observations available.
@@ -1943,7 +1941,7 @@ A
 A
 ```
 
-**Question 174: How can Takens' Embedding be used in time series forecasting?**
+**How can Takens' Embedding be used in time series forecasting?**
 - A) By predicting the exact future states of a dynamical system.
 - B) Through constructing a phase space that helps infer future states based on past behavior.
 - C) By ensuring all predictions are absolutely deterministic.
@@ -1955,11 +1953,9 @@ B
 ```
 
 
-
 ## Chapter 12
 
-
-**Question 175: What distinguishes a supervised task like classification from an unsupervised task such as clustering in time series analysis?**
+**What distinguishes a supervised task like classification from an unsupervised task such as clustering in time series analysis?**
 - A) Supervised tasks use unlabelled data while unsupervised tasks use labelled data.
 - B) Both supervised and unsupervised tasks use labels to guide the learning process.
 - C) Supervised tasks use labels to guide the learning process, while unsupervised tasks do not use any labels.
@@ -1970,7 +1966,7 @@ B
 C
 ```
 
-**Question 176: Under which circumstances is it preferable to use F1 score rather than accuracy?**
+**Under which circumstances is it preferable to use F1 score rather than accuracy?**
 - A) When the data set is balanced and model performance is consistent across classes.
 - B) When the data set is imbalanced and there is a need to balance the importance of precision and recall.
 - C) When the classes in the data set are perfectly balanced.
@@ -1981,7 +1977,7 @@ C
 B
 ```
 
-**Question 177: What is Normalized Mutual Information (NMI) used for in data analysis?**
+**What is Normalized Mutual Information (NMI) used for in data analysis?**
 - A) To measure the dependency between variables in regression tasks.
 - B) To evaluate the performance of clustering by comparing the clusters to ground truth classes.
 - C) To assess the accuracy of classification models.
@@ -1992,7 +1988,7 @@ B
 B
 ```
 
-**Question 178: Which statement best describes the relationship between similarity and dissimilarity measures in clustering algorithms?**
+**Which statement best describes the relationship between similarity and dissimilarity measures in clustering algorithms?**
 - A) Similarity measures are recalculated into dissimilarity measures before use.
 - B) They are often used interchangeably with an inverse relationship; high similarity implies low dissimilarity.
 - C) Dissimilarity measures are derived from similarity measures through complex transformations.
@@ -2003,7 +1999,7 @@ B
 B
 ```
 
-**Question 179: Why do different (dis)similarity measures affect classification outcomes?**
+**Why do different (dis)similarity measures affect classification outcomes?**
 - A) All (dis)similarity measures produce the same results.
 - B) Different measures may interpret the relationships between data points differently, impacting the classification boundaries.
 - C) Only linear measures affect classification; nonlinear measures do not.
@@ -2014,7 +2010,7 @@ B
 B
 ```
 
-**Question 180: In what scenarios is hierarchical clustering particularly useful?**
+**In what scenarios is hierarchical clustering particularly useful?**
 - A) When data is linear and simple.
 - B) When the dataset is extremely large and computational resources are limited.
 - C) When exploring data to find inherent structures and relationships at multiple scales.
@@ -2025,7 +2021,7 @@ B
 C
 ```
 
-**Question 181: Why are standard distances like Euclidean distance often unsuitable for time series data?**
+**Why are standard distances like Euclidean distance often unsuitable for time series data?**
 - A) They ignore the temporal dynamics and patterns specific to time series data.
 - B) They calculate distances too quickly, leading to underfitting.
 - C) They are more computationally intensive than specialized time series distances.
@@ -2036,7 +2032,7 @@ C
 A
 ```
 
-**Question 182: What defines a multi-variate time series in data analysis?**
+**What defines a multi-variate time series in data analysis?**
 - A) A series that consists of multiple sequences of categorical data points.
 - B) A series that tracks multiple variables or series over time.
 - C) A time series that is derived from a single variable observed at different intervals.
@@ -2047,7 +2043,7 @@ A
 B
 ```
 
-**Question 183: What is Dynamic Time Warping (DTW) and how does it differ from Euclidean distance in analyzing time series?**
+**What is Dynamic Time Warping (DTW) and how does it differ from Euclidean distance in analyzing time series?**
 - A) DTW is a method for measuring similarity between two sequences which may vary in speed, aligning them optimally to minimize their distance; Euclidean distance measures static point-to-point similarity.
 - B) DTW uses a complex algorithm that requires more data than Euclidean distance.
 - C) DTW can only be used with linear data, whereas Euclidean distance works with any data type.
@@ -2058,7 +2054,7 @@ B
 A
 ```
 
-**Question 184: What is an "alignment path" in the context of Dynamic Time Warping (DTW)?**
+**What is an "alignment path" in the context of Dynamic Time Warping (DTW)?**
 - A) A sequence of steps required to set up the DTW algorithm.
 - B) The optimal route through a matrix that minimizes the cumulative distance between two time series.
 - C) The maximum difference measured between two time series.
@@ -2069,7 +2065,7 @@ A
 B
 ```
 
-**Question 185: How is the optimal alignment path determined in Dynamic Time Warping?**
+**How is the optimal alignment path determined in Dynamic Time Warping?**
 - A) By randomly selecting paths until a satisfactory alignment is found.
 - B) Through a greedy algorithm that chooses the shortest immediate path.
 - C) Using dynamic programming to efficiently compute the minimal distance.
@@ -2080,7 +2076,7 @@ B
 C
 ```
 
-**Question 186: What are the key properties of Dynamic Time Warping (DTW)?**
+**What are the key properties of Dynamic Time Warping (DTW)?**
 - A) It is sensitive to outliers and noise in the data.
 - B) It is invariant to scaling and rotation of the time series.
 - C) It adjusts for shifts and distortions in the time dimension.
@@ -2091,7 +2087,7 @@ C
 C
 ```
 
-**Question 187: How can Dynamic Time Warping (DTW) be combined with classifiers like SVC or k-NN for time series analysis?**
+**How can Dynamic Time Warping (DTW) be combined with classifiers like SVC or k-NN for time series analysis?**
 - A) By using the DTW distance matrix as a feature vector directly in classifiers.
 - B) First computing the DTW distance matrix, then using this matrix to measure similarities in the classifier’s training and testing phases.
 - C) Applying DTW after classification to improve the accuracy of SVC or k-NN.
@@ -2102,7 +2098,7 @@ C
 B
 ```
 
-**Question 188: What role does kernel-PCA play when combined with DTW in visualizing time series data?**
+**What role does kernel-PCA play when combined with DTW in visualizing time series data?**
 - A) It enhances the computational speed of the DTW calculations.
 - B) It simplifies the time series data into a single variable.
 - C) It projects the DTW (dis)similarity matrix into a lower-dimensional space for easier visualization.
@@ -2113,7 +2109,7 @@ B
 C
 ```
 
-**Question 189: What is the fundamental concept behind a Gaussian Mixture Model (GMM) in clustering?**
+**What is the fundamental concept behind a Gaussian Mixture Model (GMM) in clustering?**
 - A) A model that uses a single Gaussian distribution to represent all data.
 - B) A non-probabilistic model that assigns each data point to a cluster.
 - C) A probabilistic model that assumes each cluster follows a different Gaussian distribution.
@@ -2124,7 +2120,7 @@ C
 C
 ```
 
-**Question 190: What is a primary advantage of using an ensemble approach in TCK?**
+**What is a primary advantage of using an ensemble approach in TCK?**
 - A) It simplifies the model by reducing the number of parameters.
 - B) It improves clustering robustness and accuracy by integrating diverse model perspectives.
 - C) It reduces computational requirements by using a single model.
@@ -2135,7 +2131,7 @@ C
 B
 ```
 
-**Question 191: What advantage does embedding a time series into a real-valued vector provide?**
+**What advantage does embedding a time series into a real-valued vector provide?**
 - A) It allows the time series to be processed by traditional data analysis tools that require fixed-length inputs.
 - B) It enhances the temporal resolution of the time series data.
 - C) It preserves the raw format of time series data without any loss.
@@ -2146,7 +2142,7 @@ B
 A
 ```
 
-**Question 192: What is the primary purpose of the Reservoir module in the Reservoir Computing framework for time series analysis?**
+**What is the primary purpose of the Reservoir module in the Reservoir Computing framework for time series analysis?**
 - A) To directly predict future values in a time series
 - B) To preprocess data by normalizing and cleaning
 - C) To extract and expand dynamic features from the input time series for use in classification and clustering
@@ -2157,7 +2153,7 @@ A
 C
 ```
 
-**Question 193: What advantage does a bidirectional Reservoir offer over a standard Reservoir?**
+**What advantage does a bidirectional Reservoir offer over a standard Reservoir?**
 - A) It captures temporal dependencies more effectively by integrating past and future context.
 - B) It reduces the computational requirements for processing.
 - C) It operates with fewer parameters and simpler configuration.
@@ -2168,7 +2164,7 @@ C
 A
 ```
 
-**Question 194: What characteristic does the Dimensionality Reduction module bring to the Reservoir Computing framework?**
+**What characteristic does the Dimensionality Reduction module bring to the Reservoir Computing framework?**
 - A) It decreases the processing speed of the system
 - B) It compresses the high-dimensional data into a more manageable form without significant loss of information
 - C) It increases the number of features for better classification accuracy
@@ -2179,7 +2175,7 @@ A
 B
 ```
 
-**Question 195: What is the main difference between using Tensor-PCA and traditional PCA for dimensionality reduction in Reservoir Computing?**
+**What is the main difference between using Tensor-PCA and traditional PCA for dimensionality reduction in Reservoir Computing?**
 - A) Tensor-PCA does not support multivariate data.
 - B) Tensor-PCA is better suited for handling the multidimensional data structures typical of reservoir states, unlike traditional PCA which is limited to flat data structures.
 - C) Traditional PCA is faster and less complex computationally than Tensor-PCA.
@@ -2190,7 +2186,7 @@ B
 B
 ```
 
-**Question 196: Why does representing time series using the Reservoir model space typically perform better than using just the output model space?**
+**Why does representing time series using the Reservoir model space typically perform better than using just the output model space?**
 - A) Because it includes only the most recent data points, ignoring earlier dynamics.
 - B) It captures a richer and more comprehensive set of dynamic behaviors from the entire reservoir processing.
 - C) The output model space is more computationally intensive, leading to slower performance.
@@ -2201,7 +2197,7 @@ B
 B
 ```
 
-**Question 197: What is the purpose of the readout module in the Reservoir Computing framework for multivariate time series?**
+**What is the purpose of the readout module in the Reservoir Computing framework for multivariate time series?**
 - A) To store the incoming multivariate time series data for processing
 - B) To filter noise from the input data before it enters the reservoir
 - C) To map the time series representation to the desired output
@@ -2212,7 +2208,7 @@ B
 C
 ```
 
-**Question 198: What is a disadvantage of using Time Series Cluster Kernel (TCK)?**
+**What is a disadvantage of using Time Series Cluster Kernel (TCK)?**
 - A) It requires large amounts of memory.
 - B) It is limited to linear time series data.
 - C) It cannot handle multivariate data.
