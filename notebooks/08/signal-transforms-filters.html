@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -422,17 +422,17 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-response">Frequency response</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-function">Transfer function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bode-plot">Bode plot</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#low-pass-filters-lpfs">Low pass filters (LPFs)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hann-window">Hann window</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tukey-filter">Tukey filter</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#butterworth-filter">Butterworth filter</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-pass-filters-hpfs">High pass filters (HPFs)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#band-pass-filter">Band pass filter</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#band-stop-filter">Band-stop filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-pass-filters-lpfs">Low pass filters (LPFs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hann-window">Hann window</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tukey-filter">Tukey filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#butterworth-filter">Butterworth filter</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-pass-filters-hpfs">High pass filters (HPFs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#band-pass-filters">Band pass filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#band-stop-filters">Band-stop filters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-forecasts-with-fourier-transforms">Making forecasts with Fourier transforms</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecast-example-1">Forecast example 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecast-example-2">Forecast example 2</a></li>
@@ -538,8 +538,8 @@ document.write(`
 </ul>
 <img alt="../../_images/ft.png" src="../../_images/ft.png" />
 <p>The Fourier Transform mathematical formulation is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-42439729-6c59-451e-abe3-83b8d9872269">
-<span class="eqno">(2)<a class="headerlink" href="#equation-42439729-6c59-451e-abe3-83b8d9872269" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-7e37931c-8f15-439a-9160-ddb122fd8f45">
+<span class="eqno">(2)<a class="headerlink" href="#equation-7e37931c-8f15-439a-9160-ddb122fd8f45" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
 <ul class="simple">
 <li><p>where:</p>
 <ul>
@@ -646,7 +646,7 @@ document.write(`
 <li><p>and</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[X[k + \frac{N}{2}] = X_{\text{even}}[k] - e^{-\frac{i 2 \pi}{N} k} X_{\text{odd}}[k]\]</div>
+\[X \left[ k + \frac{N}{2} \right] = X_{\text{even}}[k] - e^{-\frac{i 2 \pi}{N} k} X_{\text{odd}}[k]\]</div>
 <ul class="simple">
 <li><p>This process is repeated on the subsequences until the problem is reduced to the DFT of sequences of length 1, which are trivial.</p></li>
 <li><p>The algorithm recombines these results to produce the final DFT.</p></li>
@@ -657,7 +657,7 @@ document.write(`
 <section id="common-fourier-transforms">
 <h2>Common Fourier Transforms<a class="headerlink" href="#common-fourier-transforms" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>First, we make a list of the most common FT of known functions and report the analytic expression.</p></li>
+<li><p>First, we make a list of the most common FT of known functions and report their analytic expression.</p></li>
 <li><p>This list is adapted from <a class="reference external" href="https://github.com/cpjobling/eg-247-textbook">here</a>.</p></li>
 </ul>
 <table class="table">
@@ -941,7 +941,7 @@ document.write(`
 </table>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
 <span class="n">freq</span><span class="o">=</span><span class="mi">5</span>
 <span class="n">y_sinc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
 <span class="n">plot_time_freq</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_sinc</span><span class="p">)</span>
@@ -949,7 +949,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6b8834028a4a9a421f15ce2e41de5c2647cdd5c11fd93bead15d395aced718aa.png" src="../../_images/6b8834028a4a9a421f15ce2e41de5c2647cdd5c11fd93bead15d395aced718aa.png" />
+<img alt="../../_images/ecba240b98e7256d0926a8e0a250232bbe206fe6516ee6cd07f6c96afca5e663.png" src="../../_images/ecba240b98e7256d0926a8e0a250232bbe206fe6516ee6cd07f6c96afca5e663.png" />
 </div>
 </div>
 </section>
@@ -995,7 +995,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9cc71a6781d644bfdb4ab77e567d3cd75a314e6ec6c2ef098b93bc61f3c649c3.png" src="../../_images/9cc71a6781d644bfdb4ab77e567d3cd75a314e6ec6c2ef098b93bc61f3c649c3.png" />
+<img alt="../../_images/f687e335ac60ba96ad995e80b9d4c661b52545fba7b1d3f5e06459dadde0ac8e.png" src="../../_images/f687e335ac60ba96ad995e80b9d4c661b52545fba7b1d3f5e06459dadde0ac8e.png" />
 </div>
 </div>
 <p>We can observe that in the Frequency Domain:</p>
@@ -1058,7 +1058,8 @@ document.write(`
 </div>
 </div>
 <ul class="simple">
-<li><p>For the second component, we observe spectal leakage.</p></li>
+<li><p>For the second component, we observe a many small non-zero frequencies around the acutal one, <code class="docutils literal notranslate"><span class="pre">13.12</span></code>.</p></li>
+<li><p>This is the <em>spectal leakage</em>.</p></li>
 <li><p>This is a very common phenomenon when analyzing real-world signals.</p></li>
 <li><p>We should keep this in mind when we try to isolate specific frequencies with filters (more on this later).</p></li>
 </ul>
@@ -1401,6 +1402,7 @@ document.write(`
 <section id="convolution">
 <h3>Convolution<a class="headerlink" href="#convolution" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Informally, convolution represents how much one function <span class="math notranslate nohighlight">\(f\)</span> overlaps with another function <span class="math notranslate nohighlight">\(g\)</span> as it slides across the domain.</p></li>
 <li><p>The Fourier transform converts convolution in time domain into multiplication in frequency domain.</p></li>
 <li><p>The convolution is defined as:</p></li>
 </ul>
@@ -1644,6 +1646,8 @@ document.write(`
 \[\sum_{n=0}^{N-1} |x[n]|^2 = \frac{1}{N} \sum_{k=0}^{N-1} |X[k]|^2\]</div>
 <ul class="simple">
 <li><p>where <span class="math notranslate nohighlight">\(x[n]\)</span> is the discrete time-domain signal, <span class="math notranslate nohighlight">\(X[k]\)</span> is its DFT, and <span class="math notranslate nohighlight">\(N\)</span> is the number of points in the signal and its DFT.</p></li>
+<li><p>Before, we saw that signals such as the sinusoid or the Dirac delta can be concentrated in one domain (e.g., time) and spread in the other (e.g., frequency).</p></li>
+<li><p>Parseval’s theorem ensures that despite the localization properties, the total energy remains constant.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1703,15 +1707,8 @@ Energy in the frequency domain: 312.5
 <h3>Transfer function<a class="headerlink" href="#transfer-function" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The transfer function describes how the filter modifies the amplitude and phase of components of the input signal at different frequencies.</p></li>
-<li><p>For analog filters (continuous time) is defined as the ratio of the output signal and the input signal of the filter in the Laplace domain:</p></li>
+<li><p>To define it, we must first introduce the Laplace transform and the Z-transform.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[H(s) = \frac{Y(s)}{X(s)}\]</div>
-<ul class="simple">
-<li><p>For digital filters (discrete time) the ratio is defined in the Z-domain:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[H(z) = \frac{Y(z)}{X(z)}\]</div>
 <p><strong>Laplace transform</strong></p>
 <ul class="simple">
 <li><p>The Laplace transform of a function <span class="math notranslate nohighlight">\(f(t)\)</span>, defined for <span class="math notranslate nohighlight">\(t \geq 0\)</span>, is given by</p></li>
@@ -1726,7 +1723,7 @@ Energy in the frequency domain: 312.5
 </ul>
 <p><strong>Z-transform</strong></p>
 <ul class="simple">
-<li><p>The relationship between the z-transform and the Discrete Fourier Transform (DFT) is similar to the relationship between the Laplace and Fourier transforms in the continuous domain,</p></li>
+<li><p>The relationship between the z-transform and the Discrete Fourier Transform (DFT) is similar to the relationship between the Laplace and Fourier transforms in the continuous domain.</p></li>
 <li><p>The z-transform of a discrete-time signal <span class="math notranslate nohighlight">\(x[n]\)</span> is defined as</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -1736,6 +1733,17 @@ Energy in the frequency domain: 312.5
 <li><p>The Discrete Fourier Transform (DFT) <span class="math notranslate nohighlight">\(X[k] = \sum_{n=0}^{N-1} x[n]e^{-i\frac{2\pi}{N}kn}\)</span> is a special case of z-transform evaluated on the unit circle in the complex plane, i.e., when <span class="math notranslate nohighlight">\(z = e^{i\omega}\)</span>.</p></li>
 <li><p>The z-transform encompasses a broader range of analysis, allowing for the examination of signals and systems inside and outside the unit circle, which is useful for stability analysis and filter design in the z-domain.</p></li>
 </ul>
+<ul class="simple">
+<li><p>We are now ready to introduce the <em>transfer function</em>.</p></li>
+<li><p>For analog filters (continuous time) it is defined as the ratio of the output signal and the input signal of the filter in the Laplace domain:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H(s) = \frac{Y(s)}{X(s)}\]</div>
+<ul class="simple">
+<li><p>For digital filters (discrete time) the ratio is defined in the Z-domain:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H(z) = \frac{Y(z)}{X(z)}\]</div>
 <p><strong>Frequency response vs transfer function</strong></p>
 <p>To summarize:</p>
 <ul class="simple">
@@ -1832,23 +1840,25 @@ Energy in the frequency domain: 312.5
 <p><strong>Phase plot (right)</strong></p>
 <ul class="simple">
 <li><p>Illustrates the phase shift introduced by the filter across different frequencies.</p></li>
-<li><p>For a first-order low-pass filter, the phase shift goes from 0 degrees at low frequencies to -90 degrees at high frequencies.</p></li>
+<li><p>For a low-pass filter, the phase shift goes from 0 degrees at low frequencies to -90 degrees at high frequencies.</p></li>
 <li><p>The transition occurs smoothly across the frequency range, with a noticeable change around the cutoff frequency.</p></li>
 </ul>
 </section>
+</section>
+<hr class="docutils" />
 <section id="low-pass-filters-lpfs">
-<h3>Low pass filters (LPFs)<a class="headerlink" href="#low-pass-filters-lpfs" title="Link to this heading">#</a></h3>
+<h2>Low pass filters (LPFs)<a class="headerlink" href="#low-pass-filters-lpfs" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>As we mentioned earlier, a LPF passes signals with a frequency lower than a certain cutoff frequency.</p></li>
 <li><p>LPFs provide a smoother form of a signal, removing short term fluctuations.</p></li>
-<li><p>One common application is to get rid of aht high-frequency components of the noise.</p></li>
+<li><p>One common application is to get rid of the high-frequency components of the noise.</p></li>
 <li><p>Moving averages are a type of low pass filters.</p></li>
 <li><p>Representative LPFs include the Hann Window, the Tukey Filter, and the Butterworth Filter.</p></li>
 </ul>
 <section id="hann-window">
-<h4>Hann window<a class="headerlink" href="#hann-window" title="Link to this heading">#</a></h4>
+<h3>Hann window<a class="headerlink" href="#hann-window" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The Hann window, is named after Julius von Hann, and is sometimes referred to as “Hanning” or as “raised cosine”.</p></li>
+<li><p>The Hann window, named after Julius von Hann, is sometimes referred to as “Hanning” or as “raised cosine”.</p></li>
 <li><p>The shape of the filter in time domain is one lobe of an elevated cosine function.</p></li>
 <li><p>On the interval <span class="math notranslate nohighlight">\(n\in [0,N-1]\)</span> the Hann window function is:</p></li>
 </ul>
@@ -1925,7 +1935,7 @@ Energy in the frequency domain: 312.5
 </div>
 </section>
 <section id="tukey-filter">
-<h4>Tukey filter<a class="headerlink" href="#tukey-filter" title="Link to this heading">#</a></h4>
+<h3>Tukey filter<a class="headerlink" href="#tukey-filter" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The Tukey filter is also known as the Tukey window or “tapered cosine window”.</p></li>
 <li><p>It can be regarded as a cosine lobe of width <span class="math notranslate nohighlight">\(\alpha N/2\)</span> that is convolved with a rectangular window of width <span class="math notranslate nohighlight">\((1 − α/2)N\)</span>.</p></li>
@@ -1979,7 +1989,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <ul class="simple">
-<li><p>When <span class="math notranslate nohighlight">\(\alpha \rightarrow 0\)</span> the Tukey filter becomes a rectangular window.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(\alpha \rightarrow 0\)</span> the Tukey converges to a rectangular window.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2065,7 +2075,7 @@ Energy in the frequency domain: 312.5
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Window length: 32
 </pre></div>
 </div>
-<img alt="../../_images/7ffdde57a07f610cc878db2b5b721637766b586a47a0b0ab5ac3793dbbc30d91.png" src="../../_images/7ffdde57a07f610cc878db2b5b721637766b586a47a0b0ab5ac3793dbbc30d91.png" />
+<img alt="../../_images/cca04030a51046f8fe69444d983e3e07dc50e0d2de53b267c1c463f59c243aa6.png" src="../../_images/cca04030a51046f8fe69444d983e3e07dc50e0d2de53b267c1c463f59c243aa6.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2073,10 +2083,12 @@ Energy in the frequency domain: 312.5
 </ul>
 </section>
 <section id="butterworth-filter">
-<h4>Butterworth filter<a class="headerlink" href="#butterworth-filter" title="Link to this heading">#</a></h4>
+<h3>Butterworth filter<a class="headerlink" href="#butterworth-filter" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The Butterworth filter is designed to have a frequency response as flat as possible in the passband.</p></li>
-<li><p>It avoids ripples both in the passband and in the stopband, providing a smooth transition between these regions.</p></li>
+<li><p>The Butterworth filter is designed to have a frequency response as flat as possible in the <em>passband</em>.</p></li>
+<li><p>The passband is the part of the filter that allows certain the frequencies (left of the green line in the figure below).</p></li>
+<li><p>Conversely, the <em>stopband</em> is the parts of the filter that rejects/dampens the frequency (right of the green line).</p></li>
+<li><p>The Butterworth filter avoids ripples both in the passband and in the stopband, providing a smooth transition between these regions.</p></li>
 </ul>
 <img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Butterworth_response.svg/640px-Butterworth_response.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Butterworth_response.svg/640px-Butterworth_response.svg.png" />
 <div style="text-align: center; font-size: 80%;">Image: <a href="https://commons.wikimedia.org/wiki/File:Butterworth_response.svg">Wikimedia</a></div><ul class="simple">
@@ -2107,7 +2119,7 @@ Energy in the frequency domain: 312.5
 <ul class="simple">
 <li><p>Let’s consider a signal given by the sum of two sinusoids.</p></li>
 <li><p>The first sinusoid <span class="math notranslate nohighlight">\(y_1\)</span> has a frequency <span class="math notranslate nohighlight">\(f_1 = 10\)</span> Hz.</p></li>
-<li><p>The second sinusoid <span class="math notranslate nohighlight">\(y_2\)</span> has frequency <span class="math notranslate nohighlight">\(f_2 = 15\)</span> Hz.</p></li>
+<li><p>The second sinusoid <span class="math notranslate nohighlight">\(y_2\)</span> has a frequency <span class="math notranslate nohighlight">\(f_2 = 15\)</span> Hz.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2210,7 +2222,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/98cf5345bc3e962380dfc67d8b7d3d79c9155bf142b62cdaa250f9fd9f00b800.png" src="../../_images/98cf5345bc3e962380dfc67d8b7d3d79c9155bf142b62cdaa250f9fd9f00b800.png" />
+<img alt="../../_images/f4d0c787229c34ffbcb5b9a4ca8ed63e3ac551f76be8273808cc461b2ba3b199.png" src="../../_images/f4d0c787229c34ffbcb5b9a4ca8ed63e3ac551f76be8273808cc461b2ba3b199.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2238,8 +2250,9 @@ Energy in the frequency domain: 312.5
 </div>
 </section>
 </section>
+<hr class="docutils" />
 <section id="high-pass-filters-hpfs">
-<h3>High pass filters (HPFs)<a class="headerlink" href="#high-pass-filters-hpfs" title="Link to this heading">#</a></h3>
+<h2>High pass filters (HPFs)<a class="headerlink" href="#high-pass-filters-hpfs" title="Link to this heading">#</a></h2>
 <p>Allows signals with frequencies higher than a certain cutoff frequency to pass through, while attenuating (reducing) signals with frequencies below the cutoff.</p>
 <img alt="https://upload.wikimedia.org/wikipedia/commons/4/4d/75_Hz_HPF_on_Smaart.jpg" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/75_Hz_HPF_on_Smaart.jpg" />
 <div style="text-align: center; font-size: 80%;">Image: <a href="https://upload.wikimedia.org/wikipedia/commons/4/4d/75_Hz_HPF_on_Smaart.jpg">Wikimedia</a></div><ul class="simple">
@@ -2285,15 +2298,16 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/10d8169434941bb1db673798e7eaf66238d29b950e7b00b64fdccf49272b4e53.png" src="../../_images/10d8169434941bb1db673798e7eaf66238d29b950e7b00b64fdccf49272b4e53.png" />
+<img alt="../../_images/3a41522626184e3a5c9e43589c767a1ca5625a0cc3774467e966a52d8ac16674.png" src="../../_images/3a41522626184e3a5c9e43589c767a1ca5625a0cc3774467e966a52d8ac16674.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>We can observe that the trend has been removed.</p></li>
 </ul>
 </section>
-<section id="band-pass-filter">
-<h3>Band pass filter<a class="headerlink" href="#band-pass-filter" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<section id="band-pass-filters">
+<h2>Band pass filters<a class="headerlink" href="#band-pass-filters" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>A band pass filter (BPF) passes frequencies within a certain range and rejects frequencies outside that range.</p></li>
 </ul>
@@ -2338,13 +2352,14 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e9900b791e546642962f7d941bf63631698f68d58d928ddad266f99c8cbc7404.png" src="../../_images/e9900b791e546642962f7d941bf63631698f68d58d928ddad266f99c8cbc7404.png" />
+<img alt="../../_images/47e05b30c12b76539954c81238dc277d82454a68a8e7c5fc2de1e29a38b267ec.png" src="../../_images/47e05b30c12b76539954c81238dc277d82454a68a8e7c5fc2de1e29a38b267ec.png" />
 </div>
 </div>
 <p>We observe that the original signal has been de-trended, and the noise has been removed.</p>
 </section>
-<section id="band-stop-filter">
-<h3>Band-stop filter<a class="headerlink" href="#band-stop-filter" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<section id="band-stop-filters">
+<h2>Band-stop filters<a class="headerlink" href="#band-stop-filters" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>A band-stop filter (BSF) passes most filters unaltered, but attenuates those in a specific range to very low levels.</p></li>
 </ul>
@@ -2434,7 +2449,6 @@ Energy in the frequency domain: 312.5
 <li><p>The effect of the third sinusoid has been completely removed from the signal.</p></li>
 <li><p>An application of this filter is to remove a specific seasonality from the data.</p></li>
 </ul>
-</section>
 </section>
 <hr class="docutils" />
 <section id="making-forecasts-with-fourier-transforms">
@@ -2559,7 +2573,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/00b3f5f9b381c0d8d80db1a2d7d8f3a9bfcc81efda1dccd97cac7d477eda28eb.png" src="../../_images/00b3f5f9b381c0d8d80db1a2d7d8f3a9bfcc81efda1dccd97cac7d477eda28eb.png" />
+<img alt="../../_images/06560b6d5b3690ecaf1a46e6b084d271582006dc92522d5f8df901d19d090b85.png" src="../../_images/06560b6d5b3690ecaf1a46e6b084d271582006dc92522d5f8df901d19d090b85.png" />
 </div>
 </div>
 </section>
@@ -2658,7 +2672,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/fe8efef08d5fb29b7bfc91f86bfa488d8c4e8d6c7c495362bd455613d8112d68.png" src="../../_images/fe8efef08d5fb29b7bfc91f86bfa488d8c4e8d6c7c495362bd455613d8112d68.png" />
+<img alt="../../_images/796222fcd7368c321f22fd374d3b958afca6aee6f49a185e541948b26d467cab.png" src="../../_images/796222fcd7368c321f22fd374d3b958afca6aee6f49a185e541948b26d467cab.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2674,7 +2688,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8e85dae51bc59a68df37b23adc91fef0857a714548f924179c09fd97832acc7b.png" src="../../_images/8e85dae51bc59a68df37b23adc91fef0857a714548f924179c09fd97832acc7b.png" />
+<img alt="../../_images/e6332149775d9b60038e8c89f53a462675157bb50a6698f2c45c17022257d23b.png" src="../../_images/e6332149775d9b60038e8c89f53a462675157bb50a6698f2c45c17022257d23b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2691,7 +2705,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bb58122e682ecf835291e5c571a8fefeecc801bd655fe2521daf4139fc7d2bd2.png" src="../../_images/bb58122e682ecf835291e5c571a8fefeecc801bd655fe2521daf4139fc7d2bd2.png" />
+<img alt="../../_images/512c640780ef991706a46594bd97d6236156a519e934efe26714b8c6d17dff39.png" src="../../_images/512c640780ef991706a46594bd97d6236156a519e934efe26714b8c6d17dff39.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2711,7 +2725,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cec0919ee6a8aae44abdb6c2fd347c54f7357b299028a8c6a1cac1210a8f521b.png" src="../../_images/cec0919ee6a8aae44abdb6c2fd347c54f7357b299028a8c6a1cac1210a8f521b.png" />
+<img alt="../../_images/2c37489888234ca2e74066a48c311a2018bdcc376af095858887f41bdb3b2f00.png" src="../../_images/2c37489888234ca2e74066a48c311a2018bdcc376af095858887f41bdb3b2f00.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2729,7 +2743,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8bd09f4c72e9f30cc176ab3f5ca94abe7c119f4b2154d3d51f81cd6ac0ec4451.png" src="../../_images/8bd09f4c72e9f30cc176ab3f5ca94abe7c119f4b2154d3d51f81cd6ac0ec4451.png" />
+<img alt="../../_images/8de6e8556aef5bed9c3f74312e8fd10aa24934696b416f3ba4693ebdfef1de37.png" src="../../_images/8de6e8556aef5bed9c3f74312e8fd10aa24934696b416f3ba4693ebdfef1de37.png" />
 </div>
 </div>
 </section>
@@ -2739,7 +2753,7 @@ Resampled:
 <h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <p>In this lecture we learned some basic concepts from signal processing. In particular</p>
 <ul class="simple">
-<li><p>A basic understanding of the Fourier Transform, the Discrete Fourier Transform.</p></li>
+<li><p>A basic understanding of the Fourier Transform and the Discrete Fourier Transform.</p></li>
 <li><p>A practical knowledge of how to apply the Fast Fourier Transform.</p></li>
 <li><p>The FT of common signals and the main properties of the FT.</p></li>
 <li><p>The concepts of frequency response and transfer function</p></li>
@@ -2933,17 +2947,17 @@ Resampled:
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-response">Frequency response</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-function">Transfer function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bode-plot">Bode plot</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#low-pass-filters-lpfs">Low pass filters (LPFs)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hann-window">Hann window</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tukey-filter">Tukey filter</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#butterworth-filter">Butterworth filter</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-pass-filters-hpfs">High pass filters (HPFs)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#band-pass-filter">Band pass filter</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#band-stop-filter">Band-stop filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-pass-filters-lpfs">Low pass filters (LPFs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hann-window">Hann window</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tukey-filter">Tukey filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#butterworth-filter">Butterworth filter</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-pass-filters-hpfs">High pass filters (HPFs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#band-pass-filters">Band pass filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#band-stop-filters">Band-stop filters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-forecasts-with-fourier-transforms">Making forecasts with Fourier transforms</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecast-example-1">Forecast example 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecast-example-2">Forecast example 2</a></li>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -395,6 +395,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity">Stationarity</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detect-non-stationarity">Detect non-stationarity</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#achieve-stationarity">Achieve stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion">Brownian Motion</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-root-test">Unit root test</a><ul class="nav section-nav flex-column">
@@ -407,7 +408,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-vs-stationarity">Mean reversion VS stationarity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion-recap">Brownian Motion (recap)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hurst-exponent">Hurst exponent</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hurst-exponent-in-finance">Interpretation of the Hurst exponent in finance:</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical considerations:</a></li>
@@ -500,13 +500,13 @@ document.write(`
 <li><p>The human element.</p></li>
 <li><p>Aggregations of small influencers.</p></li>
 <li><p>Observation errors.</p></li>
-<li><p>The smaller this is in relation to Trend and Seasonal, the better we can predict the future.</p></li>
+<li><p>The smaller this is in relation to trend and seasonal components, the better we can predict the future.</p></li>
 </ul>
 </section>
 <section id="additive-vs-multiplicative">
 <h3>Additive vs Multiplicative<a class="headerlink" href="#additive-vs-multiplicative" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Time series models can fall into categories:</p></li>
+<li><p>Time series models can fall into two categories:</p></li>
 </ul>
 <p><strong>Additive</strong></p>
 <ul class="simple">
@@ -552,7 +552,7 @@ document.write(`
 <ul class="simple">
 <li><p>Histogram of time series:</p>
 <ul>
-<li><p>Does it look Normal? <span class="math notranslate nohighlight">\(\rightarrow\)</span> stationary.</p></li>
+<li><p>Does it look normal? <span class="math notranslate nohighlight">\(\rightarrow\)</span> stationary.</p></li>
 <li><p>Does it look non-normal (e.g., uniform)? <span class="math notranslate nohighlight">\(\rightarrow\)</span> non-stationary.</p></li>
 </ul>
 </li>
@@ -574,6 +574,41 @@ document.write(`
 <li><p>Difference (multiple times if needed) to remove trends and seasonality.</p></li>
 <li><p>Subtract estimated trend and seasonal components.</p></li>
 </ul>
+</section>
+<section id="brownian-motion">
+<h3>Brownian Motion<a class="headerlink" href="#brownian-motion" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Recall the random walk</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X(t) = X(t-1) + \epsilon_t\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\epsilon_t \sim \mathcal{N}(0,\sigma^2)\)</span>.</p></li>
+<li><p>This can also be expressed as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X(t) = X(0) + W(t)\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(W(t)\)</span> is the <em>Wiener Process</em>, or as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X(t) = X(0) + B(t)\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(B(t)\)</span> is the <em>Brownian Motion</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(W_t\)</span> and <span class="math notranslate nohighlight">\(B(t)\)</span> represents the cumulative sum of normally distributed increments <span class="math notranslate nohighlight">\(\epsilon_1 + \epsilon_2 + \dots \epsilon_t\)</span>.</p></li>
+</ul>
+<p><strong>Variance of Brownian Motion at time lag <span class="math notranslate nohighlight">\(\tau\)</span></strong></p>
+<ul class="simple">
+<li><p>For a time series <span class="math notranslate nohighlight">\(X(t)\)</span>, the variance at a time lag <span class="math notranslate nohighlight">\(\tau\)</span> can be defined as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(X(t + \tau) - X(t))\]</div>
+<ul class="simple">
+<li><p>Given <span class="math notranslate nohighlight">\(B(t)\)</span> as Brownian motion, the increment <span class="math notranslate nohighlight">\(B(t + \tau) - B(t)\)</span> is normally distributed with mean 0 and variance <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+<li><p>This is because the variance of the increments of Brownian motion over a period <span class="math notranslate nohighlight">\(\tau\)</span> is <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(B(t + \tau) - B(t)) = \tau\]</div>
 </section>
 </section>
 <hr class="docutils" />
@@ -919,43 +954,6 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </ul>
 </section>
 </section>
-<section id="brownian-motion-recap">
-<h2>Brownian Motion (recap)<a class="headerlink" href="#brownian-motion-recap" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Recall the random walk</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[X(t) = X(t-1) + \epsilon_t\]</div>
-<ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\(\epsilon_t \sim \mathcal{N}(0,\sigma^2)\)</span>.</p></li>
-<li><p>This is also be expressed as</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[X(t) = X(0) + W(t)\]</div>
-<ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\(W(t)\)</span> is the <em>Wiener Process</em></p></li>
-<li><p>or as</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[X(t) = X(0) + B(t)\]</div>
-<ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\(B(t)\)</span> is the <em>Brownian Motion</em></p></li>
-<li><p><span class="math notranslate nohighlight">\(W_t\)</span> and <span class="math notranslate nohighlight">\(B(t)\)</span> represents the cumulative sum of normally distributed increments <span class="math notranslate nohighlight">\(\epsilon_1 + \epsilon_2 + \dots \epsilon_t\)</span>.</p></li>
-</ul>
-<p><strong>Variance of Brownian Motion at time lag <span class="math notranslate nohighlight">\(\tau\)</span></strong></p>
-<ul class="simple">
-<li><p>For a time series <span class="math notranslate nohighlight">\(X(t)\)</span>, the variance at a time lag <span class="math notranslate nohighlight">\(\tau\)</span> can be defined as:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\text{Var}(X(t + \tau) - X(t))\]</div>
-<ul class="simple">
-<li><p>Given <span class="math notranslate nohighlight">\(B(t)\)</span> as Brownian motion, the increment <span class="math notranslate nohighlight">\(B(t + \tau) - B(t)\)</span> is normally distributed with mean 0 and variance <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
-<li><p>This is because the variance of the increments of Brownian motion over a period <span class="math notranslate nohighlight">\(\tau\)</span> is <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\text{Var}(B(t + \tau) - B(t)) = \tau\]</div>
-</section>
-<hr class="docutils" />
 <section id="hurst-exponent">
 <h2>Hurst exponent<a class="headerlink" href="#hurst-exponent" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -980,7 +978,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <p>A time series can then be characterised in the following manner:</p>
 <ul class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(H = 0.5\)</span>, the time series is similar to a random walk (Brownian motion). In this case, the variance increases linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(H &lt; 0.5\)</span>, the time series exhibits anti-persistence, i.e. mean reverting. The variance increases more slowly than linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(H &lt; 0.5\)</span>, the time series exhibits anti-persistence, i.e. mean reversal. The variance increases more slowly than linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(H &gt; 0.5\)</span>, the time series exhibits persistent long-range dependence, i.e. is trending. The variance increases more rapidly than linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1086,7 +1084,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </div>
 <ul class="simple">
-<li><p>Google has stocks time series approaches <span class="math notranslate nohighlight">\(H=0.5\)</span>, indicating that it is close to a geometric random walk (at least for the sample period we’re looking at).</p></li>
+<li><p>Google stocks’ time series approaches <span class="math notranslate nohighlight">\(H=0.5\)</span>, indicating that it is close to a geometric random walk (at least for the sample period we’re looking at).</p></li>
 <li><p>What does this mean in practice?</p></li>
 </ul>
 <section id="interpretation-of-the-hurst-exponent-in-finance">
@@ -1126,7 +1124,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li><p>The observed value of <span class="math notranslate nohighlight">\(H\)</span> can vary over different time frames: analyze <span class="math notranslate nohighlight">\(H\)</span> over the period relevant to the investment horizon.</p></li>
 <li><p>External factors such as market conditions, economic indicators, and geopolitical events can influence stock prices and should be considered alongside <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
 <li><p>Regardless of the value of <span class="math notranslate nohighlight">\(H\)</span>, implementing proper risk management strategies is essential to protect against unexpected market movements.</p></li>
-<li><p>If the time series is to short, the value of <span class="math notranslate nohighlight">\(H\)</span> might not reliable.</p></li>
+<li><p>If the time series is too short, the value of <span class="math notranslate nohighlight">\(H\)</span> might not be reliable.</p></li>
 </ul>
 </section>
 </section>
@@ -1442,6 +1440,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity">Stationarity</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detect-non-stationarity">Detect non-stationarity</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#achieve-stationarity">Achieve stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion">Brownian Motion</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-root-test">Unit root test</a><ul class="nav section-nav flex-column">
@@ -1454,7 +1453,6 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-reversion-vs-stationarity">Mean reversion VS stationarity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion-recap">Brownian Motion (recap)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hurst-exponent">Hurst exponent</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hurst-exponent-in-finance">Interpretation of the Hurst exponent in finance:</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical considerations:</a></li>

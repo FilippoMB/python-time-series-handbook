@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -446,7 +446,7 @@ document.write(`
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture will cover the following topics:</p>
 <ul class="simple">
-<li><p>Introduction to Kalman Filter.</p></li>
+<li><p>Introduction to the Kalman Filter.</p></li>
 <li><p>Model components and assumptions.</p></li>
 <li><p>The Kalman Filter algorithm.</p></li>
 <li><p>Application to static and dynamic one-dimensional data.</p></li>
@@ -543,7 +543,7 @@ document.write(`
 <p>The Kalman filter approach is based on three fundamental assumptions:</p>
 <ol class="arabic simple">
 <li><p>The system can be described or approximated by a linear model.</p></li>
-<li><p>All noise (from both the system and the measurements) is white.</p></li>
+<li><p>All noise (from both the system and the measurements) is white, i.e., the values are not correlated.</p></li>
 <li><p>All noise is Gaussian.</p></li>
 </ol>
 <section id="assumption-1-linearity">
@@ -557,12 +557,16 @@ document.write(`
 </section>
 <section id="assumption-2-whiteness">
 <h4>Assumption 2: Whiteness<a class="headerlink" href="#assumption-2-whiteness" title="Link to this heading">#</a></h4>
-<p>The noise value is not correlated in time.</p>
+<p>The noise values are not correlated in time.</p>
 <ul class="simple">
 <li><p>If you know the noise at time <span class="math notranslate nohighlight">\(t\)</span>, it doesn’t help you to predict the noise at future times <span class="math notranslate nohighlight">\(t+\tau\)</span>.</p></li>
-<li><p>White noise is a reasonable approximation of hte real noise.</p></li>
-<li><p>Makes mathematics tractable.</p></li>
+<li><p>White noise is a reasonable approximation of the real noise.</p></li>
+<li><p>The assumption makes the mathematics tractable.</p></li>
 </ul>
+<blockquote>
+<div><p><strong>📝 Note</strong> White noise contains a mix of all the different frequencies at the same intensity blended together.</p>
+<p>This is similar to how white light contains all the colors of the rainbow combined.</p>
+</div></blockquote>
 </section>
 <section id="assumption-3-gaussian-noise">
 <h4>Assumption 3: Gaussian noise<a class="headerlink" href="#assumption-3-gaussian-noise" title="Link to this heading">#</a></h4>
@@ -634,7 +638,7 @@ x_{t-1} \\
 <li><p>where <span class="math notranslate nohighlight">\(\boldsymbol{v}_t \sim \mathcal{N}(0,\mathbf{R})\)</span> represents the uncertainty in the measures.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{z}_{t} \in \mathbb{R}^{M}\)</span> is the measurements vector.</p></li>
 <li><p>In our case, since the GPS measures only the position, we have <span class="math notranslate nohighlight">\(\mathbf{H} = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R} = \begin{bmatrix} r_{xx} \end{bmatrix}\)</span>.</p></li>
-<li><p>In general, <span class="math notranslate nohighlight">\(\mathbf{H} \in \mathbb{R}^{M,N}\)</span> is a matrx that maps the <span class="math notranslate nohighlight">\(N\)</span> state variables into the <span class="math notranslate nohighlight">\(M\)</span> measurements and <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{M,M}\)</span> is the measurement noise covariance.</p></li>
+<li><p>In general, <span class="math notranslate nohighlight">\(\mathbf{H} \in \mathbb{R}^{M,N}\)</span> is a matrix that maps the <span class="math notranslate nohighlight">\(N\)</span> state variables into the <span class="math notranslate nohighlight">\(M\)</span> measurements and <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{M,M}\)</span> is the measurement noise covariance.</p></li>
 </ul>
 <p>In summary, we have two different sources of information:</p>
 <ul class="simple">
@@ -712,7 +716,7 @@ x_{t-1} \\
 </section>
 <section id="correct">
 <h4>Correct<a class="headerlink" href="#correct" title="Link to this heading">#</a></h4>
-<p>The measurement update equations are responsible for the feedback, i.e. for incorporating a new measurement into the prior estimate to obtain an improved a posterior estimate.</p>
+<p>The measurement update equations are responsible for the feedback, i.e. for incorporating a new measurement into the prior estimate to obtain an improved posterior estimate.</p>
 <p>The posterior estimate <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t}\)</span> is a linear combination of:</p>
 <ul class="simple">
 <li><p>The prior estimate <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}^{-}_{t}\)</span>.</p></li>
@@ -808,7 +812,7 @@ x_{t-1} \\
 </ul>
 </li>
 </ul>
-<p>Summary of Correct:</p>
+<p>Summary of the Correct step:</p>
 <img alt="../../_images/correct.png" src="../../_images/correct.png" />
 <p>The whole process is summarized below.</p>
 <img alt="../../_images/kalman.png" src="../../_images/kalman.png" />
@@ -823,7 +827,7 @@ x_{t-1} \\
 <li><p>We can take some offline sample measurements to determine the variance of the measurement noise.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Determine the process noise covariance <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span> is generally more difficult.</p></li>
+<li><p>Determining the process noise covariance <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span> is generally more difficult.</p></li>
 <li><p>We typically do not have the ability to directly observe the process we are estimating.</p></li>
 <li><p>Sometimes a relatively simple process model can produce acceptable results if one “injects” enough uncertainty into the process.</p></li>
 <li><p>This works well if the process measurements are reliable.</p></li>
@@ -1191,7 +1195,19 @@ x_{t-1} \\
 </div>
 </div>
 <ul class="simple">
-<li><p>Generate the <span class="math notranslate nohighlight">\((z_x, z_y)\)</span> measurements by clicking with a mouse on the screen.</p></li>
+<li><p>Next, we will load some pre-computed data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xy_motion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://zenodo.org/records/10951538/files/kf_ts1.csv?download=1&#39;</span><span class="p">,</span>
+                        <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Here, we use pre-computed data for simplicity/reproducibility.</p></li>
+<li><p>However, you can generate your own <span class="math notranslate nohighlight">\((z_x, z_y)\)</span> measurements by clicking first on the grid and then on <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">Sample</span></code>.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -1217,15 +1233,6 @@ x_{t-1} \\
             
         ></iframe>
         </div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we just load some precomputed data for simplicity/reproducibility</span>
-<span class="n">xy_motion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://zenodo.org/records/10951538/files/kf_ts1.csv?download=1&#39;</span><span class="p">,</span>
-                        <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
 </div>
 <ul class="simple">
 <li><p>As always, take a look at the data before analyzing it.</p></li>
