@@ -330,7 +330,7 @@ B
 
 **What is the trade-off between responsiveness and robustness to noise when using a moving average smoothing technique?**
 - A) Increasing responsiveness also increases robustness to noise
-- B) Decreasing responsiveness increases robustness to noise
+- B) Decreasing responsiveness decreases robustness to noise
 - C) Increasing responsiveness decreases robustness to noise
 - D) Responsiveness and robustness to noise are not related in moving average smoothing  
 
@@ -1566,9 +1566,9 @@ A
 
 **In a Reservoir with chaotic dynamics, what happens to two different initial states as time progresses?**
 - A) They converge to the same final state quickly.
-- B) They diverge from each other rapidly.
+- B) They eventually diverge from each other.
 - C) They stabilize at a midpoint between the two states.
-- D) They remain completely unaffected by each other.  
+- D) The evolution of one state is completely independent from the evolution of the other.
 
 ```{admonition} Answer
 :class: note, dropdown
