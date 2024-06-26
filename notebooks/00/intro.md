@@ -2,18 +2,15 @@
 
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-
 Welcome to a journey through the world of time series analysis using Python! This collection of Jupyter notebooks serves as both a comprehensive course and a practical guide for students, data scientists, and researchers interested in exploring the interplay between statistical theories and practical applications in time series analysis.
 
 Time series analysis is a crucial discipline in data science, offering insights into patterns over time that are invaluable for forecasting, anomaly detection, and understanding temporal dynamics. The aim of this course is to introduce fundamental concepts of time series analysis from multiple perspectives: statistical, dynamical systems, machine learning, and signal processing. This interdisciplinary approach aims to give the reader a broad view on the world of time series.
-
 
 ```{image} media/topics.png
 :alt: topics
 :width: 500px
 :align: center
 ```
-
 The course is designed to combine high-level theoretical knowledge with practical programming skills. Each chapter introduces key concepts of time series analysis, followed by hands-on coding sections. This structure allows you to immediately apply the theoretical concepts you learn, seeing first-hand how these translate into functional tools in data analytics. Through this process, you will gain both the knowledge to understand complex time series data and the skills to analyze and predict it effectively.
 To reinforce learning and encourage active engagement, each chapter concludes with exercises. These are designed to test your understanding and help you apply the lessons in practical contexts.
 
@@ -31,6 +28,7 @@ The course is organized into the following chapters.
 The notebooks are presented in class as slides using RISE (see [here](https://github.com/FilippoMB/python-time-series-handbook?tab=readme-ov-file#-notebook-format-and-slides) for more details). 
 For this reason, the text in the notebooks is organized with bullet points.
 ```
+
 
 ## 🎓 University courses
 
@@ -69,6 +67,7 @@ To run the code and the notebooks the recommended steps are the following:
    > jupyter lab
    ```
 
+
 ## ⚒ Roadmap
 
 ```{warning}
@@ -93,3 +92,18 @@ You can contribute both by adding new material, fixing typos, and suggesting edi
 
 Finally, if you liked this content, please share it with others who might find it useful and give it a
 <a class="github-button" href="https://github.com/FilippoMB/python-time-series-handbook" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star FilippoMB/python-time-series-handbook on GitHub">Star</a> on GitHub.
+
+
+## 📝 Citation
+
+If you are using this material in your courses or in your research, please consider citing it as follows:
+
+````bibtex
+@misc{bianchi2024tsbook,
+  author       = {Filippo Maria Bianchi},
+  title        = {Time Series Analysis with Python},
+  year         = {2024},
+  howpublished = {Online},
+  url          = {https://github.com/FilippoMB/python-time-series-handbook}
+}
+````

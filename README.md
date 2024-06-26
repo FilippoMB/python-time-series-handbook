@@ -196,3 +196,17 @@ By pressing the `Enter\Exit RISE Slideshow` button at the top you can enter the 
 <img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/notebooks/00/media/slides_rise3.png" style="width: 40%" align="center">
 
 See the [RISE documentation](https://rise.readthedocs.io/en/latest/) for more info.
+
+## 📝 Citation
+
+If you are using this material in your courses or in your research, please consider citing it as follows:
+
+````bibtex
+@misc{bianchi2024tsbook,
+  author       = {Filippo Maria Bianchi},
+  title        = {Time Series Analysis with Python},
+  year         = {2024},
+  howpublished = {Online},
+  url          = {https://github.com/FilippoMB/python-time-series-handbook}
+}
+````
