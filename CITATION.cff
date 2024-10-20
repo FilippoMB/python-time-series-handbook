@@ -1,0 +1,9 @@
+cff-version: 1.0
+message: "If you use this material in your work, please cite it as below."
+authors:
+  - family-names: "Bianchi"
+    given-names: "Filippo Maria"
+title: "Time Series Analysis with Python"
+date-released: 2024-04-15
+license: MIT
+url: "https://github.com/FilippoMB/python-time-series-handbookl"
