@@ -3,8 +3,8 @@ title: "Introduction to time series analysis"
 theme: "night"
 ---
 
-<section style="background-image: url('media/slide_header.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center; height: 100vh;">
-  <h1 style="font-size: 2em; margin-top: 25vh">Introduction to time series analysis</h1>
+<section style="background-image: url('media/slide_header.jpg'); background-size: contain; background-repeat: no-repeat; background-position: top; height: 100vh;">
+<h1 style="font-size: 2em; margin-top: 20vh">Introduction to time series analysis</h1>
 </section>
 
 ---
@@ -17,21 +17,6 @@ In this lecture we will cover the following topics:
 - Introduction to time series analysis and application examples.
 - The main components of a time series.
 - Time series decomposition.
-
---
-
-<section>
-  <pre><code data-trim data-noescape>
-#Imports
-import numpy as np
-import matplotlib.pyplot as plt
-import statsmodels.api as sm
-
-from statsmodels.tsa.seasonal import seasonal_decompose, STL
-from scipy.fft import fft
-np.random.seed(0)  # for reproducibility
-  </code></pre>
-</section>
 
 ---
 
@@ -185,11 +170,15 @@ Time series analysis is applied in many real world applications, including
 
 <section>
   <pre><code data-trim data-noescape class="fragment">
+  import numpy as np
+
   time = np.arange(144)
   trend = time * 2.65 + 100
   </code></pre>
 
   <pre><code data-trim data-noescape class="fragment">
+import matplotlib.pyplot as plt
+
 fig, ax = plt.subplots(1, 1, figsize=(10, 3))
 ax.plot(time, trend, color='tab:red')
 ax.set_xlabel("Months")
@@ -199,7 +188,9 @@ plt.title("Trend vs Time")
   </code></pre>
 </section>
 
-<img src="media/trend_vs_time.png" style="width:70%; display: block; margin: auto" class="fragment">
+--
+
+<img src="media/trend_vs_time.png" style="width:80%; display: block; margin: auto">
 
 ---
 
@@ -437,6 +428,7 @@ plt.legend()
 
 <section>
   <pre><code data-trim data-noescape>
+from statsmodels.tsa.seasonal import seasonal_decompose
 additive_decomposition = seasonal_decompose(x=additive, 
                                             model='additive', 
                                             period=12)
@@ -506,6 +498,7 @@ seas_decomp_plots(multiplicative, multiplicative_decomposition)
 
 <section>
   <pre><code data-trim data-noescape>
+from statsmodels.tsa.seasonal import STL
 stl_decomposition = STL(endog=additive, 
                         period=12, 
                         robust=True).fit()
@@ -583,6 +576,7 @@ seasonal = 20 + np.sin(time * 0.5) * 20
 
 <section>
   <pre><code data-trim data-noescape>
+from scipy.fft import fft
 def fft_analysis(signal):
     
     # Linear detrending
@@ -627,6 +621,11 @@ plt.show()
 --
 
 <img src="media/frequency_spectrum.png" style="width:80%; display: block; margin: auto">
+
+```python
+Dominant Frequency: 0.076
+Dominant Period: 13.09 time units
+```
 
 --
 
