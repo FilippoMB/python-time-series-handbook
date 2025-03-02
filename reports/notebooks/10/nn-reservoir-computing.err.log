@@ -1,0 +1,135 @@
+Traceback (most recent call last):
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+fig = plt.figure(figsize=(14,4))
+plt.plot(Yte[n_drop:,:], label="True", linewidth=2)
+plt.plot(scaler.inverse_transform(Yhat), label="Predicted")
+plt.grid()
+plt.legend()
+plt.title("True vs predicted electricity load")
+plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[24], line 3[0m
+[1;32m      1[0m fig [38;5;241m=[39m plt[38;5;241m.[39mfigure(figsize[38;5;241m=[39m([38;5;241m14[39m,[38;5;241m4[39m))
+[1;32m      2[0m plt[38;5;241m.[39mplot(Yte[n_drop:,:], label[38;5;241m=[39m[38;5;124m"[39m[38;5;124mTrue[39m[38;5;124m"[39m, linewidth[38;5;241m=[39m[38;5;241m2[39m)
+[0;32m----> 3[0m plt[38;5;241m.[39mplot([43mscaler[49m[38;5;241;43m.[39;49m[43minverse_transform[49m[43m([49m[43mYhat[49m[43m)[49m, label[38;5;241m=[39m[38;5;124m"[39m[38;5;124mPredicted[39m[38;5;124m"[39m)
+[1;32m      4[0m plt[38;5;241m.[39mgrid()
+[1;32m      5[0m plt[38;5;241m.[39mlegend()
+
+File [0;32m~/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/sklearn/preprocessing/_data.py:1106[0m, in [0;36mStandardScaler.inverse_transform[0;34m(self, X, copy)[0m
+[1;32m   1103[0m check_is_fitted([38;5;28mself[39m)
+[1;32m   1105[0m copy [38;5;241m=[39m copy [38;5;28;01mif[39;00m copy [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m [38;5;28mself[39m[38;5;241m.[39mcopy
+[0;32m-> 1106[0m X [38;5;241m=[39m [43mcheck_array[49m[43m([49m
+[1;32m   1107[0m [43m    [49m[43mX[49m[43m,[49m
+[1;32m   1108[0m [43m    [49m[43maccept_sparse[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mcsr[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m   1109[0m [43m    [49m[43mcopy[49m[38;5;241;43m=[39;49m[43mcopy[49m[43m,[49m
+[1;32m   1110[0m [43m    [49m[43mdtype[49m[38;5;241;43m=[39;49m[43mFLOAT_DTYPES[49m[43m,[49m
+[1;32m   1111[0m [43m    [49m[43mforce_writeable[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
+[1;32m   1112[0m [43m    [49m[43mensure_all_finite[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mallow-nan[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m   1113[0m [43m[49m[43m)[49m
+[1;32m   1115[0m [38;5;28;01mif[39;00m sparse[38;5;241m.[39missparse(X):
+[1;32m   1116[0m     [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mwith_mean:
+
+File [0;32m~/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/sklearn/utils/validation.py:1093[0m, in [0;36mcheck_array[0;34m(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_writeable, force_all_finite, ensure_all_finite, ensure_non_negative, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator, input_name)[0m
+[1;32m   1086[0m         [38;5;28;01melse[39;00m:
+[1;32m   1087[0m             msg [38;5;241m=[39m (
+[1;32m   1088[0m                 [38;5;124mf[39m[38;5;124m"[39m[38;5;124mExpected 2D array, got 1D array instead:[39m[38;5;130;01m\n[39;00m[38;5;124marray=[39m[38;5;132;01m{[39;00marray[38;5;132;01m}[39;00m[38;5;124m.[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m
+[1;32m   1089[0m                 [38;5;124m"[39m[38;5;124mReshape your data either using array.reshape(-1, 1) if [39m[38;5;124m"[39m
+[1;32m   1090[0m                 [38;5;124m"[39m[38;5;124myour data has a single feature or array.reshape(1, -1) [39m[38;5;124m"[39m
+[1;32m   1091[0m                 [38;5;124m"[39m[38;5;124mif it contains a single sample.[39m[38;5;124m"[39m
+[1;32m   1092[0m             )
+[0;32m-> 1093[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(msg)
+[1;32m   1095[0m [38;5;28;01mif[39;00m dtype_numeric [38;5;129;01mand[39;00m [38;5;28mhasattr[39m(array[38;5;241m.[39mdtype, [38;5;124m"[39m[38;5;124mkind[39m[38;5;124m"[39m) [38;5;129;01mand[39;00m array[38;5;241m.[39mdtype[38;5;241m.[39mkind [38;5;129;01min[39;00m [38;5;124m"[39m[38;5;124mUSV[39m[38;5;124m"[39m:
+[1;32m   1096[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m   1097[0m         [38;5;124m"[39m[38;5;124mdtype=[39m[38;5;124m'[39m[38;5;124mnumeric[39m[38;5;124m'[39m[38;5;124m is not compatible with arrays of bytes/strings.[39m[38;5;124m"[39m
+[1;32m   1098[0m         [38;5;124m"[39m[38;5;124mConvert your data to numeric values explicitly instead.[39m[38;5;124m"[39m
+[1;32m   1099[0m     )
+
+[0;31mValueError[0m: Expected 2D array, got 1D array instead:
+array=[-1.38692362e+00 -1.58770028e+00 -1.69604112e+00 -1.55991722e+00
+ -1.21578581e+00 -8.46201763e-01 -3.56656720e-01 -7.82637150e-02
+  7.56885574e-02  3.30479386e-01  3.48955066e-01  2.08611901e-01
+  2.60521511e-01  3.29160514e-01  5.08583140e-01  5.62077204e-01
+  6.93109513e-01  8.34067953e-01  3.18409606e-01 -4.26694750e-02
+ -3.61776635e-01 -8.02205329e-01 -1.15068736e+00 -1.30637560e+00
+ -1.42569598e+00 -1.50842612e+00 -1.44915005e+00 -1.23132787e+00
+ -1.00202692e+00 -5.90741022e-01  5.88404583e-02  2.82085554e-01
+  3.89448740e-01  4.86923641e-01  4.41627434e-01  3.35468422e-01
+  4.39191546e-01  5.83473103e-01  6.03160513e-01  6.69894611e-01
+  7.06493248e-01  8.48494875e-01  3.46884853e-01  6.28476767e-02
+ -2.24747961e-01 -6.92880854e-01 -1.07503285e+00 -1.28851578e+00
+ -1.38291407e+00 -1.47757942e+00 -1.43086284e+00 -1.27007237e+00
+ -1.10063326e+00 -6.87493726e-01  2.17260952e-02  3.31772598e-01
+  3.98581036e-01  4.93934783e-01  4.47730554e-01  3.10844750e-01
+  3.80494717e-01  4.05253189e-01  3.63271464e-01  4.14482312e-01
+  6.11986099e-01  7.33152245e-01  1.99271727e-01 -5.62843129e-02
+ -3.08813213e-01 -7.35628368e-01 -1.16559637e+00 -1.36506360e+00
+ -1.45820774e+00 -1.52364944e+00 -1.46261471e+00 -1.39625397e+00
+ -1.37387071e+00 -9.96516226e-01 -3.50119873e-01  1.81841971e-05
+  1.91180234e-01  2.68619800e-01  3.12443547e-01  1.78874389e-01
+  2.65541425e-01  2.61737983e-01  2.46183878e-01  3.30274781e-01
+  4.98926840e-01  7.65349312e-01  3.89653819e-01  7.59034764e-02
+ -3.06553370e-01 -6.54838634e-01 -1.03677769e+00 -1.25214668e+00
+ -1.35421042e+00 -1.44015621e+00 -1.33234273e+00 -1.11134501e+00
+ -8.69300873e-01 -5.28615692e-01  4.72742882e-02  2.72886407e-01
+  3.11943727e-01  2.81738020e-01  2.77116445e-01  1.56630722e-01
+  2.41206120e-01  3.69531215e-01  3.18751409e-01  2.90491371e-01
+  4.98798048e-01  7.68631795e-01  1.69604840e-01 -6.92437029e-02
+ -4.37683473e-01 -8.73284289e-01 -1.22461592e+00 -1.40890107e+00
+ -1.50375011e+00 -1.56516574e+00 -1.44202312e+00 -1.18430938e+00
+ -7.55855593e-01 -4.45463745e-01  1.35982136e-01  2.93540835e-01
+  3.38006867e-01  3.91957400e-01  3.44371151e-01  2.78317078e-01
+  3.63170976e-01  4.92240084e-01  4.72185315e-01  4.87300437e-01
+  7.60447075e-01  1.00935179e+00  5.26887629e-01  1.29652654e-01
+ -2.76517388e-01 -7.37422964e-01 -1.10949962e+00 -1.29106854e+00
+ -1.42807515e+00 -1.51229661e+00 -1.43123483e+00 -1.17651373e+00
+ -7.94417062e-01 -4.71004910e-01  3.45192972e-02  2.15877439e-01
+  2.21564192e-01  2.56277687e-01  2.59874033e-01  1.78671602e-01
+  2.70627955e-01  3.85652675e-01  4.35132225e-01  4.07589457e-01
+  7.57290085e-01  9.69547885e-01  4.06241057e-01  8.62107052e-02
+ -3.31114499e-01 -8.10927045e-01 -1.15888266e+00 -1.32153234e+00
+ -1.43495714e+00 -1.52012979e+00 -1.41138140e+00 -1.15448951e+00
+ -7.71022746e-01 -5.15761206e-01  7.65563313e-02  2.83213011e-01
+  3.19906687e-01  3.59285946e-01  3.91044185e-01  3.10113892e-01
+  4.02167605e-01  4.31773553e-01  3.89783487e-01  4.75341359e-01
+  7.08169679e-01  9.17353470e-01  4.37520920e-01  5.64459281e-02
+ -3.06016107e-01 -7.70186998e-01 -1.13294127e+00 -1.34279588e+00
+ -1.45489058e+00 -1.52733072e+00 -1.43565420e+00 -1.17226741e+00
+ -8.85198317e-01 -4.83233653e-01  9.99317732e-02  3.42497823e-01
+  3.78050836e-01  3.97282689e-01  3.78775828e-01  3.20427903e-01
+  3.96536558e-01  5.42165632e-01  5.41719669e-01  5.84381557e-01
+  8.04377859e-01  1.01139973e+00  4.36092719e-01  1.03806033e-01
+ -2.52331497e-01 -7.15646119e-01 -1.09858217e+00 -1.30625886e+00
+ -1.41180683e+00 -1.50538985e+00 -1.45335751e+00 -1.26912273e+00
+ -1.07241202e+00 -7.06767562e-01  7.76680181e-03  3.18243994e-01
+  3.92403202e-01  4.24049550e-01  4.42472279e-01  3.14828913e-01
+  3.47256145e-01  3.92426913e-01  3.74124878e-01  4.38706549e-01
+  7.98770001e-01  9.39146397e-01  3.15723085e-01  3.99139714e-02
+ -2.74309950e-01 -7.55588322e-01 -1.14966180e+00 -1.36387737e+00
+ -1.51699495e+00 -1.54881589e+00 -1.47122038e+00 -1.42567268e+00
+ -1.41231127e+00 -1.01340340e+00 -3.92647883e-01 -5.42741520e-02
+  1.30237566e-01  2.62115386e-01  3.14945731e-01  1.47816654e-01
+  2.71825339e-01  2.33000482e-01  2.39798636e-01  3.46959158e-01
+  6.79663303e-01  9.06266324e-01  4.91158918e-01  1.79308470e-01
+ -2.49945442e-01 -6.36593402e-01 -1.05009713e+00 -1.24242754e+00
+ -1.36339830e+00 -1.43012008e+00].
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+

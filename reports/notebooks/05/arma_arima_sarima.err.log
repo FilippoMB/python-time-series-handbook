@@ -1,0 +1,58 @@
+Traceback (most recent call last):
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Imports
+import warnings
+warnings.filterwarnings("ignore")
+from statsmodels.tools.sm_exceptions import ConvergenceWarning, ValueWarning, UserWarning
+warnings.simplefilter('ignore', ConvergenceWarning)
+warnings.simplefilter('ignore', ValueWarning)
+warnings.simplefilter('ignore', UserWarning)
+import time
+from itertools import product
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import statsmodels as ss
+import seaborn as sns
+from tqdm.notebook import tqdm
+from scipy import stats
+from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.graphics.tsaplots import month_plot, plot_acf, plot_pacf
+from statsmodels.graphics.gofplots import qqplot
+from statsmodels.tsa.stattools import adfuller, acf, pacf
+from statsmodels.tsa.seasonal import STL, seasonal_decompose
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+from statsmodels.tools.eval_measures import mse
+from statsmodels.tsa.statespace.tools import diff
+import pmdarima as pm
+from tsa_course.lecture1 import fft_analysis
+np.random.seed(0)                
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[2], line 4[0m
+[1;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mwarnings[39;00m
+[1;32m      3[0m warnings[38;5;241m.[39mfilterwarnings([38;5;124m"[39m[38;5;124mignore[39m[38;5;124m"[39m)
+[0;32m----> 4[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mstatsmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtools[39;00m[38;5;21;01m.[39;00m[38;5;21;01msm_exceptions[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m ConvergenceWarning, ValueWarning, [38;5;167;01mUserWarning[39;00m
+[1;32m      5[0m warnings[38;5;241m.[39msimplefilter([38;5;124m'[39m[38;5;124mignore[39m[38;5;124m'[39m, ConvergenceWarning)
+[1;32m      6[0m warnings[38;5;241m.[39msimplefilter([38;5;124m'[39m[38;5;124mignore[39m[38;5;124m'[39m, ValueWarning)
+
+[0;31mImportError[0m: cannot import name 'UserWarning' from 'statsmodels.tools.sm_exceptions' (/home/filippo/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/statsmodels/tools/sm_exceptions.py)
+
