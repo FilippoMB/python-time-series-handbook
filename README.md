@@ -10,6 +10,8 @@
 </div>
 <br>
 
+[![PyPI Downloads](https://static.pepy.tech/badge/tsa-course)](https://pepy.tech/projects/tsa-course)
+
 This is the collection of notebooks for the course *Time Series Analysis with Python*.
 You can view and execute the notebooks by clicking on the buttons below.
 
