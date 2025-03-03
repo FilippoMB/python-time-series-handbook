@@ -647,7 +647,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/edd66e2050971fb33886212345275dc22d08dd7c0bb39c408fe6ea8f5ca0b01d.png" src="../../_images/edd66e2050971fb33886212345275dc22d08dd7c0bb39c408fe6ea8f5ca0b01d.png" />
+<img alt="../../_images/50bd9c9bb648c4a355b14c04128238c405bb86046302c135cf7df7deefb206db.png" src="../../_images/50bd9c9bb648c4a355b14c04128238c405bb86046302c135cf7df7deefb206db.png" />
 </div>
 </div>
 <section id="multi-layer-perceptron">
@@ -1318,7 +1318,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 36.63
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 32.27
 </pre></div>
 </div>
 </div>
@@ -1345,10 +1345,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 26.75
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 26.18
 </pre></div>
 </div>
-<img alt="../../_images/c21d0a1bd452d24e44a0f9affd45865cbcd4cfb2f0e9b759def3401a541ec03e.png" src="../../_images/c21d0a1bd452d24e44a0f9affd45865cbcd4cfb2f0e9b759def3401a541ec03e.png" />
+<img alt="../../_images/99104ac5c7a06085d98d6542929145a92acf5e44ba44308935b876f176070109.png" src="../../_images/99104ac5c7a06085d98d6542929145a92acf5e44ba44308935b876f176070109.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1618,7 +1618,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7d1e9dea1206669b86a848c1a66c4218f31cccd0b8a3bd90e596d5108de6c517.png" src="../../_images/7d1e9dea1206669b86a848c1a66c4218f31cccd0b8a3bd90e596d5108de6c517.png" />
+<img alt="../../_images/470f215636005997bc798d5a50c8f9e2f9ef27bc1c30c43570715a0f01565398.png" src="../../_images/470f215636005997bc798d5a50c8f9e2f9ef27bc1c30c43570715a0f01565398.png" />
 </div>
 </div>
 </section>
@@ -1833,7 +1833,7 @@ states_te shape: (1, 266, 900)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0275s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0270s
 Test time: 0.0004s
 </pre></div>
 </div>
@@ -1846,7 +1846,7 @@ Test time: 0.0004s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Yte</span><span class="p">[</span><span class="n">n_drop</span><span class="p">:,:],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">Yhat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">Yhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;True vs predicted electricity load&quot;</span><span class="p">)</span>
@@ -1855,127 +1855,18 @@ Test time: 0.0004s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Yte</span><span class="p">[</span><span class="n">n_drop</span><span class="p">:,:],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">Yhat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-<span class="nn">File ~/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/sklearn/preprocessing/_data.py:1106,</span> in <span class="ni">StandardScaler.inverse_transform</span><span class="nt">(self, X, copy)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1103</span> <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1105</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">copy</span> <span class="k">if</span> <span class="n">copy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span>
-<span class="ne">-&gt; </span><span class="mi">1106</span> <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1107</span>     <span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1108</span>     <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csr&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1109</span>     <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1110</span>     <span class="n">dtype</span><span class="o">=</span><span class="n">FLOAT_DTYPES</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1111</span>     <span class="n">force_writeable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1112</span>     <span class="n">ensure_all_finite</span><span class="o">=</span><span class="s2">&quot;allow-nan&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1113</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1115</span> <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1116</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_mean</span><span class="p">:</span>
-
-<span class="nn">File ~/miniconda3/envs/sta2003_nb/lib/python3.10/site-packages/sklearn/utils/validation.py:1093,</span> in <span class="ni">check_array</span><span class="nt">(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_writeable, force_all_finite, ensure_all_finite, ensure_non_negative, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator, input_name)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1086</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1087</span>             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1088</span>                 <span class="sa">f</span><span class="s2">&quot;Expected 2D array, got 1D array instead:</span><span class="se">\n</span><span class="s2">array=</span><span class="si">{</span><span class="n">array</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1089</span>                 <span class="s2">&quot;Reshape your data either using array.reshape(-1, 1) if &quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1090</span>                 <span class="s2">&quot;your data has a single feature or array.reshape(1, -1) &quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1091</span>                 <span class="s2">&quot;if it contains a single sample.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1092</span>             <span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1093</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1095</span> <span class="k">if</span> <span class="n">dtype_numeric</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="s2">&quot;USV&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1096</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1097</span>         <span class="s2">&quot;dtype=&#39;numeric&#39; is not compatible with arrays of bytes/strings.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1098</span>         <span class="s2">&quot;Convert your data to numeric values explicitly instead.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1099</span>     <span class="p">)</span>
-
-<span class="ne">ValueError</span>: Expected 2D array, got 1D array instead:
-<span class="n">array</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.38692362e+00</span> <span class="o">-</span><span class="mf">1.58770028e+00</span> <span class="o">-</span><span class="mf">1.69604112e+00</span> <span class="o">-</span><span class="mf">1.55991722e+00</span>
- <span class="o">-</span><span class="mf">1.21578581e+00</span> <span class="o">-</span><span class="mf">8.46201763e-01</span> <span class="o">-</span><span class="mf">3.56656720e-01</span> <span class="o">-</span><span class="mf">7.82637150e-02</span>
-<span class="g g-Whitespace">  </span><span class="mi">7</span><span class="mf">.56885574e-02</span>  <span class="mf">3.30479386e-01</span>  <span class="mf">3.48955066e-01</span>  <span class="mf">2.08611901e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.60521511e-01</span>  <span class="mf">3.29160514e-01</span>  <span class="mf">5.08583140e-01</span>  <span class="mf">5.62077204e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">6</span><span class="mf">.93109513e-01</span>  <span class="mf">8.34067953e-01</span>  <span class="mf">3.18409606e-01</span> <span class="o">-</span><span class="mf">4.26694750e-02</span>
- <span class="o">-</span><span class="mf">3.61776635e-01</span> <span class="o">-</span><span class="mf">8.02205329e-01</span> <span class="o">-</span><span class="mf">1.15068736e+00</span> <span class="o">-</span><span class="mf">1.30637560e+00</span>
- <span class="o">-</span><span class="mf">1.42569598e+00</span> <span class="o">-</span><span class="mf">1.50842612e+00</span> <span class="o">-</span><span class="mf">1.44915005e+00</span> <span class="o">-</span><span class="mf">1.23132787e+00</span>
- <span class="o">-</span><span class="mf">1.00202692e+00</span> <span class="o">-</span><span class="mf">5.90741022e-01</span>  <span class="mf">5.88404583e-02</span>  <span class="mf">2.82085554e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.89448740e-01</span>  <span class="mf">4.86923641e-01</span>  <span class="mf">4.41627434e-01</span>  <span class="mf">3.35468422e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">4</span><span class="mf">.39191546e-01</span>  <span class="mf">5.83473103e-01</span>  <span class="mf">6.03160513e-01</span>  <span class="mf">6.69894611e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">7</span><span class="mf">.06493248e-01</span>  <span class="mf">8.48494875e-01</span>  <span class="mf">3.46884853e-01</span>  <span class="mf">6.28476767e-02</span>
- <span class="o">-</span><span class="mf">2.24747961e-01</span> <span class="o">-</span><span class="mf">6.92880854e-01</span> <span class="o">-</span><span class="mf">1.07503285e+00</span> <span class="o">-</span><span class="mf">1.28851578e+00</span>
- <span class="o">-</span><span class="mf">1.38291407e+00</span> <span class="o">-</span><span class="mf">1.47757942e+00</span> <span class="o">-</span><span class="mf">1.43086284e+00</span> <span class="o">-</span><span class="mf">1.27007237e+00</span>
- <span class="o">-</span><span class="mf">1.10063326e+00</span> <span class="o">-</span><span class="mf">6.87493726e-01</span>  <span class="mf">2.17260952e-02</span>  <span class="mf">3.31772598e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.98581036e-01</span>  <span class="mf">4.93934783e-01</span>  <span class="mf">4.47730554e-01</span>  <span class="mf">3.10844750e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.80494717e-01</span>  <span class="mf">4.05253189e-01</span>  <span class="mf">3.63271464e-01</span>  <span class="mf">4.14482312e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">6</span><span class="mf">.11986099e-01</span>  <span class="mf">7.33152245e-01</span>  <span class="mf">1.99271727e-01</span> <span class="o">-</span><span class="mf">5.62843129e-02</span>
- <span class="o">-</span><span class="mf">3.08813213e-01</span> <span class="o">-</span><span class="mf">7.35628368e-01</span> <span class="o">-</span><span class="mf">1.16559637e+00</span> <span class="o">-</span><span class="mf">1.36506360e+00</span>
- <span class="o">-</span><span class="mf">1.45820774e+00</span> <span class="o">-</span><span class="mf">1.52364944e+00</span> <span class="o">-</span><span class="mf">1.46261471e+00</span> <span class="o">-</span><span class="mf">1.39625397e+00</span>
- <span class="o">-</span><span class="mf">1.37387071e+00</span> <span class="o">-</span><span class="mf">9.96516226e-01</span> <span class="o">-</span><span class="mf">3.50119873e-01</span>  <span class="mf">1.81841971e-05</span>
-<span class="g g-Whitespace">  </span><span class="mi">1</span><span class="mf">.91180234e-01</span>  <span class="mf">2.68619800e-01</span>  <span class="mf">3.12443547e-01</span>  <span class="mf">1.78874389e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.65541425e-01</span>  <span class="mf">2.61737983e-01</span>  <span class="mf">2.46183878e-01</span>  <span class="mf">3.30274781e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">4</span><span class="mf">.98926840e-01</span>  <span class="mf">7.65349312e-01</span>  <span class="mf">3.89653819e-01</span>  <span class="mf">7.59034764e-02</span>
- <span class="o">-</span><span class="mf">3.06553370e-01</span> <span class="o">-</span><span class="mf">6.54838634e-01</span> <span class="o">-</span><span class="mf">1.03677769e+00</span> <span class="o">-</span><span class="mf">1.25214668e+00</span>
- <span class="o">-</span><span class="mf">1.35421042e+00</span> <span class="o">-</span><span class="mf">1.44015621e+00</span> <span class="o">-</span><span class="mf">1.33234273e+00</span> <span class="o">-</span><span class="mf">1.11134501e+00</span>
- <span class="o">-</span><span class="mf">8.69300873e-01</span> <span class="o">-</span><span class="mf">5.28615692e-01</span>  <span class="mf">4.72742882e-02</span>  <span class="mf">2.72886407e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.11943727e-01</span>  <span class="mf">2.81738020e-01</span>  <span class="mf">2.77116445e-01</span>  <span class="mf">1.56630722e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.41206120e-01</span>  <span class="mf">3.69531215e-01</span>  <span class="mf">3.18751409e-01</span>  <span class="mf">2.90491371e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">4</span><span class="mf">.98798048e-01</span>  <span class="mf">7.68631795e-01</span>  <span class="mf">1.69604840e-01</span> <span class="o">-</span><span class="mf">6.92437029e-02</span>
- <span class="o">-</span><span class="mf">4.37683473e-01</span> <span class="o">-</span><span class="mf">8.73284289e-01</span> <span class="o">-</span><span class="mf">1.22461592e+00</span> <span class="o">-</span><span class="mf">1.40890107e+00</span>
- <span class="o">-</span><span class="mf">1.50375011e+00</span> <span class="o">-</span><span class="mf">1.56516574e+00</span> <span class="o">-</span><span class="mf">1.44202312e+00</span> <span class="o">-</span><span class="mf">1.18430938e+00</span>
- <span class="o">-</span><span class="mf">7.55855593e-01</span> <span class="o">-</span><span class="mf">4.45463745e-01</span>  <span class="mf">1.35982136e-01</span>  <span class="mf">2.93540835e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.38006867e-01</span>  <span class="mf">3.91957400e-01</span>  <span class="mf">3.44371151e-01</span>  <span class="mf">2.78317078e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.63170976e-01</span>  <span class="mf">4.92240084e-01</span>  <span class="mf">4.72185315e-01</span>  <span class="mf">4.87300437e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">7</span><span class="mf">.60447075e-01</span>  <span class="mf">1.00935179e+00</span>  <span class="mf">5.26887629e-01</span>  <span class="mf">1.29652654e-01</span>
- <span class="o">-</span><span class="mf">2.76517388e-01</span> <span class="o">-</span><span class="mf">7.37422964e-01</span> <span class="o">-</span><span class="mf">1.10949962e+00</span> <span class="o">-</span><span class="mf">1.29106854e+00</span>
- <span class="o">-</span><span class="mf">1.42807515e+00</span> <span class="o">-</span><span class="mf">1.51229661e+00</span> <span class="o">-</span><span class="mf">1.43123483e+00</span> <span class="o">-</span><span class="mf">1.17651373e+00</span>
- <span class="o">-</span><span class="mf">7.94417062e-01</span> <span class="o">-</span><span class="mf">4.71004910e-01</span>  <span class="mf">3.45192972e-02</span>  <span class="mf">2.15877439e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.21564192e-01</span>  <span class="mf">2.56277687e-01</span>  <span class="mf">2.59874033e-01</span>  <span class="mf">1.78671602e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.70627955e-01</span>  <span class="mf">3.85652675e-01</span>  <span class="mf">4.35132225e-01</span>  <span class="mf">4.07589457e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">7</span><span class="mf">.57290085e-01</span>  <span class="mf">9.69547885e-01</span>  <span class="mf">4.06241057e-01</span>  <span class="mf">8.62107052e-02</span>
- <span class="o">-</span><span class="mf">3.31114499e-01</span> <span class="o">-</span><span class="mf">8.10927045e-01</span> <span class="o">-</span><span class="mf">1.15888266e+00</span> <span class="o">-</span><span class="mf">1.32153234e+00</span>
- <span class="o">-</span><span class="mf">1.43495714e+00</span> <span class="o">-</span><span class="mf">1.52012979e+00</span> <span class="o">-</span><span class="mf">1.41138140e+00</span> <span class="o">-</span><span class="mf">1.15448951e+00</span>
- <span class="o">-</span><span class="mf">7.71022746e-01</span> <span class="o">-</span><span class="mf">5.15761206e-01</span>  <span class="mf">7.65563313e-02</span>  <span class="mf">2.83213011e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.19906687e-01</span>  <span class="mf">3.59285946e-01</span>  <span class="mf">3.91044185e-01</span>  <span class="mf">3.10113892e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">4</span><span class="mf">.02167605e-01</span>  <span class="mf">4.31773553e-01</span>  <span class="mf">3.89783487e-01</span>  <span class="mf">4.75341359e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">7</span><span class="mf">.08169679e-01</span>  <span class="mf">9.17353470e-01</span>  <span class="mf">4.37520920e-01</span>  <span class="mf">5.64459281e-02</span>
- <span class="o">-</span><span class="mf">3.06016107e-01</span> <span class="o">-</span><span class="mf">7.70186998e-01</span> <span class="o">-</span><span class="mf">1.13294127e+00</span> <span class="o">-</span><span class="mf">1.34279588e+00</span>
- <span class="o">-</span><span class="mf">1.45489058e+00</span> <span class="o">-</span><span class="mf">1.52733072e+00</span> <span class="o">-</span><span class="mf">1.43565420e+00</span> <span class="o">-</span><span class="mf">1.17226741e+00</span>
- <span class="o">-</span><span class="mf">8.85198317e-01</span> <span class="o">-</span><span class="mf">4.83233653e-01</span>  <span class="mf">9.99317732e-02</span>  <span class="mf">3.42497823e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.78050836e-01</span>  <span class="mf">3.97282689e-01</span>  <span class="mf">3.78775828e-01</span>  <span class="mf">3.20427903e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.96536558e-01</span>  <span class="mf">5.42165632e-01</span>  <span class="mf">5.41719669e-01</span>  <span class="mf">5.84381557e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">8</span><span class="mf">.04377859e-01</span>  <span class="mf">1.01139973e+00</span>  <span class="mf">4.36092719e-01</span>  <span class="mf">1.03806033e-01</span>
- <span class="o">-</span><span class="mf">2.52331497e-01</span> <span class="o">-</span><span class="mf">7.15646119e-01</span> <span class="o">-</span><span class="mf">1.09858217e+00</span> <span class="o">-</span><span class="mf">1.30625886e+00</span>
- <span class="o">-</span><span class="mf">1.41180683e+00</span> <span class="o">-</span><span class="mf">1.50538985e+00</span> <span class="o">-</span><span class="mf">1.45335751e+00</span> <span class="o">-</span><span class="mf">1.26912273e+00</span>
- <span class="o">-</span><span class="mf">1.07241202e+00</span> <span class="o">-</span><span class="mf">7.06767562e-01</span>  <span class="mf">7.76680181e-03</span>  <span class="mf">3.18243994e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.92403202e-01</span>  <span class="mf">4.24049550e-01</span>  <span class="mf">4.42472279e-01</span>  <span class="mf">3.14828913e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">3</span><span class="mf">.47256145e-01</span>  <span class="mf">3.92426913e-01</span>  <span class="mf">3.74124878e-01</span>  <span class="mf">4.38706549e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">7</span><span class="mf">.98770001e-01</span>  <span class="mf">9.39146397e-01</span>  <span class="mf">3.15723085e-01</span>  <span class="mf">3.99139714e-02</span>
- <span class="o">-</span><span class="mf">2.74309950e-01</span> <span class="o">-</span><span class="mf">7.55588322e-01</span> <span class="o">-</span><span class="mf">1.14966180e+00</span> <span class="o">-</span><span class="mf">1.36387737e+00</span>
- <span class="o">-</span><span class="mf">1.51699495e+00</span> <span class="o">-</span><span class="mf">1.54881589e+00</span> <span class="o">-</span><span class="mf">1.47122038e+00</span> <span class="o">-</span><span class="mf">1.42567268e+00</span>
- <span class="o">-</span><span class="mf">1.41231127e+00</span> <span class="o">-</span><span class="mf">1.01340340e+00</span> <span class="o">-</span><span class="mf">3.92647883e-01</span> <span class="o">-</span><span class="mf">5.42741520e-02</span>
-<span class="g g-Whitespace">  </span><span class="mi">1</span><span class="mf">.30237566e-01</span>  <span class="mf">2.62115386e-01</span>  <span class="mf">3.14945731e-01</span>  <span class="mf">1.47816654e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.71825339e-01</span>  <span class="mf">2.33000482e-01</span>  <span class="mf">2.39798636e-01</span>  <span class="mf">3.46959158e-01</span>
-<span class="g g-Whitespace">  </span><span class="mi">6</span><span class="mf">.79663303e-01</span>  <span class="mf">9.06266324e-01</span>  <span class="mf">4.91158918e-01</span>  <span class="mf">1.79308470e-01</span>
- <span class="o">-</span><span class="mf">2.49945442e-01</span> <span class="o">-</span><span class="mf">6.36593402e-01</span> <span class="o">-</span><span class="mf">1.05009713e+00</span> <span class="o">-</span><span class="mf">1.24242754e+00</span>
- <span class="o">-</span><span class="mf">1.36339830e+00</span> <span class="o">-</span><span class="mf">1.43012008e+00</span><span class="p">]</span><span class="o">.</span>
-<span class="n">Reshape</span> <span class="n">your</span> <span class="n">data</span> <span class="n">either</span> <span class="n">using</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">your</span> <span class="n">data</span> <span class="n">has</span> <span class="n">a</span> <span class="n">single</span> <span class="n">feature</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">it</span> <span class="n">contains</span> <span class="n">a</span> <span class="n">single</span> <span class="n">sample</span><span class="o">.</span>
-</pre></div>
-</div>
-<img alt="../../_images/ba22cc79016f6905270ba2ac71812970c71c89a8923ea0f569947db5dc9a8e31.png" src="../../_images/ba22cc79016f6905270ba2ac71812970c71c89a8923ea0f569947db5dc9a8e31.png" />
+<img alt="../../_images/2d90136f0f4f02189ddd547d40169319c9e1ef5922320a5f7ad86d7dc16fa458.png" src="../../_images/2d90136f0f4f02189ddd547d40169319c9e1ef5922320a5f7ad86d7dc16fa458.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">Yhat</span><span class="p">),</span> <span class="n">Yte</span><span class="p">[</span><span class="n">n_drop</span><span class="p">:,:])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">Yhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">Yte</span><span class="p">[</span><span class="n">n_drop</span><span class="p">:,:])</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Squared Error: </span><span class="si">{</span><span class="n">mse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 20.56
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 20.41
 </pre></div>
 </div>
 </div>
@@ -2061,7 +1952,7 @@ Test time: 0.0004s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9fcfc4f93cbd4d03995462975891ef9e9f5556aef207cedb0bac8ab6e8e2da76.png" src="../../_images/9fcfc4f93cbd4d03995462975891ef9e9f5556aef207cedb0bac8ab6e8e2da76.png" />
+<img alt="../../_images/c6b4921d0c50be5d49cebb6a9d8c2d60eb026bc5317e0ee2c48eec124e6509cb.png" src="../../_images/c6b4921d0c50be5d49cebb6a9d8c2d60eb026bc5317e0ee2c48eec124e6509cb.png" />
 </div>
 </div>
 <p>Reducing the data dimensionality with PCA invole the following steps:</p>
@@ -2171,7 +2062,7 @@ Test time: 0.0004s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/93305926179d2b54a73827c208a7d26f69e09f230d7159cf7edc524b6b07d851.png" src="../../_images/93305926179d2b54a73827c208a7d26f69e09f230d7159cf7edc524b6b07d851.png" />
+<img alt="../../_images/bca69677470efc626e807df40e7e1e9dd9bc5118718c1508d25bc9aa78a6675e.png" src="../../_images/bca69677470efc626e807df40e7e1e9dd9bc5118718c1508d25bc9aa78a6675e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2185,7 +2076,7 @@ Test time: 0.0004s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a39e3ddc00bd334b5cef86bfa92a553dc3a53df4d16ff38dcaed79c355d575a5.png" src="../../_images/a39e3ddc00bd334b5cef86bfa92a553dc3a53df4d16ff38dcaed79c355d575a5.png" />
+<img alt="../../_images/d38d6984d942945f6ceac5f99dccd43e44145d26b7b59bd6d9382cfae90ec58a.png" src="../../_images/d38d6984d942945f6ceac5f99dccd43e44145d26b7b59bd6d9382cfae90ec58a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2206,7 +2097,7 @@ Test time: 0.0004s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c9a5a97fc0c5a941bd059cb5baeab1c6cb93f91f7b2fd4835ff80286fb220335.png" src="../../_images/c9a5a97fc0c5a941bd059cb5baeab1c6cb93f91f7b2fd4835ff80286fb220335.png" />
+<img alt="../../_images/08eb9cfb3b51938954456bc13552f1209bd4441143a09afbd09527ef98775755.png" src="../../_images/08eb9cfb3b51938954456bc13552f1209bd4441143a09afbd09527ef98775755.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2253,15 +2144,15 @@ states_te shape: (266, 75)
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">time_start</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
 
 <span class="c1"># Compute the mean squared error</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">Yhat_pca</span><span class="p">),</span> <span class="n">Yte</span><span class="p">[</span><span class="n">n_drop</span><span class="p">:,:])</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">Yhat_pca</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">Yte</span><span class="p">[</span><span class="n">n_drop</span><span class="p">:,:])</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Squared Error: </span><span class="si">{</span><span class="n">mse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0022s
-Test time: 0.0002s
-Mean Squared Error: 22.08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0025s
+Test time: 0.0003s
+Mean Squared Error: 21.96
 </pre></div>
 </div>
 </div>
@@ -2314,7 +2205,7 @@ Mean Squared Error: 22.08
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 2.61s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 3.26s
 </pre></div>
 </div>
 </div>
@@ -2334,7 +2225,7 @@ Mean Squared Error: 22.08
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7ddd06d3c7b67753af25d77d2de4312300783ea924b8a2eaa37e6a5b9fd65461.png" src="../../_images/7ddd06d3c7b67753af25d77d2de4312300783ea924b8a2eaa37e6a5b9fd65461.png" />
+<img alt="../../_images/0ee8118db0ab5b4177e52e2e8392788a6de8ae23fc0a10c8e109a4a5dbd6896d.png" src="../../_images/0ee8118db0ab5b4177e52e2e8392788a6de8ae23fc0a10c8e109a4a5dbd6896d.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2368,7 +2259,7 @@ Mean Squared Error: 22.08
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.88s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 1.11s
 </pre></div>
 </div>
 </div>
@@ -2447,7 +2338,7 @@ The dataset consists of a data frame with 6572 observations on the following 3 v
 4  10/3/2016 4:00       86.0  5
 </pre></div>
 </div>
-<img alt="../../_images/5daf5255117e4bea0f961a90978144fbb8cc746b7916a037438a8b12d3260ad0.png" src="../../_images/5daf5255117e4bea0f961a90978144fbb8cc746b7916a037438a8b12d3260ad0.png" />
+<img alt="../../_images/37d201e877dbf30e31c5d12fd159e8a3004fb38627751c94e7d5f934f71adafc.png" src="../../_images/37d201e877dbf30e31c5d12fd159e8a3004fb38627751c94e7d5f934f71adafc.png" />
 </div>
 </div>
 <ul class="simple">
