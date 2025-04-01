@@ -51,7 +51,7 @@ You can view and execute the notebooks by clicking on the buttons below.
 
 <br>
 
-1. **AR-MA**
+4. **AR-MA**
    - The autocorrelation function
    - The partial autocorrelation function
    - The Auto-Regressive model
@@ -117,11 +117,11 @@ You can view and execute the notebooks by clicking on the buttons below.
 
 10. **Neural networks and Reservoir Computing**
     - Windowed approaches and Neural Networks for time series forecasting
-    - Forecasting with a Multi Layer Perceptron
+    - Forecasting with a Multi-Layer Perceptron
     - Recurrent Neural Networks: advantages and challenges
     - Reservoir Computing and the Echo State Network
     - Dimensionality reduction with Principal Component Analysis
-    - Forecasting electricity consumption with Multi Layer Perceptron and Echo State Network
+    - Forecasting electricity consumption with Multi-Layer Perceptron and Echo State Network
 
     [![nbviewer](https://img.shields.io/badge/-View-blue?logo=jupyter&style=flat&labelColor=gray)](https://nbviewer.jupyter.org/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb) or [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilippoMB/python-time-series-handbook/blob/main/notebooks/10/nn-reservoir-computing.ipynb)
 
@@ -162,7 +162,7 @@ To run the notebooks locally the recommended steps are the following:
 
 2. Download the [env.yml](https://github.com/FilippoMB/python-time-series-handbook/blob/main/env.yml) file.
 
-3. Open the shell and navigate to the location with the yml file you just downloaded.
+3. Open the shell and navigate to the location with the `yml` file you just downloaded.
     - If you are on Windows, open the Miniconda shell.
 
 4. Install the environment with 

@@ -460,7 +460,7 @@ document.write(`
 <li><p>Previously, we learned that time series is data that is measured at equally-spaced intervals.</p></li>
 <li><p>We also learned that time series data can be decomposed into three parts: trend, seasonality, and residuals.</p></li>
 <li><p>Now we’ll dig deeper by discussing an important concept called <strong>stationarity</strong>.</p></li>
-<li><p>Having a firm grasp of this concept will lay the foundation necessary to understand more advanced modeling strategies that we’ll introduce later on.</p></li>
+<li><p>Having a firm grasp of this will lay the foundation necessary to understand more advanced modeling strategies that we’ll introduce later.</p></li>
 </ul>
 <p>In this lecture we will cover</p>
 <ul class="simple">
@@ -606,7 +606,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d23f2099283292aef6c15bd3f7524701caf6aab979ae32a9831c6366d74da2bc.png" src="../../_images/d23f2099283292aef6c15bd3f7524701caf6aab979ae32a9831c6366d74da2bc.png" />
+<img alt="../../_images/9a75b3b506b15212632f416b72fea1f020cd80db72712255571a69dbd4c2ba22.png" src="../../_images/9a75b3b506b15212632f416b72fea1f020cd80db72712255571a69dbd4c2ba22.png" />
 </div>
 </div>
 <ul class="simple">
@@ -689,12 +689,13 @@ document.write(`
 <span class="n">AR_object1</span> <span class="o">=</span> <span class="n">ArmaProcess</span><span class="p">(</span><span class="n">ar1</span><span class="p">,</span> <span class="n">ma1</span><span class="p">)</span>
 <span class="n">constant_autocorr_ts</span> <span class="o">=</span> <span class="n">AR_object1</span><span class="o">.</span><span class="n">generate_sample</span><span class="p">(</span><span class="n">nsample</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
-<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">constant_autocorr_ts</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with constant autocorrelation ($X$)&quot;</span><span class="p">);</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">constant_autocorr_ts</span><span class="p">,</span> 
+                  <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with constant autocorrelation ($X$)&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/110adec7b9533d8b4611e23ddc6cebb999a1f824478aa005fb9c122f2f45cc88.png" src="../../_images/110adec7b9533d8b4611e23ddc6cebb999a1f824478aa005fb9c122f2f45cc88.png" />
+<img alt="../../_images/46c0341e613e47c971d38f8810ab1d0eb0b669fa230f644dce2ec1e2520c20c3.png" src="../../_images/46c0341e613e47c971d38f8810ab1d0eb0b669fa230f644dce2ec1e2520c20c3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -709,12 +710,13 @@ document.write(`
 <span class="n">time_dependent_autocorr_ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">time_dependent_autocorr_ts_1</span><span class="p">,</span> 
                                              <span class="n">time_dependent_autocorr_ts_2</span><span class="p">])</span>
 
-<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_dependent_autocorr_ts</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with time-dependent autocorrelation ($Y$)&quot;</span><span class="p">);</span>
+<span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">time_dependent_autocorr_ts</span><span class="p">,</span> 
+                  <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time series with time-dependent autocorrelation ($Y$)&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/68dbc1705d518f8b1190b8f3723de319e8eb64e1467f357727fde9452ccdcfdc.png" src="../../_images/68dbc1705d518f8b1190b8f3723de319e8eb64e1467f357727fde9452ccdcfdc.png" />
+<img alt="../../_images/f65616991bfb345b8db83fcf47ea2a1362d1014ce9b4caa15c72194e918b1bfc.png" src="../../_images/f65616991bfb345b8db83fcf47ea2a1362d1014ce9b4caa15c72194e918b1bfc.png" />
 </div>
 </div>
 <ul class="simple">
@@ -747,14 +749,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ce2856b0a808f5c854085e9c09b34959aa4c9ad73bd8bf6a3aa53a592d58d6f1.png" src="../../_images/ce2856b0a808f5c854085e9c09b34959aa4c9ad73bd8bf6a3aa53a592d58d6f1.png" />
+<img alt="../../_images/fa2ceabf032a148929d067429dfde5ecdeb5ad048c70201d4edec5767f40f284.png" src="../../_images/fa2ceabf032a148929d067429dfde5ecdeb5ad048c70201d4edec5767f40f284.png" />
 </div>
 </div>
 </section>
 <section id="random-walk">
 <h4>Random walk<a class="headerlink" href="#random-walk" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>The random walk is one of the most important nonstationary time series.</p></li>
+<li><p>The random walk is one of the most important <strong>nonstationary</strong> time series.</p></li>
 <li><p>It is defined as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -784,7 +786,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a027cb2302e0b291f24ccd31bce4fc9b75d135f09e492b9dd86d680e4596650d.png" src="../../_images/a027cb2302e0b291f24ccd31bce4fc9b75d135f09e492b9dd86d680e4596650d.png" />
+<img alt="../../_images/ca780e8da2615103ca1ed2cda15801c34c09dd110d0a915f4a4d3028133507d9.png" src="../../_images/ca780e8da2615103ca1ed2cda15801c34c09dd110d0a915f4a4d3028133507d9.png" />
 </div>
 </div>
 <ul class="simple">
@@ -794,7 +796,7 @@ document.write(`
 </ul>
 <p><strong>Dependence on Initial Value</strong></p>
 <ul class="simple">
-<li><p>The value of the series at any point in time depends on its initial value and the sum of all previous innovations.</p></li>
+<li><p>The value of the series at any point in time depends on its initial value and the sum of all previous <em>innovations</em>.</p></li>
 <li><p>Clearly, this path dependence denotes nonstationarity.</p></li>
 </ul>
 <p><strong>Changing variance</strong></p>
@@ -855,7 +857,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b0c0fd82263cdc199e681a0fbeaebf2427e3e4224ad11276180fd9174fee4e34.png" src="../../_images/b0c0fd82263cdc199e681a0fbeaebf2427e3e4224ad11276180fd9174fee4e34.png" />
+<img alt="../../_images/8a0434ae502c376b6486e6cec0f7bd625c0658a93a0be7faadb2512b7bbf378e.png" src="../../_images/8a0434ae502c376b6486e6cec0f7bd625c0658a93a0be7faadb2512b7bbf378e.png" />
 </div>
 </div>
 <ul class="simple">
@@ -883,7 +885,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cd7d7deafa2fa762a1b90c8d1f03e786b041e22118517421a2d8e631104cef7c.png" src="../../_images/cd7d7deafa2fa762a1b90c8d1f03e786b041e22118517421a2d8e631104cef7c.png" />
+<img alt="../../_images/273c76ad66cc24c7cb87c814a01f76e5bc1b8f5c6560dd0fe75295235e7ebc6a.png" src="../../_images/273c76ad66cc24c7cb87c814a01f76e5bc1b8f5c6560dd0fe75295235e7ebc6a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -909,7 +911,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0f19a35aaaa39e4f010b0c740258e076d28af8e3adc8121819c351d527ea4479.png" src="../../_images/0f19a35aaaa39e4f010b0c740258e076d28af8e3adc8121819c351d527ea4479.png" />
+<img alt="../../_images/467fa8ac22ac0bd59770d874a323b21ffdd6dcec87101d1cea91ec6df7749a3e.png" src="../../_images/467fa8ac22ac0bd59770d874a323b21ffdd6dcec87101d1cea91ec6df7749a3e.png" />
 </div>
 </div>
 <ul class="simple">
@@ -938,7 +940,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4dd6f5716758ff03ee9f255156b1ec42cb1a5a81cd4070efec214b3a58a9043f.png" src="../../_images/4dd6f5716758ff03ee9f255156b1ec42cb1a5a81cd4070efec214b3a58a9043f.png" />
+<img alt="../../_images/67ec348bd0f39082d8f1df29ccbefdaa0039ccd29b7cb260e1d49a8384e2e3ee.png" src="../../_images/67ec348bd0f39082d8f1df29ccbefdaa0039ccd29b7cb260e1d49a8384e2e3ee.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1113,7 +1115,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a2ffcb34d475dcd91f8b839550c9b3f97b0c0b6ad4e03df2df41ca0fb80496a4.png" src="../../_images/a2ffcb34d475dcd91f8b839550c9b3f97b0c0b6ad4e03df2df41ca0fb80496a4.png" />
+<img alt="../../_images/dce673ac0f53b91e2624c77fa9f3b08b18ac7373552507225fd13c448930884f.png" src="../../_images/dce673ac0f53b91e2624c77fa9f3b08b18ac7373552507225fd13c448930884f.png" />
 </div>
 </div>
 <p><strong>📨 Take-away message</strong></p>
@@ -1397,7 +1399,7 @@ p-value: 0.741
 </table>
 </div>
 <ul class="simple">
-<li><p>Often you will have to do several of these on one dataset.</p></li>
+<li><p>Sometimes you’ll have to do multiple transformations on the same dataset.</p></li>
 <li><p>Note that this is just a small subset of the total possible ways to transform nonstationary time series.</p></li>
 </ul>
 <section id="subtract-estimated-trend-seasonality">
@@ -1422,7 +1424,7 @@ p-value: 0.994
 </div>
 <ul class="simple">
 <li><p>Nonstationary as expected.</p></li>
-<li><p>Next, we apply the transformation.</p></li>
+<li><p>Next, we apply the decomposition.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1441,7 +1443,7 @@ p-value: 0.994
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/efb5b141d92fe55087aa0b4f87863684398ef461aaab4d016d6ef783ef16face.png" src="../../_images/efb5b141d92fe55087aa0b4f87863684398ef461aaab4d016d6ef783ef16face.png" />
+<img alt="../../_images/2b15c60f05488a5989b0e3522cf7a8d09dcec6307457fa4ba842275e92abcb21.png" src="../../_images/2b15c60f05488a5989b0e3522cf7a8d09dcec6307457fa4ba842275e92abcb21.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1451,7 +1453,7 @@ p-value: 0.994
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5bcd8b5b7e6f4eeee1546c6086eb81e084a7649ec7d3a8dbf1f2ce9aff614504.png" src="../../_images/5bcd8b5b7e6f4eeee1546c6086eb81e084a7649ec7d3a8dbf1f2ce9aff614504.png" />
+<img alt="../../_images/83bb80be803cb39fe06d8a299842c649ce262db700969cd81689cdc0d764c907.png" src="../../_images/83bb80be803cb39fe06d8a299842c649ce262db700969cd81689cdc0d764c907.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1461,7 +1463,7 @@ p-value: 0.994
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/56fef2a35a1bfef53f07d034807e588acc88291b8bdf2eea5ed2c7dabd13d508.png" src="../../_images/56fef2a35a1bfef53f07d034807e588acc88291b8bdf2eea5ed2c7dabd13d508.png" />
+<img alt="../../_images/16f029b1cad767e115619ac52ce02df100c6876a94e31f960f864640e7290d8b.png" src="../../_images/16f029b1cad767e115619ac52ce02df100c6876a94e31f960f864640e7290d8b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1469,7 +1471,9 @@ p-value: 0.994
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">est_residual</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">est_residual</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">est_residual</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:])</span>
 </pre></div>
 </div>
 </div>
@@ -1477,34 +1481,9 @@ p-value: 0.994
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[        nan         nan         nan         nan         nan         nan
   1.24368173 -2.62651313 -0.10234455 -0.73531189 -0.1829664   2.04130761
  -0.65755141 -0.46722156  0.39903068  0.38172731  2.54722749 -0.46031003
-  1.15158029 -2.95123128 -3.8243952   0.80129202  2.15850427 -1.56043208
-  3.0359116  -3.14443182 -0.42647195 -0.79241057  2.89305425  3.06029956
-  0.96135096 -0.50108732 -0.85817676 -4.86262436 -0.47675426  0.62469458
-  1.86733165  3.19296905 -0.18983981 -0.16068445 -1.78136305 -2.23271451
- -2.10183683  3.79310173  1.39263034 -0.34341253 -1.17970353  2.45314096
- -3.79055414  0.35619929 -0.97123041  1.50295994 -0.48073187 -1.50897278
-  1.33062156  0.40333605  2.04519325  0.82223149 -0.03721313  0.02072604
- -1.83124467  0.28260905 -0.58713007 -2.29219567  1.34745638  0.30238082
- -1.82829117  0.50552599  0.09712559 -0.03657677  2.21367333  0.75259989
-  1.3771748  -2.08987195  1.19900202 -1.00537537 -1.50116216 -0.48861264
-  0.67380781 -0.65481532 -1.06292965  1.09813623  1.09779453 -3.38842903
-  1.23096044  3.31408846  1.62739389 -1.19160617 -3.04549638  1.29505225
- -1.16583223  0.44363104  0.87222682  0.58400786 -0.05579167  0.23568169
- -2.18513392  2.81637873 -0.40616749  0.19770027  3.06858161 -2.93997013
- -2.30549491  0.26624964 -1.77828607  2.40403475 -1.22835495 -2.30177972
-  1.38285927  1.78578503  2.35625379  0.45059171 -3.06972949  2.51600513
- -1.33226534 -0.62157147  2.37390149 -1.59898418  0.78567536  1.19671763
- -1.01040306 -2.6779518   0.01217197  2.06368639 -1.98478575 -0.47973971
- -0.41317317  2.37486029  2.36460554  0.10283292 -1.40829286  0.74603065
- -3.04663694 -0.10097141 -1.05166821  1.76970428  1.41428445  0.02640765
-  1.4903752  -3.5927001  -2.08195289 -0.09839805  0.37255568  1.12512109
-  3.38001307  1.6649115  -2.38660082  1.73553203 -3.0777606  -0.97087869
-  0.54685379  2.60933743  0.24150924 -1.63684448  0.77593821 -0.9844951
-  1.01053918 -1.99450958 -1.99487784 -0.65557883 -0.91511512  4.35653519
-  2.98276586 -0.6365906  -1.19121881  0.84886207 -2.12084827 -3.47078436
-  1.07403998  0.80507599  1.88740267  0.7949761   1.87859292 -1.04476392
- -1.2947557   0.63231715  0.29378516 -1.00038758  0.59418834  1.27579846
- -0.68317918 -1.30938778  0.15957658 -3.17218197  2.33379231 -1.80387318
+  1.15158029 -2.95123128]
+...
+[-0.68317918 -1.30938778  0.15957658 -3.17218197  2.33379231 -1.80387318
  -0.33741986  0.1581179   0.82029446  3.25311048 -1.70643665  0.83606969
  -1.55215866 -2.8317032          nan         nan         nan         nan
          nan         nan]
@@ -1551,7 +1530,7 @@ p-value: 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/08635bed46311dddb846c334ece6fda36472909e285c4efbc1b2cb729d51a456.png" src="../../_images/08635bed46311dddb846c334ece6fda36472909e285c4efbc1b2cb729d51a456.png" />
+<img alt="../../_images/ff2f50501c4c8558ffad4cf2f2fda139ad8d42500a7554a558de174699d132bb.png" src="../../_images/ff2f50501c4c8558ffad4cf2f2fda139ad8d42500a7554a558de174699d132bb.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1572,24 +1551,13 @@ p-value: 0.118
 </div>
 </div>
 </div>
-<p><strong>⚠ Attention</strong></p>
 <ul class="simple">
-<li><p>ADF is saying we reject <span class="math notranslate nohighlight">\(H_0\)</span> (at least at <span class="math notranslate nohighlight">\(\alpha=0.05\)</span> confidence level) in favor of the alternative that the time series is stationary.</p></li>
-<li><p>However, the plot clearly shows that the variance is not constant over time.</p></li>
-</ul>
-<ul class="simple">
-<li><p>This is an important lesson.</p></li>
-<li><p>Some statistical tests like ADF perform bad in some situations:</p>
-<ul>
-<li><p>with few data,</p></li>
-<li><p>when data is heteroskedastic.</p></li>
-</ul>
-</li>
+<li><p>ADF is saying we cannot reject <span class="math notranslate nohighlight">\(H_0\)</span> in favor of the alternative (the time series is stationary).</p></li>
 </ul>
 <ul class="simple">
 <li><p>Let’s now apply the log transformation.</p></li>
 <li><p>Before that, we subtract the minimum and add a small constant</p></li>
-<li><p>In this way we ensure that all values are positive.</p></li>
+<li><p>In this way we ensure that all values are positive before taking the log.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1609,18 +1577,34 @@ p-value: 0.118
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8a4eeb6342d9f450a9ce7bb55a633768f755cbbfd86eb6caf7ed353eb2d9bc07.png" src="../../_images/8a4eeb6342d9f450a9ce7bb55a633768f755cbbfd86eb6caf7ed353eb2d9bc07.png" />
+<img alt="../../_images/ea6a2c78480af93482f8f1653908f7a9ff423de11e6545dd691fffb4a4007ec0.png" src="../../_images/ea6a2c78480af93482f8f1653908f7a9ff423de11e6545dd691fffb4a4007ec0.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>Look at the values on the <span class="math notranslate nohighlight">\(y\)</span> axis.</p></li>
 <li><p>Notice how the variance has collapsed to a large extent.</p></li>
 </ul>
-<p>📨 Takeaway message:</p>
 <ul class="simple">
-<li><p>The ADF test can fail to detect nonstationarity due to heteroskedasticity.</p></li>
-<li><p>Always plot the data.</p></li>
-<li><p>Do not rely on a single tool to determine stationarity.</p></li>
+<li><p>Let’s compute again the ADF test:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adf_log</span><span class="p">,</span> <span class="n">pvalue_log</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">log_new_hetero</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ADF: </span><span class="si">{</span><span class="n">adf_log</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value: </span><span class="si">{</span><span class="n">pvalue_log</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ADF: -3.27
+p-value: 0.016
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We now see that the p-value decreased quite a lot.</p></li>
+<li><p>We still cannot reject <span class="math notranslate nohighlight">\(H_0\)</span> at confidence level <span class="math notranslate nohighlight">\(\alpha=0.01\)</span>, but we can at <span class="math notranslate nohighlight">\(\alpha=0.05\)</span>.</p></li>
 </ul>
 </section>
 <section id="removing-autocorrelation-with-differencing">
@@ -1650,7 +1634,7 @@ p-value: 0.118
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/45996e7783036c016fedf49184d3f009c034ce51e88b46aae85441cef6e2a135.png" src="../../_images/45996e7783036c016fedf49184d3f009c034ce51e88b46aae85441cef6e2a135.png" />
+<img alt="../../_images/d4d8ba0750244bff3a413aa2b920bf781a5d8b07f80eba41e8346b4f4cae83d5.png" src="../../_images/d4d8ba0750244bff3a413aa2b920bf781a5d8b07f80eba41e8346b4f4cae83d5.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2018,8 +2002,10 @@ p-value: 0.000
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_seasonality_d12</span> <span class="o">=</span> <span class="n">trend_seasonality</span><span class="p">[:</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span> <span class="o">-</span> <span class="n">trend_seasonality</span><span class="p">[</span><span class="mi">12</span><span class="p">:]</span> <span class="c1"># remove seasonality</span>
-<span class="n">trend_seasonality_d12_d1</span> <span class="o">=</span> <span class="n">trend_seasonality_d12</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">trend_seasonality_d12</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="c1"># remove trend</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_seasonality_d12</span> <span class="o">=</span> <span class="p">(</span><span class="n">trend_seasonality</span><span class="p">[:</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span> 
+                         <span class="o">-</span> <span class="n">trend_seasonality</span><span class="p">[</span><span class="mi">12</span><span class="p">:])</span> <span class="c1"># remove seasonality</span>
+<span class="n">trend_seasonality_d12_d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">trend_seasonality_d12</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+                            <span class="o">-</span> <span class="n">trend_seasonality_d12</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="c1"># remove trend</span>
 
 <span class="c1"># Plot the differenced time series</span>
 <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">13</span><span class="p">],</span> <span class="n">trend_seasonality_d12_d1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Seasonal + 1st order differencing&quot;</span><span class="p">);</span>
@@ -2027,7 +2013,7 @@ p-value: 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/df820107f1176c1cb9d72a844fe9541a3500faa13ac1eaa008c41daf80381ae9.png" src="../../_images/df820107f1176c1cb9d72a844fe9541a3500faa13ac1eaa008c41daf80381ae9.png" />
+<img alt="../../_images/ab4bd09bd235b027d73c28522eae1489bb2e0910317af86cf41c4b6080ce921b.png" src="../../_images/ab4bd09bd235b027d73c28522eae1489bb2e0910317af86cf41c4b6080ce921b.png" />
 </div>
 </div>
 <div class="cell docutils container">
