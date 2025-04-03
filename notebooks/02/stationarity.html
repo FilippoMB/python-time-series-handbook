@@ -1065,14 +1065,14 @@ document.write(`
 <li><p>The autocovariance function for a lag <span class="math notranslate nohighlight">\(h\)</span> is defined as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\text{Cov}(X(t), X(t+h)) = \mathbb{E}[(X(t) - \mu)(X(t+\tau) - \mu)]\]</div>
+\[\text{Cov}(X(t), X(t+h)) = \mathbb{E}[(X(t) - \mu)(X(t+h) - \mu)]\]</div>
 <ul class="simple">
 <li><p>Since <span class="math notranslate nohighlight">\(X(t) = \mu + R \sin(\lambda t + \psi)\)</span>, the autocovariance becomes:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\text{Cov}(X(t), X(t+h)) = \mathbb{E}\left[\left(R \sin(\lambda t + \psi)\right)\left(R \sin(\lambda (t + \tau) + \psi)\right)\right]\]</div>
+\[\text{Cov}(X(t), X(t+h)) = \mathbb{E}\left[\left(R \sin(\lambda t + \psi)\right)\left(R \sin(\lambda (t + h) + \psi)\right)\right]\]</div>
 <div class="math notranslate nohighlight">
-\[= R^2 \mathbb{E}\left[\sin(\lambda t + \psi) \sin(\lambda (t + \tau) + \psi)\right]\]</div>
+\[= R^2 \mathbb{E}\left[\sin(\lambda t + \psi) \sin(\lambda (t + h) + \psi)\right]\]</div>
 <ul class="simple">
 <li><p>Now, we use the trigonometric identity:</p></li>
 </ul>
@@ -1092,7 +1092,7 @@ document.write(`
 <li><p>Thus:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\text{Cov}(x_t, x_{t+h}) = \frac{R^2}{2} \cos(\lambda h)\]</div>
+\[\text{Cov}(x_t, x_{t+h}) = \frac{R^2}{2} \mathbb{E}\left[\cos(\lambda h)\right]\]</div>
 <ul class="simple">
 <li><p>So, the autocovariance function depends only on the lag <span class="math notranslate nohighlight">\(h\)</span> and is <em>independent</em> of time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p>Also condition #3 is satisfied ✌.</p></li>

@@ -395,26 +395,23 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlations-in-time-series">Correlations in time series</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-function-acf">Autocorrelation Function (ACF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation-function-ccf">Cross-Correlation Function (CCF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications-of-correlation-functions">Practical Applications of Correlation Functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-considerations">Limitations and Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation-function-ccf">Cross-Correlation Function (CCF)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-considerations">Limitations and Considerations</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-partial-autocorrelation-function-pacf">The Partial Autocorrelation Function (PACF)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoregressive-ar-models">Autoregressive (AR) models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-model-identification">AR model identification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ar-models">Forecasting with AR models</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-remove-trend-and-seasonality">Step 1: Remove trend and seasonality</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-apply-the-ar-model">Step 2: Apply the AR model</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-reconstruct-the-forecast">Step 3: Reconstruct the forecast</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ar-models">Forecasting with AR models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-forecasting-with-ar-model">Example: forecasting with AR model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stationairty-through-differencing">Stationairty through differencing</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity-by-subtracting-estimated-trend-and-seasonality">Stationarity by subtracting estimated trend and seasonality</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-with-differencing-approach">Predictions with differencing approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-with-tes-based-approach">Predictions with TES-based approach</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ar-model">Forecasting with AR model</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average-ma-models">Moving Average (MA) models</a><ul class="nav section-nav flex-column">
@@ -422,6 +419,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-forecasting-with-ma-model">Example: forecasting with MA model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Stationairty through differencing</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Stationarity by subtracting estimated trend and seasonality</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-through-differencing-approach">Predictions through differencing approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Predictions with TES-based approach</a></li>
 </ul>
 </li>
 </ul>
@@ -542,7 +541,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1e67fd889645848a3a7a25d49254fc2f602d02ded96344f07efef233c0917f22.png" src="../../_images/1e67fd889645848a3a7a25d49254fc2f602d02ded96344f07efef233c0917f22.png" />
+<img alt="../../_images/cbf22c366a785153e229da1c6b837379f38914c2ce30b8b0d6e56828ec7bd0c7.png" src="../../_images/cbf22c366a785153e229da1c6b837379f38914c2ce30b8b0d6e56828ec7bd0c7.png" />
 </div>
 </div>
 <ul class="simple">
@@ -592,20 +591,17 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/27ab90656439f6cd83fa6c21a98287be6a1e9e758f740f2199442ee831b2f887.png" src="../../_images/27ab90656439f6cd83fa6c21a98287be6a1e9e758f740f2199442ee831b2f887.png" />
+<img alt="../../_images/ba2ce7f0522d6bee827e0cefcda885576dbaef622e034c0d22818c9f35eb0607.png" src="../../_images/ba2ce7f0522d6bee827e0cefcda885576dbaef622e034c0d22818c9f35eb0607.png" />
 </div>
 </div>
-</section>
-<section id="practical-applications-of-correlation-functions">
-<h3>Practical Applications of Correlation Functions<a class="headerlink" href="#practical-applications-of-correlation-functions" title="Link to this heading">#</a></h3>
+<p><strong>Practical Applications of Correlation Functions</strong></p>
 <ul class="simple">
 <li><p>Identifying the nature of the data (e.g., whether it is random, has a trend or a seasonality).</p></li>
 <li><p>Helping to determine the order of ARIMA models (more on this later on).</p></li>
 <li><p>Identifying outliers in time series data.</p></li>
 </ul>
-</section>
 <section id="limitations-and-considerations">
-<h3>Limitations and Considerations<a class="headerlink" href="#limitations-and-considerations" title="Link to this heading">#</a></h3>
+<h4>Limitations and Considerations<a class="headerlink" href="#limitations-and-considerations" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Correlation functions only measure <em>linear</em> relationships.</p></li>
 <li><p>For meaningful results, time series should be <em>stationary</em>.</p></li>
@@ -641,13 +637,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/374078bdb65c73589a6e36013a4bb3cf1100e58cf285e32ac01eb4981f34f87a.png" src="../../_images/374078bdb65c73589a6e36013a4bb3cf1100e58cf285e32ac01eb4981f34f87a.png" />
+<img alt="../../_images/2ff806a34d4238685cd60cd161cd54d278ebf2792914a33ed37d22aa931ef5f5.png" src="../../_images/2ff806a34d4238685cd60cd161cd54d278ebf2792914a33ed37d22aa931ef5f5.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>You can see that lags <span class="math notranslate nohighlight">\(h&gt;1\)</span> are also present in the ACF.</p></li>
 <li><p>Those are indirect correlations due to the accumulation of the main correlation at lag <span class="math notranslate nohighlight">\(h=1\)</span>.</p></li>
 </ul>
+</section>
 </section>
 <section id="the-partial-autocorrelation-function-pacf">
 <h3>The Partial Autocorrelation Function (PACF)<a class="headerlink" href="#the-partial-autocorrelation-function-pacf" title="Link to this heading">#</a></h3>
@@ -701,7 +698,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/51d8f42f7f95706a7e5be422317f69cad3bb8d4a1514085c0eb629159a3fff88.png" src="../../_images/51d8f42f7f95706a7e5be422317f69cad3bb8d4a1514085c0eb629159a3fff88.png" />
+<img alt="../../_images/80e35a6c1f7ada3415d90e140060e2a404b0b3bb171a6d06b8c1b7e50e406d5e.png" src="../../_images/80e35a6c1f7ada3415d90e140060e2a404b0b3bb171a6d06b8c1b7e50e406d5e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -720,7 +717,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b8dfa439b321464309f2e764266f5a0561a228bdc37a3bb0c231905338a53dd0.png" src="../../_images/b8dfa439b321464309f2e764266f5a0561a228bdc37a3bb0c231905338a53dd0.png" />
+<img alt="../../_images/b7fc5afe34c023da68ddaffdcdadd6311df311c3837606452d6defd22fcd687f.png" src="../../_images/b7fc5afe34c023da68ddaffdcdadd6311df311c3837606452d6defd22fcd687f.png" />
 </div>
 </div>
 <ul class="simple">
@@ -818,7 +815,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/791160ef1cac37d4118e9e994617a00d4c143dc53aa719131031c373e649bc15.png" src="../../_images/791160ef1cac37d4118e9e994617a00d4c143dc53aa719131031c373e649bc15.png" />
+<img alt="../../_images/cf0e3f4949660067c2efac23a9b4bcc07909d6be7df588bca0268435389efb04.png" src="../../_images/cf0e3f4949660067c2efac23a9b4bcc07909d6be7df588bca0268435389efb04.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -830,9 +827,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bded306cdebcbb366783554de2ce888a7149a41343118d2e19df0a909a45a8e3.png" src="../../_images/bded306cdebcbb366783554de2ce888a7149a41343118d2e19df0a909a45a8e3.png" />
+<img alt="../../_images/2c6213be3f5a13badf7dbf5906dac583d263f4cd42c6f3d113c61096bd46d275.png" src="../../_images/2c6213be3f5a13badf7dbf5906dac583d263f4cd42c6f3d113c61096bd46d275.png" />
 </div>
 </div>
+<ul class="simple">
+<li><p>The actual coefficients of the AR(2) process are <strong>not</strong> clearly visible in the ACF plot.</p></li>
+</ul>
 <ul class="simple">
 <li><p>Next, we compute the PACF on the <code class="docutils literal notranslate"><span class="pre">ar_data</span></code>.</p></li>
 </ul>
@@ -845,13 +845,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b553b38997f34f414ed636222eaae7df5891332fe1f9800c3e2dffd9a370c68d.png" src="../../_images/b553b38997f34f414ed636222eaae7df5891332fe1f9800c3e2dffd9a370c68d.png" />
+<img alt="../../_images/10d03bf443ad8dbf3a311a0a1c17142527882c0f3346072c7919861c2c04d066.png" src="../../_images/10d03bf443ad8dbf3a311a0a1c17142527882c0f3346072c7919861c2c04d066.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>Besides the spike at lag 0, which is always there, we see two significant lags:</p>
 <ul>
-<li><p>The <em>positive</em> spike at lag 1, introduced by the <em>negative</em> coefficient <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p></li>
+<li><p>The <em>positive</em> spike at lag 1, introduced by the <em>negative</em> coefficient <code class="docutils literal notranslate"><span class="pre">-0.5</span></code>.</p></li>
 <li><p>The <em>negative</em> spike at lag 2, introduced by the <em>positive</em> coefficient <code class="docutils literal notranslate"><span class="pre">0.7</span></code>.</p></li>
 </ul>
 </li>
@@ -874,7 +874,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bded306cdebcbb366783554de2ce888a7149a41343118d2e19df0a909a45a8e3.png" src="../../_images/bded306cdebcbb366783554de2ce888a7149a41343118d2e19df0a909a45a8e3.png" />
+<img alt="../../_images/2c6213be3f5a13badf7dbf5906dac583d263f4cd42c6f3d113c61096bd46d275.png" src="../../_images/2c6213be3f5a13badf7dbf5906dac583d263f4cd42c6f3d113c61096bd46d275.png" />
 </div>
 </div>
 <p><strong>⚙ Try it yourself</strong></p>
@@ -891,8 +891,7 @@ document.write(`
 <li><p>However, an AR model can only be used on <em>stationary</em> data.</p></li>
 <li><p>Therefore, we need to do the following steps.</p></li>
 </ul>
-<section id="step-1-remove-trend-and-seasonality">
-<h4>Step 1: Remove trend and seasonality<a class="headerlink" href="#step-1-remove-trend-and-seasonality" title="Link to this heading">#</a></h4>
+<p><strong>Step 1: Remove trend and seasonality</strong></p>
 <ul>
 <li><p>Before applying an AR model is necessary to make the time series stationary.</p></li>
 <li><p>This can be done using techniques we saw in the previous chapters.</p></li>
@@ -914,17 +913,13 @@ document.write(`
 \[R(t) = X(t) - T(t) - S(t)\]</div>
 </li>
 </ul>
-</section>
-<section id="step-2-apply-the-ar-model">
-<h4>Step 2: Apply the AR model<a class="headerlink" href="#step-2-apply-the-ar-model" title="Link to this heading">#</a></h4>
+<p><strong>Step 2: Apply the AR model</strong></p>
 <ul class="simple">
 <li><p>Identify the order of the AR model.</p></li>
 <li><p>Fit an AR model to the detrended and deseasonalized time series <span class="math notranslate nohighlight">\(R(t)\)</span>.</p></li>
-<li><p>Use the model to forecast the next values <span class="math notranslate nohighlight">\(\hat R(t+\tau), \tau=1, \dots, H\)</span> where <span class="math notranslate nohighlight">\(H\)</span> is the forecast horizon.</p></li>
+<li><p>Use the model to forecast the next values <span class="math notranslate nohighlight">\(\hat R(t+h), h=1, \dots, H\)</span> where <span class="math notranslate nohighlight">\(H\)</span> is the forecast horizon.</p></li>
 </ul>
-</section>
-<section id="step-3-reconstruct-the-forecast">
-<h4>Step 3: Reconstruct the forecast<a class="headerlink" href="#step-3-reconstruct-the-forecast" title="Link to this heading">#</a></h4>
+<p><strong>Step 3: Reconstruct the forecast</strong></p>
 <ul>
 <li><p>The reconstruction procedure depends on how we made the time series stationary at step 1.</p></li>
 <li><p>If we used differencing:</p>
@@ -932,16 +927,15 @@ document.write(`
 <li><p>We must undo the differentiation by taking cumulative sums of the residuals.</p></li>
 </ul>
 </li>
-<li><p>If we modelled and removed trend and seasonality, for each <span class="math notranslate nohighlight">\(\tau \in [1, H]\)</span>:</p>
+<li><p>If we removed the trend and seasonality that we modelled, for each <span class="math notranslate nohighlight">\(h \in [1, H]\)</span> we must:</p>
 <ul class="simple">
-<li><p>Predict the trend <span class="math notranslate nohighlight">\(\hat{T}(t+\tau)\)</span> and the seasonal component <span class="math notranslate nohighlight">\(\hat{S}(t+\tau)\)</span>.</p></li>
+<li><p>Predict the trend <span class="math notranslate nohighlight">\(\hat{T}(t+h)\)</span> and the seasonal component <span class="math notranslate nohighlight">\(\hat{S}(t+h)\)</span>.</p></li>
 <li><p>Add back the estimated trend and seasonality to the forecasted value:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\hat X(t+\tau) = \hat R(t+\tau) + \hat{T}(t+\tau) + \hat{S}(t+\tau)\]</div>
+\[\hat X(t+h) = \hat R(t+h) + \hat{T}(t+h) + \hat{S}(t+h)\]</div>
 </li>
 </ul>
-</section>
 </section>
 <section id="example-forecasting-with-ar-model">
 <h3>Example: forecasting with AR model<a class="headerlink" href="#example-forecasting-with-ar-model" title="Link to this heading">#</a></h3>
@@ -961,7 +955,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c45ca7ad68cc29cc302b56a95e68fe191122a504b7247d833a4d0418cf817dc7.png" src="../../_images/c45ca7ad68cc29cc302b56a95e68fe191122a504b7247d833a4d0418cf817dc7.png" />
+<img alt="../../_images/311d9454bdc6e6355a09d2842dfdbe299a222f259be78f7c8e6c1a7a446ad32b.png" src="../../_images/311d9454bdc6e6355a09d2842dfdbe299a222f259be78f7c8e6c1a7a446ad32b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -988,7 +982,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/99ac14a621b2ffd804af8d08f5ee72839ac45c2d555fe60b72869f56f0436be9.png" src="../../_images/99ac14a621b2ffd804af8d08f5ee72839ac45c2d555fe60b72869f56f0436be9.png" />
+<img alt="../../_images/cf1137da8d7a652110256714ece7e88999905e7a4db2054ad5ab8ff3337d942c.png" src="../../_images/cf1137da8d7a652110256714ece7e88999905e7a4db2054ad5ab8ff3337d942c.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1016,7 +1010,7 @@ document.write(`
 </div>
 </div>
 <ul class="simple">
-<li><p>A p-value that high means we <em>fail</em> to reject the null hypothesis</p></li>
+<li><p>Such a high <span class="math notranslate nohighlight">\(p\)</span>-value means that we <em>fail</em> to reject the null hypothesis</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[H_0: \text{the data is nonstationary}\]</div>
@@ -1068,7 +1062,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cbb40c9c65ac5ded5c4d0bd94621e9f06d7d7f484a727b51e02fd3462886bc25.png" src="../../_images/cbb40c9c65ac5ded5c4d0bd94621e9f06d7d7f484a727b51e02fd3462886bc25.png" />
+<img alt="../../_images/d65d33c0561c80938dc0ed26eb29e6e5aea5f6ecc1ca59e9f3c449d080cc7d89.png" src="../../_images/d65d33c0561c80938dc0ed26eb29e6e5aea5f6ecc1ca59e9f3c449d080cc7d89.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1086,7 +1080,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b261a16eb248c11e0e5ef2d91d5c9e3c06fe4b311abab8f4106a0da8868c2221.png" src="../../_images/b261a16eb248c11e0e5ef2d91d5c9e3c06fe4b311abab8f4106a0da8868c2221.png" />
+<img alt="../../_images/95bfcd161ad7b56d64c29dac82c1c17ec8157fff304abb41a1aef070b65efc6c.png" src="../../_images/95bfcd161ad7b56d64c29dac82c1c17ec8157fff304abb41a1aef070b65efc6c.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1112,7 +1106,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1ec9b810c81592ad457303dc59c8edd1da4659efdaa5ef944452c46132316c9b.png" src="../../_images/1ec9b810c81592ad457303dc59c8edd1da4659efdaa5ef944452c46132316c9b.png" />
+<img alt="../../_images/8fe5b22b075681f4298608ea300ffe5a3ce811e971f2d2ed2505ef521924cee2.png" src="../../_images/8fe5b22b075681f4298608ea300ffe5a3ce811e971f2d2ed2505ef521924cee2.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1120,9 +1114,9 @@ document.write(`
 <li><p>On the contrary, this PACF looks even more different than the original one.</p></li>
 <li><p>In practice, it is rare to get a “clean” PACF with only one prominent lag at the correct order when using differencing.</p></li>
 <li><p>Interpreting the PACF (and ACF) plots to select the order of the model requires skills and experience.</p></li>
-<li><p>See <a class="reference external" href="https://people.duke.edu/~rnau/411arim3.htm">this explanation</a> for how to select the order of the AR and MA models.</p></li>
+<li><p>See <a class="reference external" href="https://people.duke.edu/~rnau/411arim3.htm">this guide</a> for selecting the best AR (and MA) order.</p></li>
 </ul>
-<p><strong>📝 Note</strong></p>
+<p><strong>📝 Note 1</strong></p>
 <ul class="simple">
 <li><p>Besides overdifferencing, other issues appear when stationarity is achieved with differencing.</p></li>
 <li><p>Some data are lost at the beginning or at the end of the time series due to differencing.</p>
@@ -1130,14 +1124,21 @@ document.write(`
 <li><p>For example, when applying 1st order and seasonal differencing <span class="math notranslate nohighlight">\(L+1\)</span> steps are lost.</p></li>
 </ul>
 </li>
-<li><p>In addition, it is easy to make mistakes when reverting the differencing to make predictions.</p></li>
+<li><p>In addition, it is easy to make <em>mistakes</em> when reverting the differencing to make predictions.</p></li>
 <li><p>This further complicates when there is a gap between the training and test set or when the forecast horizon <span class="math notranslate nohighlight">\(H\)</span> goes beyond the seasonality <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+</ul>
+<p><strong>📝 Note 2</strong></p>
+<p>Should we perform seasonal or 1st order differencing first?</p>
+<ul class="simple">
+<li><p>Both paths are valid, however seasonal differencing is usually done first.</p></li>
+<li><p>Often seasonal differeing is enough to make the data (almost) stationary.</p></li>
+<li><p>In general, we want to do as little differencing as possible to avoid overdifferencing.</p></li>
 </ul>
 </section>
 <section id="stationarity-by-subtracting-estimated-trend-and-seasonality">
 <h4>Stationarity by subtracting estimated trend and seasonality<a class="headerlink" href="#stationarity-by-subtracting-estimated-trend-and-seasonality" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>We could estimate the trend and seasonality with Triple exponential smoothing (TES).</p></li>
+<li><p>As an alternative approach, we can estimate the trend and seasonality with Triple exponential smoothing (TES).</p></li>
 <li><p>Then, we compute the residuals subtracting the estimated trend and seasonality.</p></li>
 <li><p>We see that, in this case, the residuals are much closer to our original AR process.</p></li>
 </ul>
@@ -1156,7 +1157,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7d44c92b0b3de82f324ffa8b1590c30c0c33dd9bc00d895ee3204f2b239f04f4.png" src="../../_images/7d44c92b0b3de82f324ffa8b1590c30c0c33dd9bc00d895ee3204f2b239f04f4.png" />
+<img alt="../../_images/5ec3ec19ce7387a323896420d95507d5492870ac5ac8ae039007071849ee45a4.png" src="../../_images/5ec3ec19ce7387a323896420d95507d5492870ac5ac8ae039007071849ee45a4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1169,7 +1170,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8f8d2ae64ab7f3858d943daae694b38f62a008e1fdb66b99347cb300446a5a33.png" src="../../_images/8f8d2ae64ab7f3858d943daae694b38f62a008e1fdb66b99347cb300446a5a33.png" />
+<img alt="../../_images/d2fd0bd792c329dbb83ab5039bfc2afbb8793ad209db1448d42ca127a6e22648.png" src="../../_images/d2fd0bd792c329dbb83ab5039bfc2afbb8793ad209db1448d42ca127a6e22648.png" />
 </div>
 </div>
 <p><strong>💡 Hint</strong></p>
@@ -1199,16 +1200,14 @@ document.write(`
 <li><p>Many real-world data do not look so nice.</p></li>
 <li><p>In some cases, we have to rely on other techniques, including differentiation and the “dirty” ACF/PACF plot we got from it.</p></li>
 </ul>
-</section>
-</section>
-<section id="forecasting-with-ar-model">
-<h3>Forecasting with AR model<a class="headerlink" href="#forecasting-with-ar-model" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Once the data are stationary, we are ready to fit the AR(2) model.</p></li>
+<li><p>Once the data are stationary, we are ready to fit the AR(2) model to make forecasts.</p></li>
 <li><p>Depending on which method we used to obtain stationary data, we must do something different to reconstruct the predictions.</p></li>
 <li><p>Let’s start with the stationary data obtained from differencing.</p></li>
 </ul>
-<p><strong>Differencing approach</strong></p>
+</section>
+<section id="predictions-with-differencing-approach">
+<h4>Predictions with differencing approach<a class="headerlink" href="#predictions-with-differencing-approach" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>First, we use <code class="docutils literal notranslate"><span class="pre">diff_diff_ar</span></code> to fit an AR(2) model and make forecasts for a period as long as the test data.</p></li>
 <li><p>Note how after a short while the forecast goes to zero.</p></li>
@@ -1231,7 +1230,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b52bc2d38edf44d53482d76c843ed22be0e762d7804664784390cad30367aef5.png" src="../../_images/b52bc2d38edf44d53482d76c843ed22be0e762d7804664784390cad30367aef5.png" />
+<img alt="../../_images/51b6ed9cbd78b67c8c277f5a341008979b49c4f4fac3d4ba05e2758da8ab7094.png" src="../../_images/51b6ed9cbd78b67c8c277f5a341008979b49c4f4fac3d4ba05e2758da8ab7094.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1257,7 +1256,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4cbfb38ae05d9e3b8813266c5a2b9e90749e347d0e2518fa64f2e05af568907d.png" src="../../_images/4cbfb38ae05d9e3b8813266c5a2b9e90749e347d0e2518fa64f2e05af568907d.png" />
+<img alt="../../_images/2d856ef51af1715bf344529270d401b01b20b64c413d31596d55b83d4577e6c2.png" src="../../_images/2d856ef51af1715bf344529270d401b01b20b64c413d31596d55b83d4577e6c2.png" />
 </div>
 </div>
 <p><strong>⚠ Attention</strong></p>
@@ -1265,7 +1264,9 @@ document.write(`
 <li><p>It’s very easy to make errors with indices when reverting the differencing operations.</p></li>
 <li><p>Also, the previous operations assume that there are no gaps between train and test data.</p></li>
 </ul>
-<p><strong>TES-based approach</strong></p>
+</section>
+<section id="predictions-with-tes-based-approach">
+<h4>Predictions with TES-based approach<a class="headerlink" href="#predictions-with-tes-based-approach" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Next, we consider the stationary data obtained by subtracting the trend and seasonality estimated with TES.</p></li>
 <li><p>This time we use <code class="docutils literal notranslate"><span class="pre">tes_resid</span></code> to fit the AR(2) model and make forecasts.</p></li>
@@ -1285,7 +1286,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/526c4e4812c3fa5c6a6fd020982c9a1543cc49a1f8dabd04f48b611e4b891b2e.png" src="../../_images/526c4e4812c3fa5c6a6fd020982c9a1543cc49a1f8dabd04f48b611e4b891b2e.png" />
+<img alt="../../_images/d2fa5abc7ebf982dd149cbe7d6a4aab8ff112d5d53288c8d5cf1d4014c4141e2.png" src="../../_images/d2fa5abc7ebf982dd149cbe7d6a4aab8ff112d5d53288c8d5cf1d4014c4141e2.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1308,7 +1309,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/62a881c9e87d583f2297b2ff9e20ec14eeaf7935241a4dd2e5303fe74a1f2ba7.png" src="../../_images/62a881c9e87d583f2297b2ff9e20ec14eeaf7935241a4dd2e5303fe74a1f2ba7.png" />
+<img alt="../../_images/3948626d559cf95581c671e7c5d4f669874b1a395994c82e5b72ed7b28dfc021.png" src="../../_images/3948626d559cf95581c671e7c5d4f669874b1a395994c82e5b72ed7b28dfc021.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1332,6 +1333,7 @@ MSE of TES: 1.11
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 <hr class="docutils" />
@@ -1360,10 +1362,10 @@ MSE of TES: 1.11
 </ul>
 <ul class="simple">
 <li><p>MA models capture the dependency between an observation and a residual error through a moving average applied to lagged observations.</p></li>
-<li><p>Fitting MA estimates is more complicated than AR models because the error terms are not observable.</p></li>
-<li><p>Therefore, iterative nonlinear fitting procedures need to be used.</p></li>
-<li><p>MA models are less interpretable than AR models.</p></li>
-<li><p>As AR models, also MA models require data to be stationary.</p></li>
+<li><p>Fitting MA estimates is <em>more complicated</em> than AR models because the error terms are not observable.</p></li>
+<li><p>Therefore, <em>iterative nonlinear fitting procedures</em> need to be used.</p></li>
+<li><p>MA models are <em>less interpretable</em> than AR models.</p></li>
+<li><p>As AR models, also MA models require data to be <em>stationary</em>.</p></li>
 </ul>
 <p><strong>⚠ Attention</strong></p>
 <ul class="simple">
@@ -1386,7 +1388,8 @@ MSE of TES: 1.11
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>  <span class="c1"># MA parameters</span>
-<span class="n">ma_data</span> <span class="o">=</span> <span class="n">arma_generate_sample</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">ma</span><span class="p">,</span> <span class="n">nsample</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">burnin</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># MA process</span>
+<span class="n">ma_data</span> <span class="o">=</span> <span class="n">arma_generate_sample</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">ma</span><span class="p">,</span> <span class="n">nsample</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> 
+                               <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">burnin</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># MA process</span>
 </pre></div>
 </div>
 </div>
@@ -1400,7 +1403,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6b21e0b647e32079fc6132fc81b23e48b9fa69cff491f42aff5ff523331d8b5d.png" src="../../_images/6b21e0b647e32079fc6132fc81b23e48b9fa69cff491f42aff5ff523331d8b5d.png" />
+<img alt="../../_images/303b85a7dc78df3040ce3ee162210e900f347d71bb14a2b176b52904aa132ec3.png" src="../../_images/303b85a7dc78df3040ce3ee162210e900f347d71bb14a2b176b52904aa132ec3.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1420,7 +1423,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a05988133f7dfa2cc1e2beb560c11f091bde88c719bf253e0bb30a5c35267573.png" src="../../_images/a05988133f7dfa2cc1e2beb560c11f091bde88c719bf253e0bb30a5c35267573.png" />
+<img alt="../../_images/751badc339cb5f8f87b70956df77f89aea5513a0b2eb4afc7e99f8ff305f167d.png" src="../../_images/751badc339cb5f8f87b70956df77f89aea5513a0b2eb4afc7e99f8ff305f167d.png" />
 </div>
 </div>
 <p><strong>⚙ Try it yourself</strong></p>
@@ -1445,7 +1448,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/fd87eff74562791a125210d6e5537399282fd351426971891b9166c23134cdaf.png" src="../../_images/fd87eff74562791a125210d6e5537399282fd351426971891b9166c23134cdaf.png" />
+<img alt="../../_images/dff25dd10146bcc6b1611370ab7030246f4da7cf27b835329dd3dfc27c83ec1d.png" src="../../_images/dff25dd10146bcc6b1611370ab7030246f4da7cf27b835329dd3dfc27c83ec1d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1470,7 +1473,7 @@ MSE of TES: 1.11
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c06f3c1460802ad5fbf61bf9a2149abe4912dcd4bbf22ebaeea1947aa71039ce.png" src="../../_images/c06f3c1460802ad5fbf61bf9a2149abe4912dcd4bbf22ebaeea1947aa71039ce.png" />
+<img alt="../../_images/9f0b47366664b61f1c72f0dff2d58d392b0e58c853db8cfa2292b260fc382517.png" src="../../_images/9f0b47366664b61f1c72f0dff2d58d392b0e58c853db8cfa2292b260fc382517.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1521,7 +1524,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/582bf820863aceb464102b3d0a2b84629d17c5dc20a982c04964615c316bdaad.png" src="../../_images/582bf820863aceb464102b3d0a2b84629d17c5dc20a982c04964615c316bdaad.png" />
+<img alt="../../_images/435f64e4f44fc97076eaaa3b04b518aecefe9da2ab2c9bda60e90a0f0dd4f580.png" src="../../_images/435f64e4f44fc97076eaaa3b04b518aecefe9da2ab2c9bda60e90a0f0dd4f580.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1547,7 +1550,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ec37a5b063fcbf9b276e6a333e0e4ee9c3a9c4e3fe1deac47567bf2a0d1039eb.png" src="../../_images/ec37a5b063fcbf9b276e6a333e0e4ee9c3a9c4e3fe1deac47567bf2a0d1039eb.png" />
+<img alt="../../_images/be226a7119d1dc6bb67a793b36a7a4aa1c843283e857766c5404d62569357ea7.png" src="../../_images/be226a7119d1dc6bb67a793b36a7a4aa1c843283e857766c5404d62569357ea7.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1590,7 +1593,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1a85efde2f43df695ac4c37e15a752f69bbef25313d8fdeb8de6f8f9d7e8bb33.png" src="../../_images/1a85efde2f43df695ac4c37e15a752f69bbef25313d8fdeb8de6f8f9d7e8bb33.png" />
+<img alt="../../_images/3826e435aa3375fdd6b88d4a1333083debad60ebd7dc91d11a120729090443e6.png" src="../../_images/3826e435aa3375fdd6b88d4a1333083debad60ebd7dc91d11a120729090443e6.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1610,7 +1613,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/931bd8f153ba9b5c18bdebeb89bcc2883ede98583f154522de0f0b100876fa7f.png" src="../../_images/931bd8f153ba9b5c18bdebeb89bcc2883ede98583f154522de0f0b100876fa7f.png" />
+<img alt="../../_images/a589f690d6e7da2af60c003c6f4c995e2b80f7b51bc8ce477b2710f2cfde0ec0.png" src="../../_images/a589f690d6e7da2af60c003c6f4c995e2b80f7b51bc8ce477b2710f2cfde0ec0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1618,7 +1621,9 @@ p-value (differenced ts): 0.000
 <li><p>This suggests using a MA model with order <span class="math notranslate nohighlight">\(q=3\)</span>.</p></li>
 <li><p>As in the AR case, we compute predictions using both the differencing and the TES-based approach.</p></li>
 </ul>
-<p><strong>Differencing approach</strong></p>
+</section>
+<section id="predictions-through-differencing-approach">
+<h4>Predictions through differencing approach<a class="headerlink" href="#predictions-through-differencing-approach" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>We start by fitting an MA model to <code class="docutils literal notranslate"><span class="pre">diff_diff_ma</span></code> data and compute the predictions.</p></li>
 <li><p>Note that, even if we generated the data with an MA(2) process, we use an MA(3) process since the ACF <code class="docutils literal notranslate"><span class="pre">diff_diff_ma</span></code> had a large spike at lag 3.</p></li>
@@ -1640,7 +1645,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4aa29b8b8cb13bde8ee04fc658e4bad33ab057b4cf3e50c9f21d06e562deacf4.png" src="../../_images/4aa29b8b8cb13bde8ee04fc658e4bad33ab057b4cf3e50c9f21d06e562deacf4.png" />
+<img alt="../../_images/16fa4b8bd58e91f4f019c7f2965e7e609777165b0185b6f5b1b35bde88d4d924.png" src="../../_images/16fa4b8bd58e91f4f019c7f2965e7e609777165b0185b6f5b1b35bde88d4d924.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1666,10 +1671,12 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/87ec18371b3e64b1bd7166797d309d831fd05520b15e6336498096b2a90081a5.png" src="../../_images/87ec18371b3e64b1bd7166797d309d831fd05520b15e6336498096b2a90081a5.png" />
+<img alt="../../_images/36b19541b881abccaa0a546ef148231a0661558ce0ed1d6ad4a2bf829aa19210.png" src="../../_images/36b19541b881abccaa0a546ef148231a0661558ce0ed1d6ad4a2bf829aa19210.png" />
 </div>
 </div>
-<p><strong>TES-based approach</strong></p>
+</section>
+<section id="id3">
+<h4>Predictions with TES-based approach<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>This time we fit the MA model with <code class="docutils literal notranslate"><span class="pre">tes_resid_ma</span></code> data and compute the predictions.</p></li>
 <li><p>Notice that again we use an MA(3) model, even though we know the data was generated from an MA(2) process.</p></li>
@@ -1689,7 +1696,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4f89bff7fa376790faeff3d777231c88984a89802109a5c6ee336c6838956678.png" src="../../_images/4f89bff7fa376790faeff3d777231c88984a89802109a5c6ee336c6838956678.png" />
+<img alt="../../_images/79cebfceb44d72052cde84a0daf4629c2bb7b92e9614e1a0bb5d687948efa991.png" src="../../_images/79cebfceb44d72052cde84a0daf4629c2bb7b92e9614e1a0bb5d687948efa991.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1715,7 +1722,7 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f260a17335b84520b7cb02684b380564f80c034b2d503f033fa79e1e5df7990a.png" src="../../_images/f260a17335b84520b7cb02684b380564f80c034b2d503f033fa79e1e5df7990a.png" />
+<img alt="../../_images/a098207346b26a90c64e6ab8d5523bee9f2b91b24890562e884c80d6c4a2aaee.png" src="../../_images/a098207346b26a90c64e6ab8d5523bee9f2b91b24890562e884c80d6c4a2aaee.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1892,26 +1899,23 @@ MSE of TES: 1.44
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlations-in-time-series">Correlations in time series</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-function-acf">Autocorrelation Function (ACF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation-function-ccf">Cross-Correlation Function (CCF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications-of-correlation-functions">Practical Applications of Correlation Functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-considerations">Limitations and Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-correlation-function-ccf">Cross-Correlation Function (CCF)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-considerations">Limitations and Considerations</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-partial-autocorrelation-function-pacf">The Partial Autocorrelation Function (PACF)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoregressive-ar-models">Autoregressive (AR) models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-model-identification">AR model identification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ar-models">Forecasting with AR models</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-remove-trend-and-seasonality">Step 1: Remove trend and seasonality</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-apply-the-ar-model">Step 2: Apply the AR model</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-reconstruct-the-forecast">Step 3: Reconstruct the forecast</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ar-models">Forecasting with AR models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-forecasting-with-ar-model">Example: forecasting with AR model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stationairty-through-differencing">Stationairty through differencing</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity-by-subtracting-estimated-trend-and-seasonality">Stationarity by subtracting estimated trend and seasonality</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-with-differencing-approach">Predictions with differencing approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-with-tes-based-approach">Predictions with TES-based approach</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-ar-model">Forecasting with AR model</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average-ma-models">Moving Average (MA) models</a><ul class="nav section-nav flex-column">
@@ -1919,6 +1923,8 @@ MSE of TES: 1.44
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-forecasting-with-ma-model">Example: forecasting with MA model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Stationairty through differencing</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Stationarity by subtracting estimated trend and seasonality</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions-through-differencing-approach">Predictions through differencing approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Predictions with TES-based approach</a></li>
 </ul>
 </li>
 </ul>

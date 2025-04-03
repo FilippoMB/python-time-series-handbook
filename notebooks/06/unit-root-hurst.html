@@ -706,16 +706,16 @@ document.write(`
 <li><p>The number of lags (<span class="math notranslate nohighlight">\(p\)</span>) included in the test equation is important.</p></li>
 <li><p>Too few lags might leave out necessary corrections for autocorrelation.</p></li>
 <li><p>Too many lags can reduce the power of the test.</p></li>
-<li><p>The appropriate lag length is often chosen based on information criteria such as the Akaike Information Criterion (AIC) or the Schwarz Information Criterion (BIC).</p></li>
+<li><p>The appropriate lag length is often chosen based on information criteria such as the Akaike Information Criterion (AIC) or the Bayesian Information Criterion (BIC).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generating a random walk time series (replace this with your dataset)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generating a random walk time series</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">100</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
 
-<span class="c1"># Perform Augmented Dickey-Fuller test</span>
-<span class="c1"># the lag can be set manually with &#39;maxlag&#39; or inferred automatically with autolag</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">autolag</span><span class="o">=</span><span class="s1">&#39;AIC&#39;</span><span class="p">)</span>  <span class="c1"># You can change to &#39;BIC&#39; for Schwarz Information Criterion</span>
+<span class="c1"># Perform Augmented Dickey-Fuller test. The lag can be set manually </span>
+<span class="c1"># with &#39;maxlag&#39; or inferred automatically with autolag</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">autolag</span><span class="o">=</span><span class="s1">&#39;AIC&#39;</span><span class="p">)</span>  <span class="c1"># You can change to &#39;BIC&#39;</span>
 
 <span class="n">adf_statistic</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">usedlag</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="n">critical_values</span><span class="p">,</span> <span class="n">icbest</span> <span class="o">=</span> <span class="n">result</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ADF Statistic: </span><span class="si">{</span><span class="n">adf_statistic</span><span class="w"> </span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -738,7 +738,7 @@ Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;
 </div>
 <p><strong>Types of ADF tests</strong></p>
 <ul class="simple">
-<li><p>There are three versions of the ADF test depending on whether the equation includes none, both, or one of the terms <span class="math notranslate nohighlight">\(\alpha\)</span> (constant) and <span class="math notranslate nohighlight">\(\beta t\)</span> (trend):</p>
+<li><p>There are three versions of the ADF test depending on whether the equation includes the constant term <span class="math notranslate nohighlight">\(\alpha\)</span> and the trend <span class="math notranslate nohighlight">\(\beta t\)</span>:</p>
 <ul>
 <li><p>No constant or trend (<code class="docutils literal notranslate"><span class="pre">'n'</span></code>).</p></li>
 <li><p>Constant, but no trend (<code class="docutils literal notranslate"><span class="pre">'c'</span></code>).</p></li>
@@ -757,10 +757,10 @@ Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p-value: </span><span class="si">{</span><span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Critical Values: </span><span class="si">{</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">zip</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span><span class="w"> </span><span class="n">out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># 1. No Constant or Trend</span>
+<span class="c1"># 1. No Constant, no Trend</span>
 <span class="n">series_no_const_no_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 
-<span class="c1"># 2. Constant, but No Trend</span>
+<span class="c1"># 2. Constant, but no Trend</span>
 <span class="n">series_const_no_trend</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">50</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 
 <span class="c1"># 3. Both Constant and Trend</span>
@@ -783,7 +783,7 @@ Critical Values: [&#39;1%: -3.50&#39;, &#39;5%: -2.89&#39;, &#39;10%: -2.58&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c9f223a0f0e95a78808d5a18b2c533007c5d71b7f593e27327fa94f193534ea2.png" src="../../_images/c9f223a0f0e95a78808d5a18b2c533007c5d71b7f593e27327fa94f193534ea2.png" />
+<img alt="../../_images/c9d76e49b618b01d3cd050528169eaa826a2e895fa344d149b36d2b2e5e98e77.png" src="../../_images/c9d76e49b618b01d3cd050528169eaa826a2e895fa344d149b36d2b2e5e98e77.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -850,14 +850,6 @@ Critical Values: [&#39;1%: -4.00&#39;, &#39;5%: -3.43&#39;, &#39;10%: -3.14&#39;
 </li>
 </ol>
 <ol class="arabic simple" start="3">
-<li><p><strong>Pricing Models</strong></p>
-<ul class="simple">
-<li><p>In option pricing, certain models assume mean reversion in the underlying asset’s volatility.</p></li>
-<li><p>This affects the pricing and strategy for options trading.</p></li>
-</ul>
-</li>
-</ol>
-<ol class="arabic simple" start="4">
 <li><p><strong>Economic Forecasting</strong></p>
 <ul class="simple">
 <li><p>Economic variables (like GDP growth rates, interest rates) often exhibit mean-reverting behavior.</p></li>
@@ -906,7 +898,7 @@ Critical Values: [&#39;1%: -4.00&#39;, &#39;5%: -3.43&#39;, &#39;10%: -3.14&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a8b2383663a2b06b07fa59043f937432f96893ba04be367816471fa3eb29553a.png" src="../../_images/a8b2383663a2b06b07fa59043f937432f96893ba04be367816471fa3eb29553a.png" />
+<img alt="../../_images/217fba8c86bbe8adb12999518e0a569daa4bf32ab4a3fe49f4d6729c5adf5f6a.png" src="../../_images/217fba8c86bbe8adb12999518e0a569daa4bf32ab4a3fe49f4d6729c5adf5f6a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -937,12 +929,15 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <ul class="simple">
 <li><p>Mean reversion testing is focused on whether a time series will return to a specific level (the mean).</p></li>
 <li><p>Stationarity testing checks if the overall statistical properties of the series remain consistent over time.</p></li>
+</ul>
+<p><strong>Key Differences (cont.)</strong>:</p>
+<ul class="simple">
 <li><p>A stationary time series may or may not be mean reverting.</p>
 <ul>
 <li><p>A stationary series with a constant mean and variance over time might still not revert to its mean after a shock.</p></li>
 </ul>
 </li>
-<li><p>Conversely, a mean-reverting series must have some stationarity, particularly in its mean, but it might still have changing variance or other properties over time.</p></li>
+<li><p>Conversely, a mean-reverting series must have some stationarity, particularly in its mean, but or other properties (e.g., variance) might change over time.</p></li>
 </ul>
 </section>
 </section>
@@ -951,7 +946,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <ul class="simple">
 <li><p>The Hurst exponent (<span class="math notranslate nohighlight">\(H\)</span>) is a measure used to characterize the long-term memory of time series.</p></li>
 <li><p>It helps to determine the presence of autocorrelation or persistence in the data.</p></li>
-<li><p>The goal of the Hurst Exponent is to provide us with a scalar value that will help us to identify whether a series is</p>
+<li><p>The goal of the Hurst exponent is to provide us with a scalar value that will help us to identify whether a series is</p>
 <ul>
 <li><p>random walking,</p></li>
 <li><p>trending,</p></li>
@@ -969,9 +964,9 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </ul>
 <p>A time series can then be characterised in the following manner:</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(H = 0.5\)</span>, the time series is similar to a random walk. In this case, the variance increases linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(H &lt; 0.5\)</span>, the time series exhibits anti-persistence, i.e. mean reversal. The variance increases more slowly than linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(H &gt; 0.5\)</span>, the time series exhibits persistent long-range dependence, i.e. is trending. The variance increases more rapidly than linearly with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(H = 0.5\)</span>, the time series is similar to a random walk. In this case, the variance increases <em>linearly</em> with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(H &lt; 0.5\)</span>, the time series exhibits anti-persistence, i.e. mean reversal. The variance increases <em>less than linearly</em> with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(H &gt; 0.5\)</span>, the time series exhibits persistent long-range dependence, i.e. is trending. The variance increases <em>more than linearly</em> with <span class="math notranslate nohighlight">\(\tau\)</span>.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -983,7 +978,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
     <span class="c1"># Calculate the array of the variances of the lagged differences</span>
     <span class="n">tau</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="n">lag</span><span class="p">:],</span> <span class="n">ts</span><span class="p">[:</span><span class="o">-</span><span class="n">lag</span><span class="p">]))</span> <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="n">lags</span><span class="p">]</span>
 
-    <span class="c1"># Use a linear fit to estimate the Hurst Exponent</span>
+    <span class="c1"># Use a linear fit to estimate the Hurst exponent</span>
     <span class="n">poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">lags</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">tau</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># Return the Hurst exponent from the polyfit output</span>
@@ -995,7 +990,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <p><strong>How do persistent and anti-persistent time series look like?</strong></p>
 <ul class="simple">
 <li><p>Let’s create a Python script (adapted from <a class="reference external" href="https://github.com/Mottl/hurst/tree/master">here</a>) to generate random walk with persistence.</p></li>
-<li><p>We must incorporate a form of “memory” by considering past values within a specified lookback window to decide the direction of the next step.</p></li>
+<li><p>We must incorporate a form of “memory” by considering past values within a specified look-back window to decide the direction of the next step.</p></li>
 </ul>
 <p>Let’s define</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">random_walk_memory</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">proba</span><span class="p">,</span> <span class="n">min_lookback</span><span class="p">,</span> <span class="n">max_lookback</span><span class="p">)</span>
@@ -1057,7 +1052,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6f660bfdc15a42cf44c558666b8cda6a68daf56d2b7f03378c47c5083d77fab8.png" src="../../_images/6f660bfdc15a42cf44c558666b8cda6a68daf56d2b7f03378c47c5083d77fab8.png" />
+<img alt="../../_images/b011ed777cc8a932939a2bc79f1857e67d36eb15167f49c83ab8eec264fc14f6.png" src="../../_images/b011ed777cc8a932939a2bc79f1857e67d36eb15167f49c83ab8eec264fc14f6.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1204,7 +1199,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ae52269a69aadce79628a24cb56402e2246a57abbf8e336aa1adf279307ff542.png" src="../../_images/ae52269a69aadce79628a24cb56402e2246a57abbf8e336aa1adf279307ff542.png" />
+<img alt="../../_images/db84d84176ca02bc60591be1963c82e05aab0ac45913011f45fd723163c4097d.png" src="../../_images/db84d84176ca02bc60591be1963c82e05aab0ac45913011f45fd723163c4097d.png" />
 </div>
 </div>
 <section id="variance-of-gbm">
@@ -1235,7 +1230,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </ul>
 <ul class="simple">
 <li><p>This method is widely used for option pricing, risk management, and investment strategy simulations.</p></li>
-<li><p>However, GBM has limitations, such as assuming a <em>constant drift and volatility</em>.</p></li>
+<li><p>However, GBM has limitations, such as assuming a <em>constant</em> drift (<span class="math notranslate nohighlight">\(\mu\)</span>) and volatility (<span class="math notranslate nohighlight">\(\sigma\)</span>).</p></li>
 <li><p>These assumptions may not hold true in real markets.</p></li>
 <li><p>Therefore, it’s often used as a component of a broader analysis or modeling strategy.</p></li>
 </ul>
@@ -1259,7 +1254,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 2: Calculate Daily Returns</span>
-<span class="n">returns</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="c1"># We are interested in the returns, so we get the changes in %</span>
+<span class="n">returns</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="c1"># We are interested in returns, so we get the changes in %</span>
 </pre></div>
 </div>
 </div>
@@ -1318,7 +1313,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/05cf5f70c3ccb9b377f5d6a08f8dc2d23d4aeb13dee459a8a28ac0f1475da855.png" src="../../_images/05cf5f70c3ccb9b377f5d6a08f8dc2d23d4aeb13dee459a8a28ac0f1475da855.png" />
+<img alt="../../_images/135fa771a4023afc687098ef2945bd747f304fa210dc87727c702bca249d657a.png" src="../../_images/135fa771a4023afc687098ef2945bd747f304fa210dc87727c702bca249d657a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1363,7 +1358,7 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/e47ef695e585884cd0acdcaa0804becf03417d90375ae9775c0c2ef657ee5b3b.png" src="../../_images/e47ef695e585884cd0acdcaa0804becf03417d90375ae9775c0c2ef657ee5b3b.png" />
+<img alt="../../_images/2b63a3d29a9cc8d151d369aaf748343d9b478532ebdd7b0b490f0754f49e16eb.png" src="../../_images/2b63a3d29a9cc8d151d369aaf748343d9b478532ebdd7b0b490f0754f49e16eb.png" />
 </div>
 </div>
 </section>
@@ -1392,6 +1387,8 @@ Critical Values: [&#39;1%: -3.96&#39;, &#39;5%: -3.41&#39;, &#39;10%: -3.13&#39;
 <li><p>Simulate the stock prices using GBM.</p></li>
 </ul>
 </li>
+</ul>
+<ul class="simple">
 <li><p>Which simulation seems to be more reliable? The one for Tesla or Equinor?</p></li>
 <li><p>To motivate your answer:</p>
 <ol class="arabic simple">
