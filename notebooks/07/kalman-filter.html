@@ -768,13 +768,13 @@ x_{t-1} \\
 <li><p>The update is possible thanks to the term <span class="math notranslate nohighlight">\(p^{-}_{x \dot x}\)</span> in <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> that relates the position (and its measurement) to the velocity.</p></li>
 <li><p>This showcases one of the main strengths of KF: it can handle <em>partial observations</em>.</p></li>
 </ul>
-<p>Let’s consider the two extreme cases for the values of <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span></p>
+<p>Let’s consider the two extreme cases for the values of <span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span>.</p>
 <ol class="arabic">
 <li><p>The measurement error covariance <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> approaches zero, i.e., there is no noise in the measurements.</p>
 <ul class="simple">
 <li><p>The measurements are completely reliable.</p></li>
 <li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{R} \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = \mathbf{H}^{-1}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> weights the residuals more heavily:</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> weights the residuals more heavily:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -792,7 +792,7 @@ x_{t-1} \\
 <ul class="simple">
 <li><p>The model is completely reliable and the measurements are not accounted for.</p></li>
 <li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{P}^{-}_t \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = 0\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> does not give importance to the residuals: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + 0\Delta_t = \hat{\boldsymbol{x}}^{-}_{t}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> does not give importance to the residuals: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + 0\Delta_t = \hat{\boldsymbol{x}}^{-}_{t}\)</span>.</p></li>
 </ul>
 </li>
 </ol>
@@ -804,23 +804,21 @@ x_{t-1} \\
 <div class="math notranslate nohighlight">
 \[\mathbf{P}_t = (\mathbf{I} - \mathbf{K}_t \mathbf{H})\mathbf{P}^{-}_t\]</div>
 <ul class="simple">
-<li><p>Let’s look again at the two extreme cases:</p></li>
+<li><p>Let’s look again at the two extreme cases.</p></li>
 </ul>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t = \mathbf{H}^{-1} \rightarrow \mathbf{P}_t = 0\)</span></p></li>
+</ol>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t = \mathbf{H}^{-1} \rightarrow \mathbf{P}_t = 0\)</span></p>
-<ul>
 <li><p>This is the case where the measurements are completely reliable.</p></li>
-<li><p>The only source of uncertainty at the next Predict step will be the one of the model: <span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbf{A}\mathbf{P}_t\mathbf{A}^T + \mathbf{Q} = \mathbf{Q}\)</span>.</p></li>
+<li><p>The only source of uncertainty at the next Predict step will be the one of the model: <span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbf{A}\mathbf{P}_{t-1}\mathbf{A}^T + \mathbf{Q} = \mathbf{Q}\)</span>.</p></li>
 </ul>
-</li>
-</ul>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t = 0 \rightarrow \mathbf{P}_t = \mathbf{P}^{-}_t\)</span></p></li>
+</ol>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t = 0 \rightarrow \mathbf{P}_t = \mathbf{P}^{-}_t\)</span></p>
-<ul>
 <li><p>This is the case where the measurements are unreliable and not accounted for.</p></li>
 <li><p>The posterior covariance estimate is exactly the same as the prior covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> obtained in the Predict step using the model and not modified with the new measurements in the Correct step.</p></li>
-</ul>
-</li>
 </ul>
 <p>Summary of the Correct step:</p>
 <img alt="../../_images/correct.png" src="../../_images/correct.png" />
@@ -832,7 +830,7 @@ x_{t-1} \\
 <h3>Parameters estimation<a class="headerlink" href="#parameters-estimation" title="Link to this heading">#</a></h3>
 <p>In general, both the measurement noise covariance <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> and the process noise covariance <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span> are <strong>unknown</strong>.</p>
 <ul class="simple">
-<li><p>Estimating <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> is usually done prior to operation of the filter.</p></li>
+<li><p>Estimating <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> is usually done before starting to apply the filter.</p></li>
 <li><p>Measuring <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> is usually possible because we measure the process anyway (while operating the filter).</p></li>
 <li><p>We can take some offline sample measurements to determine the variance of the measurement noise.</p></li>
 </ul>
@@ -873,7 +871,7 @@ x_{t-1} \\
 <ol class="arabic simple">
 <li><p>Make an initial estimate of your state vector and covariance matrix.</p></li>
 <li><p>Predict the state and covariance for the next time step.</p></li>
-<li><p>Computer the Kalman gain.</p></li>
+<li><p>Compute the Kalman gain.</p></li>
 <li><p>Make a measurement.</p></li>
 <li><p>Update estimates of state and covariance.</p></li>
 <li><p>Repeat from step 2.</p></li>
@@ -920,7 +918,7 @@ x_{t-1} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/50be6926fa541812e96db2ff6aded4010db308f73654b7a83c3dfa7e47fedc9d.png" src="../../_images/50be6926fa541812e96db2ff6aded4010db308f73654b7a83c3dfa7e47fedc9d.png" />
+<img alt="../../_images/5af8d80f9e2cdc68be575f6eb17825eb4e6d890ed6b4f9c2a659aa56ad21eef6.png" src="../../_images/5af8d80f9e2cdc68be575f6eb17825eb4e6d890ed6b4f9c2a659aa56ad21eef6.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1040,7 +1038,7 @@ x_{t-1} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2a46de1e588a3b9358a8110d5e89f796ff980a5fdc7f6ff1f006fbed30753cc3.png" src="../../_images/2a46de1e588a3b9358a8110d5e89f796ff980a5fdc7f6ff1f006fbed30753cc3.png" />
+<img alt="../../_images/b242862061857b745da0eed247b875b1d6cd0a1c79d689b8db14b6171725743e.png" src="../../_images/b242862061857b745da0eed247b875b1d6cd0a1c79d689b8db14b6171725743e.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1096,8 +1094,13 @@ x_{t-1} \\
 <span class="n">Xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span> 
 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_measurements</span><span class="p">):</span>
     <span class="n">Xt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Zx</span><span class="p">,</span><span class="s1">&#39;k+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;measurements $z_t$&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Zx</span><span class="p">,</span><span class="s1">&#39;k+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;measurements $z_t$&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Noisy position measurements&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$z_t$&#39;</span><span class="p">)</span>
@@ -1106,7 +1109,7 @@ x_{t-1} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/39b47b34267c556dd8d2db5c859c2cf3c6a3bbc48290892bbdb2f5db5031bb28.png" src="../../_images/39b47b34267c556dd8d2db5c859c2cf3c6a3bbc48290892bbdb2f5db5031bb28.png" />
+<img alt="../../_images/cde5c5a3a3a1ab52958636f3448ff5e75c89b81467935a8d82f5984ba8ba05b0.png" src="../../_images/cde5c5a3a3a1ab52958636f3448ff5e75c89b81467935a8d82f5984ba8ba05b0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1124,8 +1127,13 @@ x_{t-1} \\
     <span class="n">x</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">kalman_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">R_est</span><span class="p">,</span> <span class="n">Q_est</span><span class="p">)</span>
     <span class="n">KF_estimate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">KF_error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plot_1d_comparison</span><span class="p">(</span><span class="n">Zx</span><span class="p">,</span> <span class="n">KF_estimate</span><span class="p">,</span> <span class="n">Xt</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">plot_1d_error</span><span class="p">(</span><span class="n">KF_error</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">KF_error</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">KF_error</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
@@ -1133,7 +1141,7 @@ x_{t-1} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2ae89158b731d31678ab3ba2451be1c033a63da3d2ba3a3a633ba8cc5ed65744.png" src="../../_images/2ae89158b731d31678ab3ba2451be1c033a63da3d2ba3a3a633ba8cc5ed65744.png" />
+<img alt="../../_images/e324a8cc2a93e8add1ebfe9226c4e7c9378b5153ac226688ea0a83e4f2a5f4e1.png" src="../../_images/e324a8cc2a93e8add1ebfe9226c4e7c9378b5153ac226688ea0a83e4f2a5f4e1.png" />
 </div>
 </div>
 <p><strong>Question:</strong> Neither the measurements nor the KF estimate are close to the true value. Why?</p>
@@ -1160,6 +1168,8 @@ x_{t-1} \\
 <ul class="simple">
 <li><p>State vector <span class="math notranslate nohighlight">\(\boldsymbol{x} = \begin{bmatrix} x \\ y \\ \dot x \\ \dot y \end{bmatrix}\)</span>, representing the 2D position and 2D velocity.</p></li>
 <li><p>Measurement vector <span class="math notranslate nohighlight">\(\boldsymbol{z} = \begin{bmatrix} z_x \\ z_y  \end{bmatrix}\)</span>, representing measurements for the 2D position.</p></li>
+</ul>
+<ul class="simple">
 <li><p>Transition matrix <span class="math notranslate nohighlight">\(\mathbf{A} = \begin{bmatrix} 1 &amp; 0 &amp; \delta_t &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; \delta_t \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">transitionMatrix</span></code> in OpenCV).</p></li>
 <li><p>Measurement matrix <span class="math notranslate nohighlight">\(\mathbf{H} = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \end{bmatrix}\)</span> (called <code class="docutils literal notranslate"><span class="pre">measurementMatrix</span></code> in OpenCV).</p></li>
 </ul>
@@ -1251,7 +1261,7 @@ x_{t-1} \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xy_motion</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">xy_motion</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># Print first 10 items for clarity, but can look at all 205 or plot them</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xy_motion</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># Print first 10 items, but can look at all 205 or plot them</span>
 </pre></div>
 </div>
 </div>
@@ -1307,15 +1317,13 @@ x_{t-1} \\
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_est</span><span class="p">,</span> <span class="n">y_est</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;KF estimate&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_true</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;true value&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2D position&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x coordinate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y coordinate&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y coordinate&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0d4f7dd838a0fa47b43bbe531323a3993c538fbfe22bb936d06adc4df9498ac6.png" src="../../_images/0d4f7dd838a0fa47b43bbe531323a3993c538fbfe22bb936d06adc4df9498ac6.png" />
+<img alt="../../_images/88dd4b3efa87ed6d9fd35250d689d5c45032286fc9222def517084bb84f6b384.png" src="../../_images/88dd4b3efa87ed6d9fd35250d689d5c45032286fc9222def517084bb84f6b384.png" />
 </div>
 </div>
 <ul class="simple">

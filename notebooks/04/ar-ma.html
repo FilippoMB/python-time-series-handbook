@@ -1597,9 +1597,8 @@ p-value (differenced ts): 0.000
 </div>
 </div>
 <ul class="simple">
-<li><p>Next, we compute the residuals subtracting the estimated trend and seasonality.</p></li>
-<li><p>The ACF plots of the original MA process and the residuals are very similar.</p></li>
-<li><p>This indicates that we have correctly removed trend and seasonality.</p></li>
+<li><p>Next, we compute the residuals by subtracting the estimated trend and seasonality.</p></li>
+<li><p>Differently from the AR case, the ACF plots of the original MA process and the TES residuals are <strong>not</strong> so similar.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1618,7 +1617,7 @@ p-value (differenced ts): 0.000
 </div>
 <ul class="simple">
 <li><p>The ACF plot shows a significant spike at lag 3.</p></li>
-<li><p>This suggests using a MA model with order <span class="math notranslate nohighlight">\(q=3\)</span>.</p></li>
+<li><p>This suggests using a MA model with order <span class="math notranslate nohighlight">\(q=3\)</span> (even if data were generated with MA(2)).</p></li>
 <li><p>As in the AR case, we compute predictions using both the differencing and the TES-based approach.</p></li>
 </ul>
 </section>

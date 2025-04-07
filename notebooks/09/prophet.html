@@ -530,15 +530,10 @@ document.write(`
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(g(t)\)</span> is the trend component at time <span class="math notranslate nohighlight">\(t\)</span>,</p></li>
 <li><p><span class="math notranslate nohighlight">\(k\)</span> is the initial growth rate,</p></li>
-<li><p><span class="math notranslate nohighlight">\(a(t)\)</span> is a vector where each element is:</p>
-<ul>
-<li><p>the amount of time since the corresponding change point, if <span class="math notranslate nohighlight">\(t\)</span> is after a change point;</p></li>
-<li><p>0 otherwise.</p></li>
-</ul>
-</li>
+<li><p><span class="math notranslate nohighlight">\(a(t)\)</span> is time since the corresponding change point if <span class="math notranslate nohighlight">\(t\)</span> is after a change point, or 0 otherwise,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\delta\)</span> represents adjustments to the growth rate at each change point,</p></li>
 <li><p><span class="math notranslate nohighlight">\(g_0\)</span> is the offset (intercept), i.e., the value at <span class="math notranslate nohighlight">\(t=0\)</span>,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\gamma\)</span> compensates for discontinuities in the trend at each change point, ensuring the trend is continuous.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma\)</span> smooths the trend at each change point.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -675,6 +670,7 @@ document.write(`
 <h3>Seasonality component <span class="math notranslate nohighlight">\(s(t)\)</span><a class="headerlink" href="#seasonality-component-s-t" title="Link to this heading">#</a></h3>
 <p>The seasonality component <span class="math notranslate nohighlight">\(s(t)\)</span> models periodic changes, which can be yearly, weekly, or daily.</p>
 <p>Prophet uses Fourier series to model these periodic changes, allowing for flexibility in capturing seasonality.</p>
+<p>Seasonality <span class="math notranslate nohighlight">\(s(t)\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
 \[s(t) = \sum_{n=1}^{N} \left(a_n \cos\left(\frac{2\pi n t}{P}\right) + b_n \sin\left(\frac{2\pi n t}{P}\right)\right)\]</div>
 <p>where:</p>
@@ -703,7 +699,7 @@ document.write(`
 <section id="seasonal-and-holiday-effects-adjustment">
 <h4>Seasonal and holiday effects adjustment<a class="headerlink" href="#seasonal-and-holiday-effects-adjustment" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Like for piece-wise linear trend, Prophet can adjust for overfitting or underfitting of seasonal and holiday effects by changing the <em>prior scale</em> of these components.</p></li>
+<li><p>Like for piece-wise linear trend, Prophet can adjust for overfitting or underfitting of seasonal and holiday effects by changing a <em>prior scale</em> parameter.</p></li>
 <li><p>A <em>larger</em> prior scale allows the model to fit larger seasonal fluctuations.</p></li>
 <li><p>A <em>smaller</em> scale regularizes the model, preventing it from overfitting seasonal and holiday effects.</p></li>
 </ul>
@@ -889,7 +885,7 @@ document.write(`
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">growth='linear'</span></code>, meaning that we use a piece-wise linear function to model the trend. Other options are <code class="docutils literal notranslate"><span class="pre">'logistic'</span></code> or <code class="docutils literal notranslate"><span class="pre">'flat'</span></code> to specify a logistic or flat trend, respectively.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seasonality_mode='additive'</span></code>. The other option is <code class="docutils literal notranslate"><span class="pre">'multiplicative'</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">interval_width=0.90</span></code> specifies the wifth of the uncertainty intervals for the forecast.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interval_width=0.90</span></code> specifies the width of the prediction intervals for the forecast.</p></li>
 </ul>
 </li>
 </ul>
@@ -911,10 +907,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:47 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:08 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:48 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:08 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 </div>
@@ -1037,10 +1033,10 @@ document.write(`
       <th>3265</th>
       <td>2017-01-15</td>
       <td>7.185052</td>
-      <td>7.209899</td>
-      <td>9.106533</td>
-      <td>6.674976</td>
-      <td>7.744971</td>
+      <td>7.230058</td>
+      <td>9.145382</td>
+      <td>6.705897</td>
+      <td>7.756592</td>
       <td>1.018148</td>
       <td>1.018148</td>
       <td>1.018148</td>
@@ -1059,10 +1055,10 @@ document.write(`
       <th>3266</th>
       <td>2017-01-16</td>
       <td>7.184020</td>
-      <td>7.660028</td>
-      <td>9.488690</td>
-      <td>6.671095</td>
-      <td>7.746365</td>
+      <td>7.590071</td>
+      <td>9.479663</td>
+      <td>6.703929</td>
+      <td>7.757454</td>
       <td>1.344221</td>
       <td>1.344221</td>
       <td>1.344221</td>
@@ -1081,10 +1077,10 @@ document.write(`
       <th>3267</th>
       <td>2017-01-17</td>
       <td>7.182988</td>
-      <td>7.438489</td>
-      <td>9.265482</td>
-      <td>6.667362</td>
-      <td>7.747759</td>
+      <td>7.418060</td>
+      <td>9.308323</td>
+      <td>6.702004</td>
+      <td>7.758316</td>
       <td>1.132648</td>
       <td>1.132648</td>
       <td>1.132648</td>
@@ -1103,10 +1099,10 @@ document.write(`
       <th>3268</th>
       <td>2017-01-18</td>
       <td>7.181957</td>
-      <td>7.213434</td>
-      <td>9.058788</td>
-      <td>6.664359</td>
-      <td>7.749153</td>
+      <td>7.287468</td>
+      <td>9.066985</td>
+      <td>6.700079</td>
+      <td>7.759178</td>
       <td>0.966266</td>
       <td>0.966266</td>
       <td>0.966266</td>
@@ -1125,10 +1121,10 @@ document.write(`
       <th>3269</th>
       <td>2017-01-19</td>
       <td>7.180925</td>
-      <td>7.222689</td>
-      <td>9.099911</td>
-      <td>6.661355</td>
-      <td>7.750547</td>
+      <td>7.252235</td>
+      <td>9.061221</td>
+      <td>6.698154</td>
+      <td>7.760040</td>
       <td>0.979215</td>
       <td>0.979215</td>
       <td>0.979215</td>
@@ -1157,7 +1153,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0a144d53cf51d252d535518844d1a46f60a57a655401c85080c66c4f8299023c.png" src="../../_images/0a144d53cf51d252d535518844d1a46f60a57a655401c85080c66c4f8299023c.png" />
+<img alt="../../_images/49c9811e1f31d6e7a4cd282945505b9490dba2d9147d9fc85aecc10863e7505b.png" src="../../_images/49c9811e1f31d6e7a4cd282945505b9490dba2d9147d9fc85aecc10863e7505b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1172,7 +1168,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2d6945b97f7cae459a8db568e7c7658d8943ce8598954a6961e9ba2110d2b218.png" src="../../_images/2d6945b97f7cae459a8db568e7c7658d8943ce8598954a6961e9ba2110d2b218.png" />
+<img alt="../../_images/7f5575285092477a7ba561a7342a9b0b4d8e70481da6dbe6e4260a229ac2e48e.png" src="../../_images/7f5575285092477a7ba561a7342a9b0b4d8e70481da6dbe6e4260a229ac2e48e.png" />
 </div>
 </div>
 <p>An interactive figure of the forecast and components can be created with <code class="docutils literal notranslate"><span class="pre">plotly</span></code>:</p>
@@ -1236,10 +1232,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:48 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:09 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:48 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:09 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 </div>
@@ -1360,7 +1356,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/949c4d800ce9c0a3b15ae66ba348662fb7836d249ddc967e3cfcac33af4309cb.png" src="../../_images/949c4d800ce9c0a3b15ae66ba348662fb7836d249ddc967e3cfcac33af4309cb.png" />
+<img alt="../../_images/1004d1e9ab920d1e85e7dc3d7a53ca022b7ea6b79223d11745bc960e5c6260d7.png" src="../../_images/1004d1e9ab920d1e85e7dc3d7a53ca022b7ea6b79223d11745bc960e5c6260d7.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1376,17 +1372,17 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_holyday2</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">holidays</span><span class="o">=</span><span class="n">holidays_df</span><span class="p">)</span> <span class="c1"># this includes the holidays we specified by hand</span>
-<span class="n">model_holyday2</span><span class="o">.</span><span class="n">add_country_holidays</span><span class="p">(</span><span class="n">country_name</span><span class="o">=</span><span class="s1">&#39;US&#39;</span><span class="p">)</span> <span class="c1"># this the contruy-specific holidays</span>
+<span class="n">model_holyday2</span><span class="o">.</span><span class="n">add_country_holidays</span><span class="p">(</span><span class="n">country_name</span><span class="o">=</span><span class="s1">&#39;US&#39;</span><span class="p">)</span> <span class="c1"># this the country-specific holidays</span>
 <span class="n">model_holyday2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">peyton</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model_holyday2</span><span class="o">.</span><span class="n">train_holiday_names</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:50 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:11 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:50 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:11 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0                         playoff
@@ -1419,7 +1415,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1797f477b567f185d9043b9685aff90fbf4c7a98e85e5cd0bc35ca748fb72b69.png" src="../../_images/1797f477b567f185d9043b9685aff90fbf4c7a98e85e5cd0bc35ca748fb72b69.png" />
+<img alt="../../_images/6487328044f4a93b4b721a96c97a02e2f8e4d1851f286acb4f511e4b67fa9629.png" src="../../_images/6487328044f4a93b4b721a96c97a02e2f8e4d1851f286acb4f511e4b67fa9629.png" />
 </div>
 </div>
 </section>
@@ -1427,7 +1423,7 @@ dtype: object
 <h3>Saturating forecasts<a class="headerlink" href="#saturating-forecasts" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>As discussed previously, Prophet allows you to make forecasts using a logistic growth trend model.</p></li>
-<li><p>Here, we will rely on the <a class="reference external" href="https://www.statsmodels.org/stable/datasets/index.html">Datasets Package</a> from <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p></li>
+<li><p>Here, we will use a time series from the <a class="reference external" href="https://www.statsmodels.org/stable/datasets/index.html">Datasets Package</a> from <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p></li>
 <li><p>The list of available datasets is <a class="reference external" href="https://vincentarelbundock.github.io/Rdatasets/articles/data.html">here</a>.</p></li>
 <li><p>We need to do a bit of data preproccesing before using the data.</p></li>
 </ul>
@@ -1544,10 +1540,10 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:54 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:13 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:54 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:13 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 </div>
@@ -1569,7 +1565,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e696acbff7a353b5425408741d8b87d61d320b1b20b51afb06ed9149f79cd79a.png" src="../../_images/e696acbff7a353b5425408741d8b87d61d320b1b20b51afb06ed9149f79cd79a.png" />
+<img alt="../../_images/4415923332bf26f6e2b81d9077c5ff8fa5f6aa4602fb44b79caa898ec494668b.png" src="../../_images/4415923332bf26f6e2b81d9077c5ff8fa5f6aa4602fb44b79caa898ec494668b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1596,13 +1592,13 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:54 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:13 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:55 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:13 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
-<img alt="../../_images/5d3b5a9bf79f95c3777163c25f7a6ce2c1cece611ab21cbc5f601731dbcfbe04.png" src="../../_images/5d3b5a9bf79f95c3777163c25f7a6ce2c1cece611ab21cbc5f601731dbcfbe04.png" />
+<img alt="../../_images/86f125dcad353eb5d2308213b6ae751a6ca69f10ebcd01c4a7df538a795fa256.png" src="../../_images/86f125dcad353eb5d2308213b6ae751a6ca69f10ebcd01c4a7df538a795fa256.png" />
 </div>
 </div>
 </section>
@@ -1630,10 +1626,10 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:55 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:14 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:55 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:14 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 </div>
@@ -1651,7 +1647,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/22e735165c7def4cfe425614df53cc2d4016b09f466e7a38f879e63d4d0ba9c6.png" src="../../_images/22e735165c7def4cfe425614df53cc2d4016b09f466e7a38f879e63d4d0ba9c6.png" />
+<img alt="../../_images/e1e11264490ecc97486351adbfe238a7ed1b177c97c967935fb0a7c7a1dfa70f.png" src="../../_images/e1e11264490ecc97486351adbfe238a7ed1b177c97c967935fb0a7c7a1dfa70f.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1695,7 +1691,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/89fc205d4dfb5136a258282de93511d06cb14afed680bfd2bc41c8538f968568.png" src="../../_images/89fc205d4dfb5136a258282de93511d06cb14afed680bfd2bc41c8538f968568.png" />
+<img alt="../../_images/48f9d68eb3894da1789dc16b6c3d05588a7fdb4e745c6cbfcdfb7d3b0526ff20.png" src="../../_images/48f9d68eb3894da1789dc16b6c3d05588a7fdb4e745c6cbfcdfb7d3b0526ff20.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1722,13 +1718,13 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:56 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:15 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:57 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
-<img alt="../../_images/147a21c27ccbb4c3bf3d5422d489e479f8c34daa3e86f61d85c54af860f45d6a.png" src="../../_images/147a21c27ccbb4c3bf3d5422d489e479f8c34daa3e86f61d85c54af860f45d6a.png" />
+<img alt="../../_images/6cb60801acae5f011adc7af2e9a81fe8d032ad9a4588dd3504642d1e9cde0748.png" src="../../_images/6cb60801acae5f011adc7af2e9a81fe8d032ad9a4588dd3504642d1e9cde0748.png" />
 </div>
 </div>
 <p>Decreasing it will make the trend less flexible.</p>
@@ -1742,13 +1738,13 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:57 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:57 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
-<img alt="../../_images/116dc802130e5e9fce2816628a65efa5755ccd383bbcbec3b58faf4e595c0d9c.png" src="../../_images/116dc802130e5e9fce2816628a65efa5755ccd383bbcbec3b58faf4e595c0d9c.png" />
+<img alt="../../_images/2b6a3951e5e3b2fb2b19b802b790125d8291721c7dd1d80bbfb9cf768cef9b0f.png" src="../../_images/2b6a3951e5e3b2fb2b19b802b790125d8291721c7dd1d80bbfb9cf768cef9b0f.png" />
 </div>
 </div>
 </section>
@@ -1771,13 +1767,13 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:58 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:09:58 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
-<img alt="../../_images/a501324e95e6fced32c8bb744653ce8012711947645c7228233deaa2f6cbf9a9.png" src="../../_images/a501324e95e6fced32c8bb744653ce8012711947645c7228233deaa2f6cbf9a9.png" />
+<img alt="../../_images/aeb301048cff22675ad1ec9d3b2b6b7dcf0a26f003a31eedb46edb194493f315.png" src="../../_images/aeb301048cff22675ad1ec9d3b2b6b7dcf0a26f003a31eedb46edb194493f315.png" />
 </div>
 </div>
 </section>
