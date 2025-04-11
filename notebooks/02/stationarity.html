@@ -1622,7 +1622,7 @@ p-value: 0.016
 \[\hat{X}(t) = X(t) - X(t-1)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">difference</span> <span class="o">=</span> <span class="n">rand_walk</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">rand_walk</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">difference</span> <span class="o">=</span> <span class="n">rand_walk</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">rand_walk</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1634,7 +1634,7 @@ p-value: 0.016
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d4d8ba0750244bff3a413aa2b920bf781a5d8b07f80eba41e8346b4f4cae83d5.png" src="../../_images/d4d8ba0750244bff3a413aa2b920bf781a5d8b07f80eba41e8346b4f4cae83d5.png" />
+<img alt="../../_images/b3240efc979308f331e695991c6bec065612f494bcaf168c6c50428af419c4f5.png" src="../../_images/b3240efc979308f331e695991c6bec065612f494bcaf168c6c50428af419c4f5.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2070,9 +2070,7 @@ p-value: 0.000
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
+100
 </pre></div>
 </div>
 </div>
@@ -2087,7 +2085,6 @@ p-value: 0.000
 <p>Use the following tools to determine if the time series <code class="docutils literal notranslate"><span class="pre">stationarity_ts1</span></code> and <code class="docutils literal notranslate"><span class="pre">stationarity_ts2</span></code> are stationary or not.</p>
 <ol class="arabic simple">
 <li><p>Summary statistics on the chunks.</p></li>
-<li><p>Histogram plots.</p></li>
 <li><p>Augmented Dickey-Fuller test.</p></li>
 </ol>
 <p>Discuss the result obtained with each method.</p>

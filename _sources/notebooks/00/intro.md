@@ -32,7 +32,7 @@ For this reason, the text in the notebooks is organized with bullet points.
 
 ## 🎓 University courses
 
-These notebooks are currently adopted in [STA-2003 Tidsrekker](https://sa.uit.no/utdanning/emner/emne?p_document_id=822793) at UiT the Arctic University of Tromsø.
+These notebooks are currently adopted in [STA-2003 Tidsrekker](https://sa.uit.no/utdanning/emner/emne?p_document_id=822793) at UiT the Arctic University of Tromsø and [062785 - Time Series Analysis](https://www11.ceda.polimi.it/schedaincarico/schedaincarico/controller/scheda_pubblica/SchedaPublic.do?&evn_default=evento&c_classe=843368&lang=IT&__pj0=0&__pj1=2ad8b3dba5bb35c2b94e513147e1e84e) at Polytechnic of Milan.
 
 
 ## 🚀 Getting started with coding

@@ -674,18 +674,18 @@ x_{t-1} \\
 <p><strong>Covariance estimate</strong></p>
 <p>There are two sources of error in the estimate of the state of our system.</p>
 <ul class="simple">
-<li><p>The <em>prior</em> estimate error <span class="math notranslate nohighlight">\(e^{-}_t = x_t - \hat{x}^{-}_t\)</span>.</p></li>
-<li><p>The <em>posterior</em> estimate error <span class="math notranslate nohighlight">\(e_t = x_t - \hat{x}_t\)</span>.</p></li>
+<li><p>The <em>prior</em> estimate error <span class="math notranslate nohighlight">\(\boldsymbol{e}^{-}_t = \boldsymbol{x}_t - \hat{\boldsymbol{x}}^{-}_t\)</span>.</p></li>
+<li><p>The <em>posterior</em> estimate error <span class="math notranslate nohighlight">\(\boldsymbol{e}_t = \boldsymbol{x}_t - \hat{\boldsymbol{x}}_t\)</span>.</p></li>
 </ul>
 <p>Where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\hat{x}^{-}_t\)</span> is the estimate of the state based only on the knowledge of the system, e.g., the dynamics equations.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\hat{x}_t\)</span> is the estimate based also on the measurement <span class="math notranslate nohighlight">\(z_t\)</span>, e.g., the GPS.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}^{-}_t\)</span> is the estimate of the state based only on the knowledge of the system, e.g., the dynamics equations.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_t\)</span> is the estimate based also on the measurement <span class="math notranslate nohighlight">\(\boldsymbol{z}_t\)</span>, e.g., the GPS.</p></li>
 </ul>
 <p>Each type of error is associated with a covariance matrix, which reflects the amount of uncertainty in the state estimates.</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbb{E}[e^{-}_t e^{-T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>prior</em> covariance estimate).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t = \mathbb{E}[e_t e^{T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>posterior</em> covariance estimate).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t^{-} = \mathbb{E}[\boldsymbol{e}^{-}_t \boldsymbol{e}^{-T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>prior</em> covariance estimate).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}_t = \mathbb{E}[\boldsymbol{e}_t \boldsymbol{e}^{T}_t] \in \mathbb{R}^{N\times N}\)</span> (<em>posterior</em> covariance estimate).</p></li>
 <li><p>In our case, we have  <span class="math notranslate nohighlight">\(\mathbf{P}_t = \begin{bmatrix} p_{xx} &amp; p_{\dot x x} \\ p_{\dot x x} &amp; p_{\dot x \dot x} \end{bmatrix}\)</span> (for readability, the index <span class="math notranslate nohighlight">\(t\)</span> on the matrix elements is omitted):</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(p_{xx}\)</span> is the uncertainty about the position;</p></li>
@@ -709,14 +709,20 @@ x_{t-1} \\
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned} 
-\mathbf{P}_{t}^{-} &amp;= \mathbb{E}[e^{-}_t e^{-T}_t] \\
+\mathbf{P}_{t}^{-} &amp;= \mathbb{E}[\boldsymbol{e}^{-}_t \boldsymbol{e}^{-T}_t] \\
   &amp;= \mathbb{E}[(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})(\boldsymbol{x}_{t} - \hat{\boldsymbol{x}}^{-}_{t})^T] \\
   &amp;= \mathbb{E}[(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})(\mathbf{A} \boldsymbol{x}_{t-1} + \boldsymbol{w} - \mathbf{A} \hat{\boldsymbol{x}}_{t-1})^T] \\
-  &amp;= \mathbb{E}[(\mathbf{A}e_{t-1})(e_{t-1}^T \mathbf{A}^T)] + \mathbb{E}[\boldsymbol{w}\boldsymbol{w}^T]\\
-  &amp;= \mathbf{A}\mathbb{E}[e_{t-1}e_{t-1}^T ]\mathbf{A}^T + \mathbf{Q} \\
+  &amp;= \mathbb{E}[(\mathbf{A}\boldsymbol{e}_{t-1})(\boldsymbol{e}_{t-1}^T \mathbf{A}^T)] + \mathbb{E}[\boldsymbol{w}\boldsymbol{w}^T]\\
+  &amp;= \mathbf{A}\mathbb{E}[\boldsymbol{e}_{t-1}\boldsymbol{e}_{t-1}^T ]\mathbf{A}^T + \mathbf{Q} \\
   &amp;= \mathbf{A}\mathbf{P}_{t-1}\mathbf{A}^T + \mathbf{Q}
 \end{aligned}
 \end{split}\]</div>
+<p><strong>📝 Note</strong></p>
+<ul class="simple">
+<li><p>Both the state <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> and the measurements <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span> are modeled as random variables (with associated process and measurement noise).</p></li>
+<li><p>As a result, the errors <span class="math notranslate nohighlight">\(\boldsymbol{e^{-}}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{e}\)</span> are random variables themselves.</p></li>
+<li><p>The expectation <span class="math notranslate nohighlight">\(\mathbb{E}[\cdot]\)</span> is taken over the probability distribution governing these random variables.</p></li>
+</ul>
 <p>In summary, the Predict step consists of two equations to update:</p>
 <ul class="simple">
 <li><p>State estimate.</p></li>
@@ -743,8 +749,8 @@ x_{t-1} \\
 <p>The matrix <span class="math notranslate nohighlight">\(\mathbf{K} \in \mathbb{R}^{N \times M}\)</span> is chosen to be the <strong>gain</strong> that minimizes the posterior error covariance.</p>
 <p>Derivation (sketch):</p>
 <ol class="arabic simple">
-<li><p>Define the posterior error  <span class="math notranslate nohighlight">\(e_t = x_t - \hat{x}_t\)</span>.</p></li>
-<li><p>Define the posterior error covariance <span class="math notranslate nohighlight">\(P_t = \mathbb{E}[e_t e^{T}_t]\)</span>.</p></li>
+<li><p>Define the posterior error  <span class="math notranslate nohighlight">\(\boldsymbol{e}_t = \boldsymbol{x}_t - \hat{\boldsymbol{x}}_t\)</span>.</p></li>
+<li><p>Define the posterior error covariance <span class="math notranslate nohighlight">\(P_t = \mathbb{E}[\boldsymbol{e}_t \boldsymbol{e}^{T}_t]\)</span>.</p></li>
 <li><p>Substitute <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + \mathbf{K}\Delta_t\)</span> in 1).</p></li>
 <li><p>Substitute the <span class="math notranslate nohighlight">\(e_t\)</span> obtained from 3) in 2) and take the expectation.</p></li>
 <li><p>Take the derivative of the trace of the result with respect to <span class="math notranslate nohighlight">\(\mathbf{K}\)</span>.</p></li>
