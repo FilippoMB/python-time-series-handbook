@@ -619,13 +619,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">estimates</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    INPUT:</span>
-<span class="sd">        observations - numpy array of values indicating observed values</span>
-<span class="sd">        estimates - numpy array of values indicating an estimate of values</span>
-<span class="sd">    OUTPUT:</span>
-<span class="sd">        Mean Square Error value</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># check arg types</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])),</span> <span class="s2">&quot;&#39;observations&#39; must be a numpy array&quot;</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])),</span> <span class="s2">&quot;&#39;estimates&#39; must be a numpy array&quot;</span>
@@ -905,11 +899,13 @@ moving_average: 4.57
 \end{aligned}
 \end{split}\]</div>
 <img alt="../../_images/ExpWMA.gif" src="../../_images/ExpWMA.gif" />
-<p><strong>📝Note</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p>There are numerous methods to find the optimal weighting scheme based on the data and the task at hand.</p></li>
 <li><p>A full discussion is beyond the scope of the lecture.</p></li>
 </ul>
+</div>
 </section>
 <section id="forecasting-with-ma">
 <h3>Forecasting with MA<a class="headerlink" href="#forecasting-with-ma" title="Link to this heading">#</a></h3>
@@ -1133,8 +1129,11 @@ moving_average: 4.57
 </div>
 <section id="single-exponential-smoothing">
 <h3>Single exponential smoothing<a class="headerlink" href="#single-exponential-smoothing" title="Link to this heading">#</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Single Exponential Smoothing is useful if your data lacks trend and seasonality and you want to approximately extract patterns.</p>
+</div>
 <ul class="simple">
-<li><p>💡 Useful if your data lacks trend and seasonality and you want to approximately extract patterns.</p></li>
 <li><p>It is analogous to the WMA we saw previously.</p></li>
 <li><p>The basic formulation is:</p></li>
 </ul>
@@ -1182,9 +1181,10 @@ S(2) &amp; = \alpha X(2) + (1 - \alpha)S(1) = \alpha X(2) + (1 - \alpha)[\alpha 
 </section>
 <section id="double-exponential-smoothing">
 <h3>Double exponential smoothing<a class="headerlink" href="#double-exponential-smoothing" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>💡 It has all the benefits of Single Exponential plus the ability to pickup on trend.</p></li>
-</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Double Exponential Smoothing has all the benefits of Single Exponential plus the ability to pickup on trend.</p>
+</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned} 
@@ -1209,8 +1209,11 @@ b(t) = \beta\big(S(t) - S(t-1)\big) + (1 - \beta)b(t-1) &amp; \hspace{2cm} \text
 </section>
 <section id="triple-exponential-smoothing">
 <h3>Triple exponential smoothing<a class="headerlink" href="#triple-exponential-smoothing" title="Link to this heading">#</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Triple Exponential Smoothing has all the benefits of Double Exponential Smoothing, plus the ability to model the seasonality.</p>
+</div>
 <ul class="simple">
-<li><p>💡 It has all the benefits of Double Exponential with the ability to also model the seasonality.</p></li>
 <li><p>It does this by adding a third component that smooths out seasonality of length <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
 <li><p>There are two variants in the model:</p>
 <ul>

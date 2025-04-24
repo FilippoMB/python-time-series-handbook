@@ -471,9 +471,9 @@ document.write(`
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>In this lecture, you will get a basic understanding of the Fourier Transform (FT), Discrete Fourier Transform (DFT), and learn how any function can be approximated by a series of sines and cosines.</p></li>
-<li><p>In particular, you will learn the FT of common signals, the main properties of FT, and the practical skills needed to apply the FT.</p></li>
-<li><p>In addition, you will learn some common filters and why they are useful to process time series data.</p></li>
+<li><p>In this lecture, we will get a basic understanding of the Fourier Transform (FT), Discrete Fourier Transform (DFT), and learn how any function can be approximated by a series of sines and cosines.</p></li>
+<li><p>In particular, we will learn the FT of common signals, the main properties of FT, and the practical skills needed to apply the FT.</p></li>
+<li><p>In addition, we will see some common filters and learn why they are useful to process time series data.</p></li>
 <li><p>Finally, we will see how FT can be useful in forecasting tasks.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
@@ -544,7 +544,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a3219c6c97c15a603a4c61c20e1010f497b7226c3ec9b820bd1ad95b373fa102.png" src="../../_images/a3219c6c97c15a603a4c61c20e1010f497b7226c3ec9b820bd1ad95b373fa102.png" />
+<img alt="../../_images/1334a6fd15e79a448926ef084de5c6e2ec76d14911cf5e5677b8247c2951d663.png" src="../../_images/1334a6fd15e79a448926ef084de5c6e2ec76d14911cf5e5677b8247c2951d663.png" />
 </div>
 </div>
 <ul class="simple">
@@ -554,8 +554,8 @@ document.write(`
 </ul>
 <img alt="../../_images/ft.png" src="../../_images/ft.png" />
 <p>The Fourier Transform mathematical formulation is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-afcc9fa9-5008-4f3d-8c1e-7c7ce74d27ed">
-<span class="eqno">(1)<a class="headerlink" href="#equation-afcc9fa9-5008-4f3d-8c1e-7c7ce74d27ed" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-66e979dc-5e40-4107-8e5f-34467621da50">
+<span class="eqno">(1)<a class="headerlink" href="#equation-66e979dc-5e40-4107-8e5f-34467621da50" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
 <ul class="simple">
 <li><p>where:</p>
 <ul>
@@ -577,22 +577,19 @@ document.write(`
 </ul>
 <ul class="simple">
 <li><p>The integral over time indicates that the transformation considers all points in time from <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(+\infty\)</span>, giving a complete representation of the signal in the frequency domain.</p></li>
-<li><p>In practice, we cannot deal with infinity.</p></li>
-<li><p>Various approximations are used in practice.</p></li>
+<li><p>Since we cannot deal with infinity, various approximations are used in practice.</p></li>
 </ul>
 <ul class="simple">
-<li><p>The result of the Fourier Transform is a complex function of frequency.</p></li>
+<li><p>The result of the Fourier Transform is a complex function of frequencies.</p></li>
 <li><p>It shows how much of each frequency is present in the original signal.</p></li>
-<li><p>The <em>magnitude</em> of <span class="math notranslate nohighlight">\(\mathcal{F}(\omega)\)</span> indicates the amplitude of a particular frequency component.</p></li>
-<li><p>Its <em>phase</em> (angle of the complex number) indicates the phase shift of that frequency component relative to the origin.</p></li>
+<li><p>The <em>magnitude</em> of <span class="math notranslate nohighlight">\(\mathcal{F}(\omega) = \mathcal{F}(2\pi f)\)</span> indicates the amplitude of a particular frequency component <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
 </ul>
 <ul class="simple">
 <li><p>The intuitive interpretation of Eq.1 is that the effect of multiplying <span class="math notranslate nohighlight">\(f(t)\)</span> by  <span class="math notranslate nohighlight">\(e^{-i\omega t}\)</span> is to subtract <span class="math notranslate nohighlight">\(\omega\)</span> from every frequency component of <span class="math notranslate nohighlight">\(f(t)\)</span>.</p></li>
-<li><p>Only the component that was at frequency <span class="math notranslate nohighlight">\(\omega\)</span> can produce a non-zero value of the infinite integral.</p></li>
-<li><p>On the other hand, all the other shifted components are oscillatory and integrate to zero.</p></li>
+<li><p>Only the components of <span class="math notranslate nohighlight">\(f(t)\)</span> that have frequency <span class="math notranslate nohighlight">\(\omega\)</span> can produce a non-zero value of the infinite integral.</p></li>
+<li><p>All the other shifted components are oscillatory and integrate to zero.</p></li>
 </ul>
-<img alt="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" />
-<div style="text-align: center; font-size: 80%">Image: <a href="https://commons.wikimedia.org/wiki/File:Fourier_series_square_wave_circles_animation.svg#filelinks">Wikimedia</a></div><section id="inverse-fourier-transform">
+<section id="inverse-fourier-transform">
 <h3>Inverse Fourier Transform<a class="headerlink" href="#inverse-fourier-transform" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ f(t) = \int_{-\infty}^{\infty} \mathcal{F}(\omega) e^{i \omega t} d \omega \]</div>
@@ -602,16 +599,32 @@ document.write(`
 <li><p>It shows us that <em>any</em> function can be expressed as a combination of sinusoids.</p></li>
 <li><p>The sinusoids represent, thus, a <em>basis</em>.</p></li>
 </ul>
+<img alt="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" />
+<div style="text-align: center; font-size: 80%">Image: <a href="https://commons.wikimedia.org/wiki/File:Fourier_series_square_wave_circles_animation.svg#filelinks">Wikimedia</a></div>
 </section>
 </section>
 <hr class="docutils" />
 <section id="discrete-fourier-transform-and-fast-fourier-transform">
 <h2>Discrete Fourier Transform and Fast Fourier Transform<a class="headerlink" href="#discrete-fourier-transform-and-fast-fourier-transform" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The Discrete Fourier Transform (DFT) converts a <em>finite</em> list of equally spaced samples of a function into the list of coefficients of a finite combination of complex sinusoids, ordered by their frequencies.</p></li>
+<li><p>The Discrete Fourier Transform (DFT) converts a finite list of equally spaced <em>samples of a function</em> into a finite list of <em>coefficients of complex sinusoids</em>, ordered by their frequencies.</p></li>
 <li><p>The Fast Fourier Transform (FFT) is an algorithm designed to compute the DFT and its inverse efficiently.</p></li>
+</ul>
+<ul class="simple">
 <li><p>The FFT significantly reduces the computational complexity of performing a DFT from <span class="math notranslate nohighlight">\(\mathcal{O}(N^2)\)</span> to <span class="math notranslate nohighlight">\(\mathcal{O}(N \log N)\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is the number of samples.</p></li>
 <li><p>This efficiency gain is particularly impactful for large datasets, making the FFT an indispensable tool in digital signal processing, image analysis, fast convolution, and various fields of engineering and applied science.</p></li>
+</ul>
+<section id="basic-idea">
+<h3>Basic Idea<a class="headerlink" href="#basic-idea" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The DFT for a sequence <span class="math notranslate nohighlight">\(x[n]\)</span> of length <span class="math notranslate nohighlight">\(N\)</span> is defined as follows:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-\frac{i 2 \pi}{N} k n}\]</div>
+<ul class="simple">
+<li><p>for <span class="math notranslate nohighlight">\(k = 0, 1, \ldots, N-1\)</span>, where <span class="math notranslate nohighlight">\(X[k]\)</span> are the frequency domain samples.</p></li>
+<li><p>The FFT exploits the symmetry and periodicity properties of the complex exponential function.</p></li>
+<li><p>It applies a divide-and-conquer strategy to decompose the DFT of a sequence into smaller DFTs, reducing the overall computational effort.</p></li>
 </ul>
 <p>This <a class="reference external" href="https://youtu.be/QmgJmh2I3Fw">video</a> gives an excellent introduction to DFT.</p>
 <div class="cell tag_hide-input docutils container">
@@ -638,18 +651,6 @@ document.write(`
         ></iframe>
         </div></div>
 </div>
-<section id="basic-idea">
-<h3>Basic Idea<a class="headerlink" href="#basic-idea" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>The DFT for a sequence <span class="math notranslate nohighlight">\(x[n]\)</span> of length <span class="math notranslate nohighlight">\(N\)</span> is defined as follows:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-\frac{i 2 \pi}{N} k n}\]</div>
-<ul class="simple">
-<li><p>for <span class="math notranslate nohighlight">\(k = 0, 1, \ldots, N-1\)</span>, where <span class="math notranslate nohighlight">\(X[k]\)</span> are the frequency domain samples.</p></li>
-<li><p>The FFT exploits the symmetry and periodicity properties of the complex exponential function.</p></li>
-<li><p>It applies a divide-and-conquer strategy to decompose the DFT of a sequence into smaller DFTs, thereby reducing the overall computational effort.</p></li>
-</ul>
 </section>
 <section id="cooley-tukey-algorithm">
 <h3>Cooley-Tukey Algorithm<a class="headerlink" href="#cooley-tukey-algorithm" title="Link to this heading">#</a></h3>
@@ -826,7 +827,7 @@ document.write(`
 <p>Let’s start by creating a time series that consists of a sine wave with a frequency of <span class="math notranslate nohighlight">\(1 Hz\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freq</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freq</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Hz</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
 <span class="n">y_sine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
 <span class="n">plot_time_freq</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_sine</span><span class="p">)</span>
@@ -834,7 +835,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d7233f675abb5af13d631750646d4d96964c69285594e5a85593483d8bb46347.png" src="../../_images/d7233f675abb5af13d631750646d4d96964c69285594e5a85593483d8bb46347.png" />
+<img alt="../../_images/10375b974ae03dba02e581bf2fdda54684d42a4838e012a050382f2adaecf5e9.png" src="../../_images/10375b974ae03dba02e581bf2fdda54684d42a4838e012a050382f2adaecf5e9.png" />
 </div>
 </div>
 <ul class="simple">
@@ -854,7 +855,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c10453760b102801ee49b0e3e77e8c0d9821b81695b75d2c45a52fe4ec6a44b9.png" src="../../_images/c10453760b102801ee49b0e3e77e8c0d9821b81695b75d2c45a52fe4ec6a44b9.png" />
+<img alt="../../_images/b9ce46d6b33455eaa3562a501b5e01d5730bf84138cbaae1bddffa2c16223e9d.png" src="../../_images/b9ce46d6b33455eaa3562a501b5e01d5730bf84138cbaae1bddffa2c16223e9d.png" />
 </div>
 </div>
 </section>
@@ -893,7 +894,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4212deae7db8b78e8beb5edec148ef4214e24caecf87415628d2f735127a9eb3.png" src="../../_images/4212deae7db8b78e8beb5edec148ef4214e24caecf87415628d2f735127a9eb3.png" />
+<img alt="../../_images/64e62b33463d26e710c5e28df13d57b3c7b1a3699ce40d1d9ca85ed99fdee5e5.png" src="../../_images/64e62b33463d26e710c5e28df13d57b3c7b1a3699ce40d1d9ca85ed99fdee5e5.png" />
 </div>
 </div>
 <ul class="simple">
@@ -909,7 +910,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1bb07efa17107dbbaf327b8675abc680f89d061ff7275fd4c38b10656270d905.png" src="../../_images/1bb07efa17107dbbaf327b8675abc680f89d061ff7275fd4c38b10656270d905.png" />
+<img alt="../../_images/16416ad5815e1524af9301a3f5f2eac2d96c13b96635584b00e1618ae11ca59d.png" src="../../_images/16416ad5815e1524af9301a3f5f2eac2d96c13b96635584b00e1618ae11ca59d.png" />
 </div>
 </div>
 </section>
@@ -940,7 +941,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ba861cddd416f7dc593f4e372a1def5366bc6b496f994c15808fe000dcfea161.png" src="../../_images/ba861cddd416f7dc593f4e372a1def5366bc6b496f994c15808fe000dcfea161.png" />
+<img alt="../../_images/9edd0fb7c0615addbc6460b953af7644ab0cd7be4cf24216cbc67c89a4392048.png" src="../../_images/9edd0fb7c0615addbc6460b953af7644ab0cd7be4cf24216cbc67c89a4392048.png" />
 </div>
 </div>
 </section>
@@ -971,7 +972,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e3db7f15d85ebeabcaa5746e23346cf8b4ad193d93c9fce314157d174d2d89d4.png" src="../../_images/e3db7f15d85ebeabcaa5746e23346cf8b4ad193d93c9fce314157d174d2d89d4.png" />
+<img alt="../../_images/d996db4c1698e0a899fa3045adb0ae84c307d05b8bf7d3b94d77c1a2b7e15fb2.png" src="../../_images/d996db4c1698e0a899fa3045adb0ae84c307d05b8bf7d3b94d77c1a2b7e15fb2.png" />
 </div>
 </div>
 </section>
@@ -995,7 +996,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7914a0fef4ecfd5ba1292779470be213a33cb926c165b12b7c331372a22bff03.png" src="../../_images/7914a0fef4ecfd5ba1292779470be213a33cb926c165b12b7c331372a22bff03.png" />
+<img alt="../../_images/e2f41e23a50215f4a912870215cb17be32f5a244a37d574be06c07facf89bdd8.png" src="../../_images/e2f41e23a50215f4a912870215cb17be32f5a244a37d574be06c07facf89bdd8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1006,7 +1007,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2ffc7efe2a6e2234c33d97644606aeb49907da1703e1da595f0d454d3be52a54.png" src="../../_images/2ffc7efe2a6e2234c33d97644606aeb49907da1703e1da595f0d454d3be52a54.png" />
+<img alt="../../_images/ed65ecca2ff27a6bcb97c154c2b77e1b1fc73bc2b2e5f3e7475f631d1bafe198.png" src="../../_images/ed65ecca2ff27a6bcb97c154c2b77e1b1fc73bc2b2e5f3e7475f631d1bafe198.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1017,7 +1018,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7af6589715214118956d5aca757b48116e377a8812ed6af3c0f0442c92b34230.png" src="../../_images/7af6589715214118956d5aca757b48116e377a8812ed6af3c0f0442c92b34230.png" />
+<img alt="../../_images/80a95473b4179e5acfe21817962aaa4bebfbfcfabcd052cecd78e9b4486a0c63.png" src="../../_images/80a95473b4179e5acfe21817962aaa4bebfbfcfabcd052cecd78e9b4486a0c63.png" />
 </div>
 </div>
 <p>We can observe that in the Frequency Domain:</p>
@@ -1076,7 +1077,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e87ccc764a6c66c4e21cbe0857134c336544d048819c670bb8effd21acb87ce8.png" src="../../_images/e87ccc764a6c66c4e21cbe0857134c336544d048819c670bb8effd21acb87ce8.png" />
+<img alt="../../_images/f2239e27a3fbc10555bf8f51d4129e5cc7478fbdae8f47c7937f32254a0f0e5a.png" src="../../_images/f2239e27a3fbc10555bf8f51d4129e5cc7478fbdae8f47c7937f32254a0f0e5a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1108,9 +1109,11 @@ document.write(`
 <span class="n">f1</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Frequency of sine wave in Hz</span>
 <span class="n">f2</span> <span class="o">=</span> <span class="mi">80</span>  <span class="c1"># Frequency of cosine wave in Hz</span>
 <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>  <span class="c1"># Constants</span>
+
 <span class="n">f_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">f1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="c1"># First function</span>
 <span class="n">g_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">f2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="c1"># Second function</span>
 <span class="n">combination</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">f_t</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">g_t</span> <span class="c1"># Linear combination of the functions</span>
+
 <span class="n">F_f_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">f_t</span><span class="p">)</span> <span class="c1"># FT of the first function</span>
 <span class="n">F_g_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">g_t</span><span class="p">)</span> <span class="c1"># FT of the second function</span>
 <span class="n">linear_combination_F</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">F_f_t</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">F_g_t</span> <span class="c1"># Linear combination of the FTs</span>
@@ -1173,7 +1176,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/96d25a9a1ef7bcea9f26ddffff7bf7781ef0a9bb6305568f7bc01fc552e640c9.png" src="../../_images/96d25a9a1ef7bcea9f26ddffff7bf7781ef0a9bb6305568f7bc01fc552e640c9.png" />
+<img alt="../../_images/c4cc9d0eb7c14987791b77e622e6560bd2156dfb335223de6cca576d7f51b148.png" src="../../_images/c4cc9d0eb7c14987791b77e622e6560bd2156dfb335223de6cca576d7f51b148.png" />
 </div>
 </div>
 </section>
@@ -1261,7 +1264,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1837652b66d9c390c8750a34fa2a70a5683141a142cc399afaba62d040db8e40.png" src="../../_images/1837652b66d9c390c8750a34fa2a70a5683141a142cc399afaba62d040db8e40.png" />
+<img alt="../../_images/db95cf9ac2442ec6ec02ecf4bc0dad85e1e7d07961242fe44d3fb313043d0d76.png" src="../../_images/db95cf9ac2442ec6ec02ecf4bc0dad85e1e7d07961242fe44d3fb313043d0d76.png" />
 </div>
 </div>
 </section>
@@ -1339,7 +1342,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/64343fb4de43577ee76cd3bccccb590ca7dabc7464034da9e633883f358d077c.png" src="../../_images/64343fb4de43577ee76cd3bccccb590ca7dabc7464034da9e633883f358d077c.png" />
+<img alt="../../_images/fdd5412101aba6086fb257905db06c9bd3a97aecc12233218c40370e3bf91645.png" src="../../_images/fdd5412101aba6086fb257905db06c9bd3a97aecc12233218c40370e3bf91645.png" />
 </div>
 </div>
 </section>
@@ -1417,7 +1420,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/581336244348d45724ee9c19303a98adbdbbd733187d565fea608ed5ec5dea2c.png" src="../../_images/581336244348d45724ee9c19303a98adbdbbd733187d565fea608ed5ec5dea2c.png" />
+<img alt="../../_images/5c7cf5d051c64eb0dd3e2e549224342d30bb7d623e934c22e4d0b1d6c3201051.png" src="../../_images/5c7cf5d051c64eb0dd3e2e549224342d30bb7d623e934c22e4d0b1d6c3201051.png" />
 </div>
 </div>
 </section>
@@ -1499,7 +1502,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5d4c6c2945744b103b408b22644db1118cc56a3ca9927432bb5c66b5a90d75e1.png" src="../../_images/5d4c6c2945744b103b408b22644db1118cc56a3ca9927432bb5c66b5a90d75e1.png" />
+<img alt="../../_images/6cce856aac867e36e2de6b5f80c4ddd40fa4b93596e282424b568b3125b50dea.png" src="../../_images/6cce856aac867e36e2de6b5f80c4ddd40fa4b93596e282424b568b3125b50dea.png" />
 </div>
 </div>
 </section>
@@ -1561,7 +1564,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2b9cd039a97291cc09d580f2a2a92e508e5a9b19223de78239b4de4712b2f01e.png" src="../../_images/2b9cd039a97291cc09d580f2a2a92e508e5a9b19223de78239b4de4712b2f01e.png" />
+<img alt="../../_images/47e5e68cbd57a3e6e33bbb95a5acc097f43911d9d29882aea5eb5b5c2f007574.png" src="../../_images/47e5e68cbd57a3e6e33bbb95a5acc097f43911d9d29882aea5eb5b5c2f007574.png" />
 </div>
 </div>
 </section>
@@ -1649,7 +1652,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/781e466f01ed0c80044262bd523d0dd80c4b9e7c72b0c03f04a8ff7924e4d971.png" src="../../_images/781e466f01ed0c80044262bd523d0dd80c4b9e7c72b0c03f04a8ff7924e4d971.png" />
+<img alt="../../_images/61fad5a572d0a7e5d36bb4838fa2f245e688ae08e3f20f12e1f6551c9b7b7087.png" src="../../_images/61fad5a572d0a7e5d36bb4838fa2f245e688ae08e3f20f12e1f6551c9b7b7087.png" />
 </div>
 </div>
 </section>
@@ -1739,8 +1742,10 @@ Energy in the frequency domain: 312.5
 \[F(s) = \int_{0}^{\infty} e^{-st}f(t) \,dt\]</div>
 <ul class="simple">
 <li><p>where <span class="math notranslate nohighlight">\(s = \sigma + i\omega\)</span> is a complex number.</p></li>
-<li><p>The Fourier transform <span class="math notranslate nohighlight">\(F(\omega) = \int_{-\infty}^{\infty} e^{-i\omega t}f(t) \,dt\)</span> is a special case of the Laplace transform evaluated on the imaginary axis (<span class="math notranslate nohighlight">\(s = j\omega\)</span>), where <span class="math notranslate nohighlight">\(\sigma = 0\)</span>.</p></li>
-<li><p>The convergence of the Fourier transform is a stricter requirement, meaning that not all functions that have a Laplace transform will have a Fourier transform.</p></li>
+<li><p>The Fourier transform <span class="math notranslate nohighlight">\(F(\omega) = \int_{-\infty}^{\infty} e^{-i\omega t}f(t) \,dt\)</span> is a special case of the Laplace transform evaluated on the imaginary axis (<span class="math notranslate nohighlight">\(s = i\omega\)</span>), where <span class="math notranslate nohighlight">\(\sigma = 0\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The convergence of the Fourier transform is a stricter requirement, i.e., not all functions that have a Laplace transform  have a Fourier transform.</p></li>
 <li><p>While the Fourier transform is useful to analyze only the frequency content, Laplace transform is useful to analyze the overall system behavior, including stability and transient response.</p></li>
 </ul>
 <p><strong>Z-transform</strong></p>
@@ -1752,7 +1757,9 @@ Energy in the frequency domain: 312.5
 \[X(z) = \sum_{n=-\infty}^{\infty} x[n]z^{-n}\]</div>
 <ul class="simple">
 <li><p>where <span class="math notranslate nohighlight">\(z\)</span> is a complex variable (<span class="math notranslate nohighlight">\(z = re^{i\theta}\)</span>).</p></li>
-<li><p>The Discrete Fourier Transform (DFT) <span class="math notranslate nohighlight">\(X[k] = \sum_{n=0}^{N-1} x[n]e^{-i\frac{2\pi}{N}kn}\)</span> is a special case of z-transform evaluated on the unit circle in the complex plane, i.e., when <span class="math notranslate nohighlight">\(z = e^{i\omega}\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The DFT <span class="math notranslate nohighlight">\(X[k] = \sum_{n=0}^{N-1} x[n]e^{-i\frac{2\pi}{N}kn}\)</span> is a special case of z-transform evaluated on the unit circle in the complex plane, i.e., when <span class="math notranslate nohighlight">\(z = e^{i\omega}\)</span>.</p></li>
 <li><p>The z-transform encompasses a broader range of analysis, allowing for the examination of signals and systems inside and outside the unit circle, which is useful for stability analysis and filter design in the z-domain.</p></li>
 </ul>
 <ul class="simple">
@@ -1770,7 +1777,7 @@ Energy in the frequency domain: 312.5
 <p>To summarize:</p>
 <ul class="simple">
 <li><p>The frequency response describes how the filter responds to sinusoidal inputs across a range of frequencies.</p></li>
-<li><p>The transfer function gives a more general mathematical model of the filter that applies to all inputs, not just sinusoidal inputs.</p></li>
+<li><p>The transfer function gives a more general mathematical model of the filter that applies to <em>all inputs</em>, not just sinusoidal inputs.</p></li>
 <li><p>Transfer functions are described in the Laplace or Z-domain, providing a broader analysis toolset for system properties.</p></li>
 <li><p>In contrast, the frequency response is a subset of the transfer function evaluated on the imaginary axis in the Laplace domain or on the unit circle in the Z-domain.</p></li>
 </ul>
@@ -1778,13 +1785,13 @@ Energy in the frequency domain: 312.5
 <section id="bode-plot">
 <h3>Bode plot<a class="headerlink" href="#bode-plot" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>It is a plot that displays the transfer function of a system (a filter in our case).</p></li>
-<li><p>It displays the amplitude (usually in decibels, i.e., logarithmic units) of a system as a function of the frequency.</p></li>
-<li><p>It also displays the phase of a system as a function of the frequency.</p></li>
+<li><p>Displays the transfer function of a system (a filter in our case).</p></li>
+<li><p>It displays the <em>amplitude</em> (usually in decibels, i.e., logarithmic units) of a system as a function of the frequency.</p></li>
+<li><p>It also displays the <em>phase</em> of a system as a function of the frequency.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Let’s create a Bode plot for a simple low-pass filter as an example.</p></li>
-<li><p>The transfer function for a first-order low-pass filter can be expressed as:</p></li>
+<li><p>The transfer function of a first-order low-pass filter can be expressed as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[H(s) = \frac{\omega_c}{s + \omega_c}\]</div>
@@ -1850,7 +1857,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/88d2fe49412b1d4542bb5a1eb99fed9a9006f0924fc22731a131f740153ee05c.png" src="../../_images/88d2fe49412b1d4542bb5a1eb99fed9a9006f0924fc22731a131f740153ee05c.png" />
+<img alt="../../_images/a45172afa9a877262426d20e9ab3f60cd6da26910f16dde8e820822cefd24ce1.png" src="../../_images/a45172afa9a877262426d20e9ab3f60cd6da26910f16dde8e820822cefd24ce1.png" />
 </div>
 </div>
 <p><strong>Magnitude plot (left)</strong></p>
@@ -1872,10 +1879,10 @@ Energy in the frequency domain: 312.5
 <h2>Low pass filters (LPFs)<a class="headerlink" href="#low-pass-filters-lpfs" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>As we mentioned earlier, a LPF passes signals with a frequency lower than a certain cutoff frequency.</p></li>
-<li><p>LPFs provide a smoother form of a signal, removing short term fluctuations.</p></li>
-<li><p>One common application is to get rid of the high-frequency components of the noise.</p></li>
-<li><p>Moving averages are a type of low pass filters.</p></li>
-<li><p>Representative LPFs include the Hann Window, the Tukey Filter, and the Butterworth Filter.</p></li>
+<li><p>LPFs provide a smoother signal, removing fast fluctuations.</p></li>
+<li><p>LPFs are commonly used to get rid of the high-frequency components of the noise.</p></li>
+<li><p>Moving averages are a type of LPFs.</p></li>
+<li><p>Other representative of LPFs include the Hann Window, the Tukey Filter, and the Butterworth Filter.</p></li>
 </ul>
 <section id="hann-window">
 <h3>Hann window<a class="headerlink" href="#hann-window" title="Link to this heading">#</a></h3>
@@ -1899,7 +1906,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/42aaac1b3f6113561305e5e233ba5c5657248287e4173a1c7111100805eb409c.png" src="../../_images/42aaac1b3f6113561305e5e233ba5c5657248287e4173a1c7111100805eb409c.png" />
+<img alt="../../_images/2db13b9673784c6c2908d010c89be407b1f81ad991c52679d8674561fdf0ab20.png" src="../../_images/2db13b9673784c6c2908d010c89be407b1f81ad991c52679d8674561fdf0ab20.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1952,7 +1959,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/474a477221a0b7e1d8fea6323502d30fa0de55d4156be248d8baa2680bf95e6d.png" src="../../_images/474a477221a0b7e1d8fea6323502d30fa0de55d4156be248d8baa2680bf95e6d.png" />
+<img alt="../../_images/1509f24b7a125f45d6c1b2fd6ffbe1f77485ac9c09ccef3f07843d60ff57ce6f.png" src="../../_images/1509f24b7a125f45d6c1b2fd6ffbe1f77485ac9c09ccef3f07843d60ff57ce6f.png" />
 </div>
 </div>
 </section>
@@ -2007,7 +2014,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/efa6f18993d0b5fd5ac718aaaef4ba2f7c20d3d7cf74cadc680bf1d29e20e019.png" src="../../_images/efa6f18993d0b5fd5ac718aaaef4ba2f7c20d3d7cf74cadc680bf1d29e20e019.png" />
+<img alt="../../_images/fcb4f18e0f621d60ba99a550f1c3669752f6df747f5a84e597674bed42d480fe.png" src="../../_images/fcb4f18e0f621d60ba99a550f1c3669752f6df747f5a84e597674bed42d480fe.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2020,7 +2027,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/77536ba08991660f957144e97d5140df0451d8b1882f163c8ddd00e1603f20f4.png" src="../../_images/77536ba08991660f957144e97d5140df0451d8b1882f163c8ddd00e1603f20f4.png" />
+<img alt="../../_images/7e7d6e52f86d6c4570da78ce8c14a33d3aade48c15da3abfaa7e3119549975bd.png" src="../../_images/7e7d6e52f86d6c4570da78ce8c14a33d3aade48c15da3abfaa7e3119549975bd.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2033,7 +2040,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a4a8cc0a31a99687ccf3f0f28351cde700581cbbd04cd6acd5fd274a5ab0c0de.png" src="../../_images/a4a8cc0a31a99687ccf3f0f28351cde700581cbbd04cd6acd5fd274a5ab0c0de.png" />
+<img alt="../../_images/a7ccae005a1e9ad90c105bcf5aea17eb8229cf87d95d627451063efe1c906302.png" src="../../_images/a7ccae005a1e9ad90c105bcf5aea17eb8229cf87d95d627451063efe1c906302.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2072,8 +2079,7 @@ Energy in the frequency domain: 312.5
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter&#39;s parameters</span>
-<span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span> <span class="c1"># Filter&#39;s parameters</span>
 <span class="n">div_factor</span> <span class="o">=</span> <span class="mi">16</span> <span class="c1"># use powers of 2</span>
 <span class="n">win_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">/</span> <span class="n">div_factor</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Window length: </span><span class="si">{</span><span class="n">win_len</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2097,18 +2103,18 @@ Energy in the frequency domain: 312.5
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Window length: 32
 </pre></div>
 </div>
-<img alt="../../_images/88dacf6d7795ee3ceb42c73c0e776f500afdf64731f9599e2c15a388d85b75d4.png" src="../../_images/88dacf6d7795ee3ceb42c73c0e776f500afdf64731f9599e2c15a388d85b75d4.png" />
+<img alt="../../_images/c71f2bf4e0653f4d1bc58bf09b009599c9119674d9fa9e34c1316e652ae31f33.png" src="../../_images/c71f2bf4e0653f4d1bc58bf09b009599c9119674d9fa9e34c1316e652ae31f33.png" />
 </div>
 </div>
 <ul class="simple">
-<li><p>We can observe that the “Filtered Signal” matches very closely the “Signal + Trend”, and most of the noise has been removed.</p></li>
+<li><p>We can observe that the “Filtered Signal” matches very closely the “Signal + Trend” because most of the noise has been removed.</p></li>
 </ul>
 </section>
 <section id="butterworth-filter">
 <h3>Butterworth filter<a class="headerlink" href="#butterworth-filter" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The Butterworth filter is designed to have a frequency response as flat as possible in the <em>passband</em>.</p></li>
-<li><p>The passband is the part of the filter that allows certain the frequencies (left of the green line in the figure below).</p></li>
+<li><p>The passband is the part of the filter that allows certain frequencies (left of the green line in the figure below).</p></li>
 <li><p>Conversely, the <em>stopband</em> is the parts of the filter that rejects/dampens the frequency (right of the green line).</p></li>
 <li><p>The Butterworth filter avoids ripples both in the passband and in the stopband, providing a smooth transition between these regions.</p></li>
 </ul>
@@ -2118,18 +2124,14 @@ Energy in the frequency domain: 312.5
 <li><p>As such, it does not have a proper “shape” that we can visualize in the time domain.</p></li>
 <li><p>Therefore, we will use the Bode plot, which is the tool for visualizing a frequency response.</p></li>
 </ul>
-<p>The magnitude response of an <span class="math notranslate nohighlight">\(N\)</span>-th order Butterworth low-pass filter can be described by the following equation:</p>
+<p>The magnitude of the frequency response of an <span class="math notranslate nohighlight">\(N\)</span>-th order Butterworth LPF is:</p>
 <div class="math notranslate nohighlight">
 \[|H(\omega)| = \frac{1}{\sqrt{1 + \left(\frac{\omega}{\omega_c}\right)^{2N}}}\]</div>
+<p>where:</p>
 <ul class="simple">
-<li><p>where:</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\(|H(\omega)|\)</span> is the magnitude of the frequency response of the filter.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\omega\)</span> is the frequency of the input signal.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\omega_c\)</span> is the cutoff frequency (i.e., where the magnitude response is <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\)</span> (or -3 dB) of the passband value).</p></li>
-<li><p><span class="math notranslate nohighlight">\(N\)</span> is the order of the filter, which determines the steepness of the filter’s roll-off beyond the cutoff frequency. The higher the order, the steeper the roll-off.</p></li>
-</ul>
-</li>
+<li><p><span class="math notranslate nohighlight">\(\omega_c\)</span> is the cutoff frequency, i.e., where the magnitude response is <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\)</span> (or -3 dB) of the passband value.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the order of the filter; it determines the steepness of the filter’s roll-off beyond the cutoff frequency. The higher <span class="math notranslate nohighlight">\(N\)</span>, the steeper the roll-off.</p></li>
 </ul>
 <p>In summary:</p>
 <ul class="simple">
@@ -2159,7 +2161,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9be774669e7f79cd3feb6b0989f79985f10cdcab827526e6bc7b5062e9e97ce2.png" src="../../_images/9be774669e7f79cd3feb6b0989f79985f10cdcab827526e6bc7b5062e9e97ce2.png" />
+<img alt="../../_images/cf086c17c39152826471bfb275f24860a9ea56d0a488fe82fa0fe4bcf31e7668.png" src="../../_images/cf086c17c39152826471bfb275f24860a9ea56d0a488fe82fa0fe4bcf31e7668.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2185,14 +2187,14 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/465a393540ef2fe5f33c715ee5ad2fbc88eee5d9d44f0d3594b3683754dfb3cc.png" src="../../_images/465a393540ef2fe5f33c715ee5ad2fbc88eee5d9d44f0d3594b3683754dfb3cc.png" />
+<img alt="../../_images/5e7c3db68436236eba232b9ea0baad763a0c038c3d5dfd107b11b19f61c8890c.png" src="../../_images/5e7c3db68436236eba232b9ea0baad763a0c038c3d5dfd107b11b19f61c8890c.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>We see that the the <span class="math notranslate nohighlight">\(10\)</span> Hz component, <span class="math notranslate nohighlight">\(y_1\)</span>, is recovered in the filtered signal.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Next, we want to remove the noise from the noisy signal we deine before (sinusoid + trend + noise).</p></li>
+<li><p>Next, we want to remove the noise from the noisy signal we defined before (sinusoid + trend + noise).</p></li>
 <li><p>Before, we specified the cutoff frequency <span class="math notranslate nohighlight">\(f_c\)</span> in Hertz.</p></li>
 <li><p>We can equivalently express the cutoff as an angular frequency <span class="math notranslate nohighlight">\(\omega_c\)</span>.</p></li>
 <li><p>Based on the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html">documentation</a>:</p></li>
@@ -2201,11 +2203,12 @@ Energy in the frequency domain: 312.5
 <div><p>“For digital filters, if <code class="docutils literal notranslate"><span class="pre">fs</span></code> is not specified, <code class="docutils literal notranslate"><span class="pre">Wn</span></code> units are normalized from 0 to 1, where 1 is the Nyquist frequency (<code class="docutils literal notranslate"><span class="pre">Wn</span></code> is thus in half cycles / sample and defined as 2* <em>critical frequencies</em> / <em>fs</em>).”</p>
 </div></blockquote>
 <ul class="simple">
-<li><p>Let’s first compute to what angular frequency <span class="math notranslate nohighlight">\(\omega\)</span> the sinusoid’s frequency corresponds to.</p></li>
+<li><p>Before, we defined a sinusoid with frequency <code class="docutils literal notranslate"><span class="pre">1.5</span></code>.</p></li>
+<li><p>Let’s compute the angular frequency <span class="math notranslate nohighlight">\(\omega\)</span> that corresponds to this frequency.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freq</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1"># Frequency in Hz</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freq</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1"># Frequency in Hz of the sinusoid</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span> <span class="c1"># Time vector</span>
 
 <span class="c1"># Compute the sampling resolution</span>
@@ -2244,7 +2247,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/15607a9a326c73a4eead8cc67140fe9a31673e4e1ca040bb5c78fba1a184823d.png" src="../../_images/15607a9a326c73a4eead8cc67140fe9a31673e4e1ca040bb5c78fba1a184823d.png" />
+<img alt="../../_images/8170db723d37a82a4a099a662cad3a4c3e80a325a490b20ff27a2116e9711e7c.png" src="../../_images/8170db723d37a82a4a099a662cad3a4c3e80a325a490b20ff27a2116e9711e7c.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2267,7 +2270,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f5e7a2a57bcefa6eecccbc05f9ffc7effd96744c1936128dc077e5700dc9b0c5.png" src="../../_images/f5e7a2a57bcefa6eecccbc05f9ffc7effd96744c1936128dc077e5700dc9b0c5.png" />
+<img alt="../../_images/e60a1e46b57c7cc1b8047414ad7d877e36e3ff7dc89e312f81067d48b92df6ff.png" src="../../_images/e60a1e46b57c7cc1b8047414ad7d877e36e3ff7dc89e312f81067d48b92df6ff.png" />
 </div>
 </div>
 </section>
@@ -2299,7 +2302,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0a5aea343c6790464bd27254d467a1df8348226b4dbb3eb0340ac87facd26ff9.png" src="../../_images/0a5aea343c6790464bd27254d467a1df8348226b4dbb3eb0340ac87facd26ff9.png" />
+<img alt="../../_images/6254bed107d98c8611d38b95fe8f2ae34b45cbb1222a3e05a18744915e6a1f90.png" src="../../_images/6254bed107d98c8611d38b95fe8f2ae34b45cbb1222a3e05a18744915e6a1f90.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2320,7 +2323,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/90cb87b23b80b34631100aeeb7d3dc619ff98a9a737ce65a5a7146fe4bf46ad5.png" src="../../_images/90cb87b23b80b34631100aeeb7d3dc619ff98a9a737ce65a5a7146fe4bf46ad5.png" />
+<img alt="../../_images/fbc56cce044465fe6364ca2beed42ab0a304fc8de5a6e7ac9b7b85b56fc5b40b.png" src="../../_images/fbc56cce044465fe6364ca2beed42ab0a304fc8de5a6e7ac9b7b85b56fc5b40b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2357,7 +2360,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e100e1991f8179398ee3158ecfc7b5c747b3a2c852f32d3b205bd6550234f0bb.png" src="../../_images/e100e1991f8179398ee3158ecfc7b5c747b3a2c852f32d3b205bd6550234f0bb.png" />
+<img alt="../../_images/700261624a2f2de2ec28a416b44b82fed090ac75a32972748fdde7d8eb65f88c.png" src="../../_images/700261624a2f2de2ec28a416b44b82fed090ac75a32972748fdde7d8eb65f88c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2374,7 +2377,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4176dda49c1b4c0c4d206f54a4de4183c38f6a1f44e6936c489c2a2e630cd422.png" src="../../_images/4176dda49c1b4c0c4d206f54a4de4183c38f6a1f44e6936c489c2a2e630cd422.png" />
+<img alt="../../_images/110411bc0bd95bd377017d4631c0f6fdbaf01a9ed7d9db3e88cca6033a1828f2.png" src="../../_images/110411bc0bd95bd377017d4631c0f6fdbaf01a9ed7d9db3e88cca6033a1828f2.png" />
 </div>
 </div>
 <p>We observe that the original signal has been de-trended, and the noise has been removed.</p>
@@ -2383,7 +2386,7 @@ Energy in the frequency domain: 312.5
 <section id="band-stop-filters">
 <h2>Band-stop filters<a class="headerlink" href="#band-stop-filters" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>A band-stop filter (BSF) passes most filters unaltered, but attenuates those in a specific range to very low levels.</p></li>
+<li><p>A band-stop filter (BSF) passes most frequencies unaltered, but attenuates those in a specific range to very low levels.</p></li>
 </ul>
 <img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ideal_Band_Stop_Filter_Transfer_Function.svg/640px-Ideal_Band_Stop_Filter_Transfer_Function.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ideal_Band_Stop_Filter_Transfer_Function.svg/640px-Ideal_Band_Stop_Filter_Transfer_Function.svg.png" />
 <div style="text-align: center; font-size: 80%;">Image: <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Ideal_Band_Stop_Filter_Transfer_Function.svg/640px-Ideal_Band_Stop_Filter_Transfer_Function.svg.png">Wikimedia</a></div><ul class="simple">
@@ -2413,7 +2416,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2a66273c33bbdb4fce31ba195378d30f0935ef2565602c9475a8e16a79239304.png" src="../../_images/2a66273c33bbdb4fce31ba195378d30f0935ef2565602c9475a8e16a79239304.png" />
+<img alt="../../_images/f5a29f00c8e0f73c92477cf29564c363c209433028893a0d3dd5f41d22901931.png" src="../../_images/f5a29f00c8e0f73c92477cf29564c363c209433028893a0d3dd5f41d22901931.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2447,7 +2450,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/76539dee4696b0dc2c767a97d3aee4dfb3b0681b5d9892c2e62f18b3cfa860e7.png" src="../../_images/76539dee4696b0dc2c767a97d3aee4dfb3b0681b5d9892c2e62f18b3cfa860e7.png" />
+<img alt="../../_images/ec15aa021311261ddf205d3817383df95e09e13978f1f826b13889f1f5cbf9a2.png" src="../../_images/ec15aa021311261ddf205d3817383df95e09e13978f1f826b13889f1f5cbf9a2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2464,7 +2467,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c3b62f6396119ea8060f2ce796f0e7a94b1638b5598c148c978750d0ebb1cf54.png" src="../../_images/c3b62f6396119ea8060f2ce796f0e7a94b1638b5598c148c978750d0ebb1cf54.png" />
+<img alt="../../_images/b9141f3fadba89c53ce7c900a4c2c46e1b4417da1c186a3db2acacccae77b143.png" src="../../_images/b9141f3fadba89c53ce7c900a4c2c46e1b4417da1c186a3db2acacccae77b143.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2499,7 +2502,7 @@ Energy in the frequency domain: 312.5
 <ul class="simple">
 <li><p>The function first computes a linear trend of the time series <code class="docutils literal notranslate"><span class="pre">y</span></code> using <code class="docutils literal notranslate"><span class="pre">np.polyfit(t,</span> <span class="pre">y,</span> <span class="pre">1)</span></code>, which fits a first-degree polynomial to the data, i.e., a straight line with form <span class="math notranslate nohighlight">\(\beta_1 t + \beta_0\)</span>, where <span class="math notranslate nohighlight">\(\beta_1\)</span> is the slope (stored in <code class="docutils literal notranslate"><span class="pre">p[0]</span></code>) and <span class="math notranslate nohighlight">\(\beta_0\)</span> is intercept (stored in <code class="docutils literal notranslate"><span class="pre">p[1]</span></code>).</p></li>
 <li><p>This trend is then subtracted from the original time series to obtain a detrended series <code class="docutils literal notranslate"><span class="pre">y_notrend</span></code>.</p></li>
-<li><p>Detrending is crucial for focusing the Fourier analysis on the cyclical components of the time series without the influence of the underlying trend.</p></li>
+<li><p>Detrending is crucial for letting the Fourier analysis focus on the cyclical components of the time series without the influence of the underlying trend.</p></li>
 </ul>
 </li>
 </ol>
@@ -2595,7 +2598,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9efb82123a594d79ad1974ec872377cf38337c509f506cf2784ec3aaa7db3145.png" src="../../_images/9efb82123a594d79ad1974ec872377cf38337c509f506cf2784ec3aaa7db3145.png" />
+<img alt="../../_images/f1c389d9d89d2c4e29aa27310e26ef3a566acc976de7b4c95a7692bf5180b46e.png" src="../../_images/f1c389d9d89d2c4e29aa27310e26ef3a566acc976de7b4c95a7692bf5180b46e.png" />
 </div>
 </div>
 </section>
@@ -2667,7 +2670,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/58b1be91e95270d0cf28fd5bb6cef46b26753dd3b527ab1704081bda91e5809f.png" src="../../_images/58b1be91e95270d0cf28fd5bb6cef46b26753dd3b527ab1704081bda91e5809f.png" />
+<img alt="../../_images/5c2b6543909c0338f94fc29afaa0a64b4c76e25aad51578eca31a545db26bca5.png" src="../../_images/5c2b6543909c0338f94fc29afaa0a64b4c76e25aad51578eca31a545db26bca5.png" />
 </div>
 </div>
 </section>
@@ -2694,7 +2697,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5ddba0d916640d647ab0108d391a0b30da9392afa718d16f1c43520123c51f02.png" src="../../_images/5ddba0d916640d647ab0108d391a0b30da9392afa718d16f1c43520123c51f02.png" />
+<img alt="../../_images/d2be3e8ad047b75bc31ff48e3bbea217a2fa05eafd3efb7375030fcec14ed3c3.png" src="../../_images/d2be3e8ad047b75bc31ff48e3bbea217a2fa05eafd3efb7375030fcec14ed3c3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2710,7 +2713,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/47f6e8cec0398d0134fde173dca9b24f451fc69edd40e7a41f82c0eb280d58c2.png" src="../../_images/47f6e8cec0398d0134fde173dca9b24f451fc69edd40e7a41f82c0eb280d58c2.png" />
+<img alt="../../_images/448202e2ab4f67a2b6c1588665130f3bd4220e840468ae35c5d7b3723602f601.png" src="../../_images/448202e2ab4f67a2b6c1588665130f3bd4220e840468ae35c5d7b3723602f601.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2721,13 +2724,13 @@ Resampled:
 
 <span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">plot_pacf</span><span class="p">(</span><span class="n">ar_data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF Original AR process&quot;</span><span class="p">)</span>
-<span class="n">plot_pacf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF of TES residuals&quot;</span><span class="p">)</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF of the residuals&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6ca574324a0238bc36d1b5f034b8fdc97a9a849e0bb3f301a503801975defb56.png" src="../../_images/6ca574324a0238bc36d1b5f034b8fdc97a9a849e0bb3f301a503801975defb56.png" />
+<img alt="../../_images/16c4d377531aae94e6caf41ad609a9dbc982c796d14b0f7db65fefc3e2c30bdd.png" src="../../_images/16c4d377531aae94e6caf41ad609a9dbc982c796d14b0f7db65fefc3e2c30bdd.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2741,13 +2744,13 @@ Resampled:
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">run_sequence_plot</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">)],</span> <span class="n">resid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data_ar</span><span class="p">):],</span> <span class="n">resid_preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Residuals&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Differenced time series&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Residuals +  prediction&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/996419c62d27ea117966db91d978934d06c65acb2a729b04cd1f10c9399836c9.png" src="../../_images/996419c62d27ea117966db91d978934d06c65acb2a729b04cd1f10c9399836c9.png" />
+<img alt="../../_images/2608cb798557fe65ab964380190aaf224a0a8c8cdf702fee217cd8dc89014a5c.png" src="../../_images/2608cb798557fe65ab964380190aaf224a0a8c8cdf702fee217cd8dc89014a5c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2765,7 +2768,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/70344544d9942043f13043bac8a41ead40d5be56a3bb910ba005cdc3349c4b1d.png" src="../../_images/70344544d9942043f13043bac8a41ead40d5be56a3bb910ba005cdc3349c4b1d.png" />
+<img alt="../../_images/762e9139409235c2552bbf45c0e0e6a7b860294246e92c8d8799797ad2b92833.png" src="../../_images/762e9139409235c2552bbf45c0e0e6a7b860294246e92c8d8799797ad2b92833.png" />
 </div>
 </div>
 </section>
