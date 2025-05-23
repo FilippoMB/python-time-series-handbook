@@ -573,10 +573,11 @@ document.write(`
 <li><p>White noise is a reasonable approximation of the real noise.</p></li>
 <li><p>The assumption makes the mathematics tractable.</p></li>
 </ul>
-<blockquote>
-<div><p><strong>📝 Note</strong> White noise contains a mix of all the different frequencies at the same intensity blended together.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>White noise contains a mix of all the different frequencies at the same intensity blended together.</p>
 <p>This is similar to how white light contains all the colors of the rainbow combined.</p>
-</div></blockquote>
+</div>
 </section>
 <section id="assumption-3-gaussian-noise">
 <h4>Assumption 3: Gaussian noise<a class="headerlink" href="#assumption-3-gaussian-noise" title="Link to this heading">#</a></h4>
@@ -717,12 +718,14 @@ x_{t-1} \\
   &amp;= \mathbf{A}\mathbf{P}_{t-1}\mathbf{A}^T + \mathbf{Q}
 \end{aligned}
 \end{split}\]</div>
-<p><strong>📝 Note</strong></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <ul class="simple">
 <li><p>Both the state <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> and the measurements <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span> are modeled as random variables (with associated process and measurement noise).</p></li>
 <li><p>As a result, the errors <span class="math notranslate nohighlight">\(\boldsymbol{e^{-}}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{e}\)</span> are random variables themselves.</p></li>
 <li><p>The expectation <span class="math notranslate nohighlight">\(\mathbb{E}[\cdot]\)</span> is taken over the probability distribution governing these random variables.</p></li>
 </ul>
+</div>
 <p>In summary, the Predict step consists of two equations to update:</p>
 <ul class="simple">
 <li><p>State estimate.</p></li>
@@ -759,7 +762,7 @@ x_{t-1} \\
 </ol>
 <p>The previous derivation give us the following result:</p>
 <div class="math notranslate nohighlight">
-\[\mathbf{K}_t = \mathbf{P}^{-}_t \mathbf{H}^T (\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R})^{-1}= \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}}\]</div>
+\[\mathbf{K}_t = \mathbf{P}^{-}_t \mathbf{H}^T (\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R})^{-1}\]</div>
 <p>Back to our car example, we have:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{K}_t = \frac{\begin{bmatrix} p^{-}_{xx} &amp; p^{-}_{\dot x x} \\ p^{-}_{\dot x x} &amp; p^{-}_{\dot x \dot x} \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix}}{\begin{bmatrix} 1 &amp; 0 \end{bmatrix} \begin{bmatrix} p^{-}_{xx} &amp; p^{-}_{\dot x x} \\ p^{-}_{\dot x x} &amp; p^{-}_{\dot x \dot x} \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} + \begin{bmatrix} r_{xx} \end{bmatrix}} = \frac{\begin{bmatrix} p^{-}_{xx} \\ p^{-}_{x \dot x} \end{bmatrix}}{p^{-}_{xx} + r_{xx}}\end{split}\]</div>
@@ -779,7 +782,7 @@ x_{t-1} \\
 <li><p>The measurement error covariance <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> approaches zero, i.e., there is no noise in the measurements.</p>
 <ul class="simple">
 <li><p>The measurements are completely reliable.</p></li>
-<li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{R} \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = \mathbf{H}^{-1}\)</span></p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{R} \rightarrow 0} \mathbf{K}_t = \mathbf{P}^{-}_t \mathbf{H}^T(\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R})^{-1} = \mathbf{H}^{-1}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> weights the residuals more heavily:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -797,7 +800,7 @@ x_{t-1} \\
 <li><p>The covariance estimate <span class="math notranslate nohighlight">\(\mathbf{P}^{-}_t\)</span> approaches zero.</p>
 <ul class="simple">
 <li><p>The model is completely reliable and the measurements are not accounted for.</p></li>
-<li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{P}^{-}_t \rightarrow 0} \mathbf{K}_t = \frac{\mathbf{P}^{-}_t \mathbf{H}^T}{\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R}} = 0\)</span>.</p></li>
+<li><p>We have <span class="math notranslate nohighlight">\(\lim \limits_{\mathbf{P}^{-}_t \rightarrow 0} \mathbf{K}_t = \mathbf{P}^{-}_t \mathbf{H}^T(\mathbf{H} \mathbf{P}^{-}_t \mathbf{H}^T + \mathbf{R})^{-1} = 0\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{K}_t\)</span> does not give importance to the residuals: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{x}}_{t} = \hat{\boldsymbol{x}}^{-}_{t} + 0\Delta_t = \hat{\boldsymbol{x}}^{-}_{t}\)</span>.</p></li>
 </ul>
 </li>
@@ -939,12 +942,12 @@ x_{t-1} \\
 <ul class="simple">
 <li><p>In summary, we have two noise parameters: one for the model (<span class="math notranslate nohighlight">\(Q\)</span>) and one for the measurement (<span class="math notranslate nohighlight">\(R\)</span>).</p></li>
 <li><p>The values of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are inputs for the algorithm.</p></li>
-<li><p>Therefore, since we usually don’t <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, we have to make reasonable estimates.</p></li>
+<li><p>Therefore, since we usually don’t know <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, we have to make reasonable estimates.</p></li>
 </ul>
 <ul class="simple">
 <li><p>In this example, we know the actual variance for the measurements (since we are generating the measurements ourselves).</p></li>
 <li><p>We can see the effect of making a good or a bad estimate for this parameter.</p></li>
-<li><p>Also, we choose the actual position of our car, so we can see how quickly the KF converges to the true value.</p></li>
+<li><p>Also, we know the actual position of our car, so we can see how quickly the KF converges to the true value.</p></li>
 <li><p>Finally, we need to guess initial values for the initial position of the car and the variance in this initial estimate.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1065,20 +1068,16 @@ x_{t-1} \\
 <li><p>where <span class="math notranslate nohighlight">\(w_t \sim \mathcal{N}(0, Q)\)</span> represents the model noise.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Now, assume we have measurements only for the position, but not the velocity.</p></li>
-<li><p>Let the measurements be generated according to the following distribution:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[z_t = z_{t-1} + \delta t \cdot v_t\]</div>
-<ul class="simple">
-<li><p>In this case, <span class="math notranslate nohighlight">\(v_t\)</span> represent a noisy measurement for the velocity, that is not observed directly.</p></li>
-<li><p>We let <span class="math notranslate nohighlight">\(v_t \sim \mathcal{N}(v_0, R)\)</span>, where <span class="math notranslate nohighlight">\(R\)</span> represents the variance of the measurements error.</p></li>
+<li><p>Now, assume we have measurements only for the position, but not the velocity:
+$<span class="math notranslate nohighlight">\(z_t = x_t\)</span>$</p></li>
+<li><p>In practice, to simulate our measurements we use the following distribution:
+$<span class="math notranslate nohighlight">\(z_t \sim \mathcal{N}(x_t, R)\)</span>$</p></li>
+<li><p>where <span class="math notranslate nohighlight">\(R\)</span> represents the variance of the measurements error.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Let’s now modify our static algorithm to take into account this motion.</p></li>
-<li><p>At each time point, we will generate a random value <span class="math notranslate nohighlight">\(v_t\)</span> for the velocity measurement.</p></li>
-<li><p>We will assume that the car moves at velocity <span class="math notranslate nohighlight">\(v_t\)</span> until the next time point, which allows us to calculate the distance traveled.</p></li>
-<li><p>By summing all of the distances traveled, we can calculate the measured position of the car <span class="math notranslate nohighlight">\(z_t\)</span>.</p></li>
+<li><p>We build the real trajectory.</p></li>
+<li><p>We simulate measurements of the positions.</p></li>
 <li><p>Then we will apply the KF and compare the KF estimate for the position with both the actual position <span class="math notranslate nohighlight">\(x_t = x_0 + v_0 \cdot t\)</span> and the measured positions <span class="math notranslate nohighlight">\(z_t\)</span>.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1086,20 +1085,19 @@ x_{t-1} \\
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial parameters</span>
 <span class="n">v0</span> <span class="o">=</span> <span class="mf">0.3</span> 
 <span class="n">x0</span> <span class="o">=</span> <span class="mf">0.0</span>     
-<span class="n">R</span> <span class="o">=</span> <span class="mf">4.0</span>
-
-<span class="c1"># generate noisy measurements</span>
-<span class="n">n_measurements</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">Zv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span> <span class="c1"># velocity measurements</span>
-<span class="n">Zx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span> <span class="c1"># position measurements</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_measurements</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">Zv</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">R</span><span class="p">))</span> 
-    <span class="n">Zx</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Zx</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">Zv</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span> <span class="c1"># delta_t = 1</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">6.0</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.2</span>
 
 <span class="c1"># generate true positions</span>
+<span class="n">n_measurements</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">Xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span> 
 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_measurements</span><span class="p">):</span>
-    <span class="n">Xt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span>
+    <span class="n">Xt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">delta_t</span>
+
+<span class="c1"># generate noisy measurements</span>
+<span class="n">Zx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_measurements</span><span class="p">):</span>
+    <span class="n">Zx</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span> <span class="n">Xt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1115,7 +1113,7 @@ x_{t-1} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cde5c5a3a3a1ab52958636f3448ff5e75c89b81467935a8d82f5984ba8ba05b0.png" src="../../_images/cde5c5a3a3a1ab52958636f3448ff5e75c89b81467935a8d82f5984ba8ba05b0.png" />
+<img alt="../../_images/be181148d2a7ab2919ec3ba95516299c0a6aa901158ebaeb2332e21e0e0f9a96.png" src="../../_images/be181148d2a7ab2919ec3ba95516299c0a6aa901158ebaeb2332e21e0e0f9a96.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1147,20 +1145,21 @@ x_{t-1} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e324a8cc2a93e8add1ebfe9226c4e7c9378b5153ac226688ea0a83e4f2a5f4e1.png" src="../../_images/e324a8cc2a93e8add1ebfe9226c4e7c9378b5153ac226688ea0a83e4f2a5f4e1.png" />
+<img alt="../../_images/16c530382b2b4dbd1f7eab3739fb20693f9bc95964f49928104ccd67ec69eb1a.png" src="../../_images/16c530382b2b4dbd1f7eab3739fb20693f9bc95964f49928104ccd67ec69eb1a.png" />
 </div>
 </div>
-<p><strong>Question:</strong> Neither the measurements nor the KF estimate are close to the true value. Why?</p>
-<p><strong>Answer:</strong> The measurements are not close to the true value because the variance of the measurements error <span class="math notranslate nohighlight">\(R\)</span> is large compared to the velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p>
 <ul class="simple">
-<li><p>The KF estimate is tracking the measurements, so it won’t be close to the true value.</p></li>
-<li><p>In addition, we do not have measurements for the instant velocity.</p></li>
+<li><p>The measurements are not close to the true value because the variance of the measurements error <span class="math notranslate nohighlight">\(R\)</span> is large compared to the velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p></li>
+<li><p>The KF estimate is tracking the measurements, so it oscillates around the true value.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p>With dynamic models, there are more parameters to tune, so it can be more challenging to reach convergence.</p></li>
 <li><p>If we had a way to measure velocity, we could use that information too.</p></li>
 <li><p>Nevertheless, the KF can work with incomplete observations, which is one of its main advantages.</p></li>
 </ul>
+</div>
 </section>
 <section id="example-3-dynamic-two-dimensional-data">
 <h3>Example 3: Dynamic two-dimensional data<a class="headerlink" href="#example-3-dynamic-two-dimensional-data" title="Link to this heading">#</a></h3>
@@ -1382,7 +1381,10 @@ Change the parameters of the algorithm until you find some combinations that ach
 <ol class="arabic simple">
 <li><p>Rewrite the algorithm above for the P model.</p></li>
 </ol>
-<p><strong>💡 Hint:</strong> what is the size of the state vector in this case? What are the dimensions of the matrices that characterize the system?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>What is the size of the state vector in this case? What are the dimensions of the matrices that characterize the system?</p>
+</div>
 </section>
 </section>
 </section>

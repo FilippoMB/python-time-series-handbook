@@ -538,7 +538,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_a</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">change_points</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span> <span class="o">-</span> <span class="n">cp</span><span class="p">)</span> <span class="k">for</span> <span class="n">cp</span> <span class="ow">in</span> <span class="n">change_points</span><span class="p">])</span>
+    <span class="c1">#return np.array([max(0, t - cp) for cp in change_points])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">cp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">cp</span> <span class="ow">in</span> <span class="n">change_points</span><span class="p">])</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_g</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">g0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">change_points</span><span class="p">):</span>
     <span class="n">a_t</span> <span class="o">=</span> <span class="n">compute_a</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">change_points</span><span class="p">)</span>
@@ -550,11 +551,11 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">change_points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>           <span class="c1"># Times at which changes occur</span>
-<span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>                              <span class="c1"># Initial growth rate</span>
-<span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">])</span>  <span class="c1"># Adjustments to growth rate</span>
-<span class="n">g0</span> <span class="o">=</span> <span class="mf">4.0</span>                             <span class="c1"># Initial offset</span>
-<span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>   <span class="c1"># Compensations for discontinuities</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">change_points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>             <span class="c1"># Times at which changes occur</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>                                <span class="c1"># Initial growth rate</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">])</span>    <span class="c1"># Adjustments to growth rate</span>
+<span class="n">g0</span> <span class="o">=</span> <span class="mf">4.0</span>                               <span class="c1"># Initial offset</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="o">-</span><span class="n">delta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">change_points</span><span class="p">)</span> <span class="c1"># Compensations for discontinuities</span>
 
 <span class="n">time_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> 
 <span class="n">g_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_g</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">g0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">change_points</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">time_points</span><span class="p">]</span>
@@ -582,7 +583,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/1e09bcad42bcfb0d3d0ad6d49038bd3df8f66caa2bc1a92e9df2ec4433c3dece.png" src="../../_images/1e09bcad42bcfb0d3d0ad6d49038bd3df8f66caa2bc1a92e9df2ec4433c3dece.png" />
+<img alt="../../_images/8bcc58086293cde5a4fc38caec5d0fda36e4eb12adf56ee418262bbbb8b59be6.png" src="../../_images/8bcc58086293cde5a4fc38caec5d0fda36e4eb12adf56ee418262bbbb8b59be6.png" />
 </div>
 </div>
 <p><strong>🛠️ Try it yourself</strong></p>
@@ -907,10 +908,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:08 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:39 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:08 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:39 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 </div>
@@ -1033,10 +1034,10 @@ document.write(`
       <th>3265</th>
       <td>2017-01-15</td>
       <td>7.185052</td>
-      <td>7.230058</td>
-      <td>9.145382</td>
-      <td>6.705897</td>
-      <td>7.756592</td>
+      <td>7.281972</td>
+      <td>9.140802</td>
+      <td>6.669010</td>
+      <td>7.624712</td>
       <td>1.018148</td>
       <td>1.018148</td>
       <td>1.018148</td>
@@ -1055,10 +1056,10 @@ document.write(`
       <th>3266</th>
       <td>2017-01-16</td>
       <td>7.184020</td>
-      <td>7.590071</td>
-      <td>9.479663</td>
-      <td>6.703929</td>
-      <td>7.757454</td>
+      <td>7.505364</td>
+      <td>9.413301</td>
+      <td>6.664709</td>
+      <td>7.625119</td>
       <td>1.344221</td>
       <td>1.344221</td>
       <td>1.344221</td>
@@ -1077,10 +1078,10 @@ document.write(`
       <th>3267</th>
       <td>2017-01-17</td>
       <td>7.182988</td>
-      <td>7.418060</td>
-      <td>9.308323</td>
-      <td>6.702004</td>
-      <td>7.758316</td>
+      <td>7.391904</td>
+      <td>9.254228</td>
+      <td>6.660586</td>
+      <td>7.625527</td>
       <td>1.132648</td>
       <td>1.132648</td>
       <td>1.132648</td>
@@ -1099,10 +1100,10 @@ document.write(`
       <th>3268</th>
       <td>2017-01-18</td>
       <td>7.181957</td>
-      <td>7.287468</td>
-      <td>9.066985</td>
-      <td>6.700079</td>
-      <td>7.759178</td>
+      <td>7.187156</td>
+      <td>9.126339</td>
+      <td>6.656953</td>
+      <td>7.626530</td>
       <td>0.966266</td>
       <td>0.966266</td>
       <td>0.966266</td>
@@ -1121,10 +1122,10 @@ document.write(`
       <th>3269</th>
       <td>2017-01-19</td>
       <td>7.180925</td>
-      <td>7.252235</td>
-      <td>9.061221</td>
-      <td>6.698154</td>
-      <td>7.760040</td>
+      <td>7.266884</td>
+      <td>9.017443</td>
+      <td>6.653555</td>
+      <td>7.627788</td>
       <td>0.979215</td>
       <td>0.979215</td>
       <td>0.979215</td>
@@ -1153,7 +1154,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/49c9811e1f31d6e7a4cd282945505b9490dba2d9147d9fc85aecc10863e7505b.png" src="../../_images/49c9811e1f31d6e7a4cd282945505b9490dba2d9147d9fc85aecc10863e7505b.png" />
+<img alt="../../_images/6601c4f63f08de046cdaf8be1fdabe297381e157b628a9b7c4b5fd6cdd110b74.png" src="../../_images/6601c4f63f08de046cdaf8be1fdabe297381e157b628a9b7c4b5fd6cdd110b74.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1168,7 +1169,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7f5575285092477a7ba561a7342a9b0b4d8e70481da6dbe6e4260a229ac2e48e.png" src="../../_images/7f5575285092477a7ba561a7342a9b0b4d8e70481da6dbe6e4260a229ac2e48e.png" />
+<img alt="../../_images/20b7b024ff40e8db1a49ba7ae11fda7b307455beeedee9735dbc73458891ae4a.png" src="../../_images/20b7b024ff40e8db1a49ba7ae11fda7b307455beeedee9735dbc73458891ae4a.png" />
 </div>
 </div>
 <p>An interactive figure of the forecast and components can be created with <code class="docutils literal notranslate"><span class="pre">plotly</span></code>:</p>
@@ -1232,10 +1233,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:09 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:40 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:09 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:40 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 </div>
@@ -1356,7 +1357,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1004d1e9ab920d1e85e7dc3d7a53ca022b7ea6b79223d11745bc960e5c6260d7.png" src="../../_images/1004d1e9ab920d1e85e7dc3d7a53ca022b7ea6b79223d11745bc960e5c6260d7.png" />
+<img alt="../../_images/eeb19c3d065f8dcfb4be58ded2e2b9919bfb6709afca69184fb9be08035664ac.png" src="../../_images/eeb19c3d065f8dcfb4be58ded2e2b9919bfb6709afca69184fb9be08035664ac.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1379,10 +1380,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:11 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:42 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:11 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:42 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0                         playoff
@@ -1415,7 +1416,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6487328044f4a93b4b721a96c97a02e2f8e4d1851f286acb4f511e4b67fa9629.png" src="../../_images/6487328044f4a93b4b721a96c97a02e2f8e4d1851f286acb4f511e4b67fa9629.png" />
+<img alt="../../_images/4929f494835eb7e519d2748a18797a7d4772a7dedb87ec38e26e7373bf4fe06b.png" src="../../_images/4929f494835eb7e519d2748a18797a7d4772a7dedb87ec38e26e7373bf4fe06b.png" />
 </div>
 </div>
 </section>
@@ -1540,10 +1541,10 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:13 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:44 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:13 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:44 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 </div>
@@ -1565,7 +1566,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4415923332bf26f6e2b81d9077c5ff8fa5f6aa4602fb44b79caa898ec494668b.png" src="../../_images/4415923332bf26f6e2b81d9077c5ff8fa5f6aa4602fb44b79caa898ec494668b.png" />
+<img alt="../../_images/e275c999dde334277b47e118dd8bc120fc6608b81a088726aa4e0a8b75030fd6.png" src="../../_images/e275c999dde334277b47e118dd8bc120fc6608b81a088726aa4e0a8b75030fd6.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1592,13 +1593,13 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:13 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:44 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:13 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:44 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
-<img alt="../../_images/86f125dcad353eb5d2308213b6ae751a6ca69f10ebcd01c4a7df538a795fa256.png" src="../../_images/86f125dcad353eb5d2308213b6ae751a6ca69f10ebcd01c4a7df538a795fa256.png" />
+<img alt="../../_images/20db4183fde706cbfa9d0236ca3848203fea17f73d4d6251413c4d74220d54f9.png" src="../../_images/20db4183fde706cbfa9d0236ca3848203fea17f73d4d6251413c4d74220d54f9.png" />
 </div>
 </div>
 </section>
@@ -1626,10 +1627,10 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:14 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:45 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:14 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:45 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
 </div>
@@ -1647,7 +1648,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e1e11264490ecc97486351adbfe238a7ed1b177c97c967935fb0a7c7a1dfa70f.png" src="../../_images/e1e11264490ecc97486351adbfe238a7ed1b177c97c967935fb0a7c7a1dfa70f.png" />
+<img alt="../../_images/bb3a41f6824272d79b8cf19f59bf5e1eaeae752849ddc9b584eb4d9b1510f026.png" src="../../_images/bb3a41f6824272d79b8cf19f59bf5e1eaeae752849ddc9b584eb4d9b1510f026.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1691,7 +1692,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/48f9d68eb3894da1789dc16b6c3d05588a7fdb4e745c6cbfcdfb7d3b0526ff20.png" src="../../_images/48f9d68eb3894da1789dc16b6c3d05588a7fdb4e745c6cbfcdfb7d3b0526ff20.png" />
+<img alt="../../_images/aaa6f2b7995fab9ab8cbdefc6ef0ded589841e00ccf59600172498fdab75ce66.png" src="../../_images/aaa6f2b7995fab9ab8cbdefc6ef0ded589841e00ccf59600172498fdab75ce66.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1718,13 +1719,13 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:15 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:46 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:46 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
-<img alt="../../_images/6cb60801acae5f011adc7af2e9a81fe8d032ad9a4588dd3504642d1e9cde0748.png" src="../../_images/6cb60801acae5f011adc7af2e9a81fe8d032ad9a4588dd3504642d1e9cde0748.png" />
+<img alt="../../_images/79ed162864b469e375429ddf1ba5cee7e3a23a62a0a3fff5c98bac64b578e2ba.png" src="../../_images/79ed162864b469e375429ddf1ba5cee7e3a23a62a0a3fff5c98bac64b578e2ba.png" />
 </div>
 </div>
 <p>Decreasing it will make the trend less flexible.</p>
@@ -1738,13 +1739,13 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:47 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:47 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
-<img alt="../../_images/2b6a3951e5e3b2fb2b19b802b790125d8291721c7dd1d80bbfb9cf768cef9b0f.png" src="../../_images/2b6a3951e5e3b2fb2b19b802b790125d8291721c7dd1d80bbfb9cf768cef9b0f.png" />
+<img alt="../../_images/5ee83fd8e2e0a47bf9559a7abec9313ebaa7b3751a4974789302bc3c03f59cf4.png" src="../../_images/5ee83fd8e2e0a47bf9559a7abec9313ebaa7b3751a4974789302bc3c03f59cf4.png" />
 </div>
 </div>
 </section>
@@ -1767,13 +1768,13 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] start processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:47 - cmdstanpy - INFO - Chain [1] start processing
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18:56:16 - cmdstanpy - INFO - Chain [1] done processing
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11:53:47 - cmdstanpy - INFO - Chain [1] done processing
 </pre></div>
 </div>
-<img alt="../../_images/aeb301048cff22675ad1ec9d3b2b6b7dcf0a26f003a31eedb46edb194493f315.png" src="../../_images/aeb301048cff22675ad1ec9d3b2b6b7dcf0a26f003a31eedb46edb194493f315.png" />
+<img alt="../../_images/39996ba9ea54e974edb69e3b196d623cf23b62cfb443b9f9a1e0a769f7d617d6.png" src="../../_images/39996ba9ea54e974edb69e3b196d623cf23b62cfb443b9f9a1e0a769f7d617d6.png" />
 </div>
 </div>
 </section>

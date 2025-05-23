@@ -648,7 +648,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/10f58093e31dcc11e19a771253d572c190337c70e429236e370ee121409df7c5.png" src="../../_images/10f58093e31dcc11e19a771253d572c190337c70e429236e370ee121409df7c5.png" />
+<img alt="../../_images/e6b66b1465958a462f0f21ca26f27a45e98f91a61aa7d9a6a9667d6c6155491b.png" src="../../_images/e6b66b1465958a462f0f21ca26f27a45e98f91a61aa7d9a6a9667d6c6155491b.png" />
 </div>
 </div>
 <section id="multi-layer-perceptron">
@@ -717,7 +717,7 @@ document.write(`
 <li><p>Key for the training of the MLP is the creation of input-output pairs <span class="math notranslate nohighlight">\(\{\mathbf{x}_i, \mathbf{y}_i\}\)</span> used for training.</p></li>
 <li><p>Given the input <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> the model must learn to predict the output <span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span>.</p></li>
 <li><p>This is done by adapting the model weights to minimize the discrepancy between the prediction <span class="math notranslate nohighlight">\(\mathbf{\hat y}_i\)</span> and the desired output <span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span>.</p></li>
-<li><p>The weights are modified according to the gradient taken with respect to a loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{\hat y}_i, \mathbf{y}_i)\)</span> such as the MSE, e.g., <span class="math notranslate nohighlight">\(W \leftarrow W + \delta \frac{\partial \mathcal{L}}{\partial W}\)</span>.</p></li>
+<li><p>The weights are modified according to the gradient taken with respect to a loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{\hat y}_i, \mathbf{y}_i)\)</span> such as the MSE, e.g., <span class="math notranslate nohighlight">\(W \leftarrow W - \delta \frac{\partial \mathcal{L}}{\partial W}\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\delta\)</span> is a small constant defining the gradient step (learning rate).</p></li>
 </ul>
 <ul class="simple">
@@ -1318,7 +1318,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 35.65
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The next time step prediction is 36.96
 </pre></div>
 </div>
 </div>
@@ -1344,10 +1344,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 28.74
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 25.81
 </pre></div>
 </div>
-<img alt="../../_images/7261ab0ecbefddc8303c221d7fd91834063624aa9cbc105ab79e2bb17599d83d.png" src="../../_images/7261ab0ecbefddc8303c221d7fd91834063624aa9cbc105ab79e2bb17599d83d.png" />
+<img alt="../../_images/98908ef1a4113aa82859f332cfa3edf843e43d61b81a1017413816917d8db9a0.png" src="../../_images/98908ef1a4113aa82859f332cfa3edf843e43d61b81a1017413816917d8db9a0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1414,7 +1414,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <img alt="../../_images/RNN.gif" src="../../_images/RNN.gif" />
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x(t)\)</span> is the input time series, <span class="math notranslate nohighlight">\(\mathbf{h}(t)\)</span> the hidden state vector, <span class="math notranslate nohighlight">\(y(t)\)</span> the output.</p></li>
-<li><p>The matrices <span class="math notranslate nohighlight">\(W_x\)</span>, <span class="math notranslate nohighlight">\(W_h\)</span>, and <span class="math notranslate nohighlight">\(W_o\)</span> represents the input, hidden (recurrent), and output weights respectively.</p></li>
+<li><p>The matrices <span class="math notranslate nohighlight">\(W_i\)</span>, <span class="math notranslate nohighlight">\(W_h\)</span>, and <span class="math notranslate nohighlight">\(W_o\)</span> represent the input, hidden (recurrent), and output weights respectively.</p></li>
 </ul>
 <p><strong>Back Propagation Through Time (BPTT)</strong></p>
 <ul class="simple">
@@ -1522,7 +1522,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <img alt="../../_images/Reservoir_pred1.png" src="../../_images/Reservoir_pred1.png" />
 <ul class="simple">
 <li><p>To predict at a different horizon <span class="math notranslate nohighlight">\(\tau_2\)</span> the readout will select a different group of features.</p></li>
-<li><p>Note that in both cases the Readout produces always the same pool of features!</p></li>
+<li><p>Note that in both cases the Reservoir produces always the same pool of features!</p></li>
 </ul>
 <img alt="../../_images/Reservoir_pred2.png" src="../../_images/Reservoir_pred2.png" />
 <ul class="simple">
@@ -1624,7 +1624,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bbe780bff56f588db8c8281a5d0ffe037803d51d0aa18fd91d226f3862bad8e1.png" src="../../_images/bbe780bff56f588db8c8281a5d0ffe037803d51d0aa18fd91d226f3862bad8e1.png" />
+<img alt="../../_images/b1caef1aa6f30769ff12df005477a8c357534e9dc5d529143a399962e5300209.png" src="../../_images/b1caef1aa6f30769ff12df005477a8c357534e9dc5d529143a399962e5300209.png" />
 </div>
 </div>
 </section>
@@ -1839,7 +1839,7 @@ states_te shape: (1, 266, 900)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0556s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0281s
 Test time: 0.0003s
 </pre></div>
 </div>
@@ -1861,7 +1861,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/fe7da46abdf51c9aab1e555ef847f9411cd59ffd64ae7bf4e12e815f2eb5034d.png" src="../../_images/fe7da46abdf51c9aab1e555ef847f9411cd59ffd64ae7bf4e12e815f2eb5034d.png" />
+<img alt="../../_images/0eee65c1351d59e94d494162de6ff88d40d3aef8160a9810965cc4e925103944.png" src="../../_images/0eee65c1351d59e94d494162de6ff88d40d3aef8160a9810965cc4e925103944.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1872,7 +1872,7 @@ Test time: 0.0003s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 19.92
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 20.97
 </pre></div>
 </div>
 </div>
@@ -2156,9 +2156,9 @@ states_te shape: (266, 75)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0017s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.0015s
 Test time: 0.0001s
-Mean Squared Error: 21.01
+Mean Squared Error: 22.51
 </pre></div>
 </div>
 </div>
@@ -2211,7 +2211,7 @@ Mean Squared Error: 21.01
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 9.82s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 10.13s
 </pre></div>
 </div>
 </div>
@@ -2231,7 +2231,7 @@ Mean Squared Error: 21.01
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0dae811a275cb9ae14896390fce246a7904f4d47cf0d9937bacc8cddc601e8bb.png" src="../../_images/0dae811a275cb9ae14896390fce246a7904f4d47cf0d9937bacc8cddc601e8bb.png" />
+<img alt="../../_images/526df16af098f6093353f3b0363f8fafa336dfe0302237ab47a28fcdcee14b41.png" src="../../_images/526df16af098f6093353f3b0363f8fafa336dfe0302237ab47a28fcdcee14b41.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2265,7 +2265,7 @@ Mean Squared Error: 21.01
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 5.61s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 5.73s
 </pre></div>
 </div>
 </div>

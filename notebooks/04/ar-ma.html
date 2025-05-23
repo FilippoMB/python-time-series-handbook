@@ -877,11 +877,13 @@ document.write(`
 <img alt="../../_images/2c6213be3f5a13badf7dbf5906dac583d263f4cd42c6f3d113c61096bd46d275.png" src="../../_images/2c6213be3f5a13badf7dbf5906dac583d263f4cd42c6f3d113c61096bd46d275.png" />
 </div>
 </div>
-<p><strong>⚙ Try it yourself</strong></p>
+<blockquote>
+<div><p><strong>⚙ Try it yourself</strong></p>
 <ul class="simple">
 <li><p>Try modifying/adding/removing values in the <code class="docutils literal notranslate"><span class="pre">ar</span></code> coefficients in <code class="docutils literal notranslate"><span class="pre">arma_generate_sample</span></code>.</p></li>
 <li><p>Then, see how the PACF plot changes.</p></li>
 </ul>
+</div></blockquote>
 </section>
 <section id="forecasting-with-ar-models">
 <h3>Forecasting with AR models<a class="headerlink" href="#forecasting-with-ar-models" title="Link to this heading">#</a></h3>
@@ -1088,12 +1090,14 @@ document.write(`
 <li><p>These two look way more similar than the PACF we got for the nonstationary data.</p></li>
 <li><p>The prominent spike at lag 2 suggests that <span class="math notranslate nohighlight">\(p=2\)</span>, i.e., we should use an AR(2) model.</p></li>
 </ul>
-<p><strong>⚠ Attention</strong></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
 <ul class="simple">
 <li><p>In the differenced time series there are also other significant spikes at higher lags, which are not present in the original AR data.</p></li>
 <li><p>This is because there is a seasonal component left in the data.</p></li>
 <li><p>Let’s see if we can remove them by applying seasonal differencing and recompute the PACF plot.</p></li>
 </ul>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seasonal differencing</span>
@@ -1116,7 +1120,8 @@ document.write(`
 <li><p>Interpreting the PACF (and ACF) plots to select the order of the model requires skills and experience.</p></li>
 <li><p>See <a class="reference external" href="https://people.duke.edu/~rnau/411arim3.htm">this guide</a> for selecting the best AR (and MA) order.</p></li>
 </ul>
-<p><strong>📝 Note 1</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p>Besides overdifferencing, other issues appear when stationarity is achieved with differencing.</p></li>
 <li><p>Some data are lost at the beginning or at the end of the time series due to differencing.</p>
@@ -1127,13 +1132,16 @@ document.write(`
 <li><p>In addition, it is easy to make <em>mistakes</em> when reverting the differencing to make predictions.</p></li>
 <li><p>This further complicates when there is a gap between the training and test set or when the forecast horizon <span class="math notranslate nohighlight">\(H\)</span> goes beyond the seasonality <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
 </ul>
-<p><strong>📝 Note 2</strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Should we perform seasonal or 1st order differencing first?</p>
 <ul class="simple">
 <li><p>Both paths are valid, however seasonal differencing is usually done first.</p></li>
 <li><p>Often seasonal differeing is enough to make the data (almost) stationary.</p></li>
 <li><p>In general, we want to do as little differencing as possible to avoid overdifferencing.</p></li>
 </ul>
+</div>
 </section>
 <section id="stationarity-by-subtracting-estimated-trend-and-seasonality">
 <h4>Stationarity by subtracting estimated trend and seasonality<a class="headerlink" href="#stationarity-by-subtracting-estimated-trend-and-seasonality" title="Link to this heading">#</a></h4>
@@ -1173,12 +1181,14 @@ document.write(`
 <img alt="../../_images/d2fd0bd792c329dbb83ab5039bfc2afbb8793ad209db1448d42ca127a6e22648.png" src="../../_images/d2fd0bd792c329dbb83ab5039bfc2afbb8793ad209db1448d42ca127a6e22648.png" />
 </div>
 </div>
-<p><strong>💡 Hint</strong></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <ul class="simple">
 <li><p>In this case, we knew the main period to be <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
 <li><p>In general, we need to estimate it.</p></li>
 <li><p>We can use the <code class="docutils literal notranslate"><span class="pre">fft_analysis</span></code> function from Lecture 1.</p></li>
 </ul>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tsa_course.lecture1</span><span class="w"> </span><span class="kn">import</span> <span class="n">fft_analysis</span>
@@ -1194,12 +1204,14 @@ document.write(`
 </div>
 </div>
 </div>
-<p><strong>⚠ Attention</strong></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
 <ul class="simple">
 <li><p>Smoothers work so well here because we use toy data with additive components, linear trend, constant variance, etc…</p></li>
 <li><p>Many real-world data do not look so nice.</p></li>
 <li><p>In some cases, we have to rely on other techniques, including differentiation and the “dirty” ACF/PACF plot we got from it.</p></li>
 </ul>
+</div>
 <ul class="simple">
 <li><p>Once the data are stationary, we are ready to fit the AR(2) model to make forecasts.</p></li>
 <li><p>Depending on which method we used to obtain stationary data, we must do something different to reconstruct the predictions.</p></li>
@@ -1259,11 +1271,13 @@ document.write(`
 <img alt="../../_images/2d856ef51af1715bf344529270d401b01b20b64c413d31596d55b83d4577e6c2.png" src="../../_images/2d856ef51af1715bf344529270d401b01b20b64c413d31596d55b83d4577e6c2.png" />
 </div>
 </div>
-<p><strong>⚠ Attention</strong></p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
 <ul class="simple">
 <li><p>It’s very easy to make errors with indices when reverting the differencing operations.</p></li>
 <li><p>Also, the previous operations assume that there are no gaps between train and test data.</p></li>
 </ul>
+</div>
 </section>
 <section id="predictions-with-tes-based-approach">
 <h4>Predictions with TES-based approach<a class="headerlink" href="#predictions-with-tes-based-approach" title="Link to this heading">#</a></h4>
@@ -1367,13 +1381,15 @@ MSE of TES: 1.11
 <li><p>MA models are <em>less interpretable</em> than AR models.</p></li>
 <li><p>As AR models, also MA models require data to be <em>stationary</em>.</p></li>
 </ul>
-<p><strong>⚠ Attention</strong></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
 <ul class="simple">
 <li><p>We talked about smoothing with moving averages in Lesson 3.</p></li>
 <li><p>MA models are not the same as those smoothing techniques.</p></li>
 <li><p>Each serves a different, important function.</p></li>
 <li><p>We should not confuse the two.</p></li>
 </ul>
+</div>
 <section id="ma-model-identification">
 <h3>MA model identification<a class="headerlink" href="#ma-model-identification" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1426,11 +1442,13 @@ MSE of TES: 1.11
 <img alt="../../_images/751badc339cb5f8f87b70956df77f89aea5513a0b2eb4afc7e99f8ff305f167d.png" src="../../_images/751badc339cb5f8f87b70956df77f89aea5513a0b2eb4afc7e99f8ff305f167d.png" />
 </div>
 </div>
-<p><strong>⚙ Try it yourself</strong></p>
+<blockquote>
+<div><p><strong>⚙ Try it yourself</strong></p>
 <ul class="simple">
 <li><p>Try modifying/adding/removing values in the <code class="docutils literal notranslate"><span class="pre">ma</span></code> coefficients in <code class="docutils literal notranslate"><span class="pre">arma_generate_sample</span></code>.</p></li>
 <li><p>Then, see how the ACF plot changes.</p></li>
 </ul>
+</div></blockquote>
 </section>
 <section id="example-forecasting-with-ma-model">
 <h3>Example: forecasting with MA model<a class="headerlink" href="#example-forecasting-with-ma-model" title="Link to this heading">#</a></h3>
@@ -1771,7 +1789,7 @@ MSE of TES: 1.44
 </tbody>
 </table>
 </div>
-<p>In this lecture you should have learned the basics of:</p>
+<p>In this lecture we learned the basics of:</p>
 <ol class="arabic simple">
 <li><p>The Autocorrelation Function (ACF).</p></li>
 <li><p>The Partial Autocorrelation Function (PACF).</p></li>

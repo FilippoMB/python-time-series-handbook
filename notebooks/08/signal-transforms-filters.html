@@ -471,7 +471,7 @@ document.write(`
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>In this lecture, we will get a basic understanding of the Fourier Transform (FT), Discrete Fourier Transform (DFT), and learn how any function can be approximated by a series of sines and cosines.</p></li>
+<li><p>In this lecture, we will get a basic understanding of the Fourier Transform (FT), Discrete Fourier Transform (DFT), and learn how a function can be approximated by a series of sines and cosines.</p></li>
 <li><p>In particular, we will learn the FT of common signals, the main properties of FT, and the practical skills needed to apply the FT.</p></li>
 <li><p>In addition, we will see some common filters and learn why they are useful to process time series data.</p></li>
 <li><p>Finally, we will see how FT can be useful in forecasting tasks.</p></li>
@@ -544,7 +544,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1334a6fd15e79a448926ef084de5c6e2ec76d14911cf5e5677b8247c2951d663.png" src="../../_images/1334a6fd15e79a448926ef084de5c6e2ec76d14911cf5e5677b8247c2951d663.png" />
+<img alt="../../_images/b3a4ef78bc67f167fec2e3df969d8b359a9333d58cfc1f6b118a76cbb9cc53b8.png" src="../../_images/b3a4ef78bc67f167fec2e3df969d8b359a9333d58cfc1f6b118a76cbb9cc53b8.png" />
 </div>
 </div>
 <ul class="simple">
@@ -554,20 +554,15 @@ document.write(`
 </ul>
 <img alt="../../_images/ft.png" src="../../_images/ft.png" />
 <p>The Fourier Transform mathematical formulation is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-66e979dc-5e40-4107-8e5f-34467621da50">
-<span class="eqno">(1)<a class="headerlink" href="#equation-66e979dc-5e40-4107-8e5f-34467621da50" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-9caa3069-1032-4486-95d1-44c12cb0bd1f">
+<span class="eqno">(1)<a class="headerlink" href="#equation-9caa3069-1032-4486-95d1-44c12cb0bd1f" title="Permalink to this equation">#</a></span>\[\begin{equation}\mathcal{F}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} dt \end{equation}\]</div>
+<p>where:</p>
 <ul class="simple">
-<li><p>where:</p>
-<ul>
 <li><p><span class="math notranslate nohighlight">\(t\)</span> is time,</p></li>
 <li><p><span class="math notranslate nohighlight">\(f(t)\)</span> is a continuous time signal,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{F}(\omega)\)</span> is the Fourier Transform of <span class="math notranslate nohighlight">\(f(t)\)</span>,</p></li>
-<li><p><span class="math notranslate nohighlight">\(f(t)\)</span> is the original time-domain function (signal),</p></li>
 <li><p><span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span> is the angular frequency,</p></li>
-<li><p><span class="math notranslate nohighlight">\(e\)</span> is the base of the natural logarithm,</p></li>
 <li><p><span class="math notranslate nohighlight">\(i\)</span> is the imaginary unit, satisfying <span class="math notranslate nohighlight">\(i^2 = -1\)</span>.</p></li>
-</ul>
-</li>
 </ul>
 <p><strong>Explanation</strong></p>
 <ul class="simple">
@@ -596,7 +591,7 @@ document.write(`
 <ul class="simple">
 <li><p>The inverse Fourier Transform expresses a signal <span class="math notranslate nohighlight">\(f(t)\)</span> as a weighted summation of complex exponential functions.</p></li>
 <li><p>The formula is very similar to FT.</p></li>
-<li><p>It shows us that <em>any</em> function can be expressed as a combination of sinusoids.</p></li>
+<li><p>It shows us that <span class="math notranslate nohighlight">\(f(t)\)</span> can be expressed as a combination of sinusoids.</p></li>
 <li><p>The sinusoids represent, thus, a <em>basis</em>.</p></li>
 </ul>
 <img alt="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Fourier_series_square_wave_circles_animation.svg" />
@@ -1018,7 +1013,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/80a95473b4179e5acfe21817962aaa4bebfbfcfabcd052cecd78e9b4486a0c63.png" src="../../_images/80a95473b4179e5acfe21817962aaa4bebfbfcfabcd052cecd78e9b4486a0c63.png" />
+<img alt="../../_images/7defa68dedb810c751647192a942518c1e79b46d4c0c648d797e55b61e6bf868.png" src="../../_images/7defa68dedb810c751647192a942518c1e79b46d4c0c648d797e55b61e6bf868.png" />
 </div>
 </div>
 <p>We can observe that in the Frequency Domain:</p>
@@ -1663,7 +1658,7 @@ document.write(`
 <li><p>Mathematically:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[ \int_{-\infty}^{\infty} |f(t)|^2 dt = \int_{-\infty}^{\infty} |F(\omega)|^2 d\omega \]</div>
+\[ \int_{-\infty}^{\infty} |f(t)|^2 dt = \frac{1}{2\pi} \int_{-\infty}^{\infty} |F(\omega)|^2 d\omega \]</div>
 <ul class="simple">
 <li><p>For discrete signals and their discrete Fourier transforms (DFTs), this can be approximated as:</p></li>
 </ul>
@@ -2095,7 +2090,7 @@ Energy in the frequency domain: 312.5
 <span class="n">Y</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">))</span>
 <span class="n">y_tukey</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">Y</span><span class="o">*</span><span class="n">response</span><span class="p">)</span>
 
-<span class="n">filter_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_signal</span><span class="p">,</span> <span class="n">y_sine</span><span class="o">+</span><span class="n">y_trend</span><span class="p">,</span> <span class="n">y_tukey</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Signal+Trend+Noise&#39;</span><span class="p">,</span><span class="s1">&#39;Signal+Trend&#39;</span><span class="p">,</span><span class="s1">&#39;Fitered Tukey Signal&#39;</span><span class="p">])</span>
+<span class="n">filter_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_signal</span><span class="p">,</span> <span class="n">y_sine</span><span class="o">+</span><span class="n">y_trend</span><span class="p">,</span> <span class="n">y_tukey</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Signal+Trend+Noise&#39;</span><span class="p">,</span><span class="s1">&#39;Signal+Trend&#39;</span><span class="p">,</span><span class="s1">&#39;Filtered Tukey Signal&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -2103,7 +2098,7 @@ Energy in the frequency domain: 312.5
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Window length: 32
 </pre></div>
 </div>
-<img alt="../../_images/c71f2bf4e0653f4d1bc58bf09b009599c9119674d9fa9e34c1316e652ae31f33.png" src="../../_images/c71f2bf4e0653f4d1bc58bf09b009599c9119674d9fa9e34c1316e652ae31f33.png" />
+<img alt="../../_images/e65883f274d0f8f2586e33969f3c0cd561ea93475c531eef4ebdc7cc5b853f75.png" src="../../_images/e65883f274d0f8f2586e33969f3c0cd561ea93475c531eef4ebdc7cc5b853f75.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2182,12 +2177,12 @@ Energy in the frequency domain: 312.5
 
 <span class="c1"># plot</span>
 <span class="n">filter_plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_12</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y_low_butter</span><span class="p">,</span> 
-            <span class="p">[</span><span class="s1">&#39;$y_1 + y_2$&#39;</span><span class="p">,</span><span class="s1">&#39;$y_1$&#39;</span><span class="p">,</span><span class="s1">&#39;Fitered Signal&#39;</span><span class="p">])</span>
+            <span class="p">[</span><span class="s1">&#39;$y_1 + y_2$&#39;</span><span class="p">,</span><span class="s1">&#39;$y_1$&#39;</span><span class="p">,</span><span class="s1">&#39;Filtered Signal&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5e7c3db68436236eba232b9ea0baad763a0c038c3d5dfd107b11b19f61c8890c.png" src="../../_images/5e7c3db68436236eba232b9ea0baad763a0c038c3d5dfd107b11b19f61c8890c.png" />
+<img alt="../../_images/ed53460bc18e30e7fc487e091717abaaf271a93f3b2f8ca2deb5f44fd84741ad.png" src="../../_images/ed53460bc18e30e7fc487e091717abaaf271a93f3b2f8ca2deb5f44fd84741ad.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2242,12 +2237,12 @@ Energy in the frequency domain: 312.5
 
 <span class="c1"># plot</span>
 <span class="n">filter_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_signal</span><span class="p">,</span> <span class="n">y_sine</span><span class="o">+</span><span class="n">y_trend</span><span class="p">,</span> <span class="n">y_low_butter</span><span class="p">,</span> 
-            <span class="p">[</span><span class="s1">&#39;Signal+Trend+Noise&#39;</span><span class="p">,</span><span class="s1">&#39;Signal+Trend&#39;</span><span class="p">,</span><span class="s1">&#39;Fitered Signal&#39;</span><span class="p">])</span>
+            <span class="p">[</span><span class="s1">&#39;Signal+Trend+Noise&#39;</span><span class="p">,</span><span class="s1">&#39;Signal+Trend&#39;</span><span class="p">,</span><span class="s1">&#39;Filtered Signal&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8170db723d37a82a4a099a662cad3a4c3e80a325a490b20ff27a2116e9711e7c.png" src="../../_images/8170db723d37a82a4a099a662cad3a4c3e80a325a490b20ff27a2116e9711e7c.png" />
+<img alt="../../_images/e9c7cd7cc10422ab5762f40480ccf0a7517c43062084bde4b323f16d12191774.png" src="../../_images/e9c7cd7cc10422ab5762f40480ccf0a7517c43062084bde4b323f16d12191774.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2318,12 +2313,12 @@ Energy in the frequency domain: 312.5
 
 <span class="c1"># plot</span>
 <span class="n">filter_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_signal</span><span class="p">,</span> <span class="n">y_sine</span><span class="p">,</span> <span class="n">y_high_butter</span><span class="p">,</span> 
-            <span class="p">[</span><span class="s1">&#39;Sine+Trend+Noise&#39;</span><span class="p">,</span><span class="s1">&#39;Sine&#39;</span><span class="p">,</span><span class="s1">&#39;Fitered Signal&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="p">[</span><span class="s1">&#39;Sine+Trend+Noise&#39;</span><span class="p">,</span><span class="s1">&#39;Sine&#39;</span><span class="p">,</span><span class="s1">&#39;Filtered Signal&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/fbc56cce044465fe6364ca2beed42ab0a304fc8de5a6e7ac9b7b85b56fc5b40b.png" src="../../_images/fbc56cce044465fe6364ca2beed42ab0a304fc8de5a6e7ac9b7b85b56fc5b40b.png" />
+<img alt="../../_images/8146c04ebaf4eac2e0720854315dd438f274882a59200cfec49f4d8c109347ab.png" src="../../_images/8146c04ebaf4eac2e0720854315dd438f274882a59200cfec49f4d8c109347ab.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2372,12 +2367,12 @@ Energy in the frequency domain: 312.5
 
 <span class="c1"># plot</span>
 <span class="n">filter_plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">noisy_signal</span><span class="p">,</span> <span class="n">y_sine</span><span class="p">,</span> <span class="n">y_band_butter</span><span class="p">,</span> 
-            <span class="p">[</span><span class="s1">&#39;Sine+Trend+Noise&#39;</span><span class="p">,</span><span class="s1">&#39;Sine&#39;</span><span class="p">,</span><span class="s1">&#39;Fitered Signal&#39;</span><span class="p">])</span>
+            <span class="p">[</span><span class="s1">&#39;Sine+Trend+Noise&#39;</span><span class="p">,</span><span class="s1">&#39;Sine&#39;</span><span class="p">,</span><span class="s1">&#39;Filtered Signal&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/110411bc0bd95bd377017d4631c0f6fdbaf01a9ed7d9db3e88cca6033a1828f2.png" src="../../_images/110411bc0bd95bd377017d4631c0f6fdbaf01a9ed7d9db3e88cca6033a1828f2.png" />
+<img alt="../../_images/dcfc34e6017976550769c5eaff42d9918c1084a918496659fcf4956e4994699b.png" src="../../_images/dcfc34e6017976550769c5eaff42d9918c1084a918496659fcf4956e4994699b.png" />
 </div>
 </div>
 <p>We observe that the original signal has been de-trended, and the noise has been removed.</p>
@@ -2462,12 +2457,12 @@ Energy in the frequency domain: 312.5
 
 <span class="c1"># plot</span>
 <span class="n">filter_plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">sinusoid1</span><span class="o">+</span><span class="n">sinusoid2</span><span class="p">,</span> <span class="n">y_stop_butter</span><span class="p">,</span> 
-            <span class="p">[</span><span class="s1">&#39;Sin1+Sin2+Sin3&#39;</span><span class="p">,</span><span class="s1">&#39;Sin1+Sin2&#39;</span><span class="p">,</span><span class="s1">&#39;Fitered Signal&#39;</span><span class="p">])</span>
+            <span class="p">[</span><span class="s1">&#39;Sin1+Sin2+Sin3&#39;</span><span class="p">,</span><span class="s1">&#39;Sin1+Sin2&#39;</span><span class="p">,</span><span class="s1">&#39;Filtered Signal&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b9141f3fadba89c53ce7c900a4c2c46e1b4417da1c186a3db2acacccae77b143.png" src="../../_images/b9141f3fadba89c53ce7c900a4c2c46e1b4417da1c186a3db2acacccae77b143.png" />
+<img alt="../../_images/3e41d3d8a5069615d5cff893a92da46efd3f52ce2e9fbdfc56e02033060e29c0.png" src="../../_images/3e41d3d8a5069615d5cff893a92da46efd3f52ce2e9fbdfc56e02033060e29c0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2598,7 +2593,7 @@ Energy in the frequency domain: 312.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f1c389d9d89d2c4e29aa27310e26ef3a566acc976de7b4c95a7692bf5180b46e.png" src="../../_images/f1c389d9d89d2c4e29aa27310e26ef3a566acc976de7b4c95a7692bf5180b46e.png" />
+<img alt="../../_images/5e243b15c583641f8551f056510071559d81832a7e3538fde5fc7c3525c1a243.png" src="../../_images/5e243b15c583641f8551f056510071559d81832a7e3538fde5fc7c3525c1a243.png" />
 </div>
 </div>
 </section>
@@ -2697,7 +2692,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d2be3e8ad047b75bc31ff48e3bbea217a2fa05eafd3efb7375030fcec14ed3c3.png" src="../../_images/d2be3e8ad047b75bc31ff48e3bbea217a2fa05eafd3efb7375030fcec14ed3c3.png" />
+<img alt="../../_images/863105c26591f5e62d2755c2e924eee90f7ebf1b985b42b4c2bf97348b8b928e.png" src="../../_images/863105c26591f5e62d2755c2e924eee90f7ebf1b985b42b4c2bf97348b8b928e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2713,7 +2708,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/448202e2ab4f67a2b6c1588665130f3bd4220e840468ae35c5d7b3723602f601.png" src="../../_images/448202e2ab4f67a2b6c1588665130f3bd4220e840468ae35c5d7b3723602f601.png" />
+<img alt="../../_images/1512cf32bfb3bef76092613a34fed571c646dce4a2738c8ee1f202062c6880ce.png" src="../../_images/1512cf32bfb3bef76092613a34fed571c646dce4a2738c8ee1f202062c6880ce.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2730,7 +2725,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/16c4d377531aae94e6caf41ad609a9dbc982c796d14b0f7db65fefc3e2c30bdd.png" src="../../_images/16c4d377531aae94e6caf41ad609a9dbc982c796d14b0f7db65fefc3e2c30bdd.png" />
+<img alt="../../_images/66bb96094c68a5b4c359568391ff61b80f87c80b076ee8c3deed8568a7349ff7.png" src="../../_images/66bb96094c68a5b4c359568391ff61b80f87c80b076ee8c3deed8568a7349ff7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2750,7 +2745,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2608cb798557fe65ab964380190aaf224a0a8c8cdf702fee217cd8dc89014a5c.png" src="../../_images/2608cb798557fe65ab964380190aaf224a0a8c8cdf702fee217cd8dc89014a5c.png" />
+<img alt="../../_images/7efb2db0efe0716c8072aa3b3a07795a9ff97cbf97b00f7887e74a447f57793d.png" src="../../_images/7efb2db0efe0716c8072aa3b3a07795a9ff97cbf97b00f7887e74a447f57793d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2768,7 +2763,7 @@ Resampled:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/762e9139409235c2552bbf45c0e0e6a7b860294246e92c8d8799797ad2b92833.png" src="../../_images/762e9139409235c2552bbf45c0e0e6a7b860294246e92c8d8799797ad2b92833.png" />
+<img alt="../../_images/ffa6580b82d324324febe41b4cb6078569e4d1c779d343dde489ace8908e3dd9.png" src="../../_images/ffa6580b82d324324febe41b4cb6078569e4d1c779d343dde489ace8908e3dd9.png" />
 </div>
 </div>
 </section>
