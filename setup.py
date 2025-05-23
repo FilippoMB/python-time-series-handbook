@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="tsa_course",
-    version="0.3.0",
+    version="0.3.1",
     packages=find_packages(),
     python_requires='>=3.10',
     install_requires=[

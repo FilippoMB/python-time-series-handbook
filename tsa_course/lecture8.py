@@ -66,14 +66,14 @@ def annotated_sin_plot():
     xticks = [0, 1/4, 1/2, 3/4, 1]
     xtick_labels = ['0', r'$\pi/2$', r'$\pi$', r'$3\pi/2$', r'$2\pi$']
     plt.xticks(xticks, xtick_labels)
-    plt.xlabel('Degrees ($^\circ$)')
+    plt.xlabel('Radians')
     ax2 = plt.gca().twiny()  # Create a twin Axes sharing the yaxis
     ax2.set_xlim(plt.xlim())  # Ensure the limits are the same
     ax2.set_xticks(xticks)  # Use the same x-ticks as ax1
     ax2.set_xticklabels(['0', '90', '180', '275', '360'])  # But with degree labels
     ax2.set_yticks([])  # Hide the y-axis ticks
     plt.xlim(-0.1, T+0.1)
-    plt.xlabel('Radians')
+    plt.xlabel('Degrees')
     plt.text(0.11, -0.1, 'time ($t$)', ha='right')
     plt.text(-0.03, A+0.02, 'A', ha='right')
     plt.text(-0.03, 0+0.02, '0', ha='right')
