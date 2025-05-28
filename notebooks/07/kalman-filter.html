@@ -1059,11 +1059,11 @@ x_{t-1} \\
 <section id="example-2-dynamic-one-dimensional-data">
 <h3>Example 2: Dynamic one-dimensional data<a class="headerlink" href="#example-2-dynamic-one-dimensional-data" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Let’s now consider the system we saw earlier, a car that moves approximately at a constant velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p></li>
+<li><p>Let’s now consider a car that moves with initial velocity <span class="math notranslate nohighlight">\(v_0\)</span> and constant acceleration <span class="math notranslate nohighlight">\(a\)</span>.</p></li>
 <li><p>The position changes over time according to the following formula:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[x_{t} = x_{t-1} + \delta t \cdot v_0 + w_t\]</div>
+\[x_{t} = x_{t-1} + \delta t \cdot v_0 + \delta t^2 \cdot a + w_t\]</div>
 <ul class="simple">
 <li><p>where <span class="math notranslate nohighlight">\(w_t \sim \mathcal{N}(0, Q)\)</span> represents the model noise.</p></li>
 </ul>
@@ -1083,16 +1083,17 @@ $<span class="math notranslate nohighlight">\(z_t \sim \mathcal{N}(x_t, R)\)</sp
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial parameters</span>
-<span class="n">v0</span> <span class="o">=</span> <span class="mf">0.3</span> 
+<span class="n">v0</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">5e-3</span>
 <span class="n">x0</span> <span class="o">=</span> <span class="mf">0.0</span>     
-<span class="n">R</span> <span class="o">=</span> <span class="mf">6.0</span>
-<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.0</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.1</span>
 
 <span class="c1"># generate true positions</span>
 <span class="n">n_measurements</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">Xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span> 
 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_measurements</span><span class="p">):</span>
-    <span class="n">Xt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">delta_t</span>
+    <span class="n">Xt</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">delta_t</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span><span class="o">**</span><span class="mi">2</span>
 
 <span class="c1"># generate noisy measurements</span>
 <span class="n">Zx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_measurements</span><span class="p">)</span>
@@ -1104,7 +1105,7 @@ $<span class="math notranslate nohighlight">\(z_t \sim \mathcal{N}(x_t, R)\)</sp
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Zx</span><span class="p">,</span><span class="s1">&#39;k+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;measurements $z_t$&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Zx</span><span class="p">,</span><span class="s1">&#39;k+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;measurements $z_t$&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Noisy position measurements&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$z_t$&#39;</span><span class="p">)</span>
@@ -1113,18 +1114,18 @@ $<span class="math notranslate nohighlight">\(z_t \sim \mathcal{N}(x_t, R)\)</sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/be181148d2a7ab2919ec3ba95516299c0a6aa901158ebaeb2332e21e0e0f9a96.png" src="../../_images/be181148d2a7ab2919ec3ba95516299c0a6aa901158ebaeb2332e21e0e0f9a96.png" />
+<img alt="../../_images/77fb0b9cb96b9bbb956d73debf1295b9199806e7f06b7d3d6ee9b1c03cee4b40.png" src="../../_images/77fb0b9cb96b9bbb956d73debf1295b9199806e7f06b7d3d6ee9b1c03cee4b40.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial guesses and estimates</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial guesses and estimates</span>
 <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> 
 <span class="n">P</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">Q_est</span> <span class="o">=</span> <span class="mi">4</span> 
 <span class="n">R_est</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">KF_estimate</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># To store the position estimate at each time point </span>
-<span class="n">KF_error</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># To store estimated error at each time point</span>
+<span class="n">KF_estimate</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Store the position estimate at each time step</span>
+<span class="n">KF_error</span> <span class="o">=</span> <span class="p">[]</span>     <span class="c1"># Store estimated error at each time step</span>
 
 <span class="c1"># Kalman filter</span>
 <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">Zx</span><span class="p">:</span>
@@ -1145,11 +1146,11 @@ $<span class="math notranslate nohighlight">\(z_t \sim \mathcal{N}(x_t, R)\)</sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/16c530382b2b4dbd1f7eab3739fb20693f9bc95964f49928104ccd67ec69eb1a.png" src="../../_images/16c530382b2b4dbd1f7eab3739fb20693f9bc95964f49928104ccd67ec69eb1a.png" />
+<img alt="../../_images/1ac3348f836f4c08d393cbdcf893cb53e117c5e589561f283eb84609de94b1c5.png" src="../../_images/1ac3348f836f4c08d393cbdcf893cb53e117c5e589561f283eb84609de94b1c5.png" />
 </div>
 </div>
 <ul class="simple">
-<li><p>The measurements are not close to the true value because the variance of the measurements error <span class="math notranslate nohighlight">\(R\)</span> is large compared to the velocity <span class="math notranslate nohighlight">\(v_0\)</span>.</p></li>
+<li><p>The measurements are not close to the true value because the variance of the measurements error <span class="math notranslate nohighlight">\(R\)</span> is large compared to the velocity.</p></li>
 <li><p>The KF estimate is tracking the measurements, so it oscillates around the true value.</p></li>
 </ul>
 <div class="admonition note">
