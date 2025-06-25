@@ -951,7 +951,7 @@ moving_average: 4.57
 <li><p>The lag of MA is also reflected in the forecasts it produces.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Let’s focus on the <a class="reference internal" href="#forecasting-with-ma"><span class="xref myst">forecasting formula</span></a> we just defined.</p></li>
+<li><p>Let’s focus on the <a class="reference internal" href="###forecasting-with-ma"><span class="xref myst">forecasting formula</span></a> we just defined.</p></li>
 <li><p>While easy to understand, one of its properties may not be obvious.</p></li>
 <li><p>What’s the lag associated with this technique?</p></li>
 <li><p>In other words, after how many time steps do we see a local change in the underlying signal?</p></li>
@@ -1286,7 +1286,7 @@ c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find mean of series</span>
-<span class="n">trend_seasonal_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">trend_seasonality</span><span class="p">)</span>
+<span class="n">trend_seasonal_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
 
 <span class="c1"># create array of mean value equal to length of time array</span>
 <span class="n">simple_avg_preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">trend_seasonal_avg</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
@@ -1301,8 +1301,8 @@ c(t) = \gamma \left( \frac{X(t)}{S(t)} \right) + (1-\gamma)c(t-L) &amp; \hspace{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predictions:  [109.21734351 109.21734351 109.21734351 109.21734351 109.21734351]
-MSE:  9549.121874364564
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predictions:  [104.08315927 104.08315927 104.08315927 104.08315927 104.08315927]
+MSE:  10577.155938966436
 </pre></div>
 </div>
 </div>
@@ -1316,7 +1316,7 @@ MSE:  9549.121874364564
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7c71216efd74d41971b148d20d2efb7c3b78a2914cd3ed3ec421e7705620d233.png" src="../../_images/7c71216efd74d41971b148d20d2efb7c3b78a2914cd3ed3ec421e7705620d233.png" />
+<img alt="../../_images/4629acb32d5e302d77f7e705136ee61eaa090abf66d55107ede3d8d125a17c0b.png" src="../../_images/4629acb32d5e302d77f7e705136ee61eaa090abf66d55107ede3d8d125a17c0b.png" />
 </div>
 </div>
 </section>
@@ -1447,11 +1447,11 @@ MSE:  28.93848905442322
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                MSE
-simple  9549.121874
-single   136.244691
-double    82.956780
-triple    28.938489
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 MSE
+simple  10577.155939
+single    136.244691
+double     82.956780
+triple     28.938489
 </pre></div>
 </div>
 </div>

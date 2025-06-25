@@ -173,9 +173,9 @@ B
 
 **Why is a random walk typically considered non-stationary in the context of time series analysis?**
 - A) Because its variance remains constant over time.
-- B) Because its mean and variance depend on the time at which the series is observed.
+- B) Because its variance depend on the time at which the series is observed.
 - C) Because it consistently follows a predictable trend.
-- D) Because it has a fixed seasonal pattern.
+- D) Because its mean and variance change over time.
 
 ```{admonition} Answer
 :class: note, dropdown
@@ -890,9 +890,9 @@ B
 ```
 
 **How can the Hurst exponent be utilized by traders or financial analysts when evaluating the behavior of stock prices?**
-- A) A Hurst exponent of 0.5 or higher can indicate a profitable opportunity for trend-following strategies.
+- A) A Hurst exponent of 0.5 or higher suggests a good opportunity for trend-following strategies.
 - B) A Hurst exponent below 0 can suggest opportunities for strategies based on price reversals.
-- C) A Hurst exponent near 0 may encourage investment in stable, low-volatility stocks.
+- C) A Hurst exponent above 0.5 may encourage a profitable investment in stable, low-volatility stocks.
 - D) A Hurst exponent above 0 indicates high risk and high potential returns, suitable for aggressive investment strategies.
 
 ```{admonition} Answer
@@ -1386,9 +1386,9 @@ B
 ```
 
 **What is required to model holidays in the Prophet framework?**
-- A) A list of holidays must be manually specified along with their potential impact on the forecast.
+- A) A list of dates for the holidays must be manually specified.
 - B) Holidays are automatically detected based on the country's standard holiday calendar.
-- C) The user needs to input the exact dates and duration of each holiday for the past ten years.
+- C) The user must input the exact dates and duration of each holiday, along with their potential impact on the forecast.
 - D) A statistical test to determine which holidays significantly affect the data.
 
 ```{admonition} Answer
@@ -1854,7 +1854,7 @@ B
 ```
 
 **What is the formula relating the ratio $r$, the number of parts $N$, and the dimensionality $D$ in fractal geometry?**
-- A) $N = r^D$
+- A) $N = D^r$
 - B) $D = \frac{\log N}{\log r}$
 - C) $r = D \times N$
 - D) $D = N \div r$
