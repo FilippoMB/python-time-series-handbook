@@ -3,10 +3,6 @@ title: Time series analysis with Python
 author: Filippo Maria Bianchi
 logo: logo.png
 
-# Force re-execution of notebooks on each build.
-execute:
-  execute_notebooks: 'cache' # off, force, auto
-
 # # Define the name of the latex output file for PDF builds
 # latex:
 #   latex_documents:
@@ -20,7 +16,7 @@ execute:
 repository:
   url: https://github.com/FilippoMB/python-time-series-handbook  # Online location of the book
   # path_to_book: docs  # Optional path to the book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
+  branch: main  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
@@ -37,4 +33,5 @@ parse:
     - dollarmath
 
 execute:
+  execute_notebooks: 'auto' # off, force, auto, cache
   timeout: -1 # Disable timeouts for executing notebooks
