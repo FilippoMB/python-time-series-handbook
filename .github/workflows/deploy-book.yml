@@ -28,10 +28,20 @@ jobs:
       - name: Install build tools
         run: |
           python -m pip install --upgrade pip
-          pip install jupyter-book ghp-import
+          pip install "jupyter-book<2" ghp-import
+
+      - name: Show tool versions
+        run: |
+          jupyter-book --version
+          ghp-import --version
 
       - name: Build Jupyter Book
-        run: jupyter-book build .
+        run: jupyter-book build . --builder html
+
+      - name: Verify build output
+        run: |
+          test -d _build/html
+          ls -la _build/html | head -n 20
 
       - name: Deploy to GitHub Pages
         run: ghp-import -n -p -f _build/html
