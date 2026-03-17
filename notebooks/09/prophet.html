@@ -1,0 +1,1976 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Prophet &#8212; Time series analysis with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/09/prophet';</script>
+    <link rel="icon" href="../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Neural networks and Reservoir Computing" href="../10/nn-reservoir-computing.html" />
+    <link rel="prev" title="Signal transforms and filters" href="../08/signal-transforms-filters.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../00/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Time series analysis with Python - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Time series analysis with Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../00/intro.html">
+                    Time series analysis with Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/introduction_to_time_series.html">Introduction to time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/stationarity.html">Stationarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/smoothing.html">Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/ar-ma.html">AR-MA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/arma_arima_sarima.html">ARMA, ARIMA, SARIMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/unit-root-hurst.html">Unit root test and Hurst exponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/kalman-filter.html">Kalman filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/signal-transforms-filters.html">Signal transforms and filters</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Prophet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/nn-reservoir-computing.html">Neural networks and Reservoir Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/nonlinear-ts.html">Nonlinear time series analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12/classification-clustering.html">Time series classification and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/knowledge_test.html">Knowledge test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00/resources.html">Resources and acknowledgments</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FilippoMB/python-time-series-handbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/09/prophet.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/09/prophet.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Prophet</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-components">Model components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-component-g-t">Trend component <span class="math notranslate nohighlight">\(g(t)\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#piece-wise-linear-growth-model">Piece-wise linear growth model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-growth-model">Logistic growth model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonality-component-s-t">Seasonality component <span class="math notranslate nohighlight">\(s(t)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#holidays-and-events-h-t">Holidays and events <span class="math notranslate nohighlight">\(h(t)\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-and-holiday-effects-adjustment">Seasonal and holiday effects adjustment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">Fitting the Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prophet-in-python">Prophet in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-holidays-and-special-events">Modeling holidays and special events</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saturating-forecasts">Saturating forecasts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-changepoints">Trend changepoints</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusting-trend-flexibility">Adjusting trend flexibility</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-the-locations-of-the-changepoints">Specifying the locations of the changepoints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="prophet">
+<h1>Prophet<a class="headerlink" href="#prophet" title="Link to this heading">#</a></h1>
+<img alt="../../_images/cover8.png" src="../../_images/cover8.png" />
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In this lecture we will learn about <a class="reference external" href="https://facebook.github.io/prophet/">Prophet</a>, a framework for forecasting time series developed by Meta (former Facebook) in 2017.</p>
+<ul class="simple">
+<li><p>Prophet is based on an <em>additive model</em> where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects.</p></li>
+<li><p>It works best with time series that have strong seasonal effects and several seasons of historical data.</p></li>
+<li><p>Prophet is robust to missing data, shifts in the trend, and typically handles outliers well.</p></li>
+</ul>
+<p>In the following, we will cover:</p>
+<ul class="simple">
+<li><p>The main components of the Prophet model: trend, seasonality, and holidays.</p></li>
+<li><p>How to use the prophet library in Python to perform time series forecasting.</p></li>
+<li><p>Try more advanced options and configurations available within the Python library.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prophet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Prophet</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<hr class="docutils" />
+<section id="model-components">
+<h2>Model components<a class="headerlink" href="#model-components" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Prophet models a time series <span class="math notranslate nohighlight">\(y(t)\)</span> as a combination of three components:</p>
+<ol class="arabic simple">
+<li><p>trend <span class="math notranslate nohighlight">\(g(t)\)</span>,</p></li>
+<li><p>seasonality <span class="math notranslate nohighlight">\(s(t)\)</span>,</p></li>
+<li><p>holidays <span class="math notranslate nohighlight">\(h(t)\)</span>.</p></li>
+</ol>
+</li>
+</ul>
+<ul class="simple">
+<li><p>The model equation is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[y(t) = g(t) + s(t) + h(t) + \epsilon_t\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(\epsilon_t\)</span> is the error term assumed to be normally distributed.</p></li>
+</ul>
+<section id="trend-component-g-t">
+<h3>Trend component <span class="math notranslate nohighlight">\(g(t)\)</span><a class="headerlink" href="#trend-component-g-t" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The trend component models non-periodic changes in the value of the time series.</p></li>
+<li><p>Prophet provides two options for modeling the trend:</p>
+<ul>
+<li><p>Piece-wise linear growth model.</p></li>
+<li><p>Logistic growth model.</p></li>
+</ul>
+</li>
+</ul>
+<section id="piece-wise-linear-growth-model">
+<h4>Piece-wise linear growth model<a class="headerlink" href="#piece-wise-linear-growth-model" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>A piece-wise linear function can accommodate changes in the trend’s direction over time.</p></li>
+<li><p>This is particularly useful for time series data exhibiting shifts in growth rates due to external factors or internal changes.</p></li>
+<li><p>This allows to capture and forecast time series trends that do not follow a specific form (linear or logistic).</p></li>
+</ul>
+<ul class="simple">
+<li><p>In a piece-wise linear trend model, the time series is divided into <em>segments</em>.</p></li>
+<li><p>In each segment, the trend is modeled as a linear function.</p></li>
+<li><p>The points where the trend changes direction are called <em>change points</em>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Prophet allows users to specify the <em>maximum number</em> of potential change points or to let the algorithm automatically estimate it based on the data.</p></li>
+<li><p>Prophet automatically detects the change points, allowing the trend to adjust its slope at these points, hence capturing shifts in the trend’s direction.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Users can adjust the flexibility of the model in capturing trend changes by tuning the change point <em>prior scale</em> parameter.</p>
+<ul>
+<li><p>A higher prior scale makes the model more sensitive to changes (allowing more flexibility).</p></li>
+<li><p>A lower prior scale makes the model less sensitive to fluctuations (resulting in a smoother trend).</p></li>
+</ul>
+</li>
+</ul>
+<p>The piece-wise linear trend model in Prophet is defined as:</p>
+<div class="math notranslate nohighlight">
+\[g(t) = (k + a(t)^\top \delta) \cdot t + (g_0 + a(t)^\top \gamma)\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(g(t)\)</span> is the trend component at time <span class="math notranslate nohighlight">\(t\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span> is the initial growth rate,</p></li>
+<li><p><span class="math notranslate nohighlight">\(a(t)\)</span> is time since the corresponding change point if <span class="math notranslate nohighlight">\(t\)</span> is after a change point, or 0 otherwise,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta\)</span> represents adjustments to the growth rate at each change point,</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_0\)</span> is the offset (intercept), i.e., the value at <span class="math notranslate nohighlight">\(t=0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma\)</span> smooths the trend at each change point.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_a</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">change_points</span><span class="p">):</span>
+    <span class="c1">#return np.array([max(0, t - cp) for cp in change_points])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">cp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">cp</span> <span class="ow">in</span> <span class="n">change_points</span><span class="p">])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_g</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">g0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">change_points</span><span class="p">):</span>
+    <span class="n">a_t</span> <span class="o">=</span> <span class="n">compute_a</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">change_points</span><span class="p">)</span>
+    <span class="n">trend</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a_t</span><span class="p">,</span> <span class="n">delta</span><span class="p">))</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="p">(</span><span class="n">g0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a_t</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">trend</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">change_points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>             <span class="c1"># Times at which changes occur</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.3</span>                                <span class="c1"># Initial growth rate</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">])</span>    <span class="c1"># Adjustments to growth rate</span>
+<span class="n">g0</span> <span class="o">=</span> <span class="mf">4.0</span>                               <span class="c1"># Initial offset</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="o">-</span><span class="n">delta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">change_points</span><span class="p">)</span> <span class="c1"># Compensations for discontinuities</span>
+
+<span class="n">time_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> 
+<span class="n">g_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_g</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">g0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">change_points</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">time_points</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_points</span><span class="p">,</span> <span class="n">g_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Piecewise Linear Trend&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">change_points</span><span class="p">,</span> <span class="p">[</span><span class="n">compute_g</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">g0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">change_points</span><span class="p">)</span> <span class="k">for</span> <span class="n">cp</span> <span class="ow">in</span> <span class="n">change_points</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Change Points&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;g(t)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/507233e45621b972cc212207ae4c7676818e30edca3eb2c121ed0c714393b0a6.png" src="../../_images/507233e45621b972cc212207ae4c7676818e30edca3eb2c121ed0c714393b0a6.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>🛠️ Try it yourself</strong></p>
+<p>Try modifying the parameters <code class="docutils literal notranslate"><span class="pre">change_points</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>,  <code class="docutils literal notranslate"><span class="pre">delta</span></code>, <code class="docutils literal notranslate"><span class="pre">g0</span></code>, and <code class="docutils literal notranslate"><span class="pre">gamma</span></code> to see how piece-wise linear trend above change.</p>
+</div></blockquote>
+</section>
+<section id="logistic-growth-model">
+<h4>Logistic growth model<a class="headerlink" href="#logistic-growth-model" title="Link to this heading">#</a></h4>
+<p>The Logistic growth model is used to describe a population that:</p>
+<ul class="simple">
+<li><p>Grows rapidly when it’s small.</p></li>
+<li><p>Grows slowlier as it approaches a maximum limit (<em>carrying capacity</em>) that it cannot exceed.</p></li>
+<li><p>Eventually levels off when the carrying capacity is reached (<em>saturating growth</em>).</p></li>
+</ul>
+<p><em>Carrying capacity</em></p>
+<ul class="simple">
+<li><p>Is a concept borrowed from population biology.</p></li>
+<li><p>It refers to the maximum population size that an environment can sustain without being degraded.</p></li>
+<li><p>For business metrics, this could represent a market saturation point, such as the maximum number of users a platform can support due to limitations in infrastructure or market size.</p></li>
+</ul>
+<p><em>Saturating growth</em></p>
+<ul class="simple">
+<li><p>It refers to a growth pattern where increments become progressively smaller as the value approaches the carrying capacity.</p></li>
+<li><p>When the values are far below the carrying capacity, growth can be rapid (there is a lot of “room” to grow).</p></li>
+<li><p>As the values approach the carrying capacity, the growth rate decreases, and the time series levels off, reflecting a saturation point where further growth becomes increasingly difficult.</p></li>
+</ul>
+<p>The formula describing the Logistic trend is:</p>
+<div class="math notranslate nohighlight">
+\[g(t) = \frac{C}{1 + e^{-k(t - m)}}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(k\)</span> is the growth rate,</p></li>
+<li><p><span class="math notranslate nohighlight">\(C\)</span> is the carrying capacity (the maximum achievable value),</p></li>
+<li><p><span class="math notranslate nohighlight">\(t\)</span> is time,</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span> is the point in time where growth is halfway to the carrying capacity.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">logistic_growth</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">C</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">m</span><span class="p">)))</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mi">800</span>   <span class="c1"># carrying capacity</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.1</span>   <span class="c1"># growth rate</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">60</span>    <span class="c1"># offset parameter, indicating the inflection point</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">logistic_growth</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Logistic growth&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Carrying capacity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/d8d2e2638fc981a5988974d1ae360fddf43ce23d4d6f3663f4f44177e515b072.png" src="../../_images/d8d2e2638fc981a5988974d1ae360fddf43ce23d4d6f3663f4f44177e515b072.png" />
+</div>
+</div>
+<blockquote>
+<div><p>🛠️ Try it yourself**</p>
+<ul class="simple">
+<li><p>Try setting <code class="docutils literal notranslate"><span class="pre">m=20</span></code> to see how the curve changes.</p></li>
+<li><p>Try also modifying the values of <code class="docutils literal notranslate"><span class="pre">k</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="seasonality-component-s-t">
+<h3>Seasonality component <span class="math notranslate nohighlight">\(s(t)\)</span><a class="headerlink" href="#seasonality-component-s-t" title="Link to this heading">#</a></h3>
+<p>The seasonality component <span class="math notranslate nohighlight">\(s(t)\)</span> models periodic changes, which can be yearly, weekly, or daily.</p>
+<p>Prophet uses Fourier series to model these periodic changes, allowing for flexibility in capturing seasonality.</p>
+<p>Seasonality <span class="math notranslate nohighlight">\(s(t)\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[s(t) = \sum_{n=1}^{N} \left(a_n \cos\left(\frac{2\pi n t}{P}\right) + b_n \sin\left(\frac{2\pi n t}{P}\right)\right)\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the number of Fourier terms (higher <span class="math notranslate nohighlight">\(N\)</span> captures more detailed seasonal patterns),</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span> is the period (e.g., 365.25 for yearly seasonality),</p></li>
+<li><p><span class="math notranslate nohighlight">\(a_n\)</span> and <span class="math notranslate nohighlight">\(b_n\)</span> are the Fourier series coefficients that are fitted to the data.</p></li>
+</ul>
+</section>
+<section id="holidays-and-events-h-t">
+<h3>Holidays and events <span class="math notranslate nohighlight">\(h(t)\)</span><a class="headerlink" href="#holidays-and-events-h-t" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The holiday component <span class="math notranslate nohighlight">\(h(t)\)</span> models irregular - but predictable - events.</p></li>
+<li><p>This component is represented as a series of indicator functions that equal 1 if the time <span class="math notranslate nohighlight">\(t\)</span> corresponds to a holiday and 0 otherwise.</p></li>
+<li><p>Coefficients associated with these indicators are fitted to measure the impact of holidays on the forecast.</p></li>
+</ul>
+<p>The holiday component <span class="math notranslate nohighlight">\(h(t)\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[h(t) = \sum_{i} I(t \in D_i) \cdot \delta_i\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_i\)</span> represents the set of times corresponding to holiday <span class="math notranslate nohighlight">\(i\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(I\)</span> is an indicator function,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta_i\)</span> is the effect of holiday <span class="math notranslate nohighlight">\(i\)</span> on the time series, which can be tuned.</p></li>
+</ul>
+<section id="seasonal-and-holiday-effects-adjustment">
+<h4>Seasonal and holiday effects adjustment<a class="headerlink" href="#seasonal-and-holiday-effects-adjustment" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Like for piece-wise linear trend, Prophet can adjust for overfitting or underfitting of seasonal and holiday effects by changing a <em>prior scale</em> parameter.</p></li>
+<li><p>A <em>larger</em> prior scale allows the model to fit larger seasonal fluctuations.</p></li>
+<li><p>A <em>smaller</em> scale regularizes the model, preventing it from overfitting seasonal and holiday effects.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="fitting-the-model">
+<h2>Fitting the Model<a class="headerlink" href="#fitting-the-model" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The components described above are combined into the overall model.</p></li>
+<li><p>To fit the Prophet model to historical data the model’s parameters are estimated using maximum likelihood estimation or Bayesian sampling.</p></li>
+<li><p>This involves optimizing the parameters to minimize the difference between the observed and predicted values of the time series.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The optimization is usually done through gradient descent methods.</p></li>
+<li><p>To perform the optimization Prophet relies on <a class="reference external" href="https://mc-stan.org/">Stan</a>, a C++ library for statistical modeling and high-performance statistical computation that makes model fitting very fast.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="prophet-in-python">
+<h2>Prophet in Python<a class="headerlink" href="#prophet-in-python" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The input to Prophet is always a dataframe with two columns: <code class="docutils literal notranslate"><span class="pre">ds</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>Be sure to rename your dataframe with these column names.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">ds</span></code> (datestamp) column should be of a format expected by Pandas, ideally YYYY-MM-DD for a date or YYYY-MM-DD HH:MM:SS for a timestamp.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">y</span></code> column must be numeric, and represents the measurement we wish to forecast.</p></li>
+</ul>
+<ul class="simple">
+<li><p>As an example, we’ll look at a time series of daily page views for the Wikipedia page of <a class="reference external" href="https://en.wikipedia.org/wiki/Peyton_Manning">Peyton Manning</a>, a former football player.</p></li>
+<li><p>This is a nice example because it illustrates some of Prophet’s features, like multiple seasonality, changing growth rates, and the ability to model special days (such as Manning’s playoff and superbowl appearances).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/PinkWink/DataScience/master/data/07.</span><span class="si">%20e</span><span class="s1">xample_wp_peyton_manning.csv&#39;</span>
+<span class="n">peyton</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+<span class="n">peyton</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ds</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2007-12-10</td>
+      <td>14629</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2007-12-11</td>
+      <td>5012</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2007-12-12</td>
+      <td>3582</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2007-12-13</td>
+      <td>3205</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2007-12-14</td>
+      <td>2680</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peyton</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2cc932ba17ad44062de084751e549975e964b6679628f6d00afa2c5433e0a84b.png" src="../../_images/2cc932ba17ad44062de084751e549975e964b6679628f6d00afa2c5433e0a84b.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Since there are big spikes in the data, we will apply a logarithm transformation to obtain a more even range of variation in the data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peyton</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">peyton</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">peyton</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ds</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2007-12-10</td>
+      <td>9.590761</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2007-12-11</td>
+      <td>8.519590</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2007-12-12</td>
+      <td>8.183677</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2007-12-13</td>
+      <td>8.072467</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2007-12-14</td>
+      <td>7.893572</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>The log transformation clearly stabilized the variance in the data, as we can see from the plot.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peyton</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/93a8bfc2b032606ae1394a20346088a1457d72b70cd7cd4326ad34559886a4cf.png" src="../../_images/93a8bfc2b032606ae1394a20346088a1457d72b70cd7cd4326ad34559886a4cf.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Next, we instantiate a new Prophet object.</p></li>
+<li><p>We can specify several parameters such as:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">growth='linear'</span></code>, meaning that we use a piece-wise linear function to model the trend. Other options are <code class="docutils literal notranslate"><span class="pre">'logistic'</span></code> or <code class="docutils literal notranslate"><span class="pre">'flat'</span></code> to specify a logistic or flat trend, respectively.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seasonality_mode='additive'</span></code>. The other option is <code class="docutils literal notranslate"><span class="pre">'multiplicative'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interval_width=0.90</span></code> specifies the width of the prediction intervals for the forecast.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">growth</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">seasonality_mode</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">interval_width</span><span class="o">=</span><span class="mf">0.90</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Once the model is instantiated, we call its fit method and pass to it the historical dataframe.</p></li>
+<li><p>Fitting should take 1-2 seconds.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">peyton</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:33 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:34 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Predictions are then made on a dataframe with a column <code class="docutils literal notranslate"><span class="pre">ds</span></code> containing the dates for which a prediction is to be made.</p></li>
+<li><p>You can get a suitable dataframe that extends into the future a specified number of days using the helper method <code class="docutils literal notranslate"><span class="pre">Prophet.make_future_dataframe</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">periods=365</span></code> specifies the length of our forecast.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">freq='D'</span></code> specifies that the units (<code class="docutils literal notranslate"><span class="pre">365</span></code> in this case) represent days.</p></li>
+<li><p>By setting <code class="docutils literal notranslate"><span class="pre">include_history=True</span></code> it will also include the dates used for training, so we can also see the model.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">future</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="mi">365</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">include_history</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">future</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3265</th>
+      <td>2017-01-15</td>
+    </tr>
+    <tr>
+      <th>3266</th>
+      <td>2017-01-16</td>
+    </tr>
+    <tr>
+      <th>3267</th>
+      <td>2017-01-17</td>
+    </tr>
+    <tr>
+      <th>3268</th>
+      <td>2017-01-18</td>
+    </tr>
+    <tr>
+      <th>3269</th>
+      <td>2017-01-19</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">predict</span></code> method will assign each row in <code class="docutils literal notranslate"><span class="pre">future</span></code> a predicted value <code class="docutils literal notranslate"><span class="pre">yhat</span></code>.</p></li>
+<li><p>By giving also historical dates (<code class="docutils literal notranslate"><span class="pre">include_history=True</span></code>), it will provide an in-sample fit.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">forecast</span></code> object here is a new dataframe that includes a column <code class="docutils literal notranslate"><span class="pre">yhat</span></code> with the forecast and many other columns, including those with uncertainty intervals.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forecast</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="n">forecast</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ds</th>
+      <th>trend</th>
+      <th>yhat_lower</th>
+      <th>yhat_upper</th>
+      <th>trend_lower</th>
+      <th>trend_upper</th>
+      <th>additive_terms</th>
+      <th>additive_terms_lower</th>
+      <th>additive_terms_upper</th>
+      <th>weekly</th>
+      <th>weekly_lower</th>
+      <th>weekly_upper</th>
+      <th>yearly</th>
+      <th>yearly_lower</th>
+      <th>yearly_upper</th>
+      <th>multiplicative_terms</th>
+      <th>multiplicative_terms_lower</th>
+      <th>multiplicative_terms_upper</th>
+      <th>yhat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3265</th>
+      <td>2017-01-15</td>
+      <td>7.183832</td>
+      <td>7.210808</td>
+      <td>9.178632</td>
+      <td>6.646129</td>
+      <td>7.690501</td>
+      <td>1.018137</td>
+      <td>1.018137</td>
+      <td>1.018137</td>
+      <td>0.048286</td>
+      <td>0.048286</td>
+      <td>0.048286</td>
+      <td>0.969851</td>
+      <td>0.969851</td>
+      <td>0.969851</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.201969</td>
+    </tr>
+    <tr>
+      <th>3266</th>
+      <td>2017-01-16</td>
+      <td>7.182798</td>
+      <td>7.516523</td>
+      <td>9.435840</td>
+      <td>6.641274</td>
+      <td>7.691157</td>
+      <td>1.344165</td>
+      <td>1.344165</td>
+      <td>1.344165</td>
+      <td>0.352294</td>
+      <td>0.352294</td>
+      <td>0.352294</td>
+      <td>0.991871</td>
+      <td>0.991871</td>
+      <td>0.991871</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.526964</td>
+    </tr>
+    <tr>
+      <th>3267</th>
+      <td>2017-01-17</td>
+      <td>7.181765</td>
+      <td>7.325797</td>
+      <td>9.311661</td>
+      <td>6.636494</td>
+      <td>7.691812</td>
+      <td>1.132587</td>
+      <td>1.132587</td>
+      <td>1.132587</td>
+      <td>0.119640</td>
+      <td>0.119640</td>
+      <td>0.119640</td>
+      <td>1.012947</td>
+      <td>1.012947</td>
+      <td>1.012947</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.314352</td>
+    </tr>
+    <tr>
+      <th>3268</th>
+      <td>2017-01-18</td>
+      <td>7.180731</td>
+      <td>7.206031</td>
+      <td>9.061777</td>
+      <td>6.633370</td>
+      <td>7.692754</td>
+      <td>0.966217</td>
+      <td>0.966217</td>
+      <td>0.966217</td>
+      <td>-0.066659</td>
+      <td>-0.066659</td>
+      <td>-0.066659</td>
+      <td>1.032875</td>
+      <td>1.032875</td>
+      <td>1.032875</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.146948</td>
+    </tr>
+    <tr>
+      <th>3269</th>
+      <td>2017-01-19</td>
+      <td>7.179697</td>
+      <td>7.240321</td>
+      <td>9.077085</td>
+      <td>6.630300</td>
+      <td>7.694405</td>
+      <td>0.979145</td>
+      <td>0.979145</td>
+      <td>0.979145</td>
+      <td>-0.072266</td>
+      <td>-0.072266</td>
+      <td>-0.072266</td>
+      <td>1.051411</td>
+      <td>1.051411</td>
+      <td>1.051411</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.158842</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>You can plot the forecast by calling the <code class="docutils literal notranslate"><span class="pre">Prophet.plot</span></code> method and passing in the <code class="docutils literal notranslate"><span class="pre">forecast</span></code> dataframe.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/97f48a4f38c61459ed369213b60725dc52a0f4760c838af2f491006b5de9a259.png" src="../../_images/97f48a4f38c61459ed369213b60725dc52a0f4760c838af2f491006b5de9a259.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>If you want to see the forecast components, you can use the <code class="docutils literal notranslate"><span class="pre">Prophet.plot_components</span></code> method.</p></li>
+<li><p>By default you’ll see the trend, yearly seasonality, and weekly seasonality of the time series.</p></li>
+<li><p>If you include holidays, you’ll see those here, too.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">plot_components</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/91dd2a31584682bd36dfb040d17c830c80b3f49b339827534326243be2037bfd.png" src="../../_images/91dd2a31584682bd36dfb040d17c830c80b3f49b339827534326243be2037bfd.png" />
+</div>
+</div>
+<p>An interactive figure of the forecast and components can be created with <code class="docutils literal notranslate"><span class="pre">plotly</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">prophet.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_plotly</span><span class="p">,</span> <span class="n">plot_components_plotly</span>
+
+<span class="n">plot_plotly</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">forecast</span><span class="p">)</span>
+<span class="n">plot_components_plotly</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">forecast</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="modeling-holidays-and-special-events">
+<h3>Modeling holidays and special events<a class="headerlink" href="#modeling-holidays-and-special-events" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>If you have holidays or other recurring events that you’d like to model, you must create a dataframe for them.</p></li>
+<li><p>It has two columns (<code class="docutils literal notranslate"><span class="pre">holiday</span></code> and <code class="docutils literal notranslate"><span class="pre">ds</span></code>) and a row for each occurrence of the holiday.</p></li>
+<li><p>It must include all occurrences of the holiday, both in the past (back as far as the historical data go) and in the future (out as far as the forecast is being made).</p></li>
+<li><p>If they won’t repeat in the future, Prophet will model them and then not include them in the forecast.</p></li>
+</ul>
+<ul class="simple">
+<li><p>You can also include columns <code class="docutils literal notranslate"><span class="pre">lower_window</span></code> and <code class="docutils literal notranslate"><span class="pre">upper_window</span></code> which extend the holiday out to [<code class="docutils literal notranslate"><span class="pre">lower_window</span></code>, <code class="docutils literal notranslate"><span class="pre">upper_window</span></code>] days around the date.</p></li>
+<li><p>For instance, if you wanted to include Christmas Eve in addition to Christmas you’d include <code class="docutils literal notranslate"><span class="pre">'lower_window':</span> <span class="pre">-1</span></code> and <code class="docutils literal notranslate"><span class="pre">'upper_window':</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+<p>Here we create a dataframe that includes the dates of all of Peyton Manning’s playoff appearances:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add holidays </span>
+<span class="n">playoffs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;holiday&#39;</span><span class="p">:</span> <span class="s1">&#39;playoff&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;ds&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s1">&#39;2008-01-13&#39;</span><span class="p">,</span> <span class="s1">&#39;2009-01-03&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-01-16&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;2010-01-24&#39;</span><span class="p">,</span> <span class="s1">&#39;2010-02-07&#39;</span><span class="p">,</span> <span class="s1">&#39;2011-01-08&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;2013-01-12&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-01-12&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-01-19&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;2014-02-02&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-01-11&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-01-17&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;2016-01-24&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-02-07&#39;</span><span class="p">]),</span>
+  <span class="s1">&#39;lower_window&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1"># this specifies spillover into previous days</span>
+  <span class="s1">&#39;upper_window&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># this for the future days</span>
+<span class="p">})</span>
+
+<span class="n">superbowls</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;holiday&#39;</span><span class="p">:</span> <span class="s1">&#39;superbowl&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;ds&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s1">&#39;2010-02-07&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-02-02&#39;</span><span class="p">,</span> <span class="s1">&#39;2016-02-07&#39;</span><span class="p">]),</span>
+  <span class="s1">&#39;lower_window&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;upper_window&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">holidays_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">playoffs</span><span class="p">,</span> <span class="n">superbowls</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Above we have included the superbowl days as both playoff games and superbowl games.</p></li>
+<li><p>This means that the superbowl effect will be an additional additive bonus on top of the playoff effect.</p></li>
+</ul>
+<p>Once <code class="docutils literal notranslate"><span class="pre">holidays_df</span></code> is created, holiday effects are included in the forecast by passing them in with the <code class="docutils literal notranslate"><span class="pre">holidays</span></code> argument of the constructor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit and predict</span>
+<span class="n">model_holyday</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">holidays</span><span class="o">=</span><span class="n">holidays_df</span><span class="p">,</span> <span class="c1"># this includes the holidays</span>
+                        <span class="n">growth</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">seasonality_mode</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">interval_width</span><span class="o">=</span><span class="mf">0.90</span><span class="p">)</span> <span class="c1"># these are unchanged</span>
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">model_holyday</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">peyton</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:35 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:35 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the effects of various holidays on site visits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forecast</span><span class="p">[(</span><span class="n">forecast</span><span class="p">[</span><span class="s1">&#39;playoff&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">forecast</span><span class="p">[</span><span class="s1">&#39;superbowl&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">][</span>
+        <span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="s1">&#39;yhat&#39;</span><span class="p">,</span> <span class="s1">&#39;playoff&#39;</span><span class="p">,</span> <span class="s1">&#39;superbowl&#39;</span><span class="p">]][</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ds</th>
+      <th>yhat</th>
+      <th>playoff</th>
+      <th>superbowl</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2190</th>
+      <td>2014-02-02</td>
+      <td>11.633831</td>
+      <td>1.224747</td>
+      <td>1.200293</td>
+    </tr>
+    <tr>
+      <th>2191</th>
+      <td>2014-02-03</td>
+      <td>12.848671</td>
+      <td>1.902340</td>
+      <td>1.461554</td>
+    </tr>
+    <tr>
+      <th>2532</th>
+      <td>2015-01-11</td>
+      <td>9.886680</td>
+      <td>1.224747</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2533</th>
+      <td>2015-01-12</td>
+      <td>10.896298</td>
+      <td>1.902340</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2901</th>
+      <td>2016-01-17</td>
+      <td>9.643653</td>
+      <td>1.224747</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2902</th>
+      <td>2016-01-18</td>
+      <td>10.656033</td>
+      <td>1.902340</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2908</th>
+      <td>2016-01-24</td>
+      <td>9.779940</td>
+      <td>1.224747</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2909</th>
+      <td>2016-01-25</td>
+      <td>10.782914</td>
+      <td>1.902340</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2922</th>
+      <td>2016-02-07</td>
+      <td>10.697970</td>
+      <td>1.224747</td>
+      <td>1.200293</td>
+    </tr>
+    <tr>
+      <th>2923</th>
+      <td>2016-02-08</td>
+      <td>11.886316</td>
+      <td>1.902340</td>
+      <td>1.461554</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can also check visually the impact of the holidays.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span> <span class="o">=</span> <span class="n">model_holyday</span><span class="o">.</span><span class="n">plot_components</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1d2565758a4ff492441cdbcda95c41f199644d569e357d7f48cc86459007d3ab.png" src="../../_images/1d2565758a4ff492441cdbcda95c41f199644d569e357d7f48cc86459007d3ab.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Now <code class="docutils literal notranslate"><span class="pre">plot_components</span></code> contains also the holidays component.</p></li>
+<li><p>Peyton won the Superbowl in 2016 while losing in 2010 and 2014.</p></li>
+<li><p>We can see these spikes in the holidays chart.</p></li>
+</ul>
+<ul class="simple">
+<li><p>You can use a built-in collection of country-specific holidays using the <code class="docutils literal notranslate"><span class="pre">add_country_holidays</span></code>.</p></li>
+<li><p>The name of the country is specified, and then major holidays for that country will be included in addition to any holidays that are specified via the holidays argument described before.</p></li>
+<li><p>A list of available countries and the country code is availble <a class="reference external" href="https://github.com/vacanza/python-holidays/">here</a>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_holyday2</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">holidays</span><span class="o">=</span><span class="n">holidays_df</span><span class="p">)</span> <span class="c1"># this includes the holidays we specified by hand</span>
+<span class="n">model_holyday2</span><span class="o">.</span><span class="n">add_country_holidays</span><span class="p">(</span><span class="n">country_name</span><span class="o">=</span><span class="s1">&#39;US&#39;</span><span class="p">)</span> <span class="c1"># this the country-specific holidays</span>
+<span class="n">model_holyday2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">peyton</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_holyday2</span><span class="o">.</span><span class="n">train_holiday_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:36 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:37 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0                         playoff
+1                       superbowl
+2                  New Year&#39;s Day
+3                    Memorial Day
+4                Independence Day
+5                       Labor Day
+6                Thanksgiving Day
+7                   Christmas Day
+8        Christmas Day (observed)
+9      Martin Luther King Jr. Day
+10          Washington&#39;s Birthday
+11                   Columbus Day
+12                   Veterans Day
+13        Veterans Day (observed)
+14    Independence Day (observed)
+15      New Year&#39;s Day (observed)
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>As before, the country-level holidays will then show up in the components plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forecast</span> <span class="o">=</span> <span class="n">model_holyday2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">model_holyday2</span><span class="o">.</span><span class="n">plot_components</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/68f61eddf7502e5ef97e7c257f65e910612e6ae55dd781ad90c7d0e5fe49e769.png" src="../../_images/68f61eddf7502e5ef97e7c257f65e910612e6ae55dd781ad90c7d0e5fe49e769.png" />
+</div>
+</div>
+</section>
+<section id="saturating-forecasts">
+<h3>Saturating forecasts<a class="headerlink" href="#saturating-forecasts" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>As discussed previously, Prophet allows you to make forecasts using a logistic growth trend model.</p></li>
+<li><p>Here, we will use a time series from the <a class="reference external" href="https://www.statsmodels.org/stable/datasets/index.html">Datasets Package</a> from <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p></li>
+<li><p>The list of available datasets is <a class="reference external" href="https://vincentarelbundock.github.io/Rdatasets/articles/data.html">here</a>.</p></li>
+<li><p>We need to do a bit of data preproccesing before using the data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;CO2&quot;</span><span class="p">,</span> <span class="s2">&quot;datasets&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">co2</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          time   value
+0  1959.000000  315.42
+1  1959.083333  316.31
+2  1959.166667  316.50
+3  1959.250000  317.56
+4  1959.333333  318.13
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert decimal year to pandas datetime</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_decimal_year_to_datetime</span><span class="p">(</span><span class="n">decimal_years</span><span class="p">):</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="p">[(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)</span><span class="si">}</span><span class="s1">-01-01&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_timedelta</span><span class="p">((</span><span class="n">year</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">))</span> <span class="o">*</span> <span class="mf">365.25</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> 
+             <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">decimal_years</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">dates</span>
+
+<span class="c1"># Convert to Prophet format</span>
+<span class="n">co2</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">convert_decimal_year_to_datetime</span><span class="p">(</span><span class="n">co2</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
+<span class="n">co2</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Convert the column ds to datetime</span>
+<span class="n">co2</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">co2</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Converted:</span><span class="se">\n</span><span class="s2">------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">co2</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted:
+------------------
+           ds       y
+0 1959-01-01  315.42
+1 1959-01-31  316.31
+2 1959-03-02  316.50
+3 1959-04-02  317.56
+4 1959-05-02  318.13
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resample to monthly frequency based on the ds column</span>
+<span class="n">co2</span> <span class="o">=</span> <span class="n">co2</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;MS&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;ds&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Replace NaN with the mean of the previous and next value</span>
+<span class="n">co2</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">co2</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Resampled:</span><span class="se">\n</span><span class="s2">------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">co2</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resampled:
+------------------
+           ds         y
+0 1959-01-01  315.8650
+1 1959-02-01  316.1825
+2 1959-03-01  316.5000
+3 1959-04-01  317.5600
+4 1959-05-01  318.1300
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we split the data in training set (first 90% of the data) and test set (remaining 10%).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that we need to make a copy here since we will modify the data</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">co2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="n">co2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">co2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">co2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">):]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">train</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
+<span class="n">test</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/548e7c0c342a1b40221c54e071e6e7ce6f64ffb99b4911b47bcaf7d4b7c2a848.png" src="../../_images/548e7c0c342a1b40221c54e071e6e7ce6f64ffb99b4911b47bcaf7d4b7c2a848.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>The logistic model requires to specify a carrying capacity, i.e., the maximum achievable point (total market size, total population size, etc..).</p></li>
+<li><p>The carrying capacity is specified in a column <code class="docutils literal notranslate"><span class="pre">cap</span></code>.</p></li>
+<li><p>Here we will set an arbitrary value, but this would normally be set based on expertise and knowledge about the data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;cap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">360</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then fit the model as before, except we change <code class="docutils literal notranslate"><span class="pre">growth='linear'</span></code> into <code class="docutils literal notranslate"><span class="pre">growth='logistic'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_logist</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">growth</span><span class="o">=</span><span class="s1">&#39;logistic&#39;</span><span class="p">,</span> <span class="c1"># this has changed</span>
+                       <span class="n">seasonality_mode</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">interval_width</span><span class="o">=</span><span class="mf">0.90</span><span class="p">)</span>
+<span class="n">model_logist</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:38 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:39 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We make a dataframe for future predictions as before, except we must also specify the capacity in the future.</p></li>
+<li><p>Here we set the capacity at the same value we used for historical data (<code class="docutils literal notranslate"><span class="pre">train['cap']</span> <span class="pre">=</span> <span class="pre">360</span></code>).</p></li>
+<li><p>Finally, we compute the forecast for the dates in the test set.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">future</span> <span class="o">=</span> <span class="n">future</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;ds&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]])})</span> <span class="c1"># Init df for predictions</span>
+<span class="n">future</span><span class="p">[</span><span class="s1">&#39;cap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">360</span>                                                          <span class="c1"># Set the cap</span>
+<span class="n">fcst</span> <span class="o">=</span> <span class="n">model_logist</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>                                          <span class="c1"># Compute forecasts</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">model_logist</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fcst</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9192df5df3d51b5fab8c1b9e5d3ba897e6404af67bf7b9dcceec3448d7c27d2d.png" src="../../_images/9192df5df3d51b5fab8c1b9e5d3ba897e6404af67bf7b9dcceec3448d7c27d2d.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>The model tries to keep the predictions under the specified <code class="docutils literal notranslate"><span class="pre">cap</span></code> value.</p></li>
+<li><p>The value is clearly too low in this case. Try with <code class="docutils literal notranslate"><span class="pre">cap=380</span></code> to get better predictions.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The logistic growth model can also handle a saturating minimum.</p></li>
+<li><p>This is specified with a column <code class="docutils literal notranslate"><span class="pre">floor</span></code> in the same way as the <code class="docutils literal notranslate"><span class="pre">cap</span></code> column specifies the maximum.</p></li>
+<li><p>To use a logistic growth trend with a saturating minimum, a maximum capacity must also be specified.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">400</span> <span class="o">-</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="c1"># Modify the data so that the time series decreases over time</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;cap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">85</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;floor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">future</span><span class="p">[</span><span class="s1">&#39;cap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">85</span>
+<span class="n">future</span><span class="p">[</span><span class="s1">&#39;floor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">growth</span><span class="o">=</span><span class="s1">&#39;logistic&#39;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="n">fcst</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fcst</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:39 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:39 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+<img alt="../../_images/5383120611ca4861b61e0af904b486696d0a2802b7abd84dc9669e1c1d84aeb1.png" src="../../_images/5383120611ca4861b61e0af904b486696d0a2802b7abd84dc9669e1c1d84aeb1.png" />
+</div>
+</div>
+</section>
+<section id="trend-changepoints">
+<h3>Trend changepoints<a class="headerlink" href="#trend-changepoints" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Real time series frequently have abrupt changes in their trajectories.</p></li>
+<li><p>By default, Prophet will automatically detect these changepoints and will allow the trend to adapt appropriately.</p></li>
+<li><p>However, if you wish to have finer control over this process (e.g., Prophet missed a rate change, or is overfitting rate changes in the history), then there are several input arguments you can use.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Prophet detects changepoints by first specifying a large number of potential changepoints at which the rate is allowed to change.</p></li>
+<li><p>Through a L1 regularization that encourages sparsity, it use as few of them as possible.</p></li>
+<li><p>Let’s consider again the Peyton Manning data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data already log-transformed</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/facebook/prophet/main/examples/example_wp_log_peyton_manning.csv&#39;</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">future</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:40 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:40 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Prophet specifies 25 <em>potential changepoints</em> which are uniformly placed in the first 80% of the time series.</p></li>
+<li><p>The vertical lines indicate where the potential changepoints were placed.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">prophet.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_changepoints_to_plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add_changepoints_to_plot</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span> <span class="n">m</span><span class="p">,</span> <span class="n">forecast</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">cp_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7f8bc2ebd00a12912984487415a4c0da79e3404ed5834cbd78680d06f99ce869.png" src="../../_images/7f8bc2ebd00a12912984487415a4c0da79e3404ed5834cbd78680d06f99ce869.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Even though we have a lot of places where the rate can possibly change, because of the sparse prior, most of these changepoints are not used.</p></li>
+<li><p>We can see this by plotting the magnitude of the rate change at each changepoint.</p></li>
+<li><p>We keep only those where the magnitude of the rate change is significant.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">5e-3</span>  <span class="c1"># small offset to improve visualization</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">changepoints</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;delta&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">(),</span> <span class="mf">0.01</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Significance Level&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Change Points&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Rate change&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Potential Changepoints&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/b5a2f0e41132cbb9bc7085c35e42364b211b88171312290533d074e725e45bcf.png" src="../../_images/b5a2f0e41132cbb9bc7085c35e42364b211b88171312290533d074e725e45bcf.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Only 9 out of 25 potential changepoints are actually kept.</p></li>
+<li><p>We can visualize them on the actual data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add_changepoints_to_plot</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span> <span class="n">m</span><span class="p">,</span> <span class="n">forecast</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">cp_color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/071db7c33c7ad354ae5f6322c5f70926b087e0d1304fa9a4ed6eb021fff74cdc.png" src="../../_images/071db7c33c7ad354ae5f6322c5f70926b087e0d1304fa9a4ed6eb021fff74cdc.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>By default changepoints are only inferred for the first 80% of the time series.</p></li>
+<li><p>This allows having plenty of runway for projecting the trend forward and to avoid overfitting fluctuations at the end of the time series.</p></li>
+<li><p>This default works in many situations but not all, and can be changed using the <code class="docutils literal notranslate"><span class="pre">changepoint_range</span></code> argument.</p></li>
+<li><p>For example, <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">Prophet(changepoint_range=0.9)</span></code> will place potential changepoints in the first 90% of the time series.</p></li>
+<li><p>This can be useful in situation where there are important changes in the trend towards the end of the time series.</p></li>
+</ul>
+<section id="adjusting-trend-flexibility">
+<h4>Adjusting trend flexibility<a class="headerlink" href="#adjusting-trend-flexibility" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>If the trend changes are being overfit (too much flexibility) or underfit (not enough flexibility), you can adjust the strength of the sparsity prior using the input argument <code class="docutils literal notranslate"><span class="pre">changepoint_prior_scale</span></code>.</p></li>
+<li><p>By default, this parameter is set to 0.05.</p></li>
+<li><p>Increasing it will make the trend more flexible.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">changepoint_prior_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="c1"># Increase prior</span>
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add_changepoints_to_plot</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span> <span class="n">m</span><span class="p">,</span> <span class="n">forecast</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">cp_color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:41 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:42 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+<img alt="../../_images/1c8316055df5e65643bf78127bfa1d22a770c915e68d90140bf2b81c2f36f445.png" src="../../_images/1c8316055df5e65643bf78127bfa1d22a770c915e68d90140bf2b81c2f36f445.png" />
+</div>
+</div>
+<p>Decreasing it will make the trend less flexible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">changepoint_prior_scale</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="c1"># Decrease prior</span>
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add_changepoints_to_plot</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span> <span class="n">m</span><span class="p">,</span> <span class="n">forecast</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">cp_color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:43 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:43 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+<img alt="../../_images/005181314751721dcdaffc1b6d352ffe41904b985c89c9e77be177462ecdd648.png" src="../../_images/005181314751721dcdaffc1b6d352ffe41904b985c89c9e77be177462ecdd648.png" />
+</div>
+</div>
+</section>
+<section id="specifying-the-locations-of-the-changepoints">
+<h4>Specifying the locations of the changepoints<a class="headerlink" href="#specifying-the-locations-of-the-changepoints" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>You can manually specify the locations of potential changepoints with the <code class="docutils literal notranslate"><span class="pre">changepoints</span></code> argument.</p></li>
+<li><p>Slope changes will then be allowed only at these points, with the same sparse regularization as before.</p></li>
+<li><p>One could, for instance, create automatically a grid of points.</p></li>
+<li><p>Then, augment the grid with some specific dates that are known to be likely to have changes.</p></li>
+<li><p>Alternatively, the changepoints could be entirely limited to a small set of dates, as is done here.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">changepoints</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;2014-01-01&#39;</span><span class="p">])</span>
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add_changepoints_to_plot</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span> <span class="n">m</span><span class="p">,</span> <span class="n">forecast</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">cp_color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:44 - cmdstanpy - INFO - Chain [1] start processing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>07:45:44 - cmdstanpy - INFO - Chain [1] done processing
+</pre></div>
+</div>
+<img alt="../../_images/d999a0048a4c58e6f547df1bca3bdffa106426d6fc4c76c457d8f6283354bd3f.png" src="../../_images/d999a0048a4c58e6f547df1bca3bdffa106426d6fc4c76c457d8f6283354bd3f.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Prophet’s methodology offers a flexible and intuitive approach to time series forecasting.</p></li>
+<li><p>By decomposing the time series into trend, seasonality, and holiday components, it captures various patterns in the data.</p></li>
+<li><p>Using Fourier series for seasonality and logistic or piece-wise linear growth for the trend allows Prophet to handle a wide range of forecasting scenarios.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>Let’s consider a time series of monthly retail sales index in the Netherlands from 1960 to 1995.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sales</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;DutchSales&quot;</span><span class="p">,</span> <span class="s2">&quot;AER&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raw data:</span><span class="se">\n</span><span class="s2">------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sales</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raw data:
+------------------
+           time  value
+0  1960.333333     14
+1  1960.416667     13
+2  1960.500000     15
+3  1960.583333     13
+4  1960.666667     13
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>Do the required preproccesing and convert the data to Prophet format.</p></li>
+<li><p>Split the data in training and test data, using the first 90% and last 10% of the time series, respectively.</p></li>
+<li><p>Fit a Prophet model to the data using a linear trend and make a forecast for the period of the test data.</p></li>
+<li><p>Make the forecast with a model that includes the national holidays.</p></li>
+<li><p>Adjust the trend by modifying the <code class="docutils literal notranslate"><span class="pre">changepoint_range</span></code> and <code class="docutils literal notranslate"><span class="pre">changepoint_prior_scale</span></code>. For each parameter, try at least two different values from the default ones.</p></li>
+<li><p>Make the forecasts with a model with logistic trend.</p></li>
+<li><p>Compare the performance of the models obtained at steps 3-6 in terms of MSE and MAPE on the test data.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/09"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../08/signal-transforms-filters.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Signal transforms and filters</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../10/nn-reservoir-computing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Neural networks and Reservoir Computing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-components">Model components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-component-g-t">Trend component <span class="math notranslate nohighlight">\(g(t)\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#piece-wise-linear-growth-model">Piece-wise linear growth model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-growth-model">Logistic growth model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonality-component-s-t">Seasonality component <span class="math notranslate nohighlight">\(s(t)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#holidays-and-events-h-t">Holidays and events <span class="math notranslate nohighlight">\(h(t)\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-and-holiday-effects-adjustment">Seasonal and holiday effects adjustment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">Fitting the Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prophet-in-python">Prophet in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-holidays-and-special-events">Modeling holidays and special events</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saturating-forecasts">Saturating forecasts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-changepoints">Trend changepoints</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusting-trend-flexibility">Adjusting trend flexibility</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-the-locations-of-the-changepoints">Specifying the locations of the changepoints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Filippo Maria Bianchi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
