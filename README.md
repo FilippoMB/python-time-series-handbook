@@ -158,29 +158,47 @@ You can view and execute the notebooks by clicking on the buttons below.
 
 To run the notebooks locally the recommended steps are the following:
 
-1. Download and install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html).
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
-2. Download the [env.yml](https://github.com/FilippoMB/python-time-series-handbook/blob/main/env.yml) file.
+2. Clone the repository:
 
-3. Open the shell and navigate to the location with the `yml` file you just downloaded.
-    - If you are on Windows, open the Miniconda shell.
-
-4. Install the environment with 
-   ```{bash}
-   > conda env create -f env.yml
+   ```bash
+   git clone https://github.com/FilippoMB/python-time-series-handbook.git
+   cd python-time-series-handbook
    ```
 
-5. Activate your environment: 
-   ```{bash}
-   > conda activate pytsa
+3. Create the environment and install all dependencies:
+
+   ```bash
+   uv sync --extra notebooks
    ```
 
-6. Go to the folder with the notebooks
+4. Launch Jupyter Lab:
 
-7. Launch Jupyter Lab with the command 
-   ```{bash}
-   > jupyter lab
+   ```bash
+   uv run jupyter lab
    ```
+
+## 🛠 Build the book locally
+
+To build the Jupyter Book locally, install the notebook dependencies together with the docs tooling:
+
+```bash
+uv sync --extra notebooks --group docs
+uv run --extra notebooks --group docs jupyter-book build . --builder html
+```
+
+The build output will be written to `_build/html`.
+
+## 📦 Build the package
+
+To build the Python package artifacts:
+
+```bash
+uv build
+```
+
+This produces a wheel and a source distribution in `dist/`.
 
 ## 🎥 Notebook format and slides
 
@@ -203,7 +221,7 @@ See the [RISE documentation](https://rise.readthedocs.io/en/latest/) for more in
 
 If you are using this material in your courses or in your research, please consider citing it as follows:
 
-````bibtex
+```bibtex
 @misc{bianchi2024tsbook,
   author       = {Filippo Maria Bianchi},
   title        = {Time Series Analysis with Python},
@@ -211,4 +229,4 @@ If you are using this material in your courses or in your research, please consi
   howpublished = {Online},
   url          = {https://github.com/FilippoMB/python-time-series-handbook}
 }
-````
+```

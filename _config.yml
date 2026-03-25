@@ -25,6 +25,18 @@ html:
   use_repository_button: true
   favicon : "logo.png"
 
+exclude_patterns:
+  - _build
+  - README.md
+  - .venv
+  - .venv/**
+  - build
+  - build/**
+  - dist
+  - dist/**
+  - .DS_Store
+  - Thumbs.db
+
 parse:
   myst_enable_extensions:
     # Defaults here: https://jupyterbook.org/en/stable/customize/config.html

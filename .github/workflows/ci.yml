@@ -1,20 +1,16 @@
-name: Build and Deploy Jupyter Book
+name: CI
 
 on:
+  pull_request:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: deploy-jupyter-book
-  cancel-in-progress: false
+  contents: read
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,7 +23,7 @@ jobs:
           enable-cache: true
 
       - name: Install dependencies
-        run: uv sync --extra notebooks --group docs --group deploy --frozen
+        run: uv sync --extra notebooks --group docs --frozen
 
       - name: Build package
         run: uv build
@@ -43,11 +39,3 @@ jobs:
 
       - name: Build Jupyter Book
         run: uv run --extra notebooks --group docs jupyter-book build . --builder html
-
-      - name: Verify build output
-        run: |
-          test -d _build/html
-          ls -la _build/html | head -n 20
-
-      - name: Deploy to GitHub Pages
-        run: uv run --group deploy ghp-import -n -p -f _build/html

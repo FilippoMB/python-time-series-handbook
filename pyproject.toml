@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tsa-course"
+version = "0.3.1"
+description = "A collection of scripts and functions used in the course 'Time Series Analysis with Python'"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Filippo Maria Bianchi", email = "filippombianchi@gmail.com" }]
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.19.5",
+    "matplotlib",
+    "scipy",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+notebooks = [
+    "statsmodels",
+    "pandas",
+    "pandas-datareader",
+    "seaborn",
+    "scikit-learn",
+    "jupyterlab",
+    "pmdarima",
+    "opencv-python-headless",
+    "prophet",
+    "dtaidistance",
+    "plotly",
+    "ipywidgets",
+    "yfinance",
+    "reservoir-computing",
+    "tck",
+]
+
+[dependency-groups]
+docs = [
+    "jupyter-book<2",
+]
+deploy = [
+    "ghp-import",
+]
+
+[project.urls]
+Documentation = "https://filippomb.github.io/python-time-series-handbook"
+"Source Code" = "https://github.com/FilippoMB/python-time-series-handbook"
+
+[tool.hatch.build.targets.sdist]
+only-include = ["tsa_course"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["tsa_course"]

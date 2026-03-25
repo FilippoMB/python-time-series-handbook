@@ -11,11 +11,11 @@ Time series analysis is a crucial discipline in data science, offering insights 
 :width: 500px
 :align: center
 ```
+
 The course is designed to combine high-level theoretical knowledge with practical programming skills. Each chapter introduces key concepts of time series analysis, followed by hands-on coding sections. This structure allows you to immediately apply the theoretical concepts you learn, seeing first-hand how these translate into functional tools in data analytics. Through this process, you will gain both the knowledge to understand complex time series data and the skills to analyze and predict it effectively.
 To reinforce learning and encourage active engagement, each chapter concludes with exercises. These are designed to test your understanding and help you apply the lessons in practical contexts.
 
 Whether you are new to time series analysis or looking to refine your expertise, this course offers a broad exploration of the field, with Python as your toolkit. I hope that you will find this material both educational and entertaining, brining you a step closer to mastering time series analysis.
-
 
 ## 📖 Chapters
 
@@ -34,7 +34,6 @@ For this reason, the text in the notebooks is organized with bullet points.
 
 These notebooks are currently adopted in [STA-2003 Tidsrekker](https://sa.uit.no/utdanning/emner/emne?p_document_id=822793) at UiT the Arctic University of Tromsø and [062785 - Time Series Analysis](https://www11.ceda.polimi.it/schedaincarico/schedaincarico/controller/scheda_pubblica/SchedaPublic.do?&evn_default=evento&c_classe=843368&lang=IT&__pj0=0&__pj1=2ad8b3dba5bb35c2b94e513147e1e84e) at Polytechnic of Milan.
 
-
 ## 🚀 Getting started with coding
 
 You can read from here all the content of the course. However, to get your hands-on experience with coding you want to run the code snippets or the whole notebooks that you can download on <a href="https://github.com/FilippoMB/python-time-series-handbook" target="_blank">
@@ -43,30 +42,26 @@ You can read from here all the content of the course. However, to get your hands
 
 To run the code and the notebooks the recommended steps are the following:
 
-1. Download and install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html).
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
-2. Download the [env.yml](https://github.com/FilippoMB/python-time-series-handbook/blob/main/env.yml) file.
+2. Clone the repository:
 
-3. Open the shell and navigate to the location with the yml file you just downloaded.
-    - If you are on Windows, open the Miniconda shell.
-
-4. Install the environment with 
-   ```
-   > conda env create -f env.yml
+   ```bash
+   git clone https://github.com/FilippoMB/python-time-series-handbook.git
+   cd python-time-series-handbook
    ```
 
-5. Activate your environment: 
-   ```
-   > conda activate pytsa
+3. Create the environment and install all dependencies:
+
+   ```bash
+   uv sync --extra notebooks
    ```
 
-6. Go to the folder with the notebooks
+4. Launch Jupyter Lab:
 
-7. Launch Jupyter Lab with the command 
+   ```bash
+   uv run jupyter lab
    ```
-   > jupyter lab
-   ```
-
 
 ## ⚒ Roadmap
 
@@ -81,24 +76,24 @@ If there is a specific topic you feel is missing or passages that you feel are n
 
 For the moment, I intentionally decided to leave more advanced deep learning techniques aside. There are a couple of reasons for this choice. Firstly, advanced deep learning methods rely heavily on specific knowledge and tools that are generally covered in specialized deep learning courses. This focus does not align with the introductory nature of this course, which is aimed at covering the fundamentals of time series analysis.
 
-Secondly, while deep learning opens up exciting avenues for new applications—such as NLP and analysis of video and spatio-temporal data—it primarily enhances capabilities in handling diverse data types and scaling to large datasets. However, for the core objectives of this course, which are to understand and manipulate time series data effectively, the advantages of moving from the basic neural networks introduced here to more complex deep learning models do not significantly alter the fundamental approach. 
-
+Secondly, while deep learning opens up exciting avenues for new applications—such as NLP and analysis of video and spatio-temporal data—it primarily enhances capabilities in handling diverse data types and scaling to large datasets. However, for the core objectives of this course, which are to understand and manipulate time series data effectively, the advantages of moving from the basic neural networks introduced here to more complex deep learning models do not significantly alter the fundamental approach.
 
 ## 🤝 Contributing
 
-Time series analysis with Python is designed with accessibility in mind. The material is completely open-sourced and uses only free software, based in Python. 
+Time series analysis with Python is designed with accessibility in mind. The material is completely open-sourced and uses only free software, based in Python.
 You can contribute both by adding new material, fixing typos, and suggesting edits. To do that,
 <a class="github-button" href="https://github.com/FilippoMB/python-time-series-handbook/fork" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-repo-forked" aria-label="Fork FilippoMB/python-time-series-handbook on GitHub">Fork</a> the Github repository and submit a pull request.
 
+If you want to build the Jupyter Book itself or package the `tsa-course` library, the repository README contains the additional contributor commands.
+
 Finally, if you liked this content, please share it with others who might find it useful and give it a
 <a class="github-button" href="https://github.com/FilippoMB/python-time-series-handbook" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" aria-label="Star FilippoMB/python-time-series-handbook on GitHub">Star</a> on GitHub.
-
 
 ## 📝 Citation
 
 If you are using this material in your courses or in your research, please consider citing it as follows:
 
-````bibtex
+```bibtex
 @misc{bianchi2024tsbook,
   author       = {Filippo Maria Bianchi},
   title        = {Time Series Analysis with Python},
@@ -106,4 +101,4 @@ If you are using this material in your courses or in your research, please consi
   howpublished = {Online},
   url          = {https://github.com/FilippoMB/python-time-series-handbook}
 }
-````
+```
