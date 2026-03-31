@@ -4,7 +4,7 @@
 
 Welcome to a journey through the world of time series analysis using Python! This collection of Jupyter notebooks serves as both a comprehensive course and a practical guide for students, data scientists, and researchers interested in exploring the interplay between statistical theories and practical applications in time series analysis.
 
-Time series analysis is a crucial discipline in data science, offering insights into patterns over time that are invaluable for forecasting, anomaly detection, and understanding temporal dynamics. The aim of this course is to introduce fundamental concepts of time series analysis from multiple perspectives: statistical, dynamical systems, machine learning, and signal processing. This interdisciplinary approach aims to give the reader a broad view on the world of time series.
+Time series analysis is a central discipline in data science, offering insights into patterns over time that are useful for forecasting, anomaly detection, and understanding temporal dynamics. The aim of this course is to introduce fundamental concepts of time series analysis from multiple perspectives: statistical, dynamical systems, machine learning, and signal processing. This interdisciplinary approach aims to give the reader a broad view on the world of time series.
 
 ```{image} media/topics.png
 :alt: topics
@@ -12,7 +12,7 @@ Time series analysis is a crucial discipline in data science, offering insights 
 :align: center
 ```
 
-The course is designed to combine high-level theoretical knowledge with practical programming skills. Each chapter introduces key concepts of time series analysis, followed by hands-on coding sections. This structure allows you to immediately apply the theoretical concepts you learn, seeing first-hand how these translate into functional tools in data analytics. Through this process, you will gain both the knowledge to understand complex time series data and the skills to analyze and predict it effectively.
+The course is designed to combine high-level theoretical knowledge with practical programming skills. Each chapter introduces key concepts of time series analysis together with hands-on coding sections. This structure allows you to immediately apply the theoretical concepts you learn, seeing first-hand how these translate into functional tools in data analytics. Through this process, you will gain both the knowledge to understand complex time series data and the skills to analyze and predict it effectively.
 To reinforce learning and encourage active engagement, each chapter concludes with exercises. These are designed to test your understanding and help you apply the lessons in practical contexts.
 
 Whether you are new to time series analysis or looking to refine your expertise, this course offers a broad exploration of the field, with Python as your toolkit. I hope that you will find this material both educational and entertaining, brining you a step closer to mastering time series analysis.
@@ -32,7 +32,7 @@ For this reason, the text in the notebooks is organized with bullet points.
 
 ## 🎓 University courses
 
-These notebooks are currently adopted in [STA-2003 Tidsrekker](https://sa.uit.no/utdanning/emner/emne?p_document_id=822793) at UiT the Arctic University of Tromsø and [062785 - Time Series Analysis](https://www11.ceda.polimi.it/schedaincarico/schedaincarico/controller/scheda_pubblica/SchedaPublic.do?&evn_default=evento&c_classe=843368&lang=IT&__pj0=0&__pj1=2ad8b3dba5bb35c2b94e513147e1e84e) at Polytechnic of Milan.
+These notebooks are currently adopted in [STA-2003 Tidsrekker](https://sa.uit.no/utdanning/emner/emne?p_document_id=822793) at UiT the Arctic University of Tromsø and [062785 - Time Series Analysis](https://www.polimi.it/) at Polytechnic of Milan.
 
 ## 🚀 Getting started with coding
 
@@ -40,9 +40,9 @@ You can read from here all the content of the course. However, to get your hands
   <img src="https://img.shields.io/badge/-GitHub-8A2BE2?style=round-square-small&logo=github" alt="GitHub">
 </a>.
 
-To run the code and the notebooks the recommended steps are the following:
+To run the code and the notebooks locally, the recommended path is a Conda environment, for example with Miniconda.
 
-1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/).
+1. Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main) or another Conda-compatible distribution.
 
 2. Clone the repository:
 
@@ -51,17 +51,20 @@ To run the code and the notebooks the recommended steps are the following:
    cd python-time-series-handbook
    ```
 
-3. Create the environment and install all dependencies:
+3. Create the course environment:
 
    ```bash
-   uv sync --extra notebooks
+   conda env create -f environment.yml
+   conda activate tsa-course
    ```
 
-4. Launch Jupyter Lab:
+4. Launch Jupyter Notebook:
 
    ```bash
-   uv run jupyter lab
+   jupyter notebook
    ```
+
+If you are contributing to the repository and prefer the maintainer workflow based on `uv`, the repository [README](https://github.com/FilippoMB/python-time-series-handbook/blob/main/README.md) contains the development instructions.
 
 ## ⚒ Roadmap
 
@@ -69,7 +72,7 @@ To run the code and the notebooks the recommended steps are the following:
 This is an early version of the course. There might be imprecisions and errors. Also, some chapters might undergo significant revisions and changes.
 ```
 
-I am planning to add more content over time to cover additional topics in new chapters and to extend the existing ones with new examples and explanations.
+I am planning to add more material over time to cover additional topics in new chapters and to extend the existing ones with new content.
 If there is a specific topic you feel is missing or passages that you feel are not clear enough, open an <a class="github-button" href="https://github.com/FilippoMB/python-time-series-handbook/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" aria-label="Issue FilippoMB/python-time-series-handbook on GitHub">Issue</a> on the repository on Github.
 
 ### A note on deep learning

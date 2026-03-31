@@ -22,8 +22,31 @@ jobs:
           python-version: "3.12"
           enable-cache: true
 
+      - name: Check user environment sync
+        run: uv run --no-sync python scripts/sync_user_environment.py --check
+
+      - name: Install OpenMP runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgomp1 libomp-dev
+
       - name: Install dependencies
         run: uv sync --extra notebooks --group docs --frozen
+
+      - name: Verify DTW compiled backend
+        run: |
+          uv run python - <<'PY'
+          import numpy as np
+          from dtaidistance import dtw, dtw_ndim
+
+          dtw.try_import_c(verbose=True)
+
+          x = np.vstack([np.linspace(0.0, 1.0, 12), np.linspace(0.1, 1.1, 12)])
+          dtw.distance_matrix_fast(x, parallel=False)
+
+          y = np.random.default_rng(0).normal(size=(4, 9, 2))
+          dtw_ndim.distance_matrix_fast(y, parallel=False)
+          PY
 
       - name: Build package
         run: uv build
@@ -35,7 +58,50 @@ jobs:
           import tsa_course.lecture2
           import tsa_course.lecture8
           import tsa_course.lecture11
+          import rise
           PY
+
+      - name: Verify classic notebook and RISE
+        run: |
+          uv run jupyter notebook --version
+          uv run jupyter-nbextension list | grep -qi rise
 
       - name: Build Jupyter Book
         run: uv run --extra notebooks --group docs jupyter-book build . --builder html
+
+  validate-user-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up micromamba
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          cache-environment: true
+          cache-downloads: true
+          generate-run-shell: true
+          post-cleanup: all
+
+      - name: Smoke test user environment
+        run: |
+          python - <<'PY'
+          import numpy as np
+          import pandas
+          import rise
+          import sklearn
+          import statsmodels
+          import tsa_course
+          from dtaidistance import dtw, dtw_ndim
+
+          x = np.vstack([np.linspace(0.0, 1.0, 12), np.linspace(0.1, 1.1, 12)])
+          dtw.distance_matrix_fast(x, parallel=False)
+
+          y = np.random.default_rng(0).normal(size=(4, 9, 2))
+          dtw_ndim.distance_matrix_fast(y, parallel=False)
+          PY
+
+          jupyter notebook --version
+          jupyter-nbextension list | grep -qi rise
+        shell: micromamba-shell {0}

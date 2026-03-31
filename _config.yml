@@ -28,8 +28,11 @@ html:
 exclude_patterns:
   - _build
   - README.md
+  - CONTRIBUTING.md
   - .venv
   - .venv/**
+  - .conda-check
+  - .conda-check/**
   - build
   - build/**
   - dist

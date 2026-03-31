@@ -30,7 +30,10 @@ notebooks = [
     "pandas-datareader",
     "seaborn",
     "scikit-learn",
-    "jupyterlab",
+    # RISE still imports pkg_resources, which is no longer shipped by setuptools 81+.
+    "setuptools<81",
+    "notebook<7",
+    "rise",
     "pmdarima",
     "opencv-python-headless",
     "prophet",

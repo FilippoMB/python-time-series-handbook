@@ -154,11 +154,11 @@ You can view and execute the notebooks by clicking on the buttons below.
 
 <br>
 
-## 💻 How to code locally
+## 💻 Run the notebooks locally
 
-To run the notebooks locally the recommended steps are the following:
+For local notebook usage, the recommended path is Conda.
 
-1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/).
+1. Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main) or another Conda-compatible distribution.
 
 2. Clone the repository:
 
@@ -167,21 +167,48 @@ To run the notebooks locally the recommended steps are the following:
    cd python-time-series-handbook
    ```
 
-3. Create the environment and install all dependencies:
+3. Create the environment:
 
    ```bash
-   uv sync --extra notebooks
+   conda env create -f environment.yml
+   conda activate tsa-course
    ```
 
-4. Launch Jupyter Lab:
+4. Launch Jupyter Notebook:
 
    ```bash
-   uv run jupyter lab
+   jupyter notebook
    ```
+
+## 🛠 Maintainer workflow
+
+For repository development, packaging, and CI, this project uses `uv`.
+
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/).
+
+2. Sync the maintainer environment:
+
+   ```bash
+   uv sync --extra notebooks --group docs --group deploy
+   ```
+
+3. Launch Jupyter Notebook:
+
+   ```bash
+   uv run jupyter notebook
+   ```
+
+If notebook `12 - Time series classification and clustering` fails to load the compiled `dtaidistance` backend on macOS, install `libomp`:
+
+```bash
+brew install libomp
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the maintainer checklist and dependency update workflow.
 
 ## 🛠 Build the book locally
 
-To build the Jupyter Book locally, install the notebook dependencies together with the docs tooling:
+The book build is part of the maintainer workflow and uses `uv`:
 
 ```bash
 uv sync --extra notebooks --group docs
@@ -207,7 +234,7 @@ If you open a notebook you will see the following structure:
 
 <img src="https://raw.githubusercontent.com/FilippoMB/python-time-series-handbook/main/notebooks/00/media/slides_nb.png" style="width: 50%" align="center">
 
-The top-right button indicates the type of slide, which is stored in the metadata of the cell. To enable the visualization of the slide type you must first install RISE and then on the top menu select `View -> Cell Toolbar -> Slieshow`. Also, to split the cells like in the example, you must enable `Split Cells Notebook` from the [nbextensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/index.html).
+RISE is included in the provided environments. To enable the visualization of the slide type, open the classic notebook interface and select `View -> Cell Toolbar -> Slideshow`.
 
 By pressing the `Enter\Exit RISE Slideshow` button at the top you can enter the slideshow presentation.
 
